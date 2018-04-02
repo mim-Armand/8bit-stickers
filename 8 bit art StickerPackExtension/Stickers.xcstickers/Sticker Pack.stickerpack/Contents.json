@@ -1,4 +1,39 @@
 {
+  "stickers" : [
+    {
+      "filename" : "exclamation_point_01.sticker"
+    },
+    {
+      "filename" : "banana_01.sticker"
+    },
+    {
+      "filename" : "hear_01.sticker"
+    },
+    {
+      "filename" : "pumpkin_01.sticker"
+    },
+    {
+      "filename" : "skull_01.sticker"
+    },
+    {
+      "filename" : "ghost_01.sticker"
+    },
+    {
+      "filename" : "flower_01.sticker"
+    },
+    {
+      "filename" : "smiley_01.sticker"
+    },
+    {
+      "filename" : "smiley_02.sticker"
+    },
+    {
+      "filename" : "dealwithit_01.sticker"
+    },
+    {
+      "filename" : "wine_01.sticker"
+    }
+  ],
   "info" : {
     "version" : 1,
     "author" : "xcode"
