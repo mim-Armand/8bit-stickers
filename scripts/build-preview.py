@@ -32,7 +32,9 @@ for entry in json.loads((PACK / 'Contents.json').read_text())['stickers']:
 manifest = ROOT / 'art/manifest.json'
 if manifest.exists():
     fresh = [{**item, 'original': False} for item in json.loads(manifest.read_text())['stickers']]
-    fresh.sort(key=lambda item: 0 if item.get('collection') == 'tiny-pixels' else 1)
+    # Surface the seven newest reactions while retaining stable order within each batch.
+    fresh.sort(key=lambda item: 0 if item.get('source', '').startswith('art/club67-')
+               else 1 if item.get('collection') == 'tiny-pixels' else 2)
     items = fresh + items
 out = ROOT / 'prototype/catalog.js'
 out.parent.mkdir(exist_ok=True)

@@ -1,6 +1,6 @@
 # Native iMessage MVP
 
-The original Xcode sticker-pack project and all 11 catalog stickers were recovered from `mim-Armand/8bit-stickers` at commit `816eba114d65f5a0182c4ed3bf6dd1c1bd4f9256`. This is a working continuation of that project, not a replacement App Store listing. The current release candidate includes 46 stickers: 10 shipped classics plus 36 new designs, including two APNG animations. All 11 original PNGs remain preserved; the wine-glass sticker was moved to `art/recovered/wine_01.sticker/` and omitted from shipping assets at the owner's request. The latest 24 additions use a true 16×16 source grid for chunky cute characters and meme reactions closer to the original art.
+The original Xcode sticker-pack project and all 11 catalog stickers were recovered from `mim-Armand/8bit-stickers` at commit `816eba114d65f5a0182c4ed3bf6dd1c1bd4f9256`. This is a working continuation of that project, not a replacement App Store listing. The current development collection targets **1.3 (6)** and includes **67 stickers: 10 classics plus 57 new designs**, including two APNG animations. The submitted **1.2 (5)** contains 46 stickers and is frozen at Git tag `v1.2-build5-submitted`; its uploaded binary and App Review submission are unchanged. All 11 original PNGs remain preserved; the wine-glass sticker was moved to `art/recovered/wine_01.sticker/` and omitted from shipping assets at the owner's request. Forty-five designs use a true 16×16 source grid: twelve cute characters and thirty-three meme reactions. The twenty-one additions since submitted 1.2 (5) include five 67 designs and are forthcoming in 1.3 (6), with the same dark outlines, at most six opaque colors and crisp 18× nearest-neighbor enlargement into 300×300 native assets. No antialiasing or extra source detail is added.
 
 ## Identity preserved
 
@@ -10,7 +10,8 @@ The original Xcode sticker-pack project and all 11 catalog stickers were recover
 | Host bundle ID | `eu.armand.--bit-art` |
 | Extension bundle ID | `eu.armand.--bit-art.StickerPackExtension` |
 | Recorded development team | `7N3Y4QZT3Z` |
-| Current release candidate | `1.2` / `5` |
+| Current development version | `1.3` / `6` — 67 stickers |
+| Submitted version | `1.2` / `5` — 46 stickers |
 | Supported device families | iPhone and iPad |
 | Deployment target | iOS / iPadOS 15.0 |
 
@@ -20,13 +21,13 @@ The existing release supports iOS 10. Current local Xcode 27.1 rejects deploymen
 
 - Native sticker-pack extension inside Messages, using Apple's generated `StickerBrowserViewController`.
 - Original app icon retained. Ten classics ship; all eleven originals remain preserved in source.
-- Thirty-six additional transparent pixel-art stickers: twelve revival designs and twenty-four tiny cute/meme designs, with two animated PNG designs in the revival set.
+- Fifty-seven additional transparent pixel-art stickers in the development catalog: twelve revival designs and forty-five tiny cute/meme designs, with two animated PNG designs in the revival set. The submitted build 5 contains the preceding thirty-six additions; the forthcoming twenty-one require a later uploaded build.
 - Both target version/build values come from the same Xcode build settings.
 - Shared build/archive scheme, an unsigned verification script, and GitHub Actions builds.
 - `NSStickerSharingLevel = OS`, matching the current Xcode sticker-pack template, to opt into system sticker sharing on supported OS versions. Availability and placement must be verified on devices.
 - Explicit privacy manifests in both bundles declaring no tracking, no data collection, and no required-reason API use. The project contains no application code or third-party SDKs.
 
-This remains an iMessage-only app: it has no home-screen window. Search, favorites, and a pixel editor are browser prototype features; they are not in this static native pack.
+This remains an iMessage-only app: it has no home-screen window. Search, favorites, and a pixel editor are browser prototype features; they are not in this static native pack. This artwork update adds no native Studio or StoreKit/in-app purchase code. Development verification for the expanded set is recorded separately from the historical build 5 checks below.
 
 ## Build locally
 
@@ -53,9 +54,9 @@ In Messages, open a conversation, tap the plus button, and locate the sticker pa
 
 ## Signed release preparation
 
-`./scripts/archive-release.sh` creates the archive and exports an App Store Connect IPA using `Config/ExportOptions.plist`. It reads version/build from `Config/AppStoreMetadata.json` and runs `clean archive`; the current default output is `build/release/1.2-5/`, including `8 bit art.xcarchive` and `export/8 bit art.ipa`. A clean archive prevents removed sticker files from lingering in incremental build products. The two installed App Store profile names and team/bundle identifiers are public configuration; private keys, profile files and archives are not committed.
+`./scripts/archive-release.sh` creates the archive and exports an App Store Connect IPA using `Config/ExportOptions.plist`. It reads version/build from `Config/AppStoreMetadata.json` and runs `clean archive`; the development default output is `build/release/1.3-6/`. The submitted build 5 is retained separately at `build/release/1.2-5/`, including `8 bit art.xcarchive` and `export/8 bit art.ipa`. A clean archive prevents removed sticker files from lingering in incremental build products. The two installed App Store profile names and team/bundle identifiers are public configuration; private keys, profile files and archives are not committed.
 
-Version **1.2 (5)** has a clean signed archive and exported IPA. The simulator app, archive and export were checked for the absence of wine assets. Apple validation/upload succeeded with no errors and two expected hidden-app Mac/visionOS compatibility warnings. Build `ecc379bc-4471-489b-887b-826ec30d9c6b` processed as `VALID`, reports `usesNonExemptEncryption: false`, and is selected in the 1.2 draft. It is `READY_FOR_BETA_TESTING` internally and `READY_FOR_BETA_SUBMISSION` externally; no completed TestFlight device pass is claimed.
+The following validation applies to submitted **1.2 (5)**, not the new 1.3 development sources. Version **1.2 (5)** has a clean signed archive and exported IPA. The simulator app, archive and export were checked for the absence of wine assets. Apple validation/upload succeeded with no errors and two expected hidden-app Mac/visionOS compatibility warnings. Build `ecc379bc-4471-489b-887b-826ec30d9c6b` processed as `VALID`, reports `usesNonExemptEncryption: false`, and is selected in the submitted 1.2 version. It is `READY_FOR_BETA_TESTING` internally and `READY_FOR_BETA_SUBMISSION` externally; no completed TestFlight device pass is claimed.
 
 The preceding **1.2 (4)** passed Apple validation/upload with no errors and two expected compatibility warnings: this iMessage-only hidden app cannot launch as a normal app on Apple silicon Macs or Apple Vision Pro. Its processed build is valid, but it is not the intended release because it contains wine artwork.
 

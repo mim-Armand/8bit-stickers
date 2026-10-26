@@ -47,7 +47,7 @@ const version = (
     v.attributes.versionString === metadata.version,
 );
 if (!version || version.attributes.appStoreState !== "PREPARE_FOR_SUBMISSION")
-  throw new Error("Expected an editable 1.2 draft");
+  throw new Error(`Expected an editable ${metadata.version} draft`);
 const info = (
   await api("GET", `/v1/apps/${APP_ID}/appInfos?limit=10`)
 ).data.find((i) => i.attributes.appStoreState === "PREPARE_FOR_SUBMISSION");
