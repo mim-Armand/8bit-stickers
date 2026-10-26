@@ -12,6 +12,8 @@ See [native MVP](native-mvp.md) for build commands and manual checks. A compiled
 
 `scripts/generate-art.py` validates all twelve generated images: RGBA with transparent pixels, 300×300 dimensions, and each below 500 KB. The heart contains four APNG frames and the robot three. Generated files are about 1–5 KB each. Regeneration was checked twice byte-for-byte in the local Pillow 12.3.0 environment. Pixel sources and the palette are committed alongside exports.
 
+`scripts/verify-art.py` compares every decoded native/browser frame and animation duration directly to the editable source. This is the cross-platform integrity check: PNG compression bytes differ between the local macOS encoder and GitHub's Linux encoder even when decoded pixels are identical.
+
 ## Browser Studio
 
 `scripts/verify-preview.cjs` passed against the local server using Playwright and installed Google Chrome. It checks:

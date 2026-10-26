@@ -17,10 +17,12 @@ jobs:
           node-version: '22'
           cache: npm
       - run: pip install -r requirements-art.txt
+      - name: Verify committed PNG/APNG pixels against editable sources
+        run: python scripts/verify-art.py
       - run: python scripts/generate-art.py
       - run: python scripts/build-preview.py
       - name: Ensure generated catalog is current
-        run: git diff --exit-code -- art/manifest.json prototype/catalog.js '8 bit art StickerPackExtension/Stickers.xcstickers'
+        run: git diff --exit-code -- art/manifest.json prototype/catalog.js ':(glob)8 bit art StickerPackExtension/**/Contents.json'
       - run: npm ci
       - run: npx playwright install --with-deps chromium
       - name: Verify Studio
