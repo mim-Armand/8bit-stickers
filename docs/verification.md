@@ -2,7 +2,7 @@
 
 ## Native Studio — sandbox purchase configuration 1.4 (9)
 
-After the free beta was distributed, the owner selected Apple's actual sandbox purchase/restore flow. A separate release-based **TestFlightSandbox** configuration and **Studio Sandbox Internal** scheme now use **1.4 (9)**. Check the [sandbox guide](studio-sandbox.md) for the current signed-build/upload state; this section does not claim an installed device or completed remote transaction.
+After the free beta was distributed, the owner selected Apple's actual sandbox purchase/restore flow. A separate release-based **TestFlightSandbox** configuration and **Studio Sandbox Internal** scheme now use **1.4 (9)**. Clean signed archive/export and Apple validation/upload succeeded with zero errors and expected warnings 90863/90984. Upload `97fbb69d-ef07-4c84-800a-3798ceaec769` is **PROCESSING** with no processing errors; the verified internal group automatically receives completed builds. Check the [sandbox guide](studio-sandbox.md) for the current distribution state; this section does not claim an installed device or completed remote transaction.
 
 The draft **Studio Unlock** non-consumable is registered under the existing app as **`eu.armand.bitart.studio.unlock`**, Apple ID **`6827336076`**. Apple rejected the earlier proposed ID because IAP identifiers cannot contain hyphens; that ID was never registered and the app/extension identities are unchanged. English localization is saved in metadata version `45b42e0b-bc8a-4835-8bc8-4d766e48bda1` (`PREPARE_FOR_SUBMISSION`). The actual IAP's exact **US$1.00** point was found, scheduled and read back. Family Sharing is false. No public-sale availability or review screenshot/submission was created; product state remains `MISSING_METADATA`.
 

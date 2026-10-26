@@ -1,6 +1,6 @@
 # Studio Unlock — Apple sandbox testing
 
-The owner chose **Apple's actual sandbox purchase and restore flow** after the free beta was uploaded. This supersedes free activation for the next test build, **1.4 (9)**. Apple accepted the signed internal-only upload with no errors; processing/API visibility is pending. Build 8 remains the free Studio preview; use **build 9** to exercise StoreKit. Check the [sandbox status record](../release/studio-sandbox-status.json) for the verified upload/distribution state.
+The owner chose **Apple's actual sandbox purchase and restore flow** after the free beta was uploaded. This supersedes free activation for the next test build, **1.4 (9)**. Apple accepted the signed internal-only upload with no errors and explicitly reports **PROCESSING**, with no processing errors. It is **not yet installable as build 9**. The verified internal group automatically receives all builds when Apple finishes processing; no additional public review submission is required. Build 8 remains the free Studio preview; use **build 9** to exercise StoreKit. Check the [sandbox status record](../release/studio-sandbox-status.json) for the verified upload/distribution state.
 
 This is the same **8 bit art** Messages app, Apple ID **1366485724**. Public **1.2 (5)** remains Waiting for Review with automatic release after approval. No new public app/IAP review was submitted, no public sale availability was configured, and the app-download price and support website were not changed.
 
@@ -67,7 +67,13 @@ Rebuild/export locally:
 ./scripts/archive-studio-sandbox.sh
 ```
 
-This helper never uploads. Later uploads need a new unused build number and fresh identity/payload checks; do not overwrite the build 9 evidence. Signed outputs, private account readback and logs remain ignored under `build/studio-sandbox/`. The sanitized status record stores the uploaded build ID, processing/audience state, product/price and public-review readback.
+This helper never uploads. Check Apple's upload processing without changing anything:
+
+```sh
+node scripts/appstore-connect.mjs get /v1/buildUploads/97fbb69d-ef07-4c84-800a-3798ceaec769
+```
+
+Once complete, discover build 9 on app 1366485724, verify `VALID` / `INTERNAL_ONLY` / `IN_BETA_TESTING` and its group membership, then update the sanitized status with the returned build ID and current state. Add build-specific sandbox testing notes if needed; do not change public 1.2 or submit an IAP review. This is an evidence refresh, not a new upload. Later uploads need a new unused build number and fresh identity/payload checks; do not overwrite the build 9 evidence. Signed outputs, private account readback and logs remain ignored under `build/studio-sandbox/`. The sanitized status record stores the delivery ID, processing state, intended internal-only audience, product/price and public-review readback. A processed build ID and server audience will be added once Apple exposes them; the signed internal-only marker is already verified.
 
 Before public release, complete physical-device purchase/restore/insertion and accessibility checks, enable verified production ownership in a separately reviewed implementation, complete actual IAP sale/review metadata and native screenshots, and submit the app with its first IAP only when authorized. Recheck agreements and prices then. The internal-only binary cannot be used for public App Store distribution.
 
