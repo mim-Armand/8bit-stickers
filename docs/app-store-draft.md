@@ -2,7 +2,7 @@
 
 Updated October 26, 2026. Revised 46-sticker metadata was saved in App Store Connect and read back through the API. The submitted copy is preserved in [`release/1.2-build5-metadata.json`](../release/1.2-build5-metadata.json). The submitted update is **1.2 (5)**; its clean signed archive/export passed Apple validation/upload with no errors and two expected platform warnings. Build 5 processed as `VALID` and remains selected. The predecessor build 4 was accepted but contains the omitted wine artwork and is not the intended release.
 
-The active [`Config/AppStoreMetadata.json`](../Config/AppStoreMetadata.json) now describes a **local 1.3 (6) development draft with 60 stickers**, including fourteen additional 16×16 memes and four 67 designs. It has not been uploaded, saved to App Store Connect or submitted. This document and the release screenshot manifest continue to record submitted 1.2 (5).
+The active [`Config/AppStoreMetadata.json`](../Config/AppStoreMetadata.json) now describes a **local 1.3 (6) development draft with 67 stickers**, including twenty-one additional 16×16 memes and five 67 designs. Wine remains excluded. It has not been uploaded, saved to App Store Connect or submitted. This document and the release screenshot manifest continue to record submitted 1.2 (5).
 
 The version and review submission are **Waiting for Review**. The **Data Not Collected** App Privacy label is published. Release type **`AFTER_APPROVAL`** means Apple will automatically release the version after approval. The update has not yet been approved or publicly released.
 

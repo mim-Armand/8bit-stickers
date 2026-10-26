@@ -25,7 +25,7 @@ const path = require("node:path");
   try {
     await page.goto(root);
     await page.locator(".sticker-card").last().waitFor();
-    assert.equal(await page.locator(".sticker-card").count(), 60);
+    assert.equal(await page.locator(".sticker-card").count(), 67);
     await page.evaluate(() => {
       [...document.images].forEach((image) => {
         image.loading = "eager";
@@ -52,9 +52,9 @@ const path = require("node:path");
       fullPage: true,
     });
     await page.getByRole("button", { name: /Fresh pixels/ }).click();
-    assert.equal(await page.locator(".sticker-card").count(), 50);
+    assert.equal(await page.locator(".sticker-card").count(), 57);
     await page.getByRole("button", { name: /Tiny pixels/ }).click();
-    assert.equal(await page.locator(".sticker-card").count(), 38);
+    assert.equal(await page.locator(".sticker-card").count(), 45);
     await page.getByRole("button", { name: "Cute", exact: true }).click();
     assert.equal(await page.locator(".sticker-card").count(), 12);
     await page
@@ -73,11 +73,11 @@ const path = require("node:path");
       .getByRole("button", { name: "Close sticker preview", exact: true })
       .click();
     await page.getByRole("button", { name: "Memes", exact: true }).click();
-    assert.equal(await page.locator(".sticker-card").count(), 26);
-    // All four new 67 designs must be discoverable under common spellings.
+    assert.equal(await page.locator(".sticker-card").count(), 33);
+    // All five 67 designs must be discoverable under common spellings.
     for (const query of ["67", "6 7", "six seven"]) {
       await page.getByRole("searchbox").fill(query);
-      assert.equal(await page.locator(".sticker-card").count(), 4);
+      assert.equal(await page.locator(".sticker-card").count(), 5);
     }
     await page.getByRole("searchbox").fill("");
     await page.getByRole("button", { name: /Fresh pixels/ }).click();
@@ -218,7 +218,7 @@ const path = require("node:path");
     await page
       .getByRole("button", { name: "Show all stickers", exact: true })
       .click();
-    assert.equal(await page.locator(".sticker-card").count(), 60);
+    assert.equal(await page.locator(".sticker-card").count(), 67);
     await page.setViewportSize({ width: 390, height: 844 });
     await page.evaluate(() =>
       document.querySelector("#toast").classList.remove("show"),
@@ -249,10 +249,10 @@ const path = require("node:path");
     });
     await page.evaluate(() => localStorage.setItem("8bit-favorites", "{}"));
     await page.reload();
-    assert.equal(await page.locator(".sticker-card").count(), 60);
+    assert.equal(await page.locator(".sticker-card").count(), 67);
     assert.deepEqual(errors, []);
     console.log(
-      "PASS: 60 images, 38 tiny sprites, 26 memes, all four 67 designs searchable, favorites persistence, local chat, PNG downloads, editor tools/persistence, transparent 300px export, remix, responsive layout, no browser/network errors.",
+      "PASS: 67 images, 45 tiny sprites, 33 memes, all five 67 designs searchable, favorites persistence, local chat, PNG downloads, editor tools/persistence, transparent 300px export, remix, responsive layout, no browser/network errors.",
     );
   } finally {
     await browser.close();

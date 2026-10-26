@@ -1153,6 +1153,188 @@
       ],
       "pixelSource": "art/pixels/tiny_six_seven_cat.png",
       "collection": "tiny-pixels"
+    },
+    {
+      "id": "tiny_snack_goblin",
+      "title": "Snack goblin",
+      "category": "Memes",
+      "tags": [
+        "snack",
+        "goblin",
+        "raccoon",
+        "cookie",
+        "hungry",
+        "mine",
+        "cute",
+        "meme"
+      ],
+      "filename": "8 bit art StickerPackExtension/Stickers.xcstickers/Sticker Pack.stickerpack/new_tiny_snack_goblin.sticker/new_tiny_snack_goblin.png",
+      "preview": "prototype/assets/new/tiny_snack_goblin.png",
+      "animated": false,
+      "source": "art/club67-animals-sprites.json",
+      "logicalSize": [
+        16,
+        16
+      ],
+      "pixelSource": "art/pixels/tiny_snack_goblin.png",
+      "collection": "tiny-pixels"
+    },
+    {
+      "id": "tiny_unbothered_capy",
+      "title": "Unbothered capy",
+      "category": "Memes",
+      "tags": [
+        "unbothered",
+        "capybara",
+        "capy",
+        "tea",
+        "chill",
+        "relax",
+        "sipping",
+        "cute",
+        "meme"
+      ],
+      "filename": "8 bit art StickerPackExtension/Stickers.xcstickers/Sticker Pack.stickerpack/new_tiny_unbothered_capy.sticker/new_tiny_unbothered_capy.png",
+      "preview": "prototype/assets/new/tiny_unbothered_capy.png",
+      "animated": false,
+      "source": "art/club67-animals-sprites.json",
+      "logicalSize": [
+        16,
+        16
+      ],
+      "pixelSource": "art/pixels/tiny_unbothered_capy.png",
+      "collection": "tiny-pixels"
+    },
+    {
+      "id": "tiny_big_shrimp_energy",
+      "title": "Big shrimp energy",
+      "category": "Memes",
+      "tags": [
+        "shrimp",
+        "prawn",
+        "big energy",
+        "flex",
+        "strong",
+        "tiny",
+        "gym",
+        "cute",
+        "meme"
+      ],
+      "filename": "8 bit art StickerPackExtension/Stickers.xcstickers/Sticker Pack.stickerpack/new_tiny_big_shrimp_energy.sticker/new_tiny_big_shrimp_energy.png",
+      "preview": "prototype/assets/new/tiny_big_shrimp_energy.png",
+      "animated": false,
+      "source": "art/club67-animals-sprites.json",
+      "logicalSize": [
+        16,
+        16
+      ],
+      "pixelSource": "art/pixels/tiny_big_shrimp_energy.png",
+      "collection": "tiny-pixels"
+    },
+    {
+      "id": "tiny_yap_duck",
+      "title": "Yap duck",
+      "category": "Memes",
+      "tags": [
+        "yap",
+        "yapping",
+        "duck",
+        "quack",
+        "talk",
+        "chat",
+        "loud",
+        "cute",
+        "meme"
+      ],
+      "filename": "8 bit art StickerPackExtension/Stickers.xcstickers/Sticker Pack.stickerpack/new_tiny_yap_duck.sticker/new_tiny_yap_duck.png",
+      "preview": "prototype/assets/new/tiny_yap_duck.png",
+      "animated": false,
+      "source": "art/club67-animals-sprites.json",
+      "logicalSize": [
+        16,
+        16
+      ],
+      "pixelSource": "art/pixels/tiny_yap_duck.png",
+      "collection": "tiny-pixels"
+    },
+    {
+      "id": "tiny_delulu_bunny",
+      "title": "Delulu bunny",
+      "category": "Memes",
+      "tags": [
+        "delulu",
+        "bunny",
+        "rabbit",
+        "love",
+        "crush",
+        "heart glasses",
+        "obsessed",
+        "cute",
+        "meme"
+      ],
+      "filename": "8 bit art StickerPackExtension/Stickers.xcstickers/Sticker Pack.stickerpack/new_tiny_delulu_bunny.sticker/new_tiny_delulu_bunny.png",
+      "preview": "prototype/assets/new/tiny_delulu_bunny.png",
+      "animated": false,
+      "source": "art/club67-reactions-sprites.json",
+      "logicalSize": [
+        16,
+        16
+      ],
+      "pixelSource": "art/pixels/tiny_delulu_bunny.png",
+      "collection": "tiny-pixels"
+    },
+    {
+      "id": "tiny_saw_nothing",
+      "title": "I saw nothing",
+      "category": "Memes",
+      "tags": [
+        "owl",
+        "innocent",
+        "i saw nothing",
+        "nothing",
+        "not me",
+        "awkward",
+        "oops",
+        "cute",
+        "meme"
+      ],
+      "filename": "8 bit art StickerPackExtension/Stickers.xcstickers/Sticker Pack.stickerpack/new_tiny_saw_nothing.sticker/new_tiny_saw_nothing.png",
+      "preview": "prototype/assets/new/tiny_saw_nothing.png",
+      "animated": false,
+      "source": "art/club67-reactions-sprites.json",
+      "logicalSize": [
+        16,
+        16
+      ],
+      "pixelSource": "art/pixels/tiny_saw_nothing.png",
+      "collection": "tiny-pixels"
+    },
+    {
+      "id": "tiny_67_unlocked",
+      "title": "67 unlocked",
+      "category": "Memes",
+      "tags": [
+        "67",
+        "6 7",
+        "six seven",
+        "meme",
+        "achievement",
+        "unlocked",
+        "win",
+        "trophy",
+        "celebrate",
+        "gg"
+      ],
+      "filename": "8 bit art StickerPackExtension/Stickers.xcstickers/Sticker Pack.stickerpack/new_tiny_67_unlocked.sticker/new_tiny_67_unlocked.png",
+      "preview": "prototype/assets/new/tiny_67_unlocked.png",
+      "animated": false,
+      "source": "art/club67-reactions-sprites.json",
+      "logicalSize": [
+        16,
+        16
+      ],
+      "pixelSource": "art/pixels/tiny_67_unlocked.png",
+      "collection": "tiny-pixels"
     }
   ]
 }

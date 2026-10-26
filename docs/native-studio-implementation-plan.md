@@ -6,7 +6,7 @@ Status: **approved product direction; planning only, not implemented**. Updated 
 
 - Update **8 bit art, App Store ID `1366485724`**, as a custom **standalone iMessage app**. Preserve host `eu.armand.--bit-art`, extension `eu.armand.--bit-art.StickerPackExtension` and team `7N3Y4QZT3Z`. Do not use the separate `1366403490` record.
 - Studio opens **inside Messages**, with compact browsing and an expanded editor. A home-screen app, public web Studio and cloud service are separate projects.
-- Keep the included sticker catalogue, categories, search and favorites free. Current development includes sixty stickers; the submitted build contains forty-six. Do not charge existing users again for included stickers.
+- Keep the included sticker catalogue, categories, search and favorites free. Current development includes sixty-seven stickers; the submitted build contains forty-six. Do not charge existing users again for included stickers.
 - Sell **Studio Unlock**, a single **non-consumable In-App Purchase** granting permanent editor access and local saved drafts. No subscription, credits, charge per drawing, or charge per send. A recipient does not need to buy the editor to receive a sticker.
 - Intended USA base price: **US$1.00 once**. Exact IAP price-point availability has **not** been verified. The earlier $1 price-point query concerned app downloads. Before configuring this product, check its own USA price points; if $1.00 is unavailable, record the real options and return the price choice to the owner. Do not silently substitute $0.99 or change the app-download price.
 - Use StoreKit's localized `Product.displayPrice` in the purchase button. International prices are localized; do not promise a literal $1 in every currency. Apple's standard purchase sheet confirms payment.
@@ -21,7 +21,7 @@ Apple permits standalone sticker-pack ↔ custom standalone iMessage updates on 
 | Baseline | What exists | Future handling |
 | --- | --- | --- |
 | Submitted 1.2 (5) | 46 stickers; Data Not Collected label published; submission recorded as Waiting for Review with `AFTER_APPROVAL` | Preserve tag `v1.2-build5-submitted`, metadata snapshot, signed archive and release evidence. Recheck current Apple status when resuming; this document is not a live status feed. |
-| Development 1.3 (6) | 60 stickers, including fourteen additional memes and four 67 designs; unsigned builds and browser/art checks passed | Can ship as a separate art update before Studio. It has not been uploaded or submitted. |
+| Development 1.3 (6) | 67 stickers, including twenty-one additional memes and five 67 designs; the preceding 60-sticker source passed unsigned builds and browser/art checks, with latest verification tracked separately | Can ship as a separate art update before Studio. It has not been uploaded or submitted. |
 | Native Studio release | Custom Messages browser, free search/favorites, paid 16×16 editor and multiple drafts | Prefer a later 1.4 if 1.3 ships first. If the owner chooses to combine the work before 1.3 submission, it may become 1.3. Recheck App Store version/build availability before choosing numbers. |
 | Follow-up fixes | Accessibility, purchase/layout fixes and measured usability improvements | Patch release after Studio; keep the same non-consumable entitlement. |
 
@@ -85,11 +85,11 @@ Paths below are planned; these files do not exist yet.
 | `Config/Studio.storekit` | Local StoreKit test product; no live credential or production receipt |
 | `scripts/build-native-catalog.py` | Deterministically package the existing art for the code-based extension |
 
-`art/manifest.json` contains **50 generated designs only**. `scripts/build-preview.py` combines these with the **ten classics** to build the sixty-item browser catalogue. The native generator must use the same full source set, not mistake the art manifest for all sixty. Refactor the shared catalogue-building logic rather than parsing JavaScript or maintaining a hand-copied list.
+`art/manifest.json` contains **57 generated designs only**. `scripts/build-preview.py` combines these with the **ten classics** to build the sixty-seven-item browser catalogue. The native generator must use the same full source set, not mistake the art manifest for all sixty-seven. Refactor the shared catalogue-building logic rather than parsing JavaScript or maintaining a hand-copied list.
 
 Native entries need ID, localized title/accessibility description, category/tags, animation flag, bundle-relative export filename, logical size and optional raw template data. Keep old artwork pixels, APNG timings, IDs and native sticker order intact; omit wine. Generate copied resources/manifest from tracked source and commit outputs so ordinary Xcode builds need no Python. Verify bundle paths in the new target rather than assuming `.xcstickers` compiles identically after conversion.
 
-Only the **38 true 16×16** sources are initial remix templates. Do not silently shrink the 50×50 revival art or recovered originals. Built-in animations remain sendable but animation editing is outside this MVP.
+Only the **45 true 16×16** sources are initial remix templates. Do not silently shrink the 50×50 revival art or recovered originals. Built-in animations remain sendable but animation editing is outside this MVP.
 
 ## Pixel model, drawing and export
 
@@ -170,7 +170,7 @@ Offline requirement: once ownership has been verified locally, editor/draft use 
 | Milestone | Deliverable | Gate before proceeding |
 | --- | --- | --- |
 | S0 — conversion spike | Custom standalone Messages target, sample catalogue and local purchase test | Same identities; actual device launch, native insertion/APNGs, compact/expanded and checkout proven |
-| S1 — free collection | Full sixty-item native JSON/resources, categories/search/favorites | All sixty available without purchase; four 67 results; originals/animations intact; persistent favorites; context fallback works |
+| S1 — free collection | Full sixty-seven-item native JSON/resources, categories/search/favorites | All sixty-seven available without purchase; five 67 results; originals/animations intact; persistent favorites; context fallback works |
 | S2 — editor and drafts | 256-cell model, tools, autosave, multi-drafts, transparent export/insertion | Pixel/export tests and termination recovery pass; real iPhone/iPad editor usable |
 | S3 — commerce | StoreKit 2 purchase/restore service and optional paywall; configure the draft App Store IAP after checking its ID/price so real sandbox tests can run | Commerce matrix below passes in local StoreKit and relevant real sandbox flows; no draft loss |
 | S4 — release candidate | One signed build, first IAP configured, real screenshots and support/privacy updates | Exact USA IAP price verified; product+app ready for same submission; full acceptance evidence recorded |
@@ -184,7 +184,7 @@ Keep each milestone in reviewable commits/PRs with source, tests and generated a
 | --- | --- |
 | Upgrade/catalogue | Install update over the existing app; full included set accessible free; IDs/icon preserved; wine absent; PNG/APNG pixels/timings unchanged |
 | Presentation | Small/large iPhones and iPad, portrait/landscape where supported, compact/expanded, keyboard and conversation changes; no obscured controls or cleared work |
-| Drawing | Fast drags, edges, erase, four-neighbor fill, no-op fill, grouped undo/redo, clear, blank rejection and 38 exact-grid remix templates |
+| Drawing | Fast drags, edges, erase, four-neighbor fill, no-op fill, grouped undo/redo, clear, blank rejection and 45 exact-grid remix templates |
 | Export | 256-cell round-trip, 18× integer scale, 6px padding, 300×300 RGBA, transparent background, no grid/smoothing; file under limit |
 | Persistence | Multiple drafts, rename/duplicate/delete, close/reopen, force termination, interrupted/failed write, corrupt/unsupported document; valid work preserved and errors visible |
 | Messages | Insert then user Send, receive on another device, tap/peel/place where supported, APNG playback, absent conversation/insertion failure; drafts survive all outcomes |

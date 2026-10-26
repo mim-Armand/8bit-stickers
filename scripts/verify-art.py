@@ -13,6 +13,16 @@ manifest = json.loads((ROOT / 'art/manifest.json').read_text())
 by_id = {entry['id']: entry for entry in manifest['stickers']}
 sprites = list(generator.source_sprites())
 assert len(by_id) == len(sprites), 'Source/manifest count differs'
+catalog = json.loads((generator.PACK / 'Contents.json').read_text())['stickers']
+catalog_names = [entry['filename'] for entry in catalog]
+metadata = json.loads((ROOT / 'Config/AppStoreMetadata.json').read_text())
+assert len(catalog_names) == metadata['stickerCount'], 'Native catalog differs from the release draft count'
+assert len(catalog_names) == len(set(catalog_names)), 'Duplicate native sticker reference'
+assert 'wine_01.sticker' not in catalog_names, 'Wine must remain outside the available collection'
+assert not (generator.PACK / 'wine_01.sticker').exists(), 'Archived wine must not enter shipping assets'
+assert {name for name in catalog_names if name.startswith('new_')} == {
+    f"new_{sprite['id']}.sticker" for sprite, _, _ in sprites
+}, 'Native generated sticker references differ from editable sources'
 for sprite, palette, source_file in sprites:
     entry = by_id[sprite['id']]
     raw = generator.render_sprite(sprite, palette)
@@ -43,4 +53,4 @@ for sprite, palette, source_file in sprites:
                 if len(expected) > 1:
                     assert abs(actual.info['duration'] - durations[index]) < 1, path
     print(f"Verified {entry['id']}: {len(expected)} frame(s), pixels + timing match source")
-print('PASS: native and browser art match editable sources. PNG compression bytes may differ across platforms.')
+print(f'PASS: {len(catalog_names)} available stickers, wine excluded; native and browser art match editable sources. PNG compression bytes may differ across platforms.')

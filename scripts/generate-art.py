@@ -13,7 +13,8 @@ PACK = ROOT / '8 bit art StickerPackExtension/Stickers.xcstickers/Sticker Pack.s
 ART = ROOT / 'art'
 PREVIEWS = ROOT / 'docs/previews'
 MEME_EXPANSION_FILES = ['meme-reactions-sprites.json', 'meme-animals-sprites.json', 'six-seven-sprites.json']
-SOURCE_FILES = ['sprites.json', 'cute-sprites.json', 'meme-sprites.json', *MEME_EXPANSION_FILES]
+CLUB_67_FILES = ['club67-animals-sprites.json', 'club67-reactions-sprites.json']
+SOURCE_FILES = ['sprites.json', 'cute-sprites.json', 'meme-sprites.json', *MEME_EXPANSION_FILES, *CLUB_67_FILES]
 
 
 def source_sprites():
@@ -124,6 +125,7 @@ def main():
     board_items = []
     tiny_items = []
     expansion_items = []
+    club_items = []
     for sprite, palette, source_file in sprites:
         identifier = sprite['id']
         directory = PACK / f'new_{identifier}.sticker'
@@ -152,6 +154,8 @@ def main():
         (tiny_items if sprite.get('collection') == 'tiny-pixels' else board_items).append(item)
         if source_file in MEME_EXPANSION_FILES:
             expansion_items.append(item)
+        if source_file in CLUB_67_FILES:
+            club_items.append(item)
     (ART/'manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
     catalog = json.loads((PACK/'Contents.json').read_text())
     original = [item for item in catalog['stickers'] if not item['filename'].startswith('new_')]
@@ -175,6 +179,10 @@ def main():
         review_board(expansion_items, 'More memes. Still tiny.',
                      f'{len(expansion_items)} new reactions, including four 67 designs / true 16 x 16 pixels',
                      PREVIEWS/'meme-expansion-board.png')
+    if club_items:
+        review_board(club_items, 'Welcome to the 67 club.',
+                     f'{len(club_items)} more cute memes / true 16 x 16 pixels / 67 stickers total, wine excluded',
+                     PREVIEWS/'club67-board.png')
     names = {'exclamation_point_01':'Exclamation block', 'hear_01':'Heart', 'dealwithit_01':'Deal with it',
              'smiley_01':'Smile', 'smiley_02':'Big smile'}
     recovered = []

@@ -23,10 +23,10 @@ Apple allows a standalone sticker pack to become a custom standalone iMessage ap
 ## Existing releases and prototypes
 
 - **Submitted 1.2 (5):** forty-six stickers, no native editor or StoreKit code. Last verified October 26, 2026 as Waiting for Review with automatic release after approval and a published Data Not Collected label. Preserve `v1.2-build5-submitted`, its signed archive, [metadata snapshot](../release/1.2-build5-metadata.json), screenshot manifest and [release record](../release/release-status.json). Recheck live status when resuming.
-- **Development 1.3 (6):** sixty stickers, including fourteen more memes and four 67 designs. Unsigned simulator/device builds and art/browser checks passed. Not uploaded/submitted. It can ship as an art update before Studio; the likely separate Studio release would then be 1.4, with version/build confirmed later.
+- **Development 1.3 (6):** sixty-seven stickers, including twenty-one more memes since submitted 1.2 (5) and five 67 designs. The preceding sixty-sticker source passed unsigned simulator/device builds and art/browser checks; verification for the latest seven is recorded separately in [verification notes](verification.md). Not uploaded/submitted. It can ship as an art update before Studio; the likely separate Studio release would then be 1.4, with version/build confirmed later.
 - **Browser Studio:** `http://127.0.0.1:8787/prototype/`, served locally by Python. It is a reference prototype, not bundled native functionality or a public website. Its editor currently uses 32×32 cells and stores one draft in browser localStorage. Native Studio deliberately uses 16×16 / 256 cells and multiple saved documents. Browser data does not automatically migrate.
 
-The full included catalogue is built from ten classics and fifty generated designs; `art/manifest.json` contains only the fifty generated entries. The native migration must include all sixty. Thirty-eight sources are true 16×16 and eligible for exact-grid remixing; do not silently downsample legacy / 50×50 art or flatten animations.
+The full included catalogue is built from ten classics and fifty-seven generated designs; `art/manifest.json` contains only the fifty-seven generated entries. The native migration must include all sixty-seven. Forty-five sources are true 16×16 and eligible for exact-grid remixing; do not silently downsample legacy / 50×50 art or flatten animations.
 
 ## Website and scope
 

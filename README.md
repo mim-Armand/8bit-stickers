@@ -1,8 +1,10 @@
 # 8 bit art
 
-The 2018 iMessage sticker pack is recovered and back in development. This repository preserves its Git history, Xcode project, original icons and eleven original stickers. The collection now contains **60 stickers**, including **38 cute and meme reactions drawn on a true 16×16 grid**, two animations, an unsigned native build, and a working local Sticker Studio.
+The 2018 iMessage sticker pack is recovered and back in development. This repository preserves its Git history, Xcode project, original icons and eleven original stickers. The collection now contains **67 stickers**, including **45 cute and meme reactions drawn on a true 16×16 grid**, two animations, an unsigned native build, and a working local Sticker Studio.
 
-The latest **14 meme designs include four takes on 67**, Absolute cinema, Let me cook, Popcorn mode, Locked in, Tiny violin, No thoughts, Aura +1, Keyboard cat, Dramatic cat and NPC mode. They are staged for **1.3 (6)** in source; the submitted **1.2 (5)** remains a separate 46-sticker release.
+The latest seven are **Snack goblin, Unbothered capy, Big shrimp energy, Yap duck, Delulu bunny, I saw nothing and 67 unlocked**. They join the previous fourteen memes, bringing the forthcoming additions to **21** and the number-themed set to **five 67 designs**. All are staged for **1.3 (6)** in source; submitted **1.2 (5)** remains a separate 46-sticker release.
+
+![Seven new cute 16×16 memes bring the collection to 67, wine excluded](docs/previews/club67-board.png)
 
 ![14 more 16×16 meme stickers, including four 67 designs](docs/previews/meme-expansion-board.png)
 
@@ -16,7 +18,7 @@ The latest **14 meme designs include four takes on 67**, Absolute cinema, Let me
 
 The **Data Not Collected** App Privacy label was published on October 26, 2026. Version 1.2 (5) was submitted at **3:01 PM CDT**; it has not yet been approved or publicly released. Verified IDs and release evidence are recorded in [release status](release/release-status.json).
 
-Open `8 bit art.xcodeproj` in Xcode and select the shared **8 bit art** scheme. The current development pack, **1.3 (6)**, contains **60 stickers**, including a pulsing heart and blinking robot. It keeps the original bundle identifiers and icon and requires iOS/iPadOS 15 or later. The submitted 1.2 archive can be reproduced from tag `v1.2-build5-submitted`.
+Open `8 bit art.xcodeproj` in Xcode and select the shared **8 bit art** scheme. The current development pack, **1.3 (6)**, contains **67 stickers**, including a pulsing heart and blinking robot. It keeps the original bundle identifiers and icon and requires iOS/iPadOS 15 or later. The submitted 1.2 archive can be reproduced from tag `v1.2-build5-submitted`.
 
 ```sh
 ./scripts/build-ios.sh simulator
@@ -45,7 +47,7 @@ The [public app/support site](https://mim-armand.github.io/8bit-stickers/), [sup
 
 ## Art you can keep editing
 
-The six `art/*sprites.json` files contain palette-based pixel commands. All 38 tiny designs use a 16×16 canvas, dark outlines and limited colors with no white rim. `scripts/generate-art.py` generates native catalog additions, browser assets, raw PNGs in `art/pixels/`, animation frames and review boards. All eleven recovered images remain unchanged as source. Ten classics ship; the wine-glass original is retained under `art/recovered/wine_01.sticker/` and excluded from the app and Studio gallery at the owner's request.
+The eight `art/*sprites.json` files contain palette-based pixel commands. All 45 tiny designs use a 16×16 canvas, dark outlines and limited colors with no white rim. `scripts/generate-art.py` generates native catalog additions, browser assets, raw PNGs in `art/pixels/`, animation frames and review boards. All eleven recovered images remain unchanged as source. Ten classics ship; the wine-glass original is retained under `art/recovered/wine_01.sticker/` and excluded from the app and Studio gallery at the owner's request.
 
 The tiny PNGs are truly 16×16. Native 300×300 sticker exports use integer 18× enlargement with six pixels of transparent padding; no smoothing or added detail is introduced. Open a tiny sticker in Studio to download either size.
 
@@ -60,7 +62,7 @@ Read [the art guide](art/README.md) for the editable source format and provenanc
 
 ## Verification
 
-The submitted 46-sticker candidate passed a clean simulator build and clean signed device archive/export under Xcode 27.1. The new 60-sticker development collection has its own checks recorded in [verification notes](docs/verification.md). Browser checks cover assets, filters, 67 search, persistence, chat previews, downloads, editor tools, undo, PNG dimensions/transparency format, remixing and mobile layout.
+The submitted 46-sticker candidate passed a clean simulator build and clean signed device archive/export under Xcode 27.1. The new 67-sticker development collection has its own checks recorded in [verification notes](docs/verification.md). Browser checks cover assets, filters, 67 search, persistence, chat previews, downloads, editor tools, undo, PNG dimensions/transparency format, remixing and mobile layout.
 
 Optional browser checks, with the preview server already running:
 
