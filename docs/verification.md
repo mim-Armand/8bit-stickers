@@ -1,5 +1,15 @@
 # Verification — October 26, 2026
 
+## Development art expansion — 1.3 (6)
+
+The current source contains **60 stickers**, including fourteen new meme-inspired 16×16 designs and four 67 variations. `scripts/verify-art.py` passed for all fifty generated designs: raw/native/browser pixels and animation timing match editable sources, all exports have transparency and remain below 500 KB, and the 38 tiny sprites retain their logical 16×16 grid with at most six opaque colors and no rim. A separate review confirmed that the preceding 36 generated designs retain their pixels/timing and ten classics remain byte-identical.
+
+Clean unsigned **simulator and device Release builds passed** under Xcode 27.1. Both built extension bundles contain exactly sixty sticker PNGs, exclude wine, and agree with the parent app on **version 1.3, build 6**. The new set has not been signed, uploaded, submitted or tested on a physical device. Logs are ignored `build/meme-expansion-simulator.log` and `build/meme-expansion-device.log`.
+
+The full Playwright Studio check passed with installed Google Chrome: sixty images decode, the tiny filter has 38 designs, Cute has twelve, Memes has twenty-six, and `67`, `6 7` and `six seven` each find all four new number-themed stickers. Favorites, downloads, chat preview, editor tools, draft persistence, remixing and desktop/mobile layouts passed without browser or HTTP errors. Updated screenshots are under `docs/previews/`; the fourteen-art contact sheet is `meme-expansion-board.png`.
+
+The submitted **1.2 (5)** remains unchanged at `v1.2-build5-submitted`. Its metadata is copied verbatim to `release/1.2-build5-metadata.json`; `release/release-status.json` and `release/screenshots/manifest.json` remain byte-identical to the submitted record and still describe forty-six stickers. The active `Config/AppStoreMetadata.json` is now a local 1.3 (6) draft. No App Store Connect or public website mutation was performed for this expansion. The sections below preserve the earlier release's evidence.
+
 ## Native pack
 
 The initial expanded source passed unsigned simulator/device Release builds under Xcode 27.1 (27A9275), with 47 entries and two APNGs. At the owner's request, the wine-glass sticker was then omitted from shipping assets, producing release candidate **1.2 (5)** with **46 stickers: 10 classics and 36 new designs**. The revised candidate passed a clean simulator build and clean signed device archive/export, with wine absent from those products. The parent and extension identifiers match the recovered project. All eleven original sticker PNGs are preserved byte-identically to recovered commit `816eba1`; ten ship and wine is archived at `art/recovered/wine_01.sticker/`. The initial twelve revival designs are also byte-identical to commit `423256b` in both their native and browser copies.

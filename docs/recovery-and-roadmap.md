@@ -14,7 +14,8 @@ This is an **iMessage sticker pack**, rather than a drawing app. The [Apple list
 | Main bundle identifier | `eu.armand.--bit-art` |
 | Sticker extension identifier | `eu.armand.--bit-art.StickerPackExtension` |
 | Development team in recovered project | `7N3Y4QZT3Z` |
-| Current release candidate | **1.2 / 5**, 46 shipping stickers |
+| Current development collection | **1.3 / 6**, 60 stickers prepared for a later update |
+| Submitted version | **1.2 / 5**, 46 shipping stickers, frozen at `v1.2-build5-submitted` |
 
 The two consecutive hyphens in the bundle identifier are intentional. The screenshot also contains **8-bit art**, Apple ID **1366403490**, in Prepare for Submission. That is a separate record; uploading to it would not update the published app.
 
@@ -22,7 +23,9 @@ The repository's older commit message says a sticker was removed after an App Re
 
 ## The two working MVPs
 
-**Native update MVP — version 1.2.** Keep the standalone sticker pack experience, with 46 shipping stickers: 10 recovered classics plus 36 new pixel-art designs, including two APNG animations. All eleven recovered PNGs remain preserved; wine is retained under `art/recovered/wine_01.sticker/` and excluded from the shipping catalog at the owner's request. The latest 24 are cute characters and meme reactions drawn on a true 16×16 grid, with simple shapes, dark outlines and chunky pixels closer to the original collection. Preserve the existing app and extension identifiers, modernize project settings, share the Xcode scheme, and automate asset validation and simulator builds. This is the shortest route to an update that existing users can install.
+**Submitted native update MVP — version 1.2 (5).** The standalone sticker pack contains 46 shipping stickers: 10 recovered classics plus 36 new pixel-art designs, including two APNG animations. All eleven recovered PNGs remain preserved; wine is retained under `art/recovered/wine_01.sticker/` and excluded from the shipping catalog at the owner's request. The latest 24 are cute characters and meme reactions drawn on a true 16×16 grid, with simple shapes, dark outlines and chunky pixels closer to the original collection. Preserve the existing app and extension identifiers, modernize project settings, share the Xcode scheme, and automate asset validation and simulator builds. This is the shortest route to an update that existing users can install.
+
+**Development art expansion — version 1.3 (6).** The forthcoming collection has 60 stickers: ten classics plus fifty new designs. Fourteen additional meme-inspired compositions include Absolute cinema, Let me cook, Popcorn mode, Locked in, Tiny violin, No thoughts, Aura +1, Keyboard cat, Dramatic cat and NPC mode, plus the four 67 designs Six seven!, Six-seven hands, Number 67 and Certified 67 cat. The tiny collection now has 38 true 16×16 sources: twelve cute and twenty-six meme designs. Each uses dark outlines and at most six opaque colors, enlarged exactly 18× to 288×288 with six transparent pixels of padding on each side for the 300×300 native PNG. No antialiasing is used. The editable sources live in `art/meme-reactions-sprites.json`, `art/meme-animals-sprites.json` and `art/six-seven-sprites.json`; review the new set on `docs/previews/meme-expansion-board.png`. This source expansion changes neither the submitted build 5 binary nor its App Review submission. It adds no native Studio or in-app purchase code, and does not establish a completed build 6 submission or device test.
 
 **Local Studio MVP — a product exploration.** A browser interface presents categories, search, favorites, a conversation preview, PNG export and a basic pixel editor. It makes the art direction and possible future browsing/editing experience tangible. This prototype runs locally; it is not functionality shipped inside the native 1.2 sticker pack. Browser favorites and drawings stay on that browser/device. A preview conversation is illustrative and does not send messages.
 
@@ -32,7 +35,7 @@ Apple's [sticker specifications](https://developer.apple.com/documentation/messa
 
 ## App Review and release
 
-The submitted update is **1.2 (5)**, with a clean signed archive/export and wine absent from the simulator/archive/export products. Apple validation/upload passed without errors and with two expected hidden-app Mac/visionOS compatibility warnings. Build `ecc379bc-4471-489b-887b-826ec30d9c6b` processed as `VALID` and remains selected. The preceding build 4 passed Apple validation/upload and processed as `VALID`, but contains wine and is not the intended release. Version `7c6caa34-4ee8-4423-87d9-e4acc09b1b40` is **Waiting for Review** with **automatic release after approval** selected.
+The submitted update remains **1.2 (5)**, frozen at `v1.2-build5-submitted`, with a clean signed archive/export and wine absent from the simulator/archive/export products. Apple validation/upload passed without errors and with two expected hidden-app Mac/visionOS compatibility warnings. Build `ecc379bc-4471-489b-887b-826ec30d9c6b` processed as `VALID` and remains selected. The preceding build 4 passed Apple validation/upload and processed as `VALID`, but contains wine and is not the intended release. Version `7c6caa34-4ee8-4423-87d9-e4acc09b1b40` is **Waiting for Review** with **automatic release after approval** selected.
 
 Revised native-only listing copy, support/privacy URLs, reviewer notes and age-rating answers were staged and read back. Omitting the wine sticker and setting alcohol references to `NONE` returns API age rating `FOUR_PLUS` without an override. The [support](https://mim-armand.github.io/8bit-stickers/support/) and [privacy](https://mim-armand.github.io/8bit-stickers/privacy/) pages are live on GitHub Pages, with HTTP 200 responses and HTTPS enforcement verified. The current published website describes the 46-sticker collection; the interactive Studio is not part of that public deployment.
 
@@ -62,6 +65,6 @@ Apple permits standalone sticker-pack ↔ custom standalone iMessage updates in 
 ## Keep it recoverable
 
 - Commit source, original artwork, editable art definitions, generated assets, scripts and release notes to the existing GitHub repository. Keep signing keys, provisioning secrets, personal Xcode state and build output out of Git.
-- Push small reviewed changes and run the repository checks in GitHub Actions. Tag the exact source commit for each submitted build, as with `v1.2-build5-candidate`, and record the App Store version, build number and validation outcome in its release notes. Metadata-only submission records may follow in later commits without changing the uploaded binary.
+- Push small reviewed changes and run the repository checks in GitHub Actions. Tag the exact source commit for each submitted build, as with `v1.2-build5-submitted`, and record the App Store version, build number and validation outcome in its release notes. Metadata-only submission records may follow in later commits without changing the uploaded binary.
 - Retain signed archives and an encrypted signing-key backup separately from the public repository. Keep a periodic independent repository/artwork export in a second location such as an external drive or private cloud backup. GitHub plus an independent export gives recovery options if either account or local storage is lost.
 - Preserve the recovered history. Do not overwrite it with a new unrelated repository or regenerate art without keeping the editable source.

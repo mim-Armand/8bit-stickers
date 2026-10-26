@@ -815,6 +815,344 @@
       ],
       "pixelSource": "art/pixels/tiny_touch_grass.png",
       "collection": "tiny-pixels"
+    },
+    {
+      "id": "tiny_absolute_cinema",
+      "title": "Absolute cinema",
+      "category": "Memes",
+      "tags": [
+        "cinema",
+        "movie",
+        "masterpiece",
+        "peak",
+        "hands up",
+        "meme",
+        "reaction"
+      ],
+      "filename": "8 bit art StickerPackExtension/Stickers.xcstickers/Sticker Pack.stickerpack/new_tiny_absolute_cinema.sticker/new_tiny_absolute_cinema.png",
+      "preview": "prototype/assets/new/tiny_absolute_cinema.png",
+      "animated": false,
+      "source": "art/meme-reactions-sprites.json",
+      "logicalSize": [
+        16,
+        16
+      ],
+      "pixelSource": "art/pixels/tiny_absolute_cinema.png",
+      "collection": "tiny-pixels"
+    },
+    {
+      "id": "tiny_let_me_cook",
+      "title": "Let me cook",
+      "category": "Memes",
+      "tags": [
+        "cook",
+        "chef",
+        "cat",
+        "cooking",
+        "let him cook",
+        "meme",
+        "reaction"
+      ],
+      "filename": "8 bit art StickerPackExtension/Stickers.xcstickers/Sticker Pack.stickerpack/new_tiny_let_me_cook.sticker/new_tiny_let_me_cook.png",
+      "preview": "prototype/assets/new/tiny_let_me_cook.png",
+      "animated": false,
+      "source": "art/meme-reactions-sprites.json",
+      "logicalSize": [
+        16,
+        16
+      ],
+      "pixelSource": "art/pixels/tiny_let_me_cook.png",
+      "collection": "tiny-pixels"
+    },
+    {
+      "id": "tiny_popcorn_mode",
+      "title": "Popcorn mode",
+      "category": "Memes",
+      "tags": [
+        "popcorn",
+        "watching",
+        "drama",
+        "tea",
+        "spectator",
+        "meme",
+        "reaction"
+      ],
+      "filename": "8 bit art StickerPackExtension/Stickers.xcstickers/Sticker Pack.stickerpack/new_tiny_popcorn_mode.sticker/new_tiny_popcorn_mode.png",
+      "preview": "prototype/assets/new/tiny_popcorn_mode.png",
+      "animated": false,
+      "source": "art/meme-reactions-sprites.json",
+      "logicalSize": [
+        16,
+        16
+      ],
+      "pixelSource": "art/pixels/tiny_popcorn_mode.png",
+      "collection": "tiny-pixels"
+    },
+    {
+      "id": "tiny_locked_in",
+      "title": "Locked in",
+      "category": "Memes",
+      "tags": [
+        "focus",
+        "locked in",
+        "concentrate",
+        "tryhard",
+        "game face",
+        "meme",
+        "reaction"
+      ],
+      "filename": "8 bit art StickerPackExtension/Stickers.xcstickers/Sticker Pack.stickerpack/new_tiny_locked_in.sticker/new_tiny_locked_in.png",
+      "preview": "prototype/assets/new/tiny_locked_in.png",
+      "animated": false,
+      "source": "art/meme-reactions-sprites.json",
+      "logicalSize": [
+        16,
+        16
+      ],
+      "pixelSource": "art/pixels/tiny_locked_in.png",
+      "collection": "tiny-pixels"
+    },
+    {
+      "id": "tiny_violin",
+      "title": "Tiny violin",
+      "category": "Memes",
+      "tags": [
+        "tiny violin",
+        "sad song",
+        "sympathy",
+        "drama",
+        "smallest violin",
+        "meme",
+        "reaction"
+      ],
+      "filename": "8 bit art StickerPackExtension/Stickers.xcstickers/Sticker Pack.stickerpack/new_tiny_violin.sticker/new_tiny_violin.png",
+      "preview": "prototype/assets/new/tiny_violin.png",
+      "animated": false,
+      "source": "art/meme-reactions-sprites.json",
+      "logicalSize": [
+        16,
+        16
+      ],
+      "pixelSource": "art/pixels/tiny_violin.png",
+      "collection": "tiny-pixels"
+    },
+    {
+      "id": "tiny_no_thoughts",
+      "title": "No thoughts",
+      "category": "Memes",
+      "tags": [
+        "no thoughts",
+        "head empty",
+        "goldfish",
+        "fish",
+        "blank",
+        "meme"
+      ],
+      "filename": "8 bit art StickerPackExtension/Stickers.xcstickers/Sticker Pack.stickerpack/new_tiny_no_thoughts.sticker/new_tiny_no_thoughts.png",
+      "preview": "prototype/assets/new/tiny_no_thoughts.png",
+      "animated": false,
+      "source": "art/meme-animals-sprites.json",
+      "logicalSize": [
+        16,
+        16
+      ],
+      "pixelSource": "art/pixels/tiny_no_thoughts.png",
+      "collection": "tiny-pixels"
+    },
+    {
+      "id": "tiny_aura_plus",
+      "title": "Aura +1",
+      "category": "Memes",
+      "tags": [
+        "aura",
+        "plus one",
+        "potion",
+        "magic",
+        "win",
+        "meme"
+      ],
+      "filename": "8 bit art StickerPackExtension/Stickers.xcstickers/Sticker Pack.stickerpack/new_tiny_aura_plus.sticker/new_tiny_aura_plus.png",
+      "preview": "prototype/assets/new/tiny_aura_plus.png",
+      "animated": false,
+      "source": "art/meme-animals-sprites.json",
+      "logicalSize": [
+        16,
+        16
+      ],
+      "pixelSource": "art/pixels/tiny_aura_plus.png",
+      "collection": "tiny-pixels"
+    },
+    {
+      "id": "tiny_keyboard_cat",
+      "title": "Keyboard cat",
+      "category": "Memes",
+      "tags": [
+        "keyboard cat",
+        "cat",
+        "piano",
+        "music",
+        "playing",
+        "meme"
+      ],
+      "filename": "8 bit art StickerPackExtension/Stickers.xcstickers/Sticker Pack.stickerpack/new_tiny_keyboard_cat.sticker/new_tiny_keyboard_cat.png",
+      "preview": "prototype/assets/new/tiny_keyboard_cat.png",
+      "animated": false,
+      "source": "art/meme-animals-sprites.json",
+      "logicalSize": [
+        16,
+        16
+      ],
+      "pixelSource": "art/pixels/tiny_keyboard_cat.png",
+      "collection": "tiny-pixels"
+    },
+    {
+      "id": "tiny_dramatic_cat",
+      "title": "Dramatic cat",
+      "category": "Memes",
+      "tags": [
+        "crying cat",
+        "dramatic",
+        "sad",
+        "please",
+        "cat",
+        "meme"
+      ],
+      "filename": "8 bit art StickerPackExtension/Stickers.xcstickers/Sticker Pack.stickerpack/new_tiny_dramatic_cat.sticker/new_tiny_dramatic_cat.png",
+      "preview": "prototype/assets/new/tiny_dramatic_cat.png",
+      "animated": false,
+      "source": "art/meme-animals-sprites.json",
+      "logicalSize": [
+        16,
+        16
+      ],
+      "pixelSource": "art/pixels/tiny_dramatic_cat.png",
+      "collection": "tiny-pixels"
+    },
+    {
+      "id": "tiny_npc_mode",
+      "title": "NPC mode",
+      "category": "Memes",
+      "tags": [
+        "npc",
+        "blank",
+        "default",
+        "idle",
+        "no thoughts",
+        "meme"
+      ],
+      "filename": "8 bit art StickerPackExtension/Stickers.xcstickers/Sticker Pack.stickerpack/new_tiny_npc_mode.sticker/new_tiny_npc_mode.png",
+      "preview": "prototype/assets/new/tiny_npc_mode.png",
+      "animated": false,
+      "source": "art/meme-animals-sprites.json",
+      "logicalSize": [
+        16,
+        16
+      ],
+      "pixelSource": "art/pixels/tiny_npc_mode.png",
+      "collection": "tiny-pixels"
+    },
+    {
+      "id": "tiny_six_seven_neon",
+      "title": "Six seven!",
+      "category": "Memes",
+      "tags": [
+        "67",
+        "6 7",
+        "six seven",
+        "meme",
+        "six-seven",
+        "neon",
+        "hype",
+        "numbers"
+      ],
+      "filename": "8 bit art StickerPackExtension/Stickers.xcstickers/Sticker Pack.stickerpack/new_tiny_six_seven_neon.sticker/new_tiny_six_seven_neon.png",
+      "preview": "prototype/assets/new/tiny_six_seven_neon.png",
+      "animated": false,
+      "source": "art/six-seven-sprites.json",
+      "logicalSize": [
+        16,
+        16
+      ],
+      "pixelSource": "art/pixels/tiny_six_seven_neon.png",
+      "collection": "tiny-pixels"
+    },
+    {
+      "id": "tiny_six_seven_hands",
+      "title": "Six-seven hands",
+      "category": "Memes",
+      "tags": [
+        "67",
+        "6 7",
+        "six seven",
+        "meme",
+        "hands",
+        "palms up",
+        "gesture",
+        "shrug",
+        "weighing"
+      ],
+      "filename": "8 bit art StickerPackExtension/Stickers.xcstickers/Sticker Pack.stickerpack/new_tiny_six_seven_hands.sticker/new_tiny_six_seven_hands.png",
+      "preview": "prototype/assets/new/tiny_six_seven_hands.png",
+      "animated": false,
+      "source": "art/six-seven-sprites.json",
+      "logicalSize": [
+        16,
+        16
+      ],
+      "pixelSource": "art/pixels/tiny_six_seven_hands.png",
+      "collection": "tiny-pixels"
+    },
+    {
+      "id": "tiny_six_seven_jersey",
+      "title": "Number 67",
+      "category": "Memes",
+      "tags": [
+        "67",
+        "6 7",
+        "six seven",
+        "meme",
+        "basketball",
+        "jersey",
+        "sports",
+        "team",
+        "hype"
+      ],
+      "filename": "8 bit art StickerPackExtension/Stickers.xcstickers/Sticker Pack.stickerpack/new_tiny_six_seven_jersey.sticker/new_tiny_six_seven_jersey.png",
+      "preview": "prototype/assets/new/tiny_six_seven_jersey.png",
+      "animated": false,
+      "source": "art/six-seven-sprites.json",
+      "logicalSize": [
+        16,
+        16
+      ],
+      "pixelSource": "art/pixels/tiny_six_seven_jersey.png",
+      "collection": "tiny-pixels"
+    },
+    {
+      "id": "tiny_six_seven_cat",
+      "title": "Certified 67 cat",
+      "category": "Memes",
+      "tags": [
+        "67",
+        "6 7",
+        "six seven",
+        "meme",
+        "cat",
+        "kitty",
+        "cute",
+        "hype",
+        "six-seven"
+      ],
+      "filename": "8 bit art StickerPackExtension/Stickers.xcstickers/Sticker Pack.stickerpack/new_tiny_six_seven_cat.sticker/new_tiny_six_seven_cat.png",
+      "preview": "prototype/assets/new/tiny_six_seven_cat.png",
+      "animated": false,
+      "source": "art/six-seven-sprites.json",
+      "logicalSize": [
+        16,
+        16
+      ],
+      "pixelSource": "art/pixels/tiny_six_seven_cat.png",
+      "collection": "tiny-pixels"
     }
   ]
 }

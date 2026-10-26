@@ -1,6 +1,10 @@
 # 8 bit art
 
-The 2018 iMessage sticker pack is recovered and back in development. This repository preserves its Git history, Xcode project, original icons and eleven original stickers. The revival now adds 36 editable designs, including **24 cute and meme reactions drawn on a true 16×16 grid**, two animations, an unsigned native build, and a working local Sticker Studio.
+The 2018 iMessage sticker pack is recovered and back in development. This repository preserves its Git history, Xcode project, original icons and eleven original stickers. The collection now contains **60 stickers**, including **38 cute and meme reactions drawn on a true 16×16 grid**, two animations, an unsigned native build, and a working local Sticker Studio.
+
+The latest **14 meme designs include four takes on 67**, Absolute cinema, Let me cook, Popcorn mode, Locked in, Tiny violin, No thoughts, Aura +1, Keyboard cat, Dramatic cat and NPC mode. They are staged for **1.3 (6)** in source; the submitted **1.2 (5)** remains a separate 46-sticker release.
+
+![14 more 16×16 meme stickers, including four 67 designs](docs/previews/meme-expansion-board.png)
 
 ![Cute 16×16 pixel art](docs/previews/cute-art-board.png)
 
@@ -12,7 +16,7 @@ The 2018 iMessage sticker pack is recovered and back in development. This reposi
 
 The **Data Not Collected** App Privacy label was published on October 26, 2026. Version 1.2 (5) was submitted at **3:01 PM CDT**; it has not yet been approved or publicly released. Verified IDs and release evidence are recorded in [release status](release/release-status.json).
 
-Open `8 bit art.xcodeproj` in Xcode and select the shared **8 bit art** scheme. The native pack contains **46 stickers**, including a pulsing heart and blinking robot. It keeps the original bundle identifiers and icon and requires iOS/iPadOS 15 or later.
+Open `8 bit art.xcodeproj` in Xcode and select the shared **8 bit art** scheme. The current development pack, **1.3 (6)**, contains **60 stickers**, including a pulsing heart and blinking robot. It keeps the original bundle identifiers and icon and requires iOS/iPadOS 15 or later. The submitted 1.2 archive can be reproduced from tag `v1.2-build5-submitted`.
 
 ```sh
 ./scripts/build-ios.sh simulator
@@ -21,7 +25,7 @@ Open `8 bit art.xcodeproj` in Xcode and select the shared **8 bit art** scheme. 
 
 These verification builds do not use signing credentials. For simulator installation and the distribution path, see [the native guide](docs/native-mvp.md).
 
-The signed release can be rebuilt with `./scripts/archive-release.sh` using the installed distribution identity/profiles and public settings in `Config/ExportOptions.plist`. Signing keys and build output remain outside Git.
+`./scripts/archive-release.sh` uses the current development version/build in `Config/AppStoreMetadata.json` and the installed distribution identity/profiles. It does not upload or submit a release. The submitted build's metadata is preserved in `release/1.2-build5-metadata.json`; its release status and screenshots still describe 1.2 (5). Signing keys and build output remain outside Git.
 
 **Sticker Studio — local browser prototype.** Browse all stickers, filter themes, search, save favorites, try a local conversation preview, and download original PNG/APNG files. The Pixel Lab supports drawing, erasing, flood fill, undo, remixing a sticker and downloading a transparent 300×300 PNG. Favorites and one draft persist in local browser storage when available. The canvas supports pointer/touch input and keyboard arrows + Space; `P`, `E`, `F` switch tools.
 
@@ -39,7 +43,7 @@ The [public app/support site](https://mim-armand.github.io/8bit-stickers/), [sup
 
 ## Art you can keep editing
 
-`art/sprites.json`, `art/cute-sprites.json` and `art/meme-sprites.json` contain palette-based pixel commands. The latest two collections use a 16×16 canvas, dark outlines and limited colors with no white rim. `scripts/generate-art.py` generates native catalog additions, browser assets, raw PNGs in `art/pixels/`, animation frames and review boards. All eleven recovered images remain unchanged as source. Ten classics ship; the wine-glass original is retained under `art/recovered/wine_01.sticker/` and excluded from the app and Studio gallery at the owner's request.
+The six `art/*sprites.json` files contain palette-based pixel commands. All 38 tiny designs use a 16×16 canvas, dark outlines and limited colors with no white rim. `scripts/generate-art.py` generates native catalog additions, browser assets, raw PNGs in `art/pixels/`, animation frames and review boards. All eleven recovered images remain unchanged as source. Ten classics ship; the wine-glass original is retained under `art/recovered/wine_01.sticker/` and excluded from the app and Studio gallery at the owner's request.
 
 The tiny PNGs are truly 16×16. Native 300×300 sticker exports use integer 18× enlargement with six pixels of transparent padding; no smoothing or added detail is introduced. Open a tiny sticker in Studio to download either size.
 
@@ -54,7 +58,7 @@ Read [the art guide](art/README.md) for the editable source format and provenanc
 
 ## Verification
 
-The initial expanded pack passed simulator/device builds and rendered in the iOS 17.5 Messages picker. The revised 46-sticker candidate passed a clean simulator build and clean signed device archive/export under Xcode 27.1; the final archive/export was checked for the absence of wine assets. Browser checks cover assets, filters, persistence, chat previews, downloads, editor tools, undo, PNG dimensions/transparency format, remixing and mobile layout. Details and release limitations are in [verification notes](docs/verification.md).
+The submitted 46-sticker candidate passed a clean simulator build and clean signed device archive/export under Xcode 27.1. The new 60-sticker development collection has its own checks recorded in [verification notes](docs/verification.md). Browser checks cover assets, filters, 67 search, persistence, chat previews, downloads, editor tools, undo, PNG dimensions/transparency format, remixing and mobile layout.
 
 Optional browser checks, with the preview server already running:
 
