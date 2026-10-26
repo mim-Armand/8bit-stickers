@@ -1,6 +1,6 @@
 # Studio Unlock — agreed monetization plan
 
-Updated October 26, 2026. This supersedes the earlier recommendation to charge for downloading the sticker pack. The owner clarified that payment is for **the native Studio tools inside Messages**, then asked for this future implementation to be planned and documented. No pricing or product settings have been changed.
+Updated October 26, 2026. This supersedes the earlier recommendation to charge for downloading the sticker pack. The owner clarified that payment is for **the native Studio tools inside Messages**, then asked for this future implementation to be planned and documented. The local native implementation now exercises this offer with no-charge test purchases. No live pricing or product settings have been changed.
 
 ## Product and access
 
@@ -24,6 +24,6 @@ The [implementation handoff](native-studio-implementation-plan.md) is authoritat
 
 **Family Sharing is not decided.** Leave it off until the owner chooses it, then test family entitlement behavior if enabled. Apple's setting cannot be turned off after activation. [Family Sharing](https://developer.apple.com/help/app-store-connect/configure-in-app-purchase-settings/turn-on-family-sharing-for-in-app-purchases/).
 
-Current 1.2 (5) and development 1.3 (6) are static sticker packs without StoreKit. The paid Studio needs a new custom Messages binary. Apple's first non-consumable product must accompany the new app version **in the same review submission**. Do not attach this plan/product to the already submitted build 5. [First-IAP submission](https://developer.apple.com/help/app-store-connect/manage-submissions-to-app-review/submit-an-in-app-purchase/).
+Current 1.2 (5) and development 1.3 (6) are static sticker packs without StoreKit. The local 1.4 (7) Studio project supplies that custom Messages implementation, with simulated checkout and verified Xcode StoreKit testing. Normal release builds currently disable checkout; no production product has been registered. See [local testing](native-studio-local.md). A future release needs its own validated custom Messages binary. Apple's first non-consumable product must accompany the new app version **in the same review submission**. Do not attach this plan/product to the already submitted build 5. [First-IAP submission](https://developer.apple.com/help/app-store-connect/manage-submissions-to-app-review/submit-an-in-app-purchase/).
 
 A paid download, premium sticker collections, subscriptions, web checkout and per-design purchases remain outside this chosen scope. Reconsider them only if the owner changes the product direction.

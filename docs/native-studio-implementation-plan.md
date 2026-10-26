@@ -1,6 +1,6 @@
 # Native Studio inside Messages — implementation and release handoff
 
-Status: **approved product direction; planning only, not implemented**. Updated October 26, 2026 after the owner requested a native Studio with a one-time US$1 unlock. This is the starting document for a future build iteration. Read it with [product context](studio-product-plan.md), [monetization decisions](monetization-options.md) and the actual [release record](../release/release-status.json).
+Status: **local native implementation available; production release deferred**. See [the local testing guide](native-studio-local.md) for running the current code and its verification. The requirements below remain the implementation/release contract; passing local tests does not mean every production gate is complete. Updated October 26, 2026 after the owner requested a native Studio with a one-time US$1 unlock. This is the starting document for a future build iteration. Read it with [product context](studio-product-plan.md), [monetization decisions](monetization-options.md) and the actual [release record](../release/release-status.json).
 
 ## Decisions to carry forward
 
@@ -12,7 +12,7 @@ Status: **approved product direction; planning only, not implemented**. Updated 
 - Use StoreKit's localized `Product.displayPrice` in the purchase button. International prices are localized; do not promise a literal $1 in every currency. Apple's standard purchase sheet confirms payment.
 - Drafts and favorites are local to the device. No app-specific user account, developer backend, advertising, analytics or automatic cloud synchronization in this MVP. Apple handles the payment and purchase history.
 - Public support email: **seltzer.wisdom7h@icloud.com**. Keep the current GitHub Pages support/privacy URLs.
-- This request authorizes planning and documentation. It does not create products, charge users, change pricing, withdraw a submission, build Studio, or publish a release.
+- The owner subsequently authorized local implementation/testing only. Native code now exists in the separate Studio project. Product registration, real pricing, TestFlight uploads, App Review submission and changes to the pending release remain deferred.
 
 Apple permits standalone sticker-pack ↔ custom standalone iMessage updates on the same record. Moving this standalone listing into a normal iOS app requires a new app record. See [app-type rules](https://developer.apple.com/help/app-store-connect/create-an-app-record/add-imessage-app-information/) and [iMessage distribution and purchase support](https://developer.apple.com/imessage/).
 
@@ -22,6 +22,7 @@ Apple permits standalone sticker-pack ↔ custom standalone iMessage updates on 
 | --- | --- | --- |
 | Submitted 1.2 (5) | 46 stickers; Data Not Collected label published; submission recorded as Waiting for Review with `AFTER_APPROVAL` | Preserve tag `v1.2-build5-submitted`, metadata snapshot, signed archive and release evidence. Recheck current Apple status when resuming; this document is not a live status feed. |
 | Development 1.3 (6) | 67 stickers, including twenty-one additional memes and five 67 designs; the preceding 60-sticker source passed unsigned builds and browser/art checks, with latest verification tracked separately | Can ship as a separate art update before Studio. It has not been uploaded or submitted. |
+| Local Studio 1.4 (7) | Implemented custom Messages extension and preview host; local purchase flows only | Test locally. No Apple upload/product creation; keep original 1.3 (6) sticker project intact. |
 | Native Studio release | Custom Messages browser, free search/favorites, paid 16×16 editor and multiple drafts | Prefer a later 1.4 if 1.3 ships first. If the owner chooses to combine the work before 1.3 submission, it may become 1.3. Recheck App Store version/build availability before choosing numbers. |
 | Follow-up fixes | Accessibility, purchase/layout fixes and measured usability improvements | Patch release after Studio; keep the same non-consumable entitlement. |
 
@@ -65,27 +66,27 @@ Before building the editor, prove all of the following on a real device:
 
 Resolve template, bundle-resource and StoreKit presentation problems during this spike. Do not solve them by silently creating a new app listing. [Messages controller](https://developer.apple.com/documentation/messages/msmessagesappviewcontroller), [presentation styles](https://developer.apple.com/documentation/messages/msmessagesappviewcontroller/presentationstyle), [system sticker contexts](https://developer.apple.com/documentation/messages/adding-sticker-packs-and-imessage-apps-to-the-system-stickers-app-messages-camera-and-facetime).
 
-## Proposed source layout and catalogue migration
+## Local source layout and catalogue migration
 
-Paths below are planned; these files do not exist yet.
+The separate local project now implements the following layout. Production enablement and distribution steps remain unfinished; the original sticker-only project has not been converted.
 
-| Proposed path | Responsibility |
+| Local source path | Responsibility |
 | --- | --- |
-| `NativeStudio/MessagesViewController.swift` | Messages lifecycle, current conversation, compact/expanded transitions, SwiftUI containment |
+| `NativeStudio/Integration/MessagesViewController.swift` | Messages lifecycle, current conversation, compact/expanded transitions, SwiftUI containment |
 | `NativeStudio/Views/` | Collection, draft list, editor, unlock sheet and help |
-| `NativeStudio/Models/PixelDocument.swift` | Versioned 16×16 document model and validation |
-| `NativeStudio/Models/StickerItem.swift` | Stable catalogue IDs, categories, search tags and descriptions |
-| `NativeStudio/Services/CatalogStore.swift` | Load bundled catalogue and construct/cache native stickers |
-| `NativeStudio/Services/DraftStore.swift` | Serialized atomic document persistence, recovery, thumbnails |
-| `NativeStudio/Services/PixelRenderer.swift` | Deterministic transparent PNG generation |
-| `NativeStudio/Services/StudioPurchaseStore.swift` | StoreKit products, verified entitlements and purchase state |
-| `NativeStudio/Services/StickerInserter.swift` | Local-file sticker insertion and completion/error handling |
+| `NativeStudio/Core/PixelDocument.swift` | Versioned 16×16 document model and validation |
+| `NativeStudio/Integration/CatalogStore.swift` | Stable catalogue IDs, categories, search tags and descriptions |
+| `NativeStudio/Integration/CatalogStore.swift` | Load bundled catalogue and construct/cache native stickers |
+| `NativeStudio/Core/DraftStore.swift` | Serialized atomic document persistence, recovery, thumbnails |
+| `NativeStudio/Core/PixelRenderer.swift` | Deterministic transparent PNG generation |
+| `NativeStudio/Commerce/StudioPurchaseStore.swift` | StoreKit products, verified entitlements and purchase state |
+| `NativeStudio/Integration/MessagesViewController.swift` | Local-file sticker insertion and completion/error handling |
 | `NativeStudio/Resources/` | Generated native JSON catalogue, raw tiny templates, bundled PNG/APNG files and localized strings |
-| `NativeStudioTests/` | Pixel operations, document/persistence/export and commerce state tests |
+| `NativeStudio/CoreTests/, CommerceTests/, UITests/, MessageTests/` | Pixel operations, document/persistence/export and commerce state tests |
 | `Config/Studio.storekit` | Local StoreKit test product; no live credential or production receipt |
 | `scripts/build-native-catalog.py` | Deterministically package the existing art for the code-based extension |
 
-`art/manifest.json` contains **57 generated designs only**. `scripts/build-preview.py` combines these with the **ten classics** to build the sixty-seven-item browser catalogue. The native generator must use the same full source set, not mistake the art manifest for all sixty-seven. Refactor the shared catalogue-building logic rather than parsing JavaScript or maintaining a hand-copied list.
+`art/manifest.json` contains **57 generated designs only**. `scripts/build-preview.py` combines these with the **ten classics** to build the sixty-seven-item browser catalogue. The native generator must use the same full source set, not mistake the art manifest for all sixty-seven. Shared assembly now lives in `scripts/catalog-source.py`, used by both generators; do not replace it with JavaScript parsing or a hand-copied list.
 
 Native entries need ID, localized title/accessibility description, category/tags, animation flag, bundle-relative export filename, logical size and optional raw template data. Keep old artwork pixels, APNG timings, IDs and native sticker order intact; omit wine. Generate copied resources/manifest from tracked source and commit outputs so ordinary Xcode builds need no Python. Verify bundle paths in the new target rather than assuming `.xcstickers` compiles identically after conversion.
 
@@ -126,7 +127,7 @@ Insertion places the sticker in the Messages composer; **the user taps Send**. D
 
 ## Studio Unlock product and entitlement implementation
 
-Proposed product ID: **`eu.armand.--bit-art.studio.unlock`**, display name **Studio Unlock**, description **16×16 editor and saved drafts.** These are planned identifiers/strings, not a product already registered. Verify the ID is unused and valid for this app before creation; once registered, use the same exact ID across source, local StoreKit config and App Store Connect. Do not create one product per design or version.
+Proposed product ID: **`eu.armand.--bit-art.studio.unlock`**, display name **Studio Unlock**, description **16×16 editor and saved drafts.** These identify the local StoreKit test configuration; no product has been registered in App Store Connect. Verify the ID is unused and valid for this app before creation; once registered, use the same exact ID across source, local StoreKit config and App Store Connect. Do not create one product per design or version.
 
 Use StoreKit 2, compatible with the existing iOS 15 baseline. Keep purchases behind a single testable service; views never decide ownership from an ordinary preferences flag. Check the registered explicit identity and applicable target/signing configuration against the current Xcode template. No invented payment entitlement or developer payment server is needed for this plan. [Sandbox availability guidance](https://developer.apple.com/documentation/technotes/tn3186-troubleshooting-in-app-purchases-availability-in-the-sandbox).
 
