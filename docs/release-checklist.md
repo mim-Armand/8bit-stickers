@@ -1,6 +1,6 @@
-# Release preparation checklist — 8 bit art
+# Release checklist — 8 bit art
 
-Updated October 26, 2026. **1.2 (5)** is prepared in App Store Connect with **46 stickers**, a selected `VALID` build and twelve `COMPLETE` screenshot placements. The version remains **Prepare for Submission** with **manual release**. The no-collected-data App Privacy answer is saved as a draft, with Publish unpressed. No App Review submission for 1.2 or public app release has occurred.
+Updated October 26, 2026. **1.2 (5)** was submitted for App Review at **3:01 PM CDT** with **46 stickers**, a selected `VALID` build and twelve `COMPLETE` screenshot placements. Both the version and its review submission report **`WAITING_FOR_REVIEW`**. The **Data Not Collected** App Privacy label is published, and release type **`AFTER_APPROVAL`** is saved. Apple has not yet approved or publicly released the update.
 
 ## Completed preparation
 
@@ -16,16 +16,16 @@ Updated October 26, 2026. **1.2 (5)** is prepared in App Store Connect with **46
 - [x] Capture six actual native build 5 screenshots on iOS/iPadOS 17.5: three iPhone RGB images at **1179×2556** and three iPad RGB images at **2064×2752**. Source manifest: `release/screenshots/manifest.json`, `stickerCount: 46`, `wineExcluded: true`.
 - [x] Upload those six files as twelve placements across `APP_IPHONE_61`, `IMESSAGE_APP_IPHONE_61`, `APP_IPAD_PRO_3GEN_129` and `IMESSAGE_APP_IPAD_PRO_3GEN_129`. All are `COMPLETE`, with no errors. Evidence: ignored `build/release/screenshot-upload-readback.json`.
 - [x] Remove legacy 2018 screenshot placements only from editable draft 1.2; leave the published 1.1 sets/assets untouched.
-- [x] Save the no-collected-data App Privacy answer as a UI draft. Evidence: ignored `build/release/ui/privacy-draft.jpg`. The public policy URL does not publish this label.
+- [x] Publish the **Data Not Collected** App Privacy label through App Store Connect. The UI showed “Published a few seconds ago by mim Armand” and Data Not Collected. Evidence: ignored `build/submission/privacy-published.jpg`. Publishing the public policy URL is a separate task.
 
 The staged capability declarations are `userGeneratedContent: false`, `socialMedia: false` and `messagingAndChat: false`. This is an implementation-based interpretation: the predefined pack has no own chat/feed/editor and supplies developer artwork; Apple's host Messages app handles conversations. [Apple's capability definitions](https://developer.apple.com/help/app-store-connect/reference/app-information/age-ratings-values-and-definitions).
 
-## Awaiting final approval
+## Submission completed
 
-- [ ] Publish the saved **no-collected-data App Privacy label**.
-- [ ] Submit prepared **1.2 (5)** for **App Review**. Manual release remains selected for publication after approval.
+- [x] Save and read back **`AFTER_APPROVAL`** so Apple automatically releases this version after approval.
+- [x] Submit **1.2 (5)** for **App Review**. Review submission ID: `d6780537-3c51-43b3-97d9-67f900dfc768`; submitted at `2026-10-26T20:01:02.003Z`. The submission and version both report `WAITING_FOR_REVIEW`, with build 5 unchanged.
 
-No new review submission was created during preparation. Current public release evidence is summarized in `release/release-status.json`; candidate tagging and archive backup accompany the source handoff.
+Final API evidence is ignored `build/submission/review-submitted.json` and `build/submission/final-readback.json`. Public release evidence is summarized in [`release/release-status.json`](../release/release-status.json); candidate tagging and archive backup accompany the source handoff. App Review approval remains pending. No purchase or app-price change was made.
 
 ## Optional final device checks
 

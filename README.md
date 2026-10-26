@@ -8,9 +8,9 @@ The 2018 iMessage sticker pack is recovered and back in development. This reposi
 
 ## Try the two MVPs
 
-**iMessage pack — release candidate 1.2 (5), prepared in App Store Connect.** The clean signed archive and IPA passed Apple validation/upload with no errors. Build 5 processed as `VALID` and is selected in the draft version. Six actual native screenshots are staged in iPhone/iPad App Store and iMessage wells, with all twelve placements `COMPLETE`. The draft remains **Prepare for Submission** with **manual release** selected.
+**iMessage pack — version 1.2 (5), submitted for App Review.** Apple reports **Waiting for Review**, with **automatic release after approval** selected. The clean signed archive and IPA passed Apple validation/upload with no errors. Build 5 processed as `VALID` and remains selected. Six actual native screenshots have twelve `COMPLETE` placements across iPhone/iPad App Store and iMessage wells.
 
-The no-collected-data App Privacy answer is saved as a draft, with Publish unpressed. Publishing that label and submitting the version for App Review await the final approval; no review submission or public app release has occurred.
+The **Data Not Collected** App Privacy label was published on October 26, 2026. Version 1.2 (5) was submitted at **3:01 PM CDT**; it has not yet been approved or publicly released. Verified IDs and release evidence are recorded in [release status](release/release-status.json).
 
 Open `8 bit art.xcodeproj` in Xcode and select the shared **8 bit art** scheme. The native pack contains **46 stickers**, including a pulsing heart and blinking robot. It keeps the original bundle identifiers and icon and requires iOS/iPadOS 15 or later.
 
@@ -70,9 +70,9 @@ To use an installed Google Chrome instead, run `PLAYWRIGHT_CHANNEL=chrome npm ru
 
 The published app is **8 bit art, Apple ID 1366485724**, bundle ID **`eu.armand.--bit-art`**. The similarly named unpublished **8-bit art, ID 1366403490**, is a separate record. Update the published record.
 
-The published release is 1.1. The recovered source was already marked 1.2 (3), so its exact correspondence to the published binary is unverified. The current release candidate is **1.2 (5)** with 46 stickers and API age rating `FOUR_PLUS`. The wine-glass artwork is omitted from shipping assets. Build 5 has replaced the earlier build 4 in the draft; the app is not yet released.
+The published release is 1.1. The recovered source was already marked 1.2 (3), so its exact correspondence to the published binary is unverified. The submitted update is **1.2 (5)** with 46 stickers and API age rating `FOUR_PLUS`. The wine-glass artwork is omitted from shipping assets. Build 5 replaced the earlier build 4 and is now **Waiting for Review**, with automatic release after approval selected.
 
-See the [release checklist](docs/release-checklist.md) for completed staging and the remaining privacy-publication/App Review decisions; [recovery and roadmap](docs/recovery-and-roadmap.md) covers the update path and backup strategy. [App Store draft](docs/app-store-draft.md) records staged listing copy and live support/privacy URLs. No App Review submission or public app release has been performed.
+See the [release checklist](docs/release-checklist.md) for publication/submission evidence and optional device checks; [recovery and roadmap](docs/recovery-and-roadmap.md) covers the update path and backup strategy. [App Store listing](docs/app-store-draft.md) records the submitted copy and live support/privacy URLs. [Monetization options](docs/monetization-options.md) explains a possible paid pack or future Studio purchase; this submission does not add a purchase or change pricing.
 
 ## Repository layout
 

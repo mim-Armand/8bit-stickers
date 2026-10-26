@@ -3,7 +3,7 @@
   "version": "1.2",
   "build": "5",
   "locale": "en-US",
-  "releaseType": "MANUAL",
+  "releaseType": "AFTER_APPROVAL",
   "copyright": "2026 mim Armand",
   "name": "8 bit art",
   "subtitle": "Pixel stickers, big feelings",

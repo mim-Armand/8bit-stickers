@@ -1,10 +1,10 @@
 # Sticker Studio product plan
 
-Prepared October 26, 2026. This separates the release being prepared from future product choices.
+Updated October 26, 2026. This separates the submitted release from future product choices.
 
 ## What is shipping in 1.2
 
-The existing **8 bit art** app, Apple ID **1366485724**, remains a standalone iMessage sticker pack with 46 stickers. Release candidate **1.2 (5)** has a clean signed archive/export and passed Apple validation/upload, processed as `VALID` and replaced build 4 as the selected draft build. The wine-glass sticker is retained in recovered source but omitted from shipping assets. The draft uses manual release and has not been submitted for App Review or released. It preserves `eu.armand.--bit-art` and `eu.armand.--bit-art.StickerPackExtension`. There is no home-screen editor in this release. The browser Studio is not bundled, and its screenshots must not be presented as shipped iOS functionality.
+The existing **8 bit art** app, Apple ID **1366485724**, remains a standalone iMessage sticker pack with 46 stickers. Version **1.2 (5)** has a clean signed archive/export and passed Apple validation/upload, processed as `VALID` and replaced build 4 as the selected build. The wine-glass sticker is retained in recovered source but omitted from shipping assets. It was submitted for App Review on October 26, 2026, at **3:01 PM CDT**, and is **Waiting for Review**, with **automatic release after approval** selected. The **Data Not Collected** privacy label is published. The update has not yet been approved or publicly released. It preserves `eu.armand.--bit-art` and `eu.armand.--bit-art.StickerPackExtension`. There is no home-screen editor in this release. The browser Studio is not bundled, and its screenshots must not be presented as shipped iOS functionality.
 
 The current Studio at `http://127.0.0.1:8787/prototype/` is served by a Python process on this Mac. It has no public deployment. Its drawings and favorites live in that browser's local storage; stopping the server makes the local URL unavailable. Keeping its source on GitHub does not itself publish a website.
 
@@ -37,9 +37,9 @@ For a public Studio, publish an intentional static output folder rather than the
 
 ## Sequence
 
-1. Review the prepared 46-sticker 1.2 (5) update: signing, upload, selected `VALID` build, six native screenshots/twelve complete placements, revised metadata, API age rating `FOUR_PLUS` and live support/privacy URLs are verified. The no-collected-data privacy answer is saved as a draft, awaiting Publish and the final decision to submit for App Review. A physical-device/TestFlight pass is still available as an optional final check, not a claimed completed test.
-2. Submit the completed draft for App Review as authorized, then use the selected manual-release option for publication after approval.
+1. The 46-sticker 1.2 (5) update is submitted: signing, upload, selected `VALID` build, six native screenshots/twelve complete placements, revised metadata, API age rating `FOUR_PLUS` and live support/privacy URLs are verified. The no-collected-data privacy label is published. A physical-device/TestFlight pass is still available as an optional final check, not a claimed completed test.
+2. App Review is pending under submission `d6780537-3c51-43b3-97d9-67f900dfc768`. Release type `AFTER_APPROVAL` will automatically publish the update after approval.
 3. Build Studio inside Messages as the next update to the existing app, beginning with browsing and favorites.
 4. Optionally publish the web demo on GitHub Pages; decide separately whether a full home-screen Studio justifies a new app.
 
-No new home-screen app, sync service or public Studio deployment is implied by preparing version 1.2.
+No new home-screen app, sync service or public Studio deployment is implied by submitting version 1.2. Pricing is unchanged; see [monetization options](monetization-options.md) for a paid pack or future Studio purchase.

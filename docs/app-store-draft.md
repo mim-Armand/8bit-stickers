@@ -1,8 +1,8 @@
-# App Store staged draft — 8 bit art 1.2
+# App Store submission — 8 bit art 1.2
 
-Updated October 26, 2026. Revised 46-sticker metadata is staged in App Store Connect and read back through the API. Authoritative copy is [`Config/AppStoreMetadata.json`](../Config/AppStoreMetadata.json). The current release candidate is **1.2 (5)**; its clean signed archive/export passed Apple validation/upload with no errors and two expected platform warnings. Build 5 processed as `VALID` and is selected in the draft. The predecessor build 4 was accepted but contains the omitted wine artwork and is not the intended release.
+Updated October 26, 2026. Revised 46-sticker metadata was saved in App Store Connect and read back through the API. Authoritative copy is [`Config/AppStoreMetadata.json`](../Config/AppStoreMetadata.json). The submitted update is **1.2 (5)**; its clean signed archive/export passed Apple validation/upload with no errors and two expected platform warnings. Build 5 processed as `VALID` and remains selected. The predecessor build 4 was accepted but contains the omitted wine artwork and is not the intended release.
 
-The version remains **Prepare for Submission** with **manual release**. No App Review submission or public app release has occurred.
+The version and review submission are **Waiting for Review**. The **Data Not Collected** App Privacy label is published. Release type **`AFTER_APPROVAL`** means Apple will automatically release the version after approval. The update has not yet been approved or publicly released.
 
 ## Release state
 
@@ -10,10 +10,14 @@ The version remains **Prepare for Submission** with **manual release**. No App R
 | --- | --- |
 | Existing app | **8 bit art**, Apple ID **1366485724** |
 | Host / extension IDs | `eu.armand.--bit-art` / `eu.armand.--bit-art.StickerPackExtension` |
-| Current release candidate | **1.2 / 5**, 46 stickers |
-| Draft version ID | `7c6caa34-4ee8-4423-87d9-e4acc09b1b40` |
+| Submitted version / build | **1.2 / 5**, 46 stickers |
+| App Store version ID | `7c6caa34-4ee8-4423-87d9-e4acc09b1b40` |
 | Selected processed build | `ecc379bc-4471-489b-887b-826ec30d9c6b`, build 5, `VALID` |
-| Release option | `MANUAL` |
+| Review submission ID | `d6780537-3c51-43b3-97d9-67f900dfc768` |
+| Submitted at | `2026-10-26T20:01:02.003Z` / October 26, 2026, 3:01 PM CDT |
+| Version / review state | `WAITING_FOR_REVIEW` |
+| Release option | `AFTER_APPROVAL` — automatically release after approval |
+| App Privacy label | Published — Data Not Collected |
 | Public support email | **seltzer.wisdom7h@icloud.com** |
 | App page / marketing URL | [App page](https://mim-armand.github.io/8bit-stickers/) |
 | Support URL | [Support](https://mim-armand.github.io/8bit-stickers/support/) |
@@ -22,7 +26,7 @@ The version remains **Prepare for Submission** with **manual release**. No App R
 
 All eleven recovered original PNGs remain preserved in source; the wine original is archived at `art/recovered/wine_01.sticker/` and excluded from shipping assets at the owner's request. This version ships ten classics and thirty-six new designs.
 
-The three public pages are live on GitHub Pages with HTTP 200 responses and HTTPS enforcement. The interactive Studio remains localhost only. The no-collected-data App Privacy answer is **saved as a UI draft**, with Publish unpressed; publishing the policy URL does not publish that label. Six actual native screenshots are staged as twelve placements across the App Store/iMessage iPhone/iPad wells. All are `COMPLETE`, with no errors; legacy 2018 images were removed only from this draft, leaving published 1.1 untouched. The prepared candidate awaits approval to publish the saved privacy label and submit for App Review.
+The three public pages are live on GitHub Pages with HTTP 200 responses and HTTPS enforcement. The interactive Studio remains localhost only. The no-collected-data App Privacy label was published separately in App Store Connect. Six actual native screenshots have twelve placements across the App Store/iMessage iPhone/iPad wells. All are `COMPLETE`, with no errors; legacy 2018 images were removed only from the editable 1.2 draft, leaving published 1.1 untouched. Final evidence is ignored `build/submission/privacy-published.jpg`, `review-submitted.json` and `final-readback.json`.
 
 ## Listing copy
 
@@ -79,8 +83,8 @@ The existing App Review contact was preserved privately. Reviewer email/phone de
 
 Native iPhone/iPad screenshots must show the actual 46-sticker pack in Messages with fictional conversation details and no phone numbers. Browser Studio previews and art contact sheets must not imply that editing/search/favorites ship in native 1.2.
 
-After the wine sticker was omitted, alcohol references were changed to `NONE`. The API-derived rating is `FOUR_PLUS`, with no override or Made for Kids selection. Other capability declarations reflect the predefined pack: it has no own chat, user-content feed or editor; the host Messages app handles conversations. Confirm actual global/regional/OS displays before submission.
+After the wine sticker was omitted, alcohol references were changed to `NONE`. The API-derived rating is `FOUR_PLUS`, with no override or Made for Kids selection. Other capability declarations reflect the predefined pack: it has no own chat, user-content feed or editor; the host Messages app handles conversations.
 
-The saved App Privacy answer is **“No, we do not collect data from this app.”** Publish that label only as authorized after reviewing actual app/SDK behavior. The public policy is effective **October 26, 2026**, with source in `site/privacy/index.html`; it distinguishes offline app behavior, Apple services, voluntary support emails and GitHub Pages hosting logs.
+The published App Privacy answer is **“No, we do not collect data from this app.”** The public policy is effective **October 26, 2026**, with source in `site/privacy/index.html`; it distinguishes offline app behavior, Apple services, voluntary support emails and GitHub Pages hosting logs.
 
-See [release-checklist.md](release-checklist.md) for completed staging, the remaining privacy-publication/App Review decisions and optional physical-device/TestFlight checks. A processed build and complete screenshot placements do not establish App Review approval or public release.
+See [release-checklist.md](release-checklist.md) for publication/submission evidence and optional physical-device/TestFlight checks. Submission and complete screenshot placements do not establish App Review approval or public release. Pricing is unchanged; possible future paid designs are described in [monetization-options.md](monetization-options.md).

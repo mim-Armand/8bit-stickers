@@ -9,6 +9,8 @@ const metadata = JSON.parse(
   ),
 );
 const apply = process.argv.includes("--apply");
+if (!["MANUAL", "AFTER_APPROVAL"].includes(metadata.releaseType))
+  throw new Error("Release type must be MANUAL or AFTER_APPROVAL");
 const catalog = JSON.parse(
   await readFile(
     new URL(
@@ -71,7 +73,7 @@ console.log(
       versionId: version.id,
       version: metadata.version,
       build: metadata.build,
-      releaseType: "MANUAL",
+      releaseType: metadata.releaseType,
       apply,
       websites: [
         metadata.marketingUrl,
@@ -100,7 +102,10 @@ if (apply) {
     data: {
       type: "appStoreVersions",
       id: version.id,
-      attributes: { copyright: metadata.copyright, releaseType: "MANUAL" },
+      attributes: {
+        copyright: metadata.copyright,
+        releaseType: metadata.releaseType,
+      },
     },
   });
   const versionAttributes = Object.fromEntries(

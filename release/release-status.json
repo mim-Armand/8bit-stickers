@@ -1,5 +1,5 @@
 {
-  "verifiedAt": "2026-10-26T19:47:19.933Z",
+  "verifiedAt": "2026-10-26T20:01:02.003Z",
   "appId": "1366485724",
   "bundleId": "eu.armand.--bit-art",
   "extensionBundleId": "eu.armand.--bit-art.StickerPackExtension",
@@ -8,8 +8,8 @@
   "buildId": "ecc379bc-4471-489b-887b-826ec30d9c6b",
   "processingState": "VALID",
   "appStoreVersionId": "7c6caa34-4ee8-4423-87d9-e4acc09b1b40",
-  "appStoreState": "PREPARE_FOR_SUBMISSION",
-  "releaseType": "MANUAL",
+  "appStoreState": "WAITING_FOR_REVIEW",
+  "releaseType": "AFTER_APPROVAL",
   "appStoreAgeRating": "FOUR_PLUS",
   "stickerCount": 46,
   "shippedRecoveredClassics": 10,
@@ -21,9 +21,10 @@
   "usesNonExemptEncryption": false,
   "appPrivacy": {
     "answer": "DATA_NOT_COLLECTED",
-    "status": "SAVED_DRAFT_NOT_PUBLISHED"
+    "status": "PUBLISHED",
+    "evidence": "build/submission/privacy-published.jpg"
   },
-  "appReviewSubmitted": false,
+  "appReviewSubmitted": true,
   "publicAppReleased": false,
   "web": {
     "provider": "GitHub Pages",
@@ -40,7 +41,7 @@
     "bytes": 144242,
     "sha256": "08aa4309b4bdee6f70a0dcfeb7d8334d7846960718d7c1c2cc2066b28f896516"
   },
-  "sourceTag": "v1.2-build5-candidate",
+  "sourceTag": "v1.2-build5-submitted",
   "validation": {
     "errors": 0,
     "warnings": [
@@ -150,9 +151,13 @@
   ],
   "physicalDeviceTesting": "not performed",
   "nextActions": [
-    "Review/test the candidate",
-    "Publish the saved Data Not Collected privacy label",
-    "Submit version 1.2 (5) for App Review",
-    "Manually release only after approval"
-  ]
+    "Await Apple App Review",
+    "Apple will release version 1.2 automatically after approval"
+  ],
+  "reviewSubmission": {
+    "id": "d6780537-3c51-43b3-97d9-67f900dfc768",
+    "state": "WAITING_FOR_REVIEW",
+    "submittedDate": "2026-10-26T20:01:02.003Z"
+  },
+  "pricingChanged": false
 }
