@@ -1,0 +1,37 @@
+name: Artwork and Studio
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: pip install -r requirements-art.txt
+      - name: Verify committed PNG/APNG pixels against editable sources
+        run: python scripts/verify-art.py
+      - run: python scripts/generate-art.py
+      - run: python scripts/build-preview.py
+      - name: Ensure generated catalog is current
+        run: git diff --exit-code -- art/manifest.json prototype/catalog.js ':(glob)8 bit art StickerPackExtension/**/Contents.json'
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - name: Verify Studio
+        run: |
+          python -m http.server 8787 --bind 127.0.0.1 > /tmp/8bit-preview.log 2>&1 &
+          server_pid=$!
+          trap 'kill "$server_pid"' EXIT
+          for attempt in 1 2 3 4 5; do
+            curl --fail --silent http://127.0.0.1:8787/prototype/ > /dev/null && break
+            sleep 1
+          done
+          npm run test:preview

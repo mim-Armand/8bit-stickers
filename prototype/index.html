@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#faf8f3" />
+    <title>8 bit art — Sticker Studio</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='8' fill='%23f6d95c'/%3E%3Ctext x='10' y='31' font-family='monospace' font-size='32' font-weight='bold' fill='%2328242d'%3E8%3C/text%3E%3C/svg%3E"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#" aria-label="8 bit art home"
+        ><span class="brand-icon" aria-hidden="true">8</span
+        ><span>8 bit art<span class="brand-dot">.</span></span></a
+      >
+      <nav aria-label="Studio navigation">
+        <button class="nav-tab active" data-view="collection">
+          The collection</button
+        ><button class="nav-tab" data-view="lab">
+          Pixel lab <span class="tiny-label">BETA</span>
+        </button>
+      </nav>
+      <a
+        class="source-link"
+        href="https://github.com/mim-Armand/8bit-stickers"
+        target="_blank"
+        rel="noreferrer"
+        >Made of pixels. Saved in GitHub. <span aria-hidden="true">↗</span></a
+      >
+    </header>
+    <main>
+      <section id="collection-view">
+        <div class="hero">
+          <div class="hero-copy">
+            <div class="eyebrow">
+              <span class="status-dot"></span> NEW DROP · 16 × 16 CUTE + MEMES
+            </div>
+            <h1>
+              Small pixels.<br />Big feelings<span class="sun-dot">.</span>
+            </h1>
+            <p>
+              Your favorite feelings, in fewer pixels.<br />Cute faces. Very
+              relatable reactions.
+            </p>
+            <div class="hero-actions">
+              <a class="button primary" href="#collection"
+                >Find your feeling <span>↓</span></a
+              ><button class="button outline" id="make-sticker">
+                Make a sticker <span>↗</span>
+              </button>
+            </div>
+            <div class="hero-footnote">
+              <span class="mini-pixels" aria-hidden="true">▦</span> Now with 24
+              tiny cute + meme reactions.
+            </div>
+          </div>
+          <div
+            class="hero-scene"
+            aria-label="Interactive local conversation preview"
+          >
+            <span class="scene-note">a little more you ↘</span>
+            <div class="floating-card star-card">
+              <img id="hero-star" alt="Tiny pixel frog" />
+            </div>
+            <div class="chat-card">
+              <div class="chat-top">
+                <span class="avatar">J</span>
+                <div><strong>Jamie</strong><span>LOCAL CHAT PREVIEW</span></div>
+                <span class="chat-more" aria-hidden="true">•••</span>
+              </div>
+              <div class="chat-messages" id="chat-messages">
+                <div class="bubble incoming">you made my day :)</div>
+                <div class="bubble outgoing">a tiny love note for you</div>
+                <div class="sticker-message">
+                  <img id="chat-sticker" alt="Pixel heart sticker in preview" />
+                </div>
+                <span class="delivered">Preview only · no messages sent</span>
+              </div>
+              <div class="chat-input">
+                <span>Say it in pixels…</span
+                ><button
+                  id="random-sticker"
+                  aria-label="Try another sticker in chat preview"
+                >
+                  ↻
+                </button>
+              </div>
+            </div>
+            <div class="floating-card cat-card">
+              <img id="hero-cat" alt="Pixel cat" /><span>100% tiny joy</span>
+            </div>
+            <span class="sparkle sparkle-one" aria-hidden="true">✦</span
+            ><span class="sparkle sparkle-two" aria-hidden="true">+</span>
+          </div>
+        </div>
+        <div class="collection-layout" id="collection">
+          <aside class="collection-sidebar">
+            <div class="eyebrow">YOUR STICKER SHELF</div>
+            <button class="shelf active" data-filter="all">
+              <span>▦</span> All stickers <b id="all-count">46</b></button
+            ><button class="shelf" data-filter="tiny">
+              <span>▦</span> Tiny pixels <b id="tiny-count">24</b></button
+            ><button class="shelf" data-filter="new">
+              <span>✦</span> Fresh pixels <b id="new-count">36</b></button
+            ><button class="shelf" data-filter="original">
+              <span>▣</span> The originals <b>10</b></button
+            ><button class="shelf" data-filter="animated">
+              <span>▷</span> In motion <b id="animated-count">2</b></button
+            ><button class="shelf" data-filter="favorites">
+              <span>♡</span> Your favorites <b id="favorite-count">0</b>
+            </button>
+            <div class="sidebar-note">
+              <div class="mini-pixels">↳</div>
+              <strong>A fresh start,<br />with a little history.</strong>
+              <p>
+                Meet the 16 × 16 cuties and meme reactions, alongside the
+                recovered 2018 classics.
+              </p>
+              <a href="../docs/recovery-and-roadmap.md"
+                >Read the revival notes ↗</a
+              >
+            </div>
+          </aside>
+          <div class="collection-content">
+            <div class="collection-heading">
+              <div>
+                <h2 id="collection-title" tabindex="-1">
+                  A feeling for every message<span>.</span>
+                </h2>
+                <p id="results-summary">Find your next tiny expression.</p>
+              </div>
+              <label class="search"
+                ><span aria-hidden="true">⌕</span
+                ><input
+                  id="search"
+                  type="search"
+                  placeholder="Search stickers…"
+                  aria-label="Search stickers"
+                /><kbd>/</kbd></label
+              >
+            </div>
+            <div
+              class="category-bar"
+              role="group"
+              aria-label="Filter by sticker theme"
+            >
+              <button class="category active" data-category="all">
+                Everything</button
+              ><button class="category" data-category="Cute">Cute</button
+              ><button class="category" data-category="Memes">Memes</button
+              ><button class="category" data-category="Reactions">
+                Reactions</button
+              ><button class="category" data-category="Everyday">
+                Everyday</button
+              ><button class="category" data-category="Cozy">Cozy things</button
+              ><button class="category" data-category="Cosmic">Cosmic</button
+              ><button class="category" data-category="Play">Play</button>
+            </div>
+            <div class="sticker-grid" id="sticker-grid"></div>
+            <div class="empty-state" id="empty-state" hidden>
+              <span>⌕</span>
+              <h3>No pixels here yet.</h3>
+              <p>Try another search or save a few favorites.</p>
+              <button class="button outline" id="reset-filters">
+                Show all stickers
+              </button>
+            </div>
+            <div class="shelf-footer">
+              <span class="status-dot"></span
+              ><span
+                >Works locally. No account, tracking, or cloud uploads.</span
+              ><span class="pixel-divider">✦</span
+              ><span>Click any sticker to try it out.</span>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="lab-view" hidden>
+        <div class="lab-intro">
+          <div class="eyebrow">PIXEL LAB · WORKING MVP</div>
+          <h1>
+            A tiny canvas.<br />All your own<span class="sun-dot">.</span>
+          </h1>
+          <p>
+            Draw, remix, and download a transparent sticker. Your draft stays in
+            this browser.
+          </p>
+        </div>
+        <div class="lab-layout">
+          <div class="canvas-panel">
+            <div class="canvas-toolbar">
+              <strong>32 × 32 pixels</strong
+              ><label
+                ><input type="checkbox" id="show-grid" checked /> Show
+                grid</label
+              ><span id="draft-status" role="status">Ready to draw</span>
+            </div>
+            <div class="canvas-wrap">
+              <canvas
+                id="pixel-canvas"
+                tabindex="0"
+                aria-describedby="canvas-help"
+                width="512"
+                height="512"
+                aria-label="Pixel drawing canvas, 32 by 32 pixels. Use mouse or touch to draw."
+              ></canvas>
+            </div>
+            <div class="canvas-bottom">
+              <span id="canvas-help"
+                >Mouse or touch to draw. Keyboard: arrows to move · Space to
+                draw · P pencil · E eraser · F fill</span
+              ><button id="undo" class="text-button">↶ Undo</button>
+            </div>
+          </div>
+          <aside class="lab-controls">
+            <h2>Your little toolkit<span>.</span></h2>
+            <p class="muted">A few good colors are all you need.</p>
+            <div class="tool-buttons" role="group" aria-label="Drawing tools">
+              <button class="tool active" data-tool="pencil">✎ Pencil</button
+              ><button class="tool" data-tool="eraser">▱ Eraser</button
+              ><button class="tool" data-tool="fill">▧ Fill</button>
+            </div>
+            <h3>Pick a pixel color</h3>
+            <div id="palette" class="palette"></div>
+            <label class="custom-color"
+              >Your own color
+              <input type="color" id="custom-color" value="#f16b85"
+            /></label>
+            <div class="lab-preview">
+              <div class="checker">
+                <canvas
+                  id="mini-canvas"
+                  width="300"
+                  height="300"
+                  aria-label="Transparent PNG export preview"
+                ></canvas>
+              </div>
+              <span>300 × 300 PNG · transparent background</span>
+            </div>
+            <button id="export-drawing" class="button primary">
+              Download your sticker <span>↓</span></button
+            ><button id="sample-drawing" class="button outline">
+              Start with a tiny heart ♡</button
+            ><button id="clear-drawing" class="text-button danger">
+              Clear canvas
+            </button>
+            <p class="lab-note">
+              Pixel lab is a browser prototype. Drawings export as static PNGs;
+              they are not automatically installed into Messages.
+            </p>
+          </aside>
+        </div>
+      </section>
+    </main>
+    <footer class="site-footer">
+      <a class="brand small" href="#"
+        ><span class="brand-icon">8</span><span>8 bit art.</span></a
+      ><span>Little things. Lasting feelings.</span
+      ><span>Built by mim Armand · Studio prototype</span>
+    </footer>
+    <dialog id="sticker-dialog" aria-labelledby="dialog-title">
+      <button
+        class="dialog-close"
+        id="close-dialog"
+        aria-label="Close sticker preview"
+      >
+        ×
+      </button>
+      <div class="dialog-art checker"><img id="dialog-image" alt="" /></div>
+      <div class="dialog-info">
+        <div class="eyebrow" id="dialog-category"></div>
+        <h2 id="dialog-title"></h2>
+        <p id="dialog-description"></p>
+        <button class="button primary" id="preview-in-chat">
+          Add to chat preview <span>↗</span></button
+        ><a class="button outline" id="download-sticker" download
+          >Download sticker <span>↓</span></a
+        >
+        <a
+          class="text-button pixel-download"
+          id="download-pixels"
+          download
+          hidden
+          >Download 16 × 16 PNG ↓</a
+        >
+        <div class="dialog-small-actions">
+          <button class="text-button" id="dialog-favorite">
+            ♡ Save favorite</button
+          ><button class="text-button" id="edit-sticker">✎ Edit pixels</button>
+        </div>
+        <small>Chat previews stay on this page.</small>
+      </div>
+    </dialog>
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <script src="catalog.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

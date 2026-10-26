@@ -1,0 +1,820 @@
+{
+  "schemaVersion": 1,
+  "palette": {
+    "ink": "#2F243A",
+    "paper": "#FFFEF8",
+    "coral": "#FF7187",
+    "coralDark": "#D94A6B",
+    "pink": "#FFB7CE",
+    "yellow": "#FFD66D",
+    "gold": "#EAAA49",
+    "mint": "#8CDDB3",
+    "green": "#4BAF84",
+    "cyan": "#77E4DB",
+    "blue": "#6C9EF8",
+    "blueDark": "#4E6ED1",
+    "lavender": "#B8A3EC",
+    "purple": "#8A71C1",
+    "cream": "#FFF0C2",
+    "tan": "#DFA975",
+    "brown": "#9B694C"
+  },
+  "stickers": [
+    {
+      "id": "heart",
+      "title": "A little love",
+      "category": "Reactions",
+      "tags": [
+        "love",
+        "heart",
+        "hug",
+        "thanks"
+      ],
+      "filename": "8 bit art StickerPackExtension/Stickers.xcstickers/Sticker Pack.stickerpack/new_heart.sticker/new_heart.png",
+      "preview": "prototype/assets/new/heart.png",
+      "animated": true,
+      "source": "art/sprites.json",
+      "logicalSize": [
+        50,
+        50
+      ],
+      "pixelSource": "art/pixels/heart.png",
+      "collection": "revival"
+    },
+    {
+      "id": "coffee",
+      "title": "Warm & awake",
+      "category": "Everyday",
+      "tags": [
+        "coffee",
+        "morning",
+        "thanks",
+        "cozy"
+      ],
+      "filename": "8 bit art StickerPackExtension/Stickers.xcstickers/Sticker Pack.stickerpack/new_coffee.sticker/new_coffee.png",
+      "preview": "prototype/assets/new/coffee.png",
+      "animated": false,
+      "source": "art/sprites.json",
+      "logicalSize": [
+        50,
+        50
+      ],
+      "pixelSource": "art/pixels/coffee.png",
+      "collection": "revival"
+    },
+    {
+      "id": "star",
+      "title": "You are a star",
+      "category": "Cosmic",
+      "tags": [
+        "star",
+        "wow",
+        "celebrate",
+        "sparkle"
+      ],
+      "filename": "8 bit art StickerPackExtension/Stickers.xcstickers/Sticker Pack.stickerpack/new_star.sticker/new_star.png",
+      "preview": "prototype/assets/new/star.png",
+      "animated": false,
+      "source": "art/sprites.json",
+      "logicalSize": [
+        50,
+        50
+      ],
+      "pixelSource": "art/pixels/star.png",
+      "collection": "revival"
+    },
+    {
+      "id": "sprout",
+      "title": "Growing on you",
+      "category": "Cozy",
+      "tags": [
+        "plant",
+        "sprout",
+        "grow",
+        "green"
+      ],
+      "filename": "8 bit art StickerPackExtension/Stickers.xcstickers/Sticker Pack.stickerpack/new_sprout.sticker/new_sprout.png",
+      "preview": "prototype/assets/new/sprout.png",
+      "animated": false,
+      "source": "art/sprites.json",
+      "logicalSize": [
+        50,
+        50
+      ],
+      "pixelSource": "art/pixels/sprout.png",
+      "collection": "revival"
+    },
+    {
+      "id": "cat",
+      "title": "Do not disturb",
+      "category": "Cozy",
+      "tags": [
+        "cat",
+        "sleep",
+        "cozy",
+        "nap"
+      ],
+      "filename": "8 bit art StickerPackExtension/Stickers.xcstickers/Sticker Pack.stickerpack/new_cat.sticker/new_cat.png",
+      "preview": "prototype/assets/new/cat.png",
+      "animated": false,
+      "source": "art/sprites.json",
+      "logicalSize": [
+        50,
+        50
+      ],
+      "pixelSource": "art/pixels/cat.png",
+      "collection": "revival"
+    },
+    {
+      "id": "gamepad",
+      "title": "One more level",
+      "category": "Play",
+      "tags": [
+        "game",
+        "play",
+        "gg",
+        "gaming"
+      ],
+      "filename": "8 bit art StickerPackExtension/Stickers.xcstickers/Sticker Pack.stickerpack/new_gamepad.sticker/new_gamepad.png",
+      "preview": "prototype/assets/new/gamepad.png",
+      "animated": false,
+      "source": "art/sprites.json",
+      "logicalSize": [
+        50,
+        50
+      ],
+      "pixelSource": "art/pixels/gamepad.png",
+      "collection": "revival"
+    },
+    {
+      "id": "rainbow",
+      "title": "Better days ahead",
+      "category": "Reactions",
+      "tags": [
+        "rainbow",
+        "hope",
+        "happy",
+        "pride"
+      ],
+      "filename": "8 bit art StickerPackExtension/Stickers.xcstickers/Sticker Pack.stickerpack/new_rainbow.sticker/new_rainbow.png",
+      "preview": "prototype/assets/new/rainbow.png",
+      "animated": false,
+      "source": "art/sprites.json",
+      "logicalSize": [
+        50,
+        50
+      ],
+      "pixelSource": "art/pixels/rainbow.png",
+      "collection": "revival"
+    },
+    {
+      "id": "rocket",
+      "title": "Let us go",
+      "category": "Cosmic",
+      "tags": [
+        "rocket",
+        "launch",
+        "go",
+        "space"
+      ],
+      "filename": "8 bit art StickerPackExtension/Stickers.xcstickers/Sticker Pack.stickerpack/new_rocket.sticker/new_rocket.png",
+      "preview": "prototype/assets/new/rocket.png",
+      "animated": false,
+      "source": "art/sprites.json",
+      "logicalSize": [
+        50,
+        50
+      ],
+      "pixelSource": "art/pixels/rocket.png",
+      "collection": "revival"
+    },
+    {
+      "id": "cake",
+      "title": "Make a wish",
+      "category": "Reactions",
+      "tags": [
+        "cake",
+        "birthday",
+        "party",
+        "celebrate"
+      ],
+      "filename": "8 bit art StickerPackExtension/Stickers.xcstickers/Sticker Pack.stickerpack/new_cake.sticker/new_cake.png",
+      "preview": "prototype/assets/new/cake.png",
+      "animated": false,
+      "source": "art/sprites.json",
+      "logicalSize": [
+        50,
+        50
+      ],
+      "pixelSource": "art/pixels/cake.png",
+      "collection": "revival"
+    },
+    {
+      "id": "moon",
+      "title": "Sleep sweet",
+      "category": "Cosmic",
+      "tags": [
+        "moon",
+        "night",
+        "sleep",
+        "dream"
+      ],
+      "filename": "8 bit art StickerPackExtension/Stickers.xcstickers/Sticker Pack.stickerpack/new_moon.sticker/new_moon.png",
+      "preview": "prototype/assets/new/moon.png",
+      "animated": false,
+      "source": "art/sprites.json",
+      "logicalSize": [
+        50,
+        50
+      ],
+      "pixelSource": "art/pixels/moon.png",
+      "collection": "revival"
+    },
+    {
+      "id": "letter",
+      "title": "Sent with love",
+      "category": "Everyday",
+      "tags": [
+        "letter",
+        "love",
+        "message",
+        "hello"
+      ],
+      "filename": "8 bit art StickerPackExtension/Stickers.xcstickers/Sticker Pack.stickerpack/new_letter.sticker/new_letter.png",
+      "preview": "prototype/assets/new/letter.png",
+      "animated": false,
+      "source": "art/sprites.json",
+      "logicalSize": [
+        50,
+        50
+      ],
+      "pixelSource": "art/pixels/letter.png",
+      "collection": "revival"
+    },
+    {
+      "id": "robot",
+      "title": "Hello, human",
+      "category": "Play",
+      "tags": [
+        "robot",
+        "hello",
+        "friend",
+        "hi"
+      ],
+      "filename": "8 bit art StickerPackExtension/Stickers.xcstickers/Sticker Pack.stickerpack/new_robot.sticker/new_robot.png",
+      "preview": "prototype/assets/new/robot.png",
+      "animated": true,
+      "source": "art/sprites.json",
+      "logicalSize": [
+        50,
+        50
+      ],
+      "pixelSource": "art/pixels/robot.png",
+      "collection": "revival"
+    },
+    {
+      "id": "tiny_frog",
+      "title": "Henlo",
+      "category": "Cute",
+      "tags": [
+        "frog",
+        "hello",
+        "hi",
+        "cute",
+        "smile",
+        "friend"
+      ],
+      "filename": "8 bit art StickerPackExtension/Stickers.xcstickers/Sticker Pack.stickerpack/new_tiny_frog.sticker/new_tiny_frog.png",
+      "preview": "prototype/assets/new/tiny_frog.png",
+      "animated": false,
+      "source": "art/cute-sprites.json",
+      "logicalSize": [
+        16,
+        16
+      ],
+      "pixelSource": "art/pixels/tiny_frog.png",
+      "collection": "tiny-pixels"
+    },
+    {
+      "id": "tiny_bunny",
+      "title": "A little shy",
+      "category": "Cute",
+      "tags": [
+        "bunny",
+        "rabbit",
+        "shy",
+        "blush",
+        "please",
+        "cute"
+      ],
+      "filename": "8 bit art StickerPackExtension/Stickers.xcstickers/Sticker Pack.stickerpack/new_tiny_bunny.sticker/new_tiny_bunny.png",
+      "preview": "prototype/assets/new/tiny_bunny.png",
+      "animated": false,
+      "source": "art/cute-sprites.json",
+      "logicalSize": [
+        16,
+        16
+      ],
+      "pixelSource": "art/pixels/tiny_bunny.png",
+      "collection": "tiny-pixels"
+    },
+    {
+      "id": "tiny_cat",
+      "title": "Tiny hug",
+      "category": "Cute",
+      "tags": [
+        "cat",
+        "hug",
+        "love",
+        "kitten",
+        "cute",
+        "round"
+      ],
+      "filename": "8 bit art StickerPackExtension/Stickers.xcstickers/Sticker Pack.stickerpack/new_tiny_cat.sticker/new_tiny_cat.png",
+      "preview": "prototype/assets/new/tiny_cat.png",
+      "animated": false,
+      "source": "art/cute-sprites.json",
+      "logicalSize": [
+        16,
+        16
+      ],
+      "pixelSource": "art/pixels/tiny_cat.png",
+      "collection": "tiny-pixels"
+    },
+    {
+      "id": "tiny_puppy",
+      "title": "Best fren",
+      "category": "Cute",
+      "tags": [
+        "dog",
+        "puppy",
+        "friend",
+        "fren",
+        "love",
+        "cute"
+      ],
+      "filename": "8 bit art StickerPackExtension/Stickers.xcstickers/Sticker Pack.stickerpack/new_tiny_puppy.sticker/new_tiny_puppy.png",
+      "preview": "prototype/assets/new/tiny_puppy.png",
+      "animated": false,
+      "source": "art/cute-sprites.json",
+      "logicalSize": [
+        16,
+        16
+      ],
+      "pixelSource": "art/pixels/tiny_puppy.png",
+      "collection": "tiny-pixels"
+    },
+    {
+      "id": "tiny_toast",
+      "title": "Good morning",
+      "category": "Cute",
+      "tags": [
+        "toast",
+        "breakfast",
+        "morning",
+        "happy",
+        "food",
+        "cute"
+      ],
+      "filename": "8 bit art StickerPackExtension/Stickers.xcstickers/Sticker Pack.stickerpack/new_tiny_toast.sticker/new_tiny_toast.png",
+      "preview": "prototype/assets/new/tiny_toast.png",
+      "animated": false,
+      "source": "art/cute-sprites.json",
+      "logicalSize": [
+        16,
+        16
+      ],
+      "pixelSource": "art/pixels/tiny_toast.png",
+      "collection": "tiny-pixels"
+    },
+    {
+      "id": "tiny_boba",
+      "title": "Boba break",
+      "category": "Cute",
+      "tags": [
+        "boba",
+        "tea",
+        "drink",
+        "break",
+        "treat",
+        "cute"
+      ],
+      "filename": "8 bit art StickerPackExtension/Stickers.xcstickers/Sticker Pack.stickerpack/new_tiny_boba.sticker/new_tiny_boba.png",
+      "preview": "prototype/assets/new/tiny_boba.png",
+      "animated": false,
+      "source": "art/cute-sprites.json",
+      "logicalSize": [
+        16,
+        16
+      ],
+      "pixelSource": "art/pixels/tiny_boba.png",
+      "collection": "tiny-pixels"
+    },
+    {
+      "id": "tiny_duck",
+      "title": "Just a lil guy",
+      "category": "Cute",
+      "tags": [
+        "duck",
+        "quack",
+        "little",
+        "guy",
+        "cute",
+        "yellow"
+      ],
+      "filename": "8 bit art StickerPackExtension/Stickers.xcstickers/Sticker Pack.stickerpack/new_tiny_duck.sticker/new_tiny_duck.png",
+      "preview": "prototype/assets/new/tiny_duck.png",
+      "animated": false,
+      "source": "art/cute-sprites.json",
+      "logicalSize": [
+        16,
+        16
+      ],
+      "pixelSource": "art/pixels/tiny_duck.png",
+      "collection": "tiny-pixels"
+    },
+    {
+      "id": "tiny_penguin",
+      "title": "Waddle buddy",
+      "category": "Cute",
+      "tags": [
+        "penguin",
+        "friend",
+        "cold",
+        "waddle",
+        "buddy",
+        "cute"
+      ],
+      "filename": "8 bit art StickerPackExtension/Stickers.xcstickers/Sticker Pack.stickerpack/new_tiny_penguin.sticker/new_tiny_penguin.png",
+      "preview": "prototype/assets/new/tiny_penguin.png",
+      "animated": false,
+      "source": "art/cute-sprites.json",
+      "logicalSize": [
+        16,
+        16
+      ],
+      "pixelSource": "art/pixels/tiny_penguin.png",
+      "collection": "tiny-pixels"
+    },
+    {
+      "id": "tiny_bear",
+      "title": "Sleepy bean",
+      "category": "Cute",
+      "tags": [
+        "bear",
+        "sleep",
+        "sleepy",
+        "nap",
+        "tired",
+        "cozy"
+      ],
+      "filename": "8 bit art StickerPackExtension/Stickers.xcstickers/Sticker Pack.stickerpack/new_tiny_bear.sticker/new_tiny_bear.png",
+      "preview": "prototype/assets/new/tiny_bear.png",
+      "animated": false,
+      "source": "art/cute-sprites.json",
+      "logicalSize": [
+        16,
+        16
+      ],
+      "pixelSource": "art/pixels/tiny_bear.png",
+      "collection": "tiny-pixels"
+    },
+    {
+      "id": "tiny_dumpling",
+      "title": "Precious cargo",
+      "category": "Cute",
+      "tags": [
+        "dumpling",
+        "food",
+        "precious",
+        "small",
+        "cute",
+        "snack"
+      ],
+      "filename": "8 bit art StickerPackExtension/Stickers.xcstickers/Sticker Pack.stickerpack/new_tiny_dumpling.sticker/new_tiny_dumpling.png",
+      "preview": "prototype/assets/new/tiny_dumpling.png",
+      "animated": false,
+      "source": "art/cute-sprites.json",
+      "logicalSize": [
+        16,
+        16
+      ],
+      "pixelSource": "art/pixels/tiny_dumpling.png",
+      "collection": "tiny-pixels"
+    },
+    {
+      "id": "tiny_mushroom",
+      "title": "Smol friend",
+      "category": "Cute",
+      "tags": [
+        "mushroom",
+        "smol",
+        "small",
+        "friend",
+        "nature",
+        "cute"
+      ],
+      "filename": "8 bit art StickerPackExtension/Stickers.xcstickers/Sticker Pack.stickerpack/new_tiny_mushroom.sticker/new_tiny_mushroom.png",
+      "preview": "prototype/assets/new/tiny_mushroom.png",
+      "animated": false,
+      "source": "art/cute-sprites.json",
+      "logicalSize": [
+        16,
+        16
+      ],
+      "pixelSource": "art/pixels/tiny_mushroom.png",
+      "collection": "tiny-pixels"
+    },
+    {
+      "id": "tiny_capybara",
+      "title": "Unbothered buddy",
+      "category": "Cute",
+      "tags": [
+        "capybara",
+        "chill",
+        "calm",
+        "unbothered",
+        "buddy",
+        "cute"
+      ],
+      "filename": "8 bit art StickerPackExtension/Stickers.xcstickers/Sticker Pack.stickerpack/new_tiny_capybara.sticker/new_tiny_capybara.png",
+      "preview": "prototype/assets/new/tiny_capybara.png",
+      "animated": false,
+      "source": "art/cute-sprites.json",
+      "logicalSize": [
+        16,
+        16
+      ],
+      "pixelSource": "art/pixels/tiny_capybara.png",
+      "collection": "tiny-pixels"
+    },
+    {
+      "id": "tiny_sideeye",
+      "title": "Bombastic side-eye",
+      "category": "Memes",
+      "tags": [
+        "side eye",
+        "sideeye",
+        "really",
+        "judging",
+        "meme"
+      ],
+      "filename": "8 bit art StickerPackExtension/Stickers.xcstickers/Sticker Pack.stickerpack/new_tiny_sideeye.sticker/new_tiny_sideeye.png",
+      "preview": "prototype/assets/new/tiny_sideeye.png",
+      "animated": false,
+      "source": "art/meme-sprites.json",
+      "logicalSize": [
+        16,
+        16
+      ],
+      "pixelSource": "art/pixels/tiny_sideeye.png",
+      "collection": "tiny-pixels"
+    },
+    {
+      "id": "tiny_cry_laugh",
+      "title": "Literally crying",
+      "category": "Memes",
+      "tags": [
+        "cry",
+        "laugh",
+        "lol",
+        "lmao",
+        "tears",
+        "meme"
+      ],
+      "filename": "8 bit art StickerPackExtension/Stickers.xcstickers/Sticker Pack.stickerpack/new_tiny_cry_laugh.sticker/new_tiny_cry_laugh.png",
+      "preview": "prototype/assets/new/tiny_cry_laugh.png",
+      "animated": false,
+      "source": "art/meme-sprites.json",
+      "logicalSize": [
+        16,
+        16
+      ],
+      "pixelSource": "art/pixels/tiny_cry_laugh.png",
+      "collection": "tiny-pixels"
+    },
+    {
+      "id": "tiny_melting",
+      "title": "I am melting",
+      "category": "Memes",
+      "tags": [
+        "melt",
+        "melting",
+        "awkward",
+        "overwhelmed",
+        "meme"
+      ],
+      "filename": "8 bit art StickerPackExtension/Stickers.xcstickers/Sticker Pack.stickerpack/new_tiny_melting.sticker/new_tiny_melting.png",
+      "preview": "prototype/assets/new/tiny_melting.png",
+      "animated": false,
+      "source": "art/meme-sprites.json",
+      "logicalSize": [
+        16,
+        16
+      ],
+      "pixelSource": "art/pixels/tiny_melting.png",
+      "collection": "tiny-pixels"
+    },
+    {
+      "id": "tiny_gasp",
+      "title": "Wait, what?",
+      "category": "Memes",
+      "tags": [
+        "shocked",
+        "gasp",
+        "what",
+        "surprise",
+        "meme"
+      ],
+      "filename": "8 bit art StickerPackExtension/Stickers.xcstickers/Sticker Pack.stickerpack/new_tiny_gasp.sticker/new_tiny_gasp.png",
+      "preview": "prototype/assets/new/tiny_gasp.png",
+      "animated": false,
+      "source": "art/meme-sprites.json",
+      "logicalSize": [
+        16,
+        16
+      ],
+      "pixelSource": "art/pixels/tiny_gasp.png",
+      "collection": "tiny-pixels"
+    },
+    {
+      "id": "tiny_bruh",
+      "title": "Bruh.",
+      "category": "Memes",
+      "tags": [
+        "bruh",
+        "deadpan",
+        "unimpressed",
+        "blank",
+        "meme"
+      ],
+      "filename": "8 bit art StickerPackExtension/Stickers.xcstickers/Sticker Pack.stickerpack/new_tiny_bruh.sticker/new_tiny_bruh.png",
+      "preview": "prototype/assets/new/tiny_bruh.png",
+      "animated": false,
+      "source": "art/meme-sprites.json",
+      "logicalSize": [
+        16,
+        16
+      ],
+      "pixelSource": "art/pixels/tiny_bruh.png",
+      "collection": "tiny-pixels"
+    },
+    {
+      "id": "tiny_this_is_fine",
+      "title": "This is fine",
+      "category": "Memes",
+      "tags": [
+        "fine",
+        "fire",
+        "stress",
+        "cope",
+        "chaos",
+        "meme"
+      ],
+      "filename": "8 bit art StickerPackExtension/Stickers.xcstickers/Sticker Pack.stickerpack/new_tiny_this_is_fine.sticker/new_tiny_this_is_fine.png",
+      "preview": "prototype/assets/new/tiny_this_is_fine.png",
+      "animated": false,
+      "source": "art/meme-sprites.json",
+      "logicalSize": [
+        16,
+        16
+      ],
+      "pixelSource": "art/pixels/tiny_this_is_fine.png",
+      "collection": "tiny-pixels"
+    },
+    {
+      "id": "tiny_sus",
+      "title": "A little sus",
+      "category": "Memes",
+      "tags": [
+        "sus",
+        "suspicious",
+        "hmm",
+        "raised brow",
+        "meme"
+      ],
+      "filename": "8 bit art StickerPackExtension/Stickers.xcstickers/Sticker Pack.stickerpack/new_tiny_sus.sticker/new_tiny_sus.png",
+      "preview": "prototype/assets/new/tiny_sus.png",
+      "animated": false,
+      "source": "art/meme-sprites.json",
+      "logicalSize": [
+        16,
+        16
+      ],
+      "pixelSource": "art/pixels/tiny_sus.png",
+      "collection": "tiny-pixels"
+    },
+    {
+      "id": "tiny_heart_eyes",
+      "title": "Respectfully obsessed",
+      "category": "Memes",
+      "tags": [
+        "heart eyes",
+        "love",
+        "obsessed",
+        "cute",
+        "meme"
+      ],
+      "filename": "8 bit art StickerPackExtension/Stickers.xcstickers/Sticker Pack.stickerpack/new_tiny_heart_eyes.sticker/new_tiny_heart_eyes.png",
+      "preview": "prototype/assets/new/tiny_heart_eyes.png",
+      "animated": false,
+      "source": "art/meme-sprites.json",
+      "logicalSize": [
+        16,
+        16
+      ],
+      "pixelSource": "art/pixels/tiny_heart_eyes.png",
+      "collection": "tiny-pixels"
+    },
+    {
+      "id": "tiny_stonks",
+      "title": "Stonks",
+      "category": "Memes",
+      "tags": [
+        "stonks",
+        "win",
+        "up",
+        "profit",
+        "winning",
+        "meme"
+      ],
+      "filename": "8 bit art StickerPackExtension/Stickers.xcstickers/Sticker Pack.stickerpack/new_tiny_stonks.sticker/new_tiny_stonks.png",
+      "preview": "prototype/assets/new/tiny_stonks.png",
+      "animated": false,
+      "source": "art/meme-sprites.json",
+      "logicalSize": [
+        16,
+        16
+      ],
+      "pixelSource": "art/pixels/tiny_stonks.png",
+      "collection": "tiny-pixels"
+    },
+    {
+      "id": "tiny_loading",
+      "title": "Brain loading",
+      "category": "Memes",
+      "tags": [
+        "loading",
+        "brain",
+        "thinking",
+        "wait",
+        "buffering",
+        "meme"
+      ],
+      "filename": "8 bit art StickerPackExtension/Stickers.xcstickers/Sticker Pack.stickerpack/new_tiny_loading.sticker/new_tiny_loading.png",
+      "preview": "prototype/assets/new/tiny_loading.png",
+      "animated": false,
+      "source": "art/meme-sprites.json",
+      "logicalSize": [
+        16,
+        16
+      ],
+      "pixelSource": "art/pixels/tiny_loading.png",
+      "collection": "tiny-pixels"
+    },
+    {
+      "id": "tiny_im_dead",
+      "title": "I am dead",
+      "category": "Memes",
+      "tags": [
+        "dead",
+        "skull",
+        "rip",
+        "lol",
+        "meme"
+      ],
+      "filename": "8 bit art StickerPackExtension/Stickers.xcstickers/Sticker Pack.stickerpack/new_tiny_im_dead.sticker/new_tiny_im_dead.png",
+      "preview": "prototype/assets/new/tiny_im_dead.png",
+      "animated": false,
+      "source": "art/meme-sprites.json",
+      "logicalSize": [
+        16,
+        16
+      ],
+      "pixelSource": "art/pixels/tiny_im_dead.png",
+      "collection": "tiny-pixels"
+    },
+    {
+      "id": "tiny_touch_grass",
+      "title": "Touch grass",
+      "category": "Memes",
+      "tags": [
+        "touch grass",
+        "outside",
+        "offline",
+        "grass",
+        "meme"
+      ],
+      "filename": "8 bit art StickerPackExtension/Stickers.xcstickers/Sticker Pack.stickerpack/new_tiny_touch_grass.sticker/new_tiny_touch_grass.png",
+      "preview": "prototype/assets/new/tiny_touch_grass.png",
+      "animated": false,
+      "source": "art/meme-sprites.json",
+      "logicalSize": [
+        16,
+        16
+      ],
+      "pixelSource": "art/pixels/tiny_touch_grass.png",
+      "collection": "tiny-pixels"
+    }
+  ]
+}

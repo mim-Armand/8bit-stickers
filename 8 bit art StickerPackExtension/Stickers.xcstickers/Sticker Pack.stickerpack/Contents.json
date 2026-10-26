@@ -1,44 +1,149 @@
 {
-  "stickers" : [
+  "stickers": [
     {
-      "filename" : "exclamation_point_01.sticker"
+      "filename": "exclamation_point_01.sticker"
     },
     {
-      "filename" : "banana_01.sticker"
+      "filename": "banana_01.sticker"
     },
     {
-      "filename" : "hear_01.sticker"
+      "filename": "hear_01.sticker"
     },
     {
-      "filename" : "pumpkin_01.sticker"
+      "filename": "pumpkin_01.sticker"
     },
     {
-      "filename" : "skull_01.sticker"
+      "filename": "skull_01.sticker"
     },
     {
-      "filename" : "ghost_01.sticker"
+      "filename": "ghost_01.sticker"
     },
     {
-      "filename" : "flower_01.sticker"
+      "filename": "flower_01.sticker"
     },
     {
-      "filename" : "smiley_01.sticker"
+      "filename": "smiley_01.sticker"
     },
     {
-      "filename" : "smiley_02.sticker"
+      "filename": "smiley_02.sticker"
     },
     {
-      "filename" : "dealwithit_01.sticker"
+      "filename": "dealwithit_01.sticker"
     },
     {
-      "filename" : "wine_01.sticker"
+      "filename": "new_heart.sticker"
+    },
+    {
+      "filename": "new_coffee.sticker"
+    },
+    {
+      "filename": "new_star.sticker"
+    },
+    {
+      "filename": "new_sprout.sticker"
+    },
+    {
+      "filename": "new_cat.sticker"
+    },
+    {
+      "filename": "new_gamepad.sticker"
+    },
+    {
+      "filename": "new_rainbow.sticker"
+    },
+    {
+      "filename": "new_rocket.sticker"
+    },
+    {
+      "filename": "new_cake.sticker"
+    },
+    {
+      "filename": "new_moon.sticker"
+    },
+    {
+      "filename": "new_letter.sticker"
+    },
+    {
+      "filename": "new_robot.sticker"
+    },
+    {
+      "filename": "new_tiny_frog.sticker"
+    },
+    {
+      "filename": "new_tiny_bunny.sticker"
+    },
+    {
+      "filename": "new_tiny_cat.sticker"
+    },
+    {
+      "filename": "new_tiny_puppy.sticker"
+    },
+    {
+      "filename": "new_tiny_toast.sticker"
+    },
+    {
+      "filename": "new_tiny_boba.sticker"
+    },
+    {
+      "filename": "new_tiny_duck.sticker"
+    },
+    {
+      "filename": "new_tiny_penguin.sticker"
+    },
+    {
+      "filename": "new_tiny_bear.sticker"
+    },
+    {
+      "filename": "new_tiny_dumpling.sticker"
+    },
+    {
+      "filename": "new_tiny_mushroom.sticker"
+    },
+    {
+      "filename": "new_tiny_capybara.sticker"
+    },
+    {
+      "filename": "new_tiny_sideeye.sticker"
+    },
+    {
+      "filename": "new_tiny_cry_laugh.sticker"
+    },
+    {
+      "filename": "new_tiny_melting.sticker"
+    },
+    {
+      "filename": "new_tiny_gasp.sticker"
+    },
+    {
+      "filename": "new_tiny_bruh.sticker"
+    },
+    {
+      "filename": "new_tiny_this_is_fine.sticker"
+    },
+    {
+      "filename": "new_tiny_sus.sticker"
+    },
+    {
+      "filename": "new_tiny_heart_eyes.sticker"
+    },
+    {
+      "filename": "new_tiny_stonks.sticker"
+    },
+    {
+      "filename": "new_tiny_loading.sticker"
+    },
+    {
+      "filename": "new_tiny_im_dead.sticker"
+    },
+    {
+      "filename": "new_tiny_touch_grass.sticker"
     }
   ],
-  "info" : {
-    "version" : 1,
-    "author" : "xcode"
+  "info": {
+    "version": 1,
+    "author": "xcode"
   },
-  "properties" : {
-    "grid-size" : "regular"
+  "properties": {
+    "grid-size": "regular"
   }
 }

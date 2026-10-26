@@ -1,0 +1,28 @@
+# Xcode outputs and per-user state
+build/
+DerivedData/
+*.xcarchive/
+*.xcresult/
+xcuserdata/
+*.xcuserstate
+*.xccheckout
+*.xcscmblueprint
+.DS_Store
+
+# Local-only credentials and environment
+.env
+.env.*
+!.env.example
+*.p8
+*.p12
+*.mobileprovision
+*.ipa
+.local/
+
+# Browser development outputs
+node_modules/
+playwright-report/
+test-results/
+.venv/
+__pycache__/
+*.pyc
