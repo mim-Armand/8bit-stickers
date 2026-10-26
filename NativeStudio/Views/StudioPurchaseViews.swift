@@ -17,9 +17,11 @@ struct StudioLockedView: View {
                 StudioFeatures()
                 Button(action: onUnlock) { Label("Try Studio", systemImage: "pencil.tip.crop.circle") }
                     .buttonStyle(StudioPrimaryButton()).accessibilityIdentifier("studio.newDrawing")
-                Text("One-time unlock\(purchases.price.map { " · \($0)" } ?? ""). No subscription.\nAll included stickers stay free.")
+                Text(purchases.isBetaTesting
+                     ? "Studio is free to enable during this beta.\nAll included stickers stay free."
+                     : "One-time unlock\(purchases.price.map { " · \($0)" } ?? ""). No subscription.\nAll included stickers stay free.")
                     .font(.footnote).foregroundColor(StudioTheme.secondary).multilineTextAlignment(.center)
-                Button("Restore Purchases") { Task { await purchases.restore() } }
+                Button(purchases.isBetaTesting ? "Restore beta access" : "Restore Purchases") { Task { await purchases.restore() } }
                     .font(.subheadline.weight(.semibold)).foregroundColor(StudioTheme.purple)
                     .disabled(purchases.isLoading || purchases.isPurchasing)
                     .accessibilityIdentifier("studio.restore")
@@ -61,7 +63,9 @@ struct StudioUnlockView: View {
                     PixelHeartMark().padding(.top, 12)
                     VStack(spacing: 7) {
                         Text("Your ideas. Your stickers.").font(.system(.title2, design: .rounded).weight(.bold))
-                        Text("Unlock the editor and saved drafts forever.")
+                        Text(purchases.isBetaTesting
+                             ? "Try the editor and saved drafts free during TestFlight."
+                             : "Unlock the editor and saved drafts forever.")
                             .font(.subheadline).foregroundColor(StudioTheme.secondary).multilineTextAlignment(.center)
                     }
                     StudioFeatures()
@@ -78,18 +82,20 @@ struct StudioUnlockView: View {
                     .buttonStyle(StudioPrimaryButton())
                     .disabled(!purchases.canPurchase || purchases.isPurchasing || purchases.isPending)
                     .accessibilityIdentifier("studio.unlock")
-                    Text("One-time purchase. No subscription.\nNo charge per drawing or sticker sent.")
+                    Text(purchases.isBetaTesting
+                         ? "No payment is collected in this beta.\nThe release is planned to offer a one-time US$1 Studio Unlock."
+                         : "One-time purchase. No subscription.\nNo charge per drawing or sticker sent.")
                         .font(.footnote).foregroundColor(StudioTheme.secondary).multilineTextAlignment(.center)
                     if purchases.isPending {
                         StudioNotice(text: "Your purchase is awaiting approval. You can keep using the free stickers.", symbol: "clock")
                     } else if let message = purchases.message {
                         StudioNotice(text: message)
                     }
-                    if !purchases.isLoading && purchases.price == nil {
+                    if !purchases.isBetaTesting && !purchases.isLoading && purchases.price == nil {
                         Button("Try loading the price again") { Task { await purchases.start() } }
                             .font(.subheadline).foregroundColor(StudioTheme.purple)
                     }
-                    Button("Restore Purchases") { Task { await purchases.restore() } }
+                    Button(purchases.isBetaTesting ? "Restore beta access" : "Restore Purchases") { Task { await purchases.restore() } }
                         .font(.subheadline.weight(.semibold)).foregroundColor(StudioTheme.purple)
                         .disabled(purchases.isLoading || purchases.isPurchasing)
                         .accessibilityIdentifier("studio.restore")
@@ -98,7 +104,7 @@ struct StudioUnlockView: View {
                 }.padding(24).frame(maxWidth: 520).frame(maxWidth: .infinity)
             }
             .background(StudioTheme.cream)
-            .navigationTitle("Studio Unlock").navigationBarTitleDisplayMode(.inline)
+            .navigationTitle(purchases.isBetaTesting ? "Studio preview" : "Studio Unlock").navigationBarTitleDisplayMode(.inline)
             .toolbar { ToolbarItem(placement: .cancellationAction) { Button("Not now") { dismiss() } } }
         }
         .navigationViewStyle(StackNavigationViewStyle())
@@ -106,6 +112,7 @@ struct StudioUnlockView: View {
     }
 
     private var buyTitle: String {
+        if purchases.isBetaTesting { return "Enable Studio for this beta" }
         if purchases.isPurchasing { return "Unlocking Studio…" }
         if purchases.isPending { return "Awaiting approval" }
         if purchases.isLoading { return "Loading price…" }
@@ -125,16 +132,25 @@ struct StudioHelpView: View {
                 Section(header: Text("Using 8 bit art")) {
                     helpRow("Tap. Hold. Make someone's day.", "Tap an included sticker to add it to Messages. Touch and hold to place it on a message or photo.")
                     helpRow("Make a sticker", "Open Studio, start a drawing or remix a tiny sticker, then tap Insert sticker. Messages puts it in the composer; you tap Send.")
-                    helpRow("A one-time unlock", "Included stickers, search, and favorites are free. Studio adds the editor and saved drafts. There is no subscription or charge per drawing.")
+                    if purchases.isBetaTesting {
+                        helpRow("Free during this beta", "Enable Studio to try the editor and saved drafts without payment. The release is planned to offer a one-time US$1 Studio Unlock. Apple's purchase flow is not tested in this beta.")
+                    } else {
+                        helpRow("A one-time unlock", "Included stickers, search, and favorites are free. Studio adds the editor and saved drafts. There is no subscription or charge per drawing.")
+                    }
                 }
                 Section(header: Text("Your drawings")) {
                     helpRow("Saved on this device", "Drawings save as you edit. Deleting the app can remove them. Export drawings you want to keep.")
-                    helpRow("Restore tools, not deleted art", "Restore Purchases brings back your Studio unlock under the same App Store account. Drawings don't automatically move between devices.")
+                    helpRow("Restore tools, not deleted art", purchases.isBetaTesting
+                            ? "Restore beta access checks whether Studio was enabled on this device. You can enable it free on another beta device, but drawings don't automatically move between devices."
+                            : "Restore Purchases brings back your Studio unlock under the same App Store account. Drawings don't automatically move between devices.")
                 }
                 Section(header: Text("Studio access")) {
-                    Label(purchases.isUnlocked ? "Studio is unlocked" : "Studio is not unlocked", systemImage: purchases.isUnlocked ? "checkmark.circle.fill" : "lock")
+                    Label(purchases.isBetaTesting
+                          ? (purchases.isUnlocked ? "Studio is enabled for this beta" : "Studio is not enabled yet")
+                          : (purchases.isUnlocked ? "Studio is unlocked" : "Studio is not unlocked"),
+                          systemImage: purchases.isUnlocked ? "checkmark.circle.fill" : "lock")
                         .foregroundColor(StudioTheme.purple)
-                    Button("Restore Purchases") { Task { await purchases.restore() } }
+                    Button(purchases.isBetaTesting ? "Restore beta access" : "Restore Purchases") { Task { await purchases.restore() } }
                         .disabled(purchases.isLoading || purchases.isPurchasing)
                         .accessibilityIdentifier("studio.restore")
                     if let message = purchases.message { Text(message).font(.footnote).foregroundColor(StudioTheme.secondary) }
@@ -144,7 +160,7 @@ struct StudioHelpView: View {
                     Link("Support instructions", destination: URL(string: "https://mim-armand.github.io/8bit-stickers/support/")!)
                     Link("Privacy policy", destination: URL(string: "https://mim-armand.github.io/8bit-stickers/privacy/")!)
                 }
-                #if DEBUG && STUDIO_LOCAL_TESTING
+                #if DEBUG && STUDIO_LOCAL_TESTING && !STUDIO_BETA_TESTING
                 if purchases.isLocalTesting {
                     Section(header: Text("Local testing")) {
                         Text(purchases.localTestingNote ?? "Local test — no charge").font(.footnote)

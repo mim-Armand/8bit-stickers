@@ -1,6 +1,6 @@
 # Studio Unlock — agreed monetization plan
 
-Updated October 26, 2026. This supersedes the earlier recommendation to charge for downloading the sticker pack. The owner clarified that payment is for **the native Studio tools inside Messages**, then asked for this future implementation to be planned and documented. The local native implementation now exercises this offer with no-charge test purchases. No live pricing or product settings have been changed.
+Updated October 26, 2026. This supersedes the earlier recommendation to charge for downloading the sticker pack. The owner clarified that payment is for **the native Studio tools inside Messages**, then asked for this future implementation to be planned and documented. The local native implementation now exercises this offer with no-charge test purchases. The owner subsequently requested TestFlight access: **1.4 (8) is available internally with free beta activation and no StoreKit requests**. This does not create paid ownership; real Apple sandbox purchase/restore testing remains deferred. See the [TestFlight guide](studio-testflight.md). No live pricing or product settings have been changed.
 
 ## Product and access
 

@@ -30,7 +30,11 @@ final class StudioFlowTests: XCTestCase {
         app.buttons["studio.tab.studio"].tap()
         app.buttons["studio.newDrawing"].tap()
         XCTAssertTrue(app.buttons["studio.unlock"].waitForExistence(timeout: 3))
+        #if STUDIO_BETA_TESTING
+        XCTAssertEqual(app.buttons["studio.unlock"].label, "Enable Studio for this beta")
+        #else
         XCTAssertTrue(app.buttons["studio.unlock"].label.contains("$1.00"))
+        #endif
         saveScreenshot("01-local-unlock")
         app.buttons["Not now"].tap()
         app.buttons["studio.tab.collection"].tap()

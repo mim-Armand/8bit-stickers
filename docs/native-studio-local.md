@@ -1,6 +1,6 @@
 # Native Studio — local testing build
 
-Implemented October 26, 2026 at the owner's request. **Local development/testing only. Do not create App Store products, upload to TestFlight, submit, or change the pending release.** The original sticker-only Xcode project and release records remain intact.
+Implemented October 26, 2026 at the owner's request. This guide describes the original **local Debug/testing build**. The owner subsequently requested TestFlight access: **1.4 (8) is now available for internal testing with free beta activation**; see the [TestFlight guide](studio-testflight.md). Public App Review and production IAP setup remain deferred. The original sticker-only project and pending 1.2 (5) release remain intact.
 
 ## Try it in the local browser viewer
 
@@ -26,7 +26,7 @@ Open [`NativeStudio/Studio.xcodeproj`](../NativeStudio/Studio.xcodeproj) in Xcod
 | **Studio Messages Local** | The actual standalone Messages app and custom Messages extension, preserving `eu.armand.--bit-art` and `eu.armand.--bit-art.StickerPackExtension`. Run with Messages as the host, open a conversation, then choose 8 bit art from the app menu. |
 | **Studio Messages Tests** | Simulator-only integration checks using Apple's fictional conversation fixture. Install the Messages build first. The test inserts a sticker in the composer and never taps Send. |
 
-The local project uses version **1.4 (7)** for testing. These numbers are not reserved/uploaded. The separate original project remains the prepared **1.3 (6)** sticker-only build. Submitted **1.2 (5)** and its automatic-release setting were not changed.
+Debug/local configurations use version **1.4 (7)** for testing; build 7 was not uploaded. The dedicated TestFlight configuration uses the uploaded internal beta **1.4 (8)**. The separate original project remains the prepared **1.3 (6)** sticker-only build. Submitted **1.2 (5)** and its automatic-release setting were not changed.
 
 Command-line shortcuts, with a simulator already booted:
 

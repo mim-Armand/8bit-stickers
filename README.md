@@ -1,6 +1,6 @@
 # 8 bit art
 
-The 2018 iMessage sticker pack is recovered and back in development. This repository preserves its Git history, Xcode project, original icons and eleven original stickers. The collection now contains **67 stickers**, including **45 cute and meme reactions drawn on a true 16×16 grid**, two animations, an unsigned native build, and a working local Sticker Studio.
+The 2018 iMessage sticker pack is recovered and back in development. This repository preserves its Git history, Xcode project, original icons and eleven original stickers. The collection now contains **67 stickers**, including **45 cute and meme reactions drawn on a true 16×16 grid**, two animations, a native Studio available in internal TestFlight, and a working local browser prototype.
 
 The latest seven are **Snack goblin, Unbothered capy, Big shrimp energy, Yap duck, Delulu bunny, I saw nothing and 67 unlocked**. They join the previous fourteen memes, bringing the forthcoming additions to **21** and the number-themed set to **five 67 designs**. All are staged for **1.3 (6)** in source; submitted **1.2 (5)** remains a separate 46-sticker release.
 
@@ -45,9 +45,11 @@ The [public app/support site](https://mim-armand.github.io/8bit-stickers/), [sup
 
 ![Sticker Studio](docs/previews/studio-desktop.png)
 
-## Native Studio — local testing
+## Native Studio — TestFlight and local testing
 
-The planned Studio is now implemented as a **local native build**: free search/favorites for all 67 stickers, an optional one-time $1 test unlock, a true 16×16 editor, 45 exact-grid remix templates, multiple saved drafts, PNG export and actual Messages insertion. It saves as you draw, resumes the requested drawing after unlock, and keeps existing work available after refund/revocation.
+**Internal TestFlight 1.4 (8) is available, and the account holder is invited.** Install 8 bit art from TestFlight, open it inside Messages, then choose **Studio → Enable Studio for this beta**. All tools are free during this beta; no purchase is made. See the [TestFlight installation and verification guide](docs/studio-testflight.md). The pending public 1.2 (5) review and automatic-release setting are unchanged.
+
+The planned Studio is now implemented in a **native Messages build**: free search/favorites for all 67 stickers, an optional one-time $1 test unlock, a true 16×16 editor, 45 exact-grid remix templates, multiple saved drafts, PNG export and actual Messages insertion. It saves as you draw, resumes the requested drawing after unlock, and keeps existing work available after refund/revocation.
 
 Open [`NativeStudio/Studio.xcodeproj`](NativeStudio/Studio.xcodeproj). Choose **Studio Local** to try the shared UI in a simulator preview app, or **Studio Messages Local** for the actual standalone Messages extension. The preview host is a development aid with its own local identity; the intended public app remains inside Messages on the existing listing.
 
@@ -58,9 +60,9 @@ Open [`NativeStudio/Studio.xcodeproj`](NativeStudio/Studio.xcodeproj). Choose **
 
 For an interactive browser view of the **actual native simulator app**, open **http://127.0.0.1:8792/** while `scripts/run-native-viewer.sh SIMULATOR_UUID` is running. This is useful where the Simulator window app is unavailable; it supports tap, drag and text entry, stays on localhost and is excluded from the Messages binary.
 
-The unlock is marked **Local test — no charge**. The default mode simulates payment; the bundled StoreKit configuration also supports Apple's local transaction tests. Normal release builds disable checkout. No Apple products, uploads, submissions or pricing have been changed. The separate sticker-only project remains 1.3 (6); local Studio uses 1.4 (7) only for testing.
+Debug builds mark the unlock **Local test — no charge** and simulate payment; the bundled StoreKit configuration also supports Apple's local transaction tests. The dedicated TestFlight configuration uses **free beta activation** without StoreKit requests. Normal Release builds disable checkout. No live product or price was created. The separate sticker-only project remains 1.3 (6); local Debug uses 1.4 (7), while the uploaded internal beta is 1.4 (8).
 
-See the [local testing guide](docs/native-studio-local.md) for test controls, StoreKit mode, saved-draft behavior, source layout and remaining production work. Current evidence is in [verification notes](docs/verification.md). Keep all release activity deferred until the owner asks to proceed.
+See the [local testing guide](docs/native-studio-local.md) for test controls, StoreKit mode, saved-draft behavior, source layout and remaining production work. Current evidence is in [verification notes](docs/verification.md). Public release and production purchase setup remain deferred until the owner asks to proceed.
 
 ## Art you can keep editing
 

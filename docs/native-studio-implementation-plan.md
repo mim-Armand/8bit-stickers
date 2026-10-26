@@ -1,6 +1,6 @@
 # Native Studio inside Messages — implementation and release handoff
 
-Status: **local native implementation available; production release deferred**. See [the local testing guide](native-studio-local.md) for running the current code and its verification. The requirements below remain the implementation/release contract; passing local tests does not mean every production gate is complete. Updated October 26, 2026 after the owner requested a native Studio with a one-time US$1 unlock. This is the starting document for a future build iteration. Read it with [product context](studio-product-plan.md), [monetization decisions](monetization-options.md) and the actual [release record](../release/release-status.json).
+Status: **native implementation available in internal TestFlight 1.4 (8); public release and production IAP deferred**. See the [TestFlight guide](studio-testflight.md) for installation, free beta access and verified distribution state. See [the local testing guide](native-studio-local.md) for running the current code and its verification. The requirements below remain the implementation/release contract; passing local tests does not mean every production gate is complete. Updated October 26, 2026 after the owner requested a native Studio with a one-time US$1 unlock. This is the starting document for a future build iteration. Read it with [product context](studio-product-plan.md), [monetization decisions](monetization-options.md) and the actual [release record](../release/release-status.json).
 
 ## Decisions to carry forward
 
@@ -12,7 +12,7 @@ Status: **local native implementation available; production release deferred**. 
 - Use StoreKit's localized `Product.displayPrice` in the purchase button. International prices are localized; do not promise a literal $1 in every currency. Apple's standard purchase sheet confirms payment.
 - Drafts and favorites are local to the device. No app-specific user account, developer backend, advertising, analytics or automatic cloud synchronization in this MVP. Apple handles the payment and purchase history.
 - Public support email: **seltzer.wisdom7h@icloud.com**. Keep the current GitHub Pages support/privacy URLs.
-- The owner subsequently authorized local implementation/testing only. Native code now exists in the separate Studio project. Product registration, real pricing, TestFlight uploads, App Review submission and changes to the pending release remain deferred.
+- The owner first authorized local implementation/testing, then requested TestFlight access. The dedicated **1.4 (8) internal-only beta** is uploaded and available, with the account holder invited and free beta Studio activation. Product registration, real pricing, public App Review submission, external distribution and changes to pending 1.2 (5) remain deferred. Beta activation is separate from both local mock ownership and future paid ownership.
 
 Apple permits standalone sticker-pack ↔ custom standalone iMessage updates on the same record. Moving this standalone listing into a normal iOS app requires a new app record. See [app-type rules](https://developer.apple.com/help/app-store-connect/create-an-app-record/add-imessage-app-information/) and [iMessage distribution and purchase support](https://developer.apple.com/imessage/).
 
@@ -22,8 +22,9 @@ Apple permits standalone sticker-pack ↔ custom standalone iMessage updates on 
 | --- | --- | --- |
 | Submitted 1.2 (5) | 46 stickers; Data Not Collected label published; submission recorded as Waiting for Review with `AFTER_APPROVAL` | Preserve tag `v1.2-build5-submitted`, metadata snapshot, signed archive and release evidence. Recheck current Apple status when resuming; this document is not a live status feed. |
 | Development 1.3 (6) | 67 stickers, including twenty-one additional memes and five 67 designs; the preceding 60-sticker source passed unsigned builds and browser/art checks, with latest verification tracked separately | Can ship as a separate art update before Studio. It has not been uploaded or submitted. |
-| Local Studio 1.4 (7) | Implemented custom Messages extension and preview host; local purchase flows only | Test locally. No Apple upload/product creation; keep original 1.3 (6) sticker project intact. |
-| Native Studio release | Custom Messages browser, free search/favorites, paid 16×16 editor and multiple drafts | Prefer a later 1.4 if 1.3 ships first. If the owner chooses to combine the work before 1.3 submission, it may become 1.3. Recheck App Store version/build availability before choosing numbers. |
+| Local Studio 1.4 (7) | Implemented custom Messages extension and preview host; local purchase flows only | Keep for Debug/simulator testing; build 7 was not uploaded. |
+| Internal TestFlight 1.4 (8) | Same Messages identity, 67 stickers, 45 templates, free beta Studio activation | Uploaded and in internal beta testing; owner invited. No live IAP or public review submission. Keep original 1.3 (6) project intact. |
+| Native Studio release | Custom Messages browser, free search/favorites, paid 16×16 editor and multiple drafts | Internal beta uses 1.4 (8). Before public release, recheck App Store version/build availability and whether the intermediate 1.3 art update is still needed; do not reuse build 8 or try to submit its internal-only binary. |
 | Follow-up fixes | Accessibility, purchase/layout fixes and measured usability improvements | Patch release after Studio; keep the same non-consumable entitlement. |
 
 Do not attach Studio or its first IAP to submitted 1.2 (5). Do not overwrite an existing signed archive or pretend its 46-sticker screenshots depict the new interface. The planned release split is a sequencing recommendation, not a reservation of version numbers.
