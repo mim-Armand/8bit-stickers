@@ -1,0 +1,204 @@
+{
+  "schemaVersion": 1,
+  "palette": {
+    "ink": "#2F243A",
+    "paper": "#FFFEF8",
+    "coral": "#FF7187",
+    "coralDark": "#D94A6B",
+    "pink": "#FFB7CE",
+    "yellow": "#FFD66D",
+    "gold": "#EAAA49",
+    "mint": "#8CDDB3",
+    "green": "#4BAF84",
+    "cyan": "#77E4DB",
+    "blue": "#6C9EF8",
+    "blueDark": "#4E6ED1",
+    "lavender": "#B8A3EC",
+    "purple": "#8A71C1",
+    "cream": "#FFF0C2",
+    "tan": "#DFA975",
+    "brown": "#9B694C"
+  },
+  "stickers": [
+    {
+      "id": "heart",
+      "title": "A little love",
+      "category": "Reactions",
+      "tags": [
+        "love",
+        "heart",
+        "hug",
+        "thanks"
+      ],
+      "filename": "8 bit art StickerPackExtension/Stickers.xcstickers/Sticker Pack.stickerpack/new_heart.sticker/new_heart.png",
+      "preview": "prototype/assets/new/heart.png",
+      "animated": true,
+      "source": "art/sprites.json"
+    },
+    {
+      "id": "coffee",
+      "title": "Warm & awake",
+      "category": "Everyday",
+      "tags": [
+        "coffee",
+        "morning",
+        "thanks",
+        "cozy"
+      ],
+      "filename": "8 bit art StickerPackExtension/Stickers.xcstickers/Sticker Pack.stickerpack/new_coffee.sticker/new_coffee.png",
+      "preview": "prototype/assets/new/coffee.png",
+      "animated": false,
+      "source": "art/sprites.json"
+    },
+    {
+      "id": "star",
+      "title": "You are a star",
+      "category": "Cosmic",
+      "tags": [
+        "star",
+        "wow",
+        "celebrate",
+        "sparkle"
+      ],
+      "filename": "8 bit art StickerPackExtension/Stickers.xcstickers/Sticker Pack.stickerpack/new_star.sticker/new_star.png",
+      "preview": "prototype/assets/new/star.png",
+      "animated": false,
+      "source": "art/sprites.json"
+    },
+    {
+      "id": "sprout",
+      "title": "Growing on you",
+      "category": "Cozy",
+      "tags": [
+        "plant",
+        "sprout",
+        "grow",
+        "green"
+      ],
+      "filename": "8 bit art StickerPackExtension/Stickers.xcstickers/Sticker Pack.stickerpack/new_sprout.sticker/new_sprout.png",
+      "preview": "prototype/assets/new/sprout.png",
+      "animated": false,
+      "source": "art/sprites.json"
+    },
+    {
+      "id": "cat",
+      "title": "Do not disturb",
+      "category": "Cozy",
+      "tags": [
+        "cat",
+        "sleep",
+        "cozy",
+        "nap"
+      ],
+      "filename": "8 bit art StickerPackExtension/Stickers.xcstickers/Sticker Pack.stickerpack/new_cat.sticker/new_cat.png",
+      "preview": "prototype/assets/new/cat.png",
+      "animated": false,
+      "source": "art/sprites.json"
+    },
+    {
+      "id": "gamepad",
+      "title": "One more level",
+      "category": "Play",
+      "tags": [
+        "game",
+        "play",
+        "gg",
+        "gaming"
+      ],
+      "filename": "8 bit art StickerPackExtension/Stickers.xcstickers/Sticker Pack.stickerpack/new_gamepad.sticker/new_gamepad.png",
+      "preview": "prototype/assets/new/gamepad.png",
+      "animated": false,
+      "source": "art/sprites.json"
+    },
+    {
+      "id": "rainbow",
+      "title": "Better days ahead",
+      "category": "Reactions",
+      "tags": [
+        "rainbow",
+        "hope",
+        "happy",
+        "pride"
+      ],
+      "filename": "8 bit art StickerPackExtension/Stickers.xcstickers/Sticker Pack.stickerpack/new_rainbow.sticker/new_rainbow.png",
+      "preview": "prototype/assets/new/rainbow.png",
+      "animated": false,
+      "source": "art/sprites.json"
+    },
+    {
+      "id": "rocket",
+      "title": "Let us go",
+      "category": "Cosmic",
+      "tags": [
+        "rocket",
+        "launch",
+        "go",
+        "space"
+      ],
+      "filename": "8 bit art StickerPackExtension/Stickers.xcstickers/Sticker Pack.stickerpack/new_rocket.sticker/new_rocket.png",
+      "preview": "prototype/assets/new/rocket.png",
+      "animated": false,
+      "source": "art/sprites.json"
+    },
+    {
+      "id": "cake",
+      "title": "Make a wish",
+      "category": "Reactions",
+      "tags": [
+        "cake",
+        "birthday",
+        "party",
+        "celebrate"
+      ],
+      "filename": "8 bit art StickerPackExtension/Stickers.xcstickers/Sticker Pack.stickerpack/new_cake.sticker/new_cake.png",
+      "preview": "prototype/assets/new/cake.png",
+      "animated": false,
+      "source": "art/sprites.json"
+    },
+    {
+      "id": "moon",
+      "title": "Sleep sweet",
+      "category": "Cosmic",
+      "tags": [
+        "moon",
+        "night",
+        "sleep",
+        "dream"
+      ],
+      "filename": "8 bit art StickerPackExtension/Stickers.xcstickers/Sticker Pack.stickerpack/new_moon.sticker/new_moon.png",
+      "preview": "prototype/assets/new/moon.png",
+      "animated": false,
+      "source": "art/sprites.json"
+    },
+    {
+      "id": "letter",
+      "title": "Sent with love",
+      "category": "Everyday",
+      "tags": [
+        "letter",
+        "love",
+        "message",
+        "hello"
+      ],
+      "filename": "8 bit art StickerPackExtension/Stickers.xcstickers/Sticker Pack.stickerpack/new_letter.sticker/new_letter.png",
+      "preview": "prototype/assets/new/letter.png",
+      "animated": false,
+      "source": "art/sprites.json"
+    },
+    {
+      "id": "robot",
+      "title": "Hello, human",
+      "category": "Play",
+      "tags": [
+        "robot",
+        "hello",
+        "friend",
+        "hi"
+      ],
+      "filename": "8 bit art StickerPackExtension/Stickers.xcstickers/Sticker Pack.stickerpack/new_robot.sticker/new_robot.png",
+      "preview": "prototype/assets/new/robot.png",
+      "animated": true,
+      "source": "art/sprites.json"
+    }
+  ]
+}

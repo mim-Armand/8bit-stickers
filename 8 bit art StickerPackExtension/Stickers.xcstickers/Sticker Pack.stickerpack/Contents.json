@@ -1,44 +1,80 @@
 {
-  "stickers" : [
+  "stickers": [
     {
-      "filename" : "exclamation_point_01.sticker"
+      "filename": "exclamation_point_01.sticker"
     },
     {
-      "filename" : "banana_01.sticker"
+      "filename": "banana_01.sticker"
     },
     {
-      "filename" : "hear_01.sticker"
+      "filename": "hear_01.sticker"
     },
     {
-      "filename" : "pumpkin_01.sticker"
+      "filename": "pumpkin_01.sticker"
     },
     {
-      "filename" : "skull_01.sticker"
+      "filename": "skull_01.sticker"
     },
     {
-      "filename" : "ghost_01.sticker"
+      "filename": "ghost_01.sticker"
     },
     {
-      "filename" : "flower_01.sticker"
+      "filename": "flower_01.sticker"
     },
     {
-      "filename" : "smiley_01.sticker"
+      "filename": "smiley_01.sticker"
     },
     {
-      "filename" : "smiley_02.sticker"
+      "filename": "smiley_02.sticker"
     },
     {
-      "filename" : "dealwithit_01.sticker"
+      "filename": "dealwithit_01.sticker"
     },
     {
-      "filename" : "wine_01.sticker"
+      "filename": "wine_01.sticker"
+    },
+    {
+      "filename": "new_heart.sticker"
+    },
+    {
+      "filename": "new_coffee.sticker"
+    },
+    {
+      "filename": "new_star.sticker"
+    },
+    {
+      "filename": "new_sprout.sticker"
+    },
+    {
+      "filename": "new_cat.sticker"
+    },
+    {
+      "filename": "new_gamepad.sticker"
+    },
+    {
+      "filename": "new_rainbow.sticker"
+    },
+    {
+      "filename": "new_rocket.sticker"
+    },
+    {
+      "filename": "new_cake.sticker"
+    },
+    {
+      "filename": "new_moon.sticker"
+    },
+    {
+      "filename": "new_letter.sticker"
+    },
+    {
+      "filename": "new_robot.sticker"
     }
   ],
-  "info" : {
-    "version" : 1,
-    "author" : "xcode"
+  "info": {
+    "version": 1,
+    "author": "xcode"
   },
-  "properties" : {
-    "grid-size" : "regular"
+  "properties": {
+    "grid-size": "regular"
   }
 }

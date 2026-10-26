@@ -1,0 +1,13 @@
+{
+  "name": "8-bit-art-studio",
+  "version": "1.2.0",
+  "private": true,
+  "description": "Local, dependency-free sticker studio and recovered iMessage pack",
+  "scripts": {
+    "preview": "sh scripts/start-preview.sh",
+    "test:preview": "node scripts/verify-preview.cjs"
+  },
+  "devDependencies": {
+    "playwright": "1.62.1"
+  }
+}

@@ -1,0 +1,20 @@
+name: iOS sticker pack
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Xcode version
+        run: xcodebuild -version
+      - name: Build iPhone and iPad simulator pack without signing
+        run: ./scripts/build-ios.sh simulator
+      - name: Build device pack without signing
+        run: ./scripts/build-ios.sh device

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8B17A8C12610260000000001 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 8B17A8C12610260000000003 /* PrivacyInfo.xcprivacy */; };
+		8B17A8C12610260000000002 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 8B17A8C12610260000000003 /* PrivacyInfo.xcprivacy */; };
 		3DFC40FC206EF101006DC420 /* 8 bit art StickerPackExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 3DFC40FB206EF101006DC420 /* 8 bit art StickerPackExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		3DFC4100206EF101006DC420 /* Stickers.xcstickers in Resources */ = {isa = PBXBuildFile; fileRef = 3DFC40FF206EF101006DC420 /* Stickers.xcstickers */; };
 		3DFC4101206EF101006DC420 /* Stickers.xcstickers in Resources */ = {isa = PBXBuildFile; fileRef = 3DFC40FF206EF101006DC420 /* Stickers.xcstickers */; };
@@ -37,6 +39,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		8B17A8C12610260000000003 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = PrivacyInfo.xcprivacy; path = "8 bit art/PrivacyInfo.xcprivacy"; sourceTree = "<group>"; };
 		3DFC40F7206EF101006DC420 /* 8 bit art.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "8 bit art.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DFC40FB206EF101006DC420 /* 8 bit art StickerPackExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "8 bit art StickerPackExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DFC40FF206EF101006DC420 /* Stickers.xcstickers */ = {isa = PBXFileReference; lastKnownFileType = folder.stickers; name = Stickers.xcstickers; path = "8 bit art StickerPackExtension/Stickers.xcstickers"; sourceTree = "<group>"; };
@@ -47,6 +50,7 @@
 			isa = PBXGroup;
 			children = (
 				3DFC40FF206EF101006DC420 /* Stickers.xcstickers */,
+				8B17A8C12610260000000003 /* PrivacyInfo.xcprivacy */,
 				3DFC40F8206EF101006DC420 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -101,7 +105,7 @@
 		3DFC40F1206EF101006DC420 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0930;
+				LastUpgradeCheck = 2710;
 				ORGANIZATIONNAME = "mim Armand";
 				TargetAttributes = {
 					3DFC40F6206EF101006DC420 = {
@@ -136,6 +140,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3DFC4101206EF101006DC420 /* Stickers.xcstickers in Resources */,
+				8B17A8C12610260000000001 /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -144,6 +149,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3DFC4100206EF101006DC420 /* Stickers.xcstickers in Resources */,
+				8B17A8C12610260000000002 /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -190,7 +196,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -209,7 +215,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -248,7 +254,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -261,7 +267,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -272,10 +278,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
+				CURRENT_PROJECT_VERSION = 4;
+				MARKETING_VERSION = 1.2;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7N3Y4QZT3Z;
 				INFOPLIST_FILE = "8 bit art StickerPackExtension/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "eu.armand.--bit-art.StickerPackExtension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -287,10 +295,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
+				CURRENT_PROJECT_VERSION = 4;
+				MARKETING_VERSION = 1.2;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7N3Y4QZT3Z;
 				INFOPLIST_FILE = "8 bit art StickerPackExtension/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "eu.armand.--bit-art.StickerPackExtension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -302,10 +312,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
+				CURRENT_PROJECT_VERSION = 4;
+				MARKETING_VERSION = 1.2;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7N3Y4QZT3Z;
 				INFOPLIST_FILE = "8 bit art/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "eu.armand.--bit-art";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -316,10 +328,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
+				CURRENT_PROJECT_VERSION = 4;
+				MARKETING_VERSION = 1.2;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7N3Y4QZT3Z;
 				INFOPLIST_FILE = "8 bit art/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "eu.armand.--bit-art";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
