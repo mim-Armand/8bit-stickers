@@ -1,6 +1,6 @@
 # Editable pixel art
 
-The original eleven sticker files were recovered from `mim-Armand/8bit-stickers` at commit `816eba114d65f5a0182c4ed3bf6dd1c1bd4f9256`. Their pixels and original names are preserved in the native asset catalog. Repository recovery establishes where these files came from; it does not establish ownership of every depicted design. Review provenance before publishing the recovered collection.
+The original eleven sticker files were recovered from `mim-Armand/8bit-stickers` at commit `816eba114d65f5a0182c4ed3bf6dd1c1bd4f9256`. Ten remain in the native catalog. The original wine-glass file is preserved unchanged in [`recovered/wine_01.sticker`](recovered/wine_01.sticker), outside the shipped catalog, following the owner's decision to omit it and aim for a 4+ age rating. Repository recovery establishes where these files came from; it does not establish ownership of every depicted design. Review provenance before publishing the recovered collection.
 
 Thirty-six new designs are recorded as editable drawing commands. The first twelve are in [`sprites.json`](sprites.json); the latest **24 cute and meme designs** are in [`cute-sprites.json`](cute-sprites.json) and [`meme-sprites.json`](meme-sprites.json). These are original pixel compositions using generic subjects. No stock images, fonts, remote services, or image-generation model are involved in the sticker pixels. The preview boards use Pillow's bundled default font.
 
@@ -26,7 +26,7 @@ python3 scripts/build-preview.py
 
 This regenerates:
 
-- Thirty-six native `.sticker` directories and appends their references after the eleven originals, without changing the original PNG files.
+- Thirty-six native `.sticker` directories and appends their references after the ten shipped classics, without changing any original PNG files. The archived wine sticker stays excluded.
 - Thirty-six matching browser assets in `prototype/assets/new/`.
 - Raw logical-resolution PNGs in `art/pixels/`, including 24 genuine 16×16 images.
 - `art/manifest.json`, the shared catalog consumed by the browser MVP.

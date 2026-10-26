@@ -278,7 +278,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				MARKETING_VERSION = 1.2;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7N3Y4QZT3Z;
@@ -295,9 +295,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				MARKETING_VERSION = 1.2;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Distribution";
+				PROVISIONING_PROFILE_SPECIFIER = "8 bit art extension App Store 20261026";
 				DEVELOPMENT_TEAM = 7N3Y4QZT3Z;
 				INFOPLIST_FILE = "8 bit art StickerPackExtension/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
@@ -312,7 +314,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				MARKETING_VERSION = 1.2;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7N3Y4QZT3Z;
@@ -328,9 +330,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				MARKETING_VERSION = 1.2;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Distribution";
+				PROVISIONING_PROFILE_SPECIFIER = "8 bit art app App Store 20261026";
 				DEVELOPMENT_TEAM = 7N3Y4QZT3Z;
 				INFOPLIST_FILE = "8 bit art/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;

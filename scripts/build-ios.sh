@@ -19,4 +19,4 @@ xcodebuild \
   -derivedDataPath "$project_root/build/ios-$platform" \
   CODE_SIGNING_ALLOWED=NO \
   ONLY_ACTIVE_ARCH=NO \
-  build
+  clean build

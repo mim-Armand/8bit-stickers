@@ -1,0 +1,158 @@
+{
+  "verifiedAt": "2026-10-26T19:47:19.933Z",
+  "appId": "1366485724",
+  "bundleId": "eu.armand.--bit-art",
+  "extensionBundleId": "eu.armand.--bit-art.StickerPackExtension",
+  "version": "1.2",
+  "build": "5",
+  "buildId": "ecc379bc-4471-489b-887b-826ec30d9c6b",
+  "processingState": "VALID",
+  "appStoreVersionId": "7c6caa34-4ee8-4423-87d9-e4acc09b1b40",
+  "appStoreState": "PREPARE_FOR_SUBMISSION",
+  "releaseType": "MANUAL",
+  "appStoreAgeRating": "FOUR_PLUS",
+  "stickerCount": 46,
+  "shippedRecoveredClassics": 10,
+  "preservedRecoveredSources": 11,
+  "newDesigns": 36,
+  "tinyDesigns": 24,
+  "wineExcluded": true,
+  "wineSource": "art/recovered/wine_01.sticker/wine_01.png",
+  "usesNonExemptEncryption": false,
+  "appPrivacy": {
+    "answer": "DATA_NOT_COLLECTED",
+    "status": "SAVED_DRAFT_NOT_PUBLISHED"
+  },
+  "appReviewSubmitted": false,
+  "publicAppReleased": false,
+  "web": {
+    "provider": "GitHub Pages",
+    "url": "https://mim-armand.github.io/8bit-stickers/",
+    "supportUrl": "https://mim-armand.github.io/8bit-stickers/support/",
+    "privacyPolicyUrl": "https://mim-armand.github.io/8bit-stickers/privacy/",
+    "branch": "gh-pages",
+    "deploymentCommit": "30355ecd03d7b135b002f614803367d73eb3c805",
+    "studioDeployed": false,
+    "studioLocalUrl": "http://127.0.0.1:8787/prototype/"
+  },
+  "ipa": {
+    "path": "build/release/1.2-5/export/8 bit art.ipa",
+    "bytes": 144242,
+    "sha256": "08aa4309b4bdee6f70a0dcfeb7d8334d7846960718d7c1c2cc2066b28f896516"
+  },
+  "sourceTag": "v1.2-build5-candidate",
+  "validation": {
+    "errors": 0,
+    "warnings": [
+      {
+        "code": 90863,
+        "reason": "Sticker-only hidden app cannot launch as a normal macOS app"
+      },
+      {
+        "code": 90984,
+        "reason": "Sticker-only hidden app cannot launch as a normal visionOS app"
+      }
+    ]
+  },
+  "screenshots": [
+    {
+      "displayType": "APP_IPHONE_61",
+      "assets": [
+        {
+          "fileName": "01-classics-and-revival.png",
+          "id": "a6800005-172e-8adc-8017-301420a2e9af",
+          "state": "COMPLETE",
+          "checksum": "8e6116fab217fd6e2367b3c4a10bf54d"
+        },
+        {
+          "fileName": "02-cute-pixels.png",
+          "id": "b2000005-172e-8adc-801d-db643cb66a6f",
+          "state": "COMPLETE",
+          "checksum": "ae41c72a48eb5e148f00c7386029d6fb"
+        },
+        {
+          "fileName": "03-meme-reactions.png",
+          "id": "b3400005-172e-8adc-8036-6ff8a8773a87",
+          "state": "COMPLETE",
+          "checksum": "b725f5cb0060f739e11c9c808d05bb2e"
+        }
+      ]
+    },
+    {
+      "displayType": "IMESSAGE_APP_IPAD_PRO_3GEN_129",
+      "assets": [
+        {
+          "fileName": "01-classics-and-revival.png",
+          "id": "a9000005-172e-8adc-8000-a37712233822",
+          "state": "COMPLETE",
+          "checksum": "99ba666150ab7a57b5f4058d5fbe5ef2"
+        },
+        {
+          "fileName": "02-cute-pixels.png",
+          "id": "d6800005-172e-8adc-803b-a923b304b83c",
+          "state": "COMPLETE",
+          "checksum": "3542eb09fca8d0cfee359e52ef046a2f"
+        },
+        {
+          "fileName": "03-meme-reactions.png",
+          "id": "b9c00005-172e-8adc-802c-351237f0e07a",
+          "state": "COMPLETE",
+          "checksum": "caeffad3b8227251b20dd27bff81a26b"
+        }
+      ]
+    },
+    {
+      "displayType": "IMESSAGE_APP_IPHONE_61",
+      "assets": [
+        {
+          "fileName": "01-classics-and-revival.png",
+          "id": "ff000005-172e-8adc-8001-e8c40b3eaead",
+          "state": "COMPLETE",
+          "checksum": "8e6116fab217fd6e2367b3c4a10bf54d"
+        },
+        {
+          "fileName": "02-cute-pixels.png",
+          "id": "a4000005-172e-8adc-8011-97845f20947b",
+          "state": "COMPLETE",
+          "checksum": "ae41c72a48eb5e148f00c7386029d6fb"
+        },
+        {
+          "fileName": "03-meme-reactions.png",
+          "id": "c9800005-172e-8adc-8027-39081244f211",
+          "state": "COMPLETE",
+          "checksum": "b725f5cb0060f739e11c9c808d05bb2e"
+        }
+      ]
+    },
+    {
+      "displayType": "APP_IPAD_PRO_3GEN_129",
+      "assets": [
+        {
+          "fileName": "01-classics-and-revival.png",
+          "id": "80800005-172e-8adc-802c-5acd5086d685",
+          "state": "COMPLETE",
+          "checksum": "99ba666150ab7a57b5f4058d5fbe5ef2"
+        },
+        {
+          "fileName": "02-cute-pixels.png",
+          "id": "64400005-172e-8adc-8000-d0860faacb76",
+          "state": "COMPLETE",
+          "checksum": "3542eb09fca8d0cfee359e52ef046a2f"
+        },
+        {
+          "fileName": "03-meme-reactions.png",
+          "id": "84800005-172e-8adc-8035-133e7ea28e61",
+          "state": "COMPLETE",
+          "checksum": "caeffad3b8227251b20dd27bff81a26b"
+        }
+      ]
+    }
+  ],
+  "physicalDeviceTesting": "not performed",
+  "nextActions": [
+    "Review/test the candidate",
+    "Publish the saved Data Not Collected privacy label",
+    "Submit version 1.2 (5) for App Review",
+    "Manually release only after approval"
+  ]
+}

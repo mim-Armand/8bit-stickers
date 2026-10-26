@@ -2,11 +2,31 @@
 
 ## Native pack
 
-Xcode 27.1 (27A9275) built both the simulator and device Release configurations without signing. The final builds include all 47 entries and two animated PNGs, with no warnings or errors in either build. The parent and extension identifiers match the recovered project. All eleven original sticker PNGs are byte-identical to the recovered commit `816eba1`. The initial twelve revival designs are also byte-identical to commit `423256b` in both their native and browser copies.
+The initial expanded source passed unsigned simulator/device Release builds under Xcode 27.1 (27A9275), with 47 entries and two APNGs. At the owner's request, the wine-glass sticker was then omitted from shipping assets, producing release candidate **1.2 (5)** with **46 stickers: 10 classics and 36 new designs**. The revised candidate passed a clean simulator build and clean signed device archive/export, with wine absent from those products. The parent and extension identifiers match the recovered project. All eleven original sticker PNGs are preserved byte-identically to recovered commit `816eba1`; ten ship and wine is archived at `art/recovered/wine_01.sticker/`. The initial twelve revival designs are also byte-identical to commit `423256b` in both their native and browser copies.
 
-The final 47-sticker app installed into an iOS 27.0 iPhone 17 simulator; `pluginkit` confirmed `eu.armand.--bit-art.StickerPackExtension` version 1.2 registered in Messages. Messages launched successfully. Apple supplies the sticker browser runtime for this catalog-only extension.
+The initial 47-sticker app installed into an iOS 27.0 iPhone 17 simulator; `pluginkit` confirmed `eu.armand.--bit-art.StickerPackExtension` version 1.2 registered in Messages. Messages launched successfully. Apple supplies the sticker browser runtime for this catalog-only extension.
 
-See [native MVP](native-mvp.md) for build commands and manual checks. A compiled unsigned device bundle is not a signed distribution archive. Current team access, App Store build-number availability, installation over the published app, real-device send/place behavior, animation playback, iPad layouts, TestFlight and App Review are still release checks.
+The pack also rendered in the iOS 17.5 native Messages sticker picker. The current iOS 27 simulator fixture omitted the system Stickers entry itself; comparison against Xcode 27.1's templates found matching product types, principal class and sharing keys. Registration alone was not treated as proof of rendering.
+
+See [native MVP](native-mvp.md) for build commands. Installation over the published app, real-device send/place behavior, animation playback, iPad layouts, TestFlight use and App Review remain separate checks.
+
+## Signed build and App Store staging
+
+The owning team and distribution signing path were verified. The revised **1.2 (5)** candidate has a clean signed archive and exported IPA under ignored `build/release/1.2-5/`. Apple validation/upload succeeded without errors and with two expected hidden-app Mac/visionOS compatibility warnings. Delivery UUID: `ecc379bc-4471-489b-887b-826ec30d9c6b`; ignored evidence is `build/release/apple-validation-build5.json` and `apple-upload-build5.json`. Build 5 processed as `VALID` and is selected in the 1.2 draft. It reports `usesNonExemptEncryption: false`, `READY_FOR_BETA_TESTING` internally and `READY_FOR_BETA_SUBMISSION` externally. No completed TestFlight device pass is claimed. A stale wine file was caught in an incremental build product, so release preparation now uses a clean archive and explicitly verifies wine is absent from the simulator bundle, archive and IPA.
+
+The preceding **1.2 (4)** passed Apple's validation/upload with zero errors, then processed as `VALID`. Its two expected compatibility warnings concerned the hidden sticker-only app being unlaunchable as a normal Mac or visionOS app. Build 4 is not the intended release because it contains wine. Draft version `7c6caa34-4ee8-4423-87d9-e4acc09b1b40` remains **Prepare for Submission** with manual release; build 5 has replaced build 4 as the selected candidate.
+
+The revised description, keywords, promotional text, support/privacy URLs and review notes were saved and read back through the API. Evidence is ignored `build/release/draft-metadata-readback.json`. Existing App Review contact details remain private. Removing wine and declaring alcohol references `NONE` produces API age rating `FOUR_PLUS` without an override.
+
+Six actual native screenshots were captured for build 5's 46-sticker pack: three iPhone RGB images at 1179×2556 and three iPad RGB images at 2064×2752. The source manifest is `release/screenshots/manifest.json`, with `nativePackBuild: 5`, `stickerCount: 46` and `wineExcluded: true`. The same six images form twelve placements across `APP_IPHONE_61`, `IMESSAGE_APP_IPHONE_61`, `APP_IPAD_PRO_3GEN_129` and `IMESSAGE_APP_IPAD_PRO_3GEN_129`; all processed as `COMPLETE`, with no errors. Ignored readback evidence is `build/release/screenshot-upload-readback.json`. Legacy 2018 placements were removed only from draft 1.2; published 1.1 sets/assets were protected.
+
+App Privacy's no-collected-data answer is saved as a UI draft, with Publish unpressed; evidence is ignored `build/release/ui/privacy-draft.jpg`. The prepared candidate awaits approval to publish that label and submit for App Review. No review submission for 1.2 or public app release has occurred. A physical-device/TestFlight pass remains an optional final check; simulator capture and processed-build acceptance do not establish that testing.
+
+## Public support website
+
+The app page, support instructions and privacy policy are live at `https://mim-armand.github.io/8bit-stickers/`, `/support/` and `/privacy/`. All three returned HTTP 200, the GitHub Pages build completed, and HTTPS enforcement is enabled. The published `gh-pages` source is commit `30355ecd03d7b135b002f614803367d73eb3c805`. The public homepage now describes 46 stickers, and all three pages were rechecked with HTTP 200 responses after that update.
+
+This deployment contains only the app/support/privacy site. It does not publish the interactive Sticker Studio or its pixel editor.
 
 ## Artwork
 
@@ -16,9 +36,9 @@ See [native MVP](native-mvp.md) for build commands and manual checks. A compiled
 
 ## Browser Studio
 
-`scripts/verify-preview.cjs` passed for the expanded 47-sticker source against the local server using Playwright and installed Google Chrome. The checks cover:
+The initial expanded 47-sticker source passed `scripts/verify-preview.cjs` against the local server using Playwright and installed Google Chrome. The revised gallery contains 46 stickers because wine is omitted. The prior Studio checks covered:
 
-- All 47 catalog image paths decode, and no JavaScript errors or failed HTTP responses occur.
+- All original expanded catalog image paths decode, and no JavaScript errors or failed HTTP responses occur.
 - New/original/animated/theme filters, the 24-sticker tiny collection, 12 Cute and 12 Memes filters, text search and empty-state reset.
 - Favorites survive a reload; local conversation preview updates to the chosen sticker.
 - The original PNG downloads with its correct filename; a tiny source PNG downloads at its actual 16×16 resolution.

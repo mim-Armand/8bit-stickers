@@ -174,6 +174,9 @@ def main():
         folder = PACK/item['filename']
         asset = json.loads((folder/'Contents.json').read_text())['properties']['filename']
         recovered.append({'path':folder/asset, 'title':names.get(folder.stem,folder.stem.replace('_01','').title()), 'caption':'RECOVERED / original repository'})
+    excluded_wine = ART/'recovered/wine_01.sticker/wine_01.png'
+    if excluded_wine.exists():
+        recovered.append({'path':excluded_wine, 'title':'Wine glass', 'caption':'PRESERVED SOURCE / not shipped'})
     review_board(recovered, 'The originals survived.', 'Eleven recovered stickers / preserved without changing their pixels', PREVIEWS/'recovered-art-board.png')
     for entry in manifest['stickers']:
         file = ROOT/entry['filename']

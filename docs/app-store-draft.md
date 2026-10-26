@@ -1,15 +1,28 @@
-# App Store draft — 8 bit art 1.2
+# App Store staged draft — 8 bit art 1.2
 
-Draft prepared October 26, 2026. Review after device testing and before entering it into App Store Connect. This document does not publish a listing or privacy policy.
+Updated October 26, 2026. Revised 46-sticker metadata is staged in App Store Connect and read back through the API. Authoritative copy is [`Config/AppStoreMetadata.json`](../Config/AppStoreMetadata.json). The current release candidate is **1.2 (5)**; its clean signed archive/export passed Apple validation/upload with no errors and two expected platform warnings. Build 5 processed as `VALID` and is selected in the draft. The predecessor build 4 was accepted but contains the omitted wine artwork and is not the intended release.
 
-## App identity and support
+The version remains **Prepare for Submission** with **manual release**. No App Review submission or public app release has occurred.
 
-- Existing app: **8 bit art**, Apple ID **1366485724**.
-- Main bundle ID: `eu.armand.--bit-art`.
-- Proposed version/build: **1.2 / 4**; confirm against uploaded builds.
-- Default public support email: **seltzer.wisdom7h@icloud.com**.
-- Support URL: **not yet hosted**. Publish a page containing installation help and the support email, then enter its actual URL.
-- Privacy policy URL: **not yet hosted**. Publish the reviewed policy below at a publicly accessible URL before submission.
+## Release state
+
+| Field | Verified value |
+| --- | --- |
+| Existing app | **8 bit art**, Apple ID **1366485724** |
+| Host / extension IDs | `eu.armand.--bit-art` / `eu.armand.--bit-art.StickerPackExtension` |
+| Current release candidate | **1.2 / 5**, 46 stickers |
+| Draft version ID | `7c6caa34-4ee8-4423-87d9-e4acc09b1b40` |
+| Selected processed build | `ecc379bc-4471-489b-887b-826ec30d9c6b`, build 5, `VALID` |
+| Release option | `MANUAL` |
+| Public support email | **seltzer.wisdom7h@icloud.com** |
+| App page / marketing URL | [App page](https://mim-armand.github.io/8bit-stickers/) |
+| Support URL | [Support](https://mim-armand.github.io/8bit-stickers/support/) |
+| Privacy policy URL | [Privacy policy](https://mim-armand.github.io/8bit-stickers/privacy/) |
+| Age-rating API result | `FOUR_PLUS`, alcohol references `NONE`, no override |
+
+All eleven recovered original PNGs remain preserved in source; the wine original is archived at `art/recovered/wine_01.sticker/` and excluded from shipping assets at the owner's request. This version ships ten classics and thirty-six new designs.
+
+The three public pages are live on GitHub Pages with HTTP 200 responses and HTTPS enforcement. The interactive Studio remains localhost only. The no-collected-data App Privacy answer is **saved as a UI draft**, with Publish unpressed; publishing the policy URL does not publish that label. Six actual native screenshots are staged as twelve placements across the App Store/iMessage iPhone/iPad wells. All are `COMPLETE`, with no errors; legacy 2018 images were removed only from this draft, leaving published 1.1 untouched. The prepared candidate awaits approval to publish the saved privacy label and submit for App Review.
 
 ## Listing copy
 
@@ -17,58 +30,57 @@ Draft prepared October 26, 2026. Review after device testing and before entering
 
 **Subtitle:** Pixel stickers, big feelings
 
-**Promotional text:** A little pixel art for everyday conversations. Send a heart, celebrate a win, or share a cozy moment with a colorful collection of retro stickers.
+**Promotional text:** Tiny pixel characters, cute animals, and very relatable reactions. Explore 46 retro stickers for Messages, including a pulsing heart and blinking robot.
 
 **Description:**
 
 Give your messages a little 8-bit love.
 
-8 bit art brings a colorful collection of pixel-art stickers to Messages. Tap a sticker to send it, or touch and hold to peel it onto a message or photo.
+8 bit art brings 46 pixel-art stickers to Messages, including 10 classics and 36 fresh designs. Meet tiny cute animals, share a side-eye or a shocked reaction, and add some retro personality to everyday conversations.
 
-This refreshed collection includes 47 stickers: 11 recovered classics and 36 new designs. Meet cute tiny animals, share a side-eye or a shocked reaction, and add a little retro personality to everyday conversations. Twenty-four new cute and meme designs use a chunky 16×16 pixel grid; a pulsing heart and blinking robot add a little movement.
+Twenty-four cute characters and meme reactions use a chunky 16×16 pixel grid. A pulsing heart and blinking robot add a little movement. Tap a sticker to send it, or touch and hold to place it on a message or photo.
 
-The sticker pack works offline. There are no accounts, ads or subscriptions.
+The sticker pack works offline. There are no accounts, ads, subscriptions, or developer analytics.
 
-To find your stickers, open a conversation in Messages, tap the add button and open Stickers. Look for 8 bit art in your sticker apps. The exact steps can vary with your iOS version.
+Open a conversation in Messages, tap the add/apps button, and open Stickers. Choose 8 bit art from your sticker apps. The exact steps vary by iOS version. This is a Messages sticker pack and does not have a separate home-screen editor.
+
+Version 1.2 requires iOS or iPadOS 15 or later.
 
 Questions or feedback? Contact seltzer.wisdom7h@icloud.com.
 
-**Keywords:** pixel,retro,8bit,stickers,art,love,reactions,cute,celebrate,heart
+**Keywords:** pixel,retro,8bit,stickers,art,love,reactions,cute,meme,heart,cat,frog,boba
 
 **What's New:**
 
-8 bit art is back! This update brings back 11 classic stickers and adds 36 new pixel-art designs, including 24 chunky cute characters and meme reactions. Try the pulsing heart and blinking robot, too. We have also refreshed the project for modern iPhone and iPad versions.
+8 bit art is back!
 
-**Screenshot plan:** Capture the actual native sticker pack in Messages on supported iPhone and iPad sizes. Show the collection, a few everyday replies and stickers placed on sample bubbles. Use fictional conversation names and text. The local Studio is a prototype and must not appear as a feature of the native sticker pack in listing screenshots.
+• 36 new pixel-art stickers, bringing the collection to 46.
+• 24 chunky 16×16 cute characters and meme reactions.
+• A pulsing heart and a blinking robot.
+• Refreshed for modern iPhone and iPad versions.
+
+Your 10 classic stickers are still included. Requires iOS or iPadOS 15 or later.
 
 ## Reviewer notes
 
-This is an update to the existing standalone iMessage sticker pack, Apple ID 1366485724. It preserves the main bundle ID `eu.armand.--bit-art` and extension ID `eu.armand.--bit-art.StickerPackExtension`.
+Update to the existing standalone iMessage sticker pack, Apple ID 1366485724. The app and extension identifiers are preserved. The collection contains 46 stickers: 10 existing classics, 12 revival designs (including a pulsing heart and blinking robot), and 24 static cute/meme reactions drawn on a 16×16 source grid.
 
-The update retains 11 stickers from the recovered project and adds 36 new pixel-art designs: 12 revival designs, including a pulsing heart and blinking robot, plus 24 static cute/meme designs drawn on a 16×16 source grid. All are exported as transparent sticker assets for Messages. No login, purchase, account setup or server access is required. Open Messages and select the 8 bit art sticker pack to test sending and placing stickers. The app does not provide a separate home-screen editor. The browser Studio in the source repository is a local development prototype and is not bundled in this submission.
+No login, purchase, account, server, or permissions are required. Open a conversation in Messages, open the apps/sticker picker, and select 8 bit art. Tap to send or touch and hold to place stickers. Exact picker labels vary with the OS version.
 
-Replace these draft statements if the final build changes. Enter the review contact details requested by App Store Connect separately; the public support address does not establish a reviewer phone number.
+This is an iMessage-only app and has no home-screen editor. The web Sticker Studio in the GitHub source is a local prototype and is not included in this build. The public website contains app support and privacy pages only.
 
-## Privacy policy draft
+The sticker pack contains no tracking, advertising, analytics SDKs, or developer data collection. Version 1.2 requires iOS/iPadOS 15+.
 
-**8 bit art — Privacy Policy**
+The legacy wine-glass sticker is omitted from this release. Its source is archived in GitHub and is not included in the app asset catalog.
 
-Effective date: **set to the policy's actual publication date**.
+The existing App Review contact was preserved privately. Reviewer email/phone details are not copied into the public repository.
 
-8 bit art is a sticker pack for Apple's Messages app, provided by mim Armand. The sticker pack works offline and does not require an account.
+## Screenshots and disclosures
 
-**Data collection.** The sticker pack does not collect, transmit or store personal information on a developer-operated server. It contains no advertising, tracking or third-party analytics SDKs. The developer does not receive your messages, recipients or sticker conversations through the app.
+Native iPhone/iPad screenshots must show the actual 46-sticker pack in Messages with fictional conversation details and no phone numbers. Browser Studio previews and art contact sheets must not imply that editing/search/favorites ship in native 1.2.
 
-**Apple services.** Downloading the app and using Messages involve Apple services governed by Apple's own privacy policies. Information processed by those services is not sent to the developer by the sticker pack.
+After the wine sticker was omitted, alcohol references were changed to `NONE`. The API-derived rating is `FOUR_PLUS`, with no override or Made for Kids selection. Other capability declarations reflect the predefined pack: it has no own chat, user-content feed or editor; the host Messages app handles conversations. Confirm actual global/regional/OS displays before submission.
 
-**Support.** If you choose to email support, we receive your email address and whatever information you include. We use that correspondence to respond to your request and retain it only as needed to handle support and applicable obligations. Contact us to request deletion of correspondence, subject to any required retention.
+The saved App Privacy answer is **“No, we do not collect data from this app.”** Publish that label only as authorized after reviewing actual app/SDK behavior. The public policy is effective **October 26, 2026**, with source in `site/privacy/index.html`; it distinguishes offline app behavior, Apple services, voluntary support emails and GitHub Pages hosting logs.
 
-**Children.** The sticker pack does not collect personal information from users, including children. Contact support if you believe personal information has been sent to us inadvertently.
-
-**Changes and contact.** We will update this policy if the app's data practices change. For privacy questions, contact **seltzer.wisdom7h@icloud.com**.
-
-## Submission disclosures to verify
-
-For the current offline static-pack design, the intended App Privacy response is **“No, we do not collect data from this app.”** Verify the actual bundled build before publishing that answer. A support email sent voluntarily outside the sticker pack is addressed in the policy above.
-
-Complete Apple's current age-rating questionnaire based on the actual art, including the recovered wine sticker. Do not blindly carry over the old 4+ rating. Verify content-rights answers, any remaining export-compliance prompts, supported devices and minimum OS. A support page and privacy policy are still release deliverables; this Markdown draft is not a public policy URL.
+See [release-checklist.md](release-checklist.md) for completed staging, the remaining privacy-publication/App Review decisions and optional physical-device/TestFlight checks. A processed build and complete screenshot placements do not establish App Review approval or public release.

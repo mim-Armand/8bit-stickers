@@ -1,0 +1,19 @@
+{
+  "appId": "1366485724",
+  "version": "1.2",
+  "build": "5",
+  "locale": "en-US",
+  "releaseType": "MANUAL",
+  "copyright": "2026 mim Armand",
+  "name": "8 bit art",
+  "subtitle": "Pixel stickers, big feelings",
+  "description": "Give your messages a little 8-bit love.\n\n8 bit art brings 46 pixel-art stickers to Messages, including 10 classics and 36 fresh designs. Meet tiny cute animals, share a side-eye or a shocked reaction, and add some retro personality to everyday conversations.\n\nTwenty-four cute characters and meme reactions use a chunky 16×16 pixel grid. A pulsing heart and blinking robot add a little movement. Tap a sticker to send it, or touch and hold to place it on a message or photo.\n\nThe sticker pack works offline. There are no accounts, ads, subscriptions, or developer analytics.\n\nOpen a conversation in Messages, tap the add/apps button, and open Stickers. Choose 8 bit art from your sticker apps. The exact steps vary by iOS version. This is a Messages sticker pack and does not have a separate home-screen editor.\n\nVersion 1.2 requires iOS or iPadOS 15 or later.\n\nQuestions or feedback? Contact seltzer.wisdom7h@icloud.com.",
+  "promotionalText": "Tiny pixel characters, cute animals, and very relatable reactions. Explore 46 retro stickers for Messages, including a pulsing heart and blinking robot.",
+  "keywords": "pixel,retro,8bit,stickers,art,love,reactions,cute,meme,heart,cat,frog,boba",
+  "whatsNew": "8 bit art is back!\n\n• 36 new pixel-art stickers, bringing the collection to 46.\n• 24 chunky 16×16 cute characters and meme reactions.\n• A pulsing heart and a blinking robot.\n• Refreshed for modern iPhone and iPad versions.\n\nYour 10 classic stickers are still included. Requires iOS or iPadOS 15 or later.",
+  "marketingUrl": "https://mim-armand.github.io/8bit-stickers/",
+  "supportUrl": "https://mim-armand.github.io/8bit-stickers/support/",
+  "privacyPolicyUrl": "https://mim-armand.github.io/8bit-stickers/privacy/",
+  "reviewNotes": "Update to the existing standalone iMessage sticker pack, Apple ID 1366485724. The app and extension identifiers are preserved. The collection contains 46 stickers: 10 existing classics, 12 revival designs (including a pulsing heart and blinking robot), and 24 static cute/meme reactions drawn on a 16×16 source grid.\n\nNo login, purchase, account, server, or permissions are required. Open a conversation in Messages, open the apps/sticker picker, and select 8 bit art. Tap to send or touch and hold to place stickers. Exact picker labels vary with the OS version.\n\nThis is an iMessage-only app and has no home-screen editor. The web Sticker Studio in the GitHub source is a local prototype and is not included in this build. The public website contains app support and privacy pages only.\n\nThe sticker pack contains no tracking, advertising, analytics SDKs, or developer data collection. Version 1.2 requires iOS/iPadOS 15+.\n\nThe legacy wine-glass sticker is omitted from this release. Its source is archived in GitHub and is not included in the app asset catalog.",
+  "stickerCount": 46
+}

@@ -16,6 +16,8 @@ xcuserdata/
 *.p8
 *.p12
 *.mobileprovision
+*.ipa
+.local/
 
 # Browser development outputs
 node_modules/

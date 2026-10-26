@@ -14,7 +14,7 @@ This is an **iMessage sticker pack**, rather than a drawing app. The [Apple list
 | Main bundle identifier | `eu.armand.--bit-art` |
 | Sticker extension identifier | `eu.armand.--bit-art.StickerPackExtension` |
 | Development team in recovered project | `7N3Y4QZT3Z` |
-| Proposed next version/build | **1.2 / 4**, subject to existing uploaded-build history |
+| Current release candidate | **1.2 / 5**, 46 shipping stickers |
 
 The two consecutive hyphens in the bundle identifier are intentional. The screenshot also contains **8-bit art**, Apple ID **1366403490**, in Prepare for Submission. That is a separate record; uploading to it would not update the published app.
 
@@ -22,7 +22,7 @@ The repository's older commit message says a sticker was removed after an App Re
 
 ## The two working MVPs
 
-**Native update MVP — version 1.2.** Keep the standalone sticker pack experience, with 47 stickers: the 11 recovered stickers plus 36 new pixel-art designs, including two APNG animations. The latest 24 are cute characters and meme reactions drawn on a true 16×16 grid, with simple shapes, dark outlines and chunky pixels closer to the original collection. Preserve the existing app and extension identifiers, modernize project settings, share the Xcode scheme, and automate asset validation and simulator builds. This is the shortest route to an update that existing users can install.
+**Native update MVP — version 1.2.** Keep the standalone sticker pack experience, with 46 shipping stickers: 10 recovered classics plus 36 new pixel-art designs, including two APNG animations. All eleven recovered PNGs remain preserved; wine is retained under `art/recovered/wine_01.sticker/` and excluded from the shipping catalog at the owner's request. The latest 24 are cute characters and meme reactions drawn on a true 16×16 grid, with simple shapes, dark outlines and chunky pixels closer to the original collection. Preserve the existing app and extension identifiers, modernize project settings, share the Xcode scheme, and automate asset validation and simulator builds. This is the shortest route to an update that existing users can install.
 
 **Local Studio MVP — a product exploration.** A browser interface presents categories, search, favorites, a conversation preview, PNG export and a basic pixel editor. It makes the art direction and possible future browsing/editing experience tangible. This prototype runs locally; it is not functionality shipped inside the native 1.2 sticker pack. Browser favorites and drawings stay on that browser/device. A preview conversation is illustrative and does not send messages.
 
@@ -32,12 +32,17 @@ Apple's [sticker specifications](https://developer.apple.com/documentation/messa
 
 ## What is needed before release
 
-1. **Confirm account identity and build availability.** Open App Store Connect → 8 bit art → App Information. Verify Apple ID 1366485724 and the exact bundle ID. In Xcode, confirm access to the owning team and both identifiers. Check whether 1.2/build 4 has ever been uploaded; increase the version/build if necessary. [Apple requires the same bundle ID](https://developer.apple.com/help/app-store-connect/reference/app-information/app-information) and an [incremental new version in the existing record](https://developer.apple.com/help/app-store-connect/update-your-app/create-a-new-version).
-2. **Review the supported OS range.** The published app supports iOS 10+. The modernization currently targets iOS 15+. Building with a current SDK and choosing the minimum supported OS are separate decisions. Decide whether to retain this iOS 15 minimum after testing; users on older systems would not receive this update.
-3. **Test on iPhone and iPad in Messages.** Verify installation over the old app, the existing pack's identity, every sticker, tap-to-send and peel/place behavior, transparency, compact/expanded layouts and light/dark appearance. A successful simulator build does not establish these release checks.
-4. **Create and validate a signed archive.** Use the owning Apple Developer team. Lost original signing keys do not prevent an update: Apple says [recreating certificates does not affect the ability to update App Store apps](https://help.apple.com/xcode/mac/current/en.lproj/devd1432da9a.html). Use Xcode Organizer to validate and upload, then test the processed build through TestFlight. Current [upload requirements](https://developer.apple.com/help/app-store-connect/manage-builds/upload-builds/) list Xcode 26 or later for building iOS apps and extensions; recheck at submission time.
-5. **Finish the product page.** Review new screenshots from actual Messages use, the art/content rights, current age-rating questions, support URL and privacy policy URL. The legacy wine sticker makes the alcohol-related age-rating question worth reviewing. The [privacy disclosure](https://developer.apple.com/help/app-store-connect/manage-app-information/manage-app-privacy) must accurately describe the app and any SDKs. Draft copy is in `docs/app-store-draft.md`; a public policy URL still needs hosting.
-6. **Submit the completed 1.2 build for review.** Check outstanding agreements and any account-specific App Store Connect requirements. Confirm release timing after testing. No App Store submission or release is implied by this repository work.
+The current candidate is **1.2 (5)**, with a clean signed archive/export and wine absent from the simulator/archive/export products. Apple validation/upload passed without errors and with two expected hidden-app Mac/visionOS compatibility warnings. Build `ecc379bc-4471-489b-887b-826ec30d9c6b` processed as `VALID` and is selected in the 1.2 draft. The preceding build 4 passed Apple validation/upload and processed as `VALID`, but contains wine and is not the intended release. Draft `7c6caa34-4ee8-4423-87d9-e4acc09b1b40` remains **Prepare for Submission** with **manual release**.
+
+Revised native-only listing copy, support/privacy URLs, reviewer notes and age-rating answers were staged and read back. Omitting the wine sticker and setting alcohol references to `NONE` returns API age rating `FOUR_PLUS` without an override. The [support](https://mim-armand.github.io/8bit-stickers/support/) and [privacy](https://mim-armand.github.io/8bit-stickers/privacy/) pages are live on GitHub Pages, with HTTP 200 responses and HTTPS enforcement verified. The current published website describes the 46-sticker collection; the interactive Studio is not part of that public deployment.
+
+Release preparation is complete apart from the final publication/submission decisions:
+
+1. **Approve App Privacy publication and App Review submission.** The no-collected-data answer is saved as a UI draft, with Publish unpressed. The draft version remains unsubmitted. The public policy URL is already live and does not publish the privacy label by itself. [Privacy disclosure guidance](https://developer.apple.com/app-store/app-privacy-details/).
+2. **Optionally perform a final physical-device/TestFlight pass.** The native 46-sticker picker rendered on iPhone and iPad simulators. Sending, peel/place, animation playback, light/dark use and installation over the live version can still be checked on devices; these are recommendations, not claimed completed checks. The published app supports iOS 10+, while this update requires iOS 15+.
+3. **Use manual release after approval.** Six genuine native screenshots have twelve `COMPLETE` placements across App Store/iMessage iPhone/iPad sets; old 2018 images were removed only from the editable draft. Metadata and the selected build were read back. No review submission for 1.2 or public app release has occurred. After an authorized submission and App Review approval, use the selected manual-release option for publication.
+
+The [release checklist](release-checklist.md) records completed and outstanding steps. Existing identity is preserved as required by [Apple's app information rules](https://developer.apple.com/help/app-store-connect/reference/app-information/app-information); the update uses the [existing record's version workflow](https://developer.apple.com/help/app-store-connect/update-your-app/create-a-new-version).
 
 ## Enhancements after the recovery update
 
@@ -47,9 +52,10 @@ Apple's [sticker specifications](https://developer.apple.com/documentation/messa
 | More animation | More expressive replies | Build on the included heart pulse and robot blink with star twinkles and seasonal characters, with restrained timing and file-size checks. |
 | New themes | A distinctive growing library | Cozy desk, space garden, celebration, Persian-inspired seasonal motifs and nature; prioritize original artwork. |
 | Localization | Broader everyday use | Localize listing, category names and descriptions; prefer art that works without embedded English text. |
-| Optional companion editor | Create and export personal stickers | Promote the Studio experiment to native only after validating demand and export/import behavior. |
+| Native Studio inside Messages | Create and insert personal stickers | Extend the existing app into a custom standalone iMessage app with local drafts and a small pixel editor. |
+| Optional home-screen Studio | A larger creative workspace | Requires a separate app record and app identity rather than conversion of this existing standalone listing. |
 
-Adding a normal iOS companion app is a larger product change. Apple says iOS apps containing sticker extensions cannot select the **Stickers** category; [review the submission model](https://developer.apple.com/imessage/) before taking that route.
+Apple permits standalone sticker-pack ↔ custom standalone iMessage updates in the same record, but requires a new app to change standalone ↔ extension-within-iOS-app. [Apple's explicit app-type rule](https://developer.apple.com/help/app-store-connect/create-an-app-record/add-imessage-app-information). The recommended continuation is Studio **inside Messages**; a home-screen app is a separate product decision. See the [Studio product plan](studio-product-plan.md) for that distinction and optional web hosting.
 
 ## Keep it recoverable
 

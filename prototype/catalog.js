@@ -961,18 +961,5 @@ window.STICKERS = [
     "filename": "8 bit art StickerPackExtension/Stickers.xcstickers/Sticker Pack.stickerpack/dealwithit_01.sticker/dealwithit_01.png",
     "animated": false,
     "original": true
-  },
-  {
-    "id": "wine_01",
-    "title": "Wine glass",
-    "category": "Originals",
-    "tags": [
-      "cheers",
-      "drink"
-    ],
-    "preview": "8 bit art StickerPackExtension/Stickers.xcstickers/Sticker Pack.stickerpack/wine_01.sticker/wine_01.png",
-    "filename": "8 bit art StickerPackExtension/Stickers.xcstickers/Sticker Pack.stickerpack/wine_01.sticker/wine_01.png",
-    "animated": false,
-    "original": true
   }
 ];

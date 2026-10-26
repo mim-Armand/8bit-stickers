@@ -8,7 +8,11 @@ The 2018 iMessage sticker pack is recovered and back in development. This reposi
 
 ## Try the two MVPs
 
-**iMessage pack — proposed version 1.2 (4).** Open `8 bit art.xcodeproj` in Xcode and select the shared **8 bit art** scheme. The native pack contains **47 stickers**, including a pulsing heart and blinking robot. It keeps the original bundle identifiers and icon. It requires iOS/iPadOS 15 or later with the current toolchain.
+**iMessage pack — release candidate 1.2 (5), prepared in App Store Connect.** The clean signed archive and IPA passed Apple validation/upload with no errors. Build 5 processed as `VALID` and is selected in the draft version. Six actual native screenshots are staged in iPhone/iPad App Store and iMessage wells, with all twelve placements `COMPLETE`. The draft remains **Prepare for Submission** with **manual release** selected.
+
+The no-collected-data App Privacy answer is saved as a draft, with Publish unpressed. Publishing that label and submitting the version for App Review await the final approval; no review submission or public app release has occurred.
+
+Open `8 bit art.xcodeproj` in Xcode and select the shared **8 bit art** scheme. The native pack contains **46 stickers**, including a pulsing heart and blinking robot. It keeps the original bundle identifiers and icon and requires iOS/iPadOS 15 or later.
 
 ```sh
 ./scripts/build-ios.sh simulator
@@ -16,6 +20,8 @@ The 2018 iMessage sticker pack is recovered and back in development. This reposi
 ```
 
 These verification builds do not use signing credentials. For simulator installation and the distribution path, see [the native guide](docs/native-mvp.md).
+
+The signed release can be rebuilt with `./scripts/archive-release.sh` using the installed distribution identity/profiles and public settings in `Config/ExportOptions.plist`. Signing keys and build output remain outside Git.
 
 **Sticker Studio — local browser prototype.** Browse all stickers, filter themes, search, save favorites, try a local conversation preview, and download original PNG/APNG files. The Pixel Lab supports drawing, erasing, flood fill, undo, remixing a sticker and downloading a transparent 300×300 PNG. Favorites and one draft persist in local browser storage when available. The canvas supports pointer/touch input and keyboard arrows + Space; `P`, `E`, `F` switch tools.
 
@@ -27,11 +33,13 @@ Open **http://127.0.0.1:8787/prototype/**. Python 3 is the only runtime needed t
 
 The Studio is a working product experiment. Search, favorites, chat previews and the editor are **not bundled into the native sticker pack**. It does not send messages or install exported art into Messages automatically. Editing animation loads one frame and exports a static PNG.
 
+The [public app/support site](https://mim-armand.github.io/8bit-stickers/), [support page](https://mim-armand.github.io/8bit-stickers/support/) and [privacy policy](https://mim-armand.github.io/8bit-stickers/privacy/) are now hosted on **GitHub Pages**. The interactive Studio is **not** published there; it remains localhost only. The [Studio product plan](docs/studio-product-plan.md) recommends adding a native Studio **inside Messages** in a future update to this same listing. Apple's app-type rules require a new app record for a full home-screen Studio app.
+
 ![Sticker Studio](docs/previews/studio-desktop.png)
 
 ## Art you can keep editing
 
-`art/sprites.json`, `art/cute-sprites.json` and `art/meme-sprites.json` contain palette-based pixel commands. The latest two collections use a 16×16 canvas, dark outlines and limited colors with no white rim. `scripts/generate-art.py` generates native catalog additions, browser assets, raw PNGs in `art/pixels/`, animation frames and review boards. The recovered eleven images remain unchanged.
+`art/sprites.json`, `art/cute-sprites.json` and `art/meme-sprites.json` contain palette-based pixel commands. The latest two collections use a 16×16 canvas, dark outlines and limited colors with no white rim. `scripts/generate-art.py` generates native catalog additions, browser assets, raw PNGs in `art/pixels/`, animation frames and review boards. All eleven recovered images remain unchanged as source. Ten classics ship; the wine-glass original is retained under `art/recovered/wine_01.sticker/` and excluded from the app and Studio gallery at the owner's request.
 
 The tiny PNGs are truly 16×16. Native 300×300 sticker exports use integer 18× enlargement with six pixels of transparent padding; no smoothing or added detail is introduced. Open a tiny sticker in Studio to download either size.
 
@@ -46,7 +54,7 @@ Read [the art guide](art/README.md) for the editable source format and provenanc
 
 ## Verification
 
-The native simulator and device Release builds passed under Xcode 27.1. The extension was installed and registered in an iOS 27 simulator. Browser checks cover assets, filters, persistence, chat previews, downloads, editor tools, undo, PNG dimensions/transparency format, remixing and mobile layout. Details and release limitations are in [verification notes](docs/verification.md).
+The initial expanded pack passed simulator/device builds and rendered in the iOS 17.5 Messages picker. The revised 46-sticker candidate passed a clean simulator build and clean signed device archive/export under Xcode 27.1; the final archive/export was checked for the absence of wine assets. Browser checks cover assets, filters, persistence, chat previews, downloads, editor tools, undo, PNG dimensions/transparency format, remixing and mobile layout. Details and release limitations are in [verification notes](docs/verification.md).
 
 Optional browser checks, with the preview server already running:
 
@@ -62,9 +70,9 @@ To use an installed Google Chrome instead, run `PLAYWRIGHT_CHANNEL=chrome npm ru
 
 The published app is **8 bit art, Apple ID 1366485724**, bundle ID **`eu.armand.--bit-art`**. The similarly named unpublished **8-bit art, ID 1366403490**, is a separate record. Update the published record.
 
-The published release is 1.1. The recovered source was already marked 1.2 (3), so its exact correspondence to the published binary is unverified. The new local version 1.2 (4) remains provisional until the App Store Connect build history is checked.
+The published release is 1.1. The recovered source was already marked 1.2 (3), so its exact correspondence to the published binary is unverified. The current release candidate is **1.2 (5)** with 46 stickers and API age rating `FOUR_PLUS`. The wine-glass artwork is omitted from shipping assets. Build 5 has replaced the earlier build 4 in the draft; the app is not yet released.
 
-See [recovery and roadmap](docs/recovery-and-roadmap.md) for the update path, recommended improvements, remaining account/device checks and backup strategy. [App Store draft](docs/app-store-draft.md) includes listing copy, review notes and an unpublished privacy-policy draft. No Apple upload, review submission or release has been performed.
+See the [release checklist](docs/release-checklist.md) for completed staging and the remaining privacy-publication/App Review decisions; [recovery and roadmap](docs/recovery-and-roadmap.md) covers the update path and backup strategy. [App Store draft](docs/app-store-draft.md) records staged listing copy and live support/privacy URLs. No App Review submission or public app release has been performed.
 
 ## Repository layout
 

@@ -25,17 +25,19 @@ const path = require("node:path");
   try {
     await page.goto(root);
     await page.locator(".sticker-card").last().waitFor();
-    assert.equal(await page.locator(".sticker-card").count(), 47);
-    await page.evaluate(async () => {
-      await Promise.all(
-        [...document.images]
-          .filter((i) => i.getAttribute("src"))
-          .map(async (i) => {
-            i.loading = "eager";
-            await i.decode();
-          }),
-      );
+    assert.equal(await page.locator(".sticker-card").count(), 46);
+    await page.evaluate(() => {
+      [...document.images].forEach((image) => {
+        image.loading = "eager";
+      });
     });
+    // Switching lazy images to eager can replace a pending decode request.
+    // Wait for the actual load result rather than racing that transition.
+    await page.waitForFunction(() =>
+      [...document.images]
+        .filter((image) => image.getAttribute("src"))
+        .every((image) => image.complete && image.naturalWidth > 0),
+    );
     assert.equal(
       await page.evaluate(
         () =>
@@ -210,7 +212,7 @@ const path = require("node:path");
     await page
       .getByRole("button", { name: "Show all stickers", exact: true })
       .click();
-    assert.equal(await page.locator(".sticker-card").count(), 47);
+    assert.equal(await page.locator(".sticker-card").count(), 46);
     await page.setViewportSize({ width: 390, height: 844 });
     await page.evaluate(() =>
       document.querySelector("#toast").classList.remove("show"),
@@ -241,10 +243,10 @@ const path = require("node:path");
     });
     await page.evaluate(() => localStorage.setItem("8bit-favorites", "{}"));
     await page.reload();
-    assert.equal(await page.locator(".sticker-card").count(), 47);
+    assert.equal(await page.locator(".sticker-card").count(), 46);
     assert.deepEqual(errors, []);
     console.log(
-      "PASS: 47 images, tiny/cute/meme filters, search, favorites persistence, local chat, PNG downloads, editor tools/persistence, transparent 300px export, remix, responsive layout, no browser/network errors.",
+      "PASS: 46 images, tiny/cute/meme filters, search, favorites persistence, local chat, PNG downloads, editor tools/persistence, transparent 300px export, remix, responsive layout, no browser/network errors.",
     );
   } finally {
     await browser.close();
