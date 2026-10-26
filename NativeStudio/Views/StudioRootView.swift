@@ -60,7 +60,8 @@ struct StudioRootView: View {
             VStack(alignment: .leading, spacing: 3) {
                 Text("8 bit art").font(.system(.title3, design: .rounded).weight(.heavy))
                 if purchases.isLocalTesting {
-                    Text("LOCAL TEST · NO REAL CHARGES").font(.system(size: 9, weight: .bold, design: .rounded))
+                    Text(purchases.isBetaTesting ? "TESTFLIGHT PREVIEW · NO CHARGES" : "LOCAL TEST · NO REAL CHARGES")
+                        .font(.system(size: 9, weight: .bold, design: .rounded))
                         .foregroundColor(StudioTheme.purple).accessibilityIdentifier("studio.localTestingNotice")
                 } else {
                     Text("Little pixels. Big feelings.").font(.caption).foregroundColor(StudioTheme.secondary)

@@ -7,6 +7,7 @@ options:
 configs:
   Debug: debug
   Release: release
+  TestFlight: release
 settings:
   base:
     SWIFT_VERSION: '5.0'
@@ -23,6 +24,12 @@ settings:
       SWIFT_ACTIVE_COMPILATION_CONDITIONS: '$(inherited) DEBUG STUDIO_LOCAL_TESTING'
       SWIFT_OPTIMIZATION_LEVEL: '-Onone'
       ENABLE_TESTABILITY: YES
+    TestFlight:
+      SWIFT_ACTIVE_COMPILATION_CONDITIONS: STUDIO_BETA_TESTING
+      CURRENT_PROJECT_VERSION: '8'
+      CODE_SIGNING_ALLOWED: YES
+      CODE_SIGN_IDENTITY: 90776C637395C6FA5FF2E8133037AA95C594ECC7
+      DEVELOPMENT_TEAM: 7N3Y4QZT3Z
 targets:
   StudioLocal:
     type: application
@@ -66,6 +73,9 @@ targets:
         INFOPLIST_FILE: Config/Messages-Info.plist
         APPLICATION_EXTENSION_API_ONLY: YES
         ASSETCATALOG_COMPILER_APPICON_NAME: iMessage App Icon
+      configs:
+        TestFlight:
+          PROVISIONING_PROFILE_SPECIFIER: 8 bit art extension App Store 20261026
   StudioMessagesHost:
     type: application.messages
     platform: iOS
@@ -81,7 +91,11 @@ targets:
         PRODUCT_NAME: 8 bit art
         PRODUCT_BUNDLE_IDENTIFIER: eu.armand.--bit-art
         INFOPLIST_FILE: Config/Host-Info.plist
-        ASSETCATALOG_COMPILER_APPICON_NAME: iMessage App Icon
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+      configs:
+        TestFlight:
+          SKIP_INSTALL: NO
+          PROVISIONING_PROFILE_SPECIFIER: 8 bit art app App Store 20261026
   StudioCoreTests:
     type: bundle.unit-test
     platform: iOS
@@ -164,3 +178,14 @@ schemes:
         STUDIO_NATIVE_PREVIEW_BRIDGE: '1'
       targets:
         - StudioPreviewBridgeTests
+  Studio TestFlight Internal:
+    build:
+      targets:
+        StudioMessagesHost: all
+    archive:
+      config: TestFlight
+    test:
+      config: TestFlight
+      targets:
+        - StudioCoreTests
+        - StudioUITests

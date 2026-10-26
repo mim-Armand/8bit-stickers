@@ -1,6 +1,16 @@
 # Verification — October 26, 2026
 
-## Native Studio — local build only
+## Native Studio — internal TestFlight 1.4 (8)
+
+The owner requested TestFlight after local implementation. A clean signed archive/export of the dedicated release-based **TestFlight** configuration passed final Apple validation and upload with **zero errors** and expected hidden Messages-only compatibility warnings **90863 / 90984**. The first validation found missing host icon metadata; an opaque regular AppIcon and `CFBundleIconName` fixed it before the successful upload. The icon retains the original source pixels.
+
+Apple readback confirms build **`886a1635-0abf-4a13-9299-12aa814bcbd9`**, version **1.4 (8)**, processing **`VALID`**, audience **`INTERNAL_ONLY`**, internal state **`IN_BETA_TESTING`**, external state **`NOT_APPLICABLE`**. The account holder is invited to the existing internal group and the beta build is available there. No physical-device installation or accepted invitation is claimed. The selected public **1.2 (5)** build remains **Waiting for Review / AFTER_APPROVAL**.
+
+**29 beta/model tests and 2 beta UI tests passed** on iPhone 15 Pro Max / iOS 17.5. They exercise free beta activation, persistence/restore, isolation from local mock ownership, normal disabled initialization and preserved drawings. **31 existing Debug model/purchase tests passed again**, including the actual Xcode StoreKit test. TestFlight performs no product lookup/purchase/payment call; actual Apple sandbox transactions remain untested.
+
+The signed IPA has exactly 67 included stickers, 45 templates and no wine. Both bundle identities and version/build match; its host declares `TFInternalTestingOnly=true`. Preview host, XCTest/HTML bridge and `.storekit` files are excluded. Logs, xcresults, archive, IPA and private tester readback are ignored under `build/studio-testflight/`. The sanitized [beta status](../release/studio-testflight-status.json) records its SHA-256 and distribution fields; [installation/build guide](studio-testflight.md) explains the beta and remaining production work. No live IAP, pricing or public website change was made.
+
+## Native Studio — original local verification
 
 The separate `NativeStudio/Studio.xcodeproj` implements the custom standalone Messages extension and a local preview host. Both share the native catalogue, editor, draft and purchase UI. All 67 included stickers are available free; 45 sources support exact-grid remixing. Local project version 1.4 (7) is a development label, not an uploaded or reserved App Store version. The original 1.3 (6) sticker project, active App Store metadata, submitted 1.2 records/screenshots and archive script remain byte-identical to the preceding source revision.
 
@@ -16,7 +26,7 @@ The separate `NativeStudio/Studio.xcodeproj` implements the custom standalone Me
 
 Native resource verification checks all 67 copied image files byte-for-byte against source and all 45 logical templates pixel-for-pixel. The existing browser and artwork checks also passed after shared catalogue assembly was extracted to `scripts/catalog-source.py`; the generated browser catalogue stayed unchanged. Screenshots under `docs/previews/native-studio/` were captured from the local preview host and actual simulator Messages app, with fictional data. They are not submitted App Store screenshots.
 
-The default unlock is a clearly marked no-charge simulation; Xcode StoreKit mode requires the supplied local configuration. Normal release builds disable checkout. No App Store Connect products/settings, TestFlight upload, Apple submission, public website or live price were changed. See [local testing instructions](native-studio-local.md) and [remaining release gates](native-studio-implementation-plan.md).
+The default unlock is a clearly marked no-charge simulation; Xcode StoreKit mode requires the supplied local configuration. Normal release builds disable checkout. At the original local-verification stage, no Apple upload or account setting was changed. The subsequently authorized internal beta is recorded above; live IAP, public review, website and pricing remain unchanged. See [local testing instructions](native-studio-local.md) and [remaining release gates](native-studio-implementation-plan.md).
 
 ## Development art expansion — 1.3 (6)
 

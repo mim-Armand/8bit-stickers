@@ -1,0 +1,57 @@
+{
+  "verifiedAtUTC": "2026-10-26T22:08:48.178855+00:00",
+  "app": {
+    "name": "8 bit art",
+    "appleID": "1366485724",
+    "hostBundleID": "eu.armand.--bit-art",
+    "extensionBundleID": "eu.armand.--bit-art.StickerPackExtension"
+  },
+  "beta": {
+    "version": "1.4",
+    "build": "8",
+    "buildID": "886a1635-0abf-4a13-9299-12aa814bcbd9",
+    "preReleaseVersionID": "c417dc6c-af2b-4836-b215-e69cb57a4a46",
+    "processingState": "VALID",
+    "audience": "INTERNAL_ONLY",
+    "internalState": "IN_BETA_TESTING",
+    "externalState": "NOT_APPLICABLE",
+    "uploadedDate": "2026-10-26T15:04:21-07:00",
+    "expirationDate": "2027-01-24T14:04:21-08:00",
+    "freeStudioActivation": true,
+    "realPurchasesEnabled": false,
+    "liveIAPCreated": false,
+    "stickerCount": 67,
+    "exactGridTemplates": 45,
+    "wineExcluded": true
+  },
+  "internalTesting": {
+    "groupID": "cc61a994-1e73-490e-bf55-038453b95c3f",
+    "groupName": "App Store Connect Users",
+    "testerCount": 1,
+    "ownerState": "INVITED",
+    "buildAvailable": true,
+    "physicalDeviceInstallVerified": false
+  },
+  "export": {
+    "path": "build/studio-testflight/1.4-8/export/8 bit art.ipa",
+    "bytes": 735706,
+    "sha256": "ac86041037a6f93ce406eca925d2e551c345b63ec56704920f3ef4142fb2903b",
+    "internalOnlyMarker": true
+  },
+  "appleValidation": {
+    "errors": 0,
+    "warningCodes": [
+      "90863",
+      "90984"
+    ]
+  },
+  "pendingPublicRelease": {
+    "version": "1.2",
+    "build": "5",
+    "selectedBuildID": "ecc379bc-4471-489b-887b-826ec30d9c6b",
+    "state": "WAITING_FOR_REVIEW",
+    "releaseType": "AFTER_APPROVAL",
+    "unchanged": true
+  },
+  "evidenceDirectory": "build/studio-testflight/ (ignored; contains private account readback and signed outputs)"
+}

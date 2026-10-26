@@ -2,7 +2,8 @@ import Combine
 import Foundation
 import StoreKit
 
-/// This iteration is deliberately local-only. A normal build cannot initiate a purchase.
+/// A normal build cannot initiate a purchase. TestFlight previews explicitly enable
+/// free beta access, without contacting StoreKit or granting production ownership.
 /// DEBUG + STUDIO_LOCAL_TESTING enables either the deterministic simulator or, when
 /// explicitly requested by the Xcode scheme, the local StoreKit configuration.
 @MainActor
@@ -16,7 +17,12 @@ final class StudioPurchaseStore: ObservableObject {
     @Published var message: String?
     @Published private(set) var price: String?
 
-    private enum Mode { case disabled, simulated, storeKit }
+    private enum Mode {
+        case disabled, simulated, storeKit
+        #if STUDIO_BETA_TESTING
+        case betaPreview
+        #endif
+    }
     private let mode: Mode
     private let defaults: UserDefaults
     private var product: Product?
@@ -25,21 +31,35 @@ final class StudioPurchaseStore: ObservableObject {
     private var hasStarted = false
     private static let localPurchaseKey = "studio.localSimulation.purchased"
     private static let localPendingKey = "studio.localSimulation.pending"
+    private static let betaAccessKey = "studio.betaPreview.enabled"
 
     var isLocalTesting: Bool { mode != .disabled }
+    var isBetaTesting: Bool {
+        #if STUDIO_BETA_TESTING
+        return mode == .betaPreview
+        #else
+        return false
+        #endif
+    }
     var isUsingStoreKitTesting: Bool { mode == .storeKit }
     var canPurchase: Bool {
-        isLocalTesting && price != nil && !isLoading && !isPurchasing && !isPending && !isUnlocked
+        isLocalTesting && (isBetaTesting || price != nil) && !isLoading && !isPurchasing && !isPending && !isUnlocked
     }
     var localTestingNote: String? {
         guard isLocalTesting else { return nil }
+        if isBetaTesting { return "TestFlight preview — no payment or Apple purchase" }
         return isUsingStoreKitTesting ? "Local StoreKit test — no charge" : "Local test — no charge"
     }
 
     init(localTesting: Bool = false, defaults: UserDefaults = .standard,
          useStoreKitTesting: Bool? = nil) {
         self.defaults = defaults
-        #if DEBUG && STUDIO_LOCAL_TESTING
+        #if STUDIO_BETA_TESTING
+        mode = localTesting ? .betaPreview : .disabled
+        if localTesting {
+            isUnlocked = defaults.bool(forKey: Self.betaAccessKey)
+        }
+        #elseif DEBUG && STUDIO_LOCAL_TESTING
         if localTesting {
             let requested = useStoreKitTesting
                 ?? (ProcessInfo.processInfo.environment["STUDIO_STOREKIT_TESTING"] == "1")
@@ -63,6 +83,10 @@ final class StudioPurchaseStore: ObservableObject {
     func start() async {
         guard mode != .disabled else {
             message = "Purchases are disabled in this build. Use the local testing app."
+            return
+        }
+        if isBetaTesting {
+            await refreshEntitlements()
             return
         }
         // A failed first price request must remain retryable from the offer sheet.
@@ -95,6 +119,11 @@ final class StudioPurchaseStore: ObservableObject {
         switch mode {
         case .disabled:
             return
+        #if STUDIO_BETA_TESTING
+        case .betaPreview:
+            isUnlocked = defaults.bool(forKey: Self.betaAccessKey)
+            isPending = false
+        #endif
         case .simulated:
             isUnlocked = defaults.bool(forKey: Self.localPurchaseKey)
             isPending = defaults.bool(forKey: Self.localPendingKey)
@@ -139,6 +168,15 @@ final class StudioPurchaseStore: ObservableObject {
             message = "Studio is already unlocked."
             return
         }
+        if isBetaTesting {
+            isPurchasing = true
+            defaults.set(true, forKey: Self.betaAccessKey)
+            isUnlocked = true
+            isPending = false
+            message = "Studio is enabled for this TestFlight beta. No payment was taken."
+            isPurchasing = false
+            return
+        }
         #if DEBUG && STUDIO_LOCAL_TESTING
         if mode == .simulated {
             await simulate(.success)
@@ -178,6 +216,12 @@ final class StudioPurchaseStore: ObservableObject {
         guard !isPurchasing, !isLoading else { return }
         isLoading = true
         defer { isLoading = false }
+        if isBetaTesting {
+            await refreshEntitlements()
+            message = isUnlocked ? "Beta access restored on this device."
+                : "No beta access is saved on this device. You can enable Studio free for this beta."
+            return
+        }
         if mode == .simulated {
             await refreshEntitlements()
             message = isUnlocked ? "Local purchase restored. Studio is unlocked."
