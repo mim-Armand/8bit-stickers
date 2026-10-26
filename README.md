@@ -37,7 +37,9 @@ Open **http://127.0.0.1:8787/prototype/**. Python 3 is the only runtime needed t
 
 The Studio is a working product experiment. Search, favorites, chat previews and the editor are **not bundled into the native sticker pack**. It does not send messages or install exported art into Messages automatically. Editing animation loads one frame and exports a static PNG.
 
-The [public app/support site](https://mim-armand.github.io/8bit-stickers/), [support page](https://mim-armand.github.io/8bit-stickers/support/) and [privacy policy](https://mim-armand.github.io/8bit-stickers/privacy/) are now hosted on **GitHub Pages**. The interactive Studio is **not** published there; it remains localhost only. The [Studio product plan](docs/studio-product-plan.md) recommends adding a native Studio **inside Messages** in a future update to this same listing. Apple's app-type rules require a new app record for a full home-screen Studio app.
+The [public app/support site](https://mim-armand.github.io/8bit-stickers/), [support page](https://mim-armand.github.io/8bit-stickers/support/) and [privacy policy](https://mim-armand.github.io/8bit-stickers/privacy/) are now hosted on **GitHub Pages**. The interactive Studio is **not** published there; it remains localhost only. The owner has chosen a future native Studio **inside Messages** on this same listing, with free browsing/search/favorites and a permanent **Studio Unlock** targeting US$1.00. Apple's app-type rules require a new app record for a full home-screen Studio app.
+
+**Future implementation starts at [the native Studio build and release handoff](docs/native-studio-implementation-plan.md).** It defines the 16×16 editor, multi-draft persistence, StoreKit purchase/restore/offline behavior, source layout, milestone acceptance tests and first-IAP release checklist. The browser editor currently uses a 32×32 grid and is an interaction reference, not the native data model. This plan changes no binary, price, Apple submission or hosting.
 
 ![Sticker Studio](docs/previews/studio-desktop.png)
 
@@ -76,7 +78,7 @@ The published app is **8 bit art, Apple ID 1366485724**, bundle ID **`eu.armand.
 
 The published release is 1.1. The recovered source was already marked 1.2 (3), so its exact correspondence to the published binary is unverified. The submitted update is **1.2 (5)** with 46 stickers and API age rating `FOUR_PLUS`. The wine-glass artwork is omitted from shipping assets. Build 5 replaced the earlier build 4 and is now **Waiting for Review**, with automatic release after approval selected.
 
-See the [release checklist](docs/release-checklist.md) for publication/submission evidence and optional device checks; [recovery and roadmap](docs/recovery-and-roadmap.md) covers the update path and backup strategy. [App Store listing](docs/app-store-draft.md) records the submitted copy and live support/privacy URLs. [Monetization options](docs/monetization-options.md) explains a possible paid pack or future Studio purchase; this submission does not add a purchase or change pricing.
+See the [release checklist](docs/release-checklist.md) for publication/submission evidence and optional device checks; [recovery and roadmap](docs/recovery-and-roadmap.md) covers the update path and backup strategy. [App Store listing](docs/app-store-draft.md) records the submitted copy and live support/privacy URLs. [Studio Unlock decisions](docs/monetization-options.md) record the chosen future tools purchase; this submission does not add a purchase or change pricing.
 
 ## Repository layout
 

@@ -1,27 +1,29 @@
-# One-time sticker pricing
+# Studio Unlock — agreed monetization plan
 
-Researched October 26, 2026. This is a proposal; no app price, In-App Purchase, tax, banking or agreement settings were changed during this research.
+Updated October 26, 2026. This supersedes the earlier recommendation to charge for downloading the sticker pack. The owner clarified that payment is for **the native Studio tools inside Messages**, then asked for this future implementation to be planned and documented. No pricing or product settings have been changed.
 
-## Available approaches
+## Product and access
 
-| Approach | Customer experience | Work required |
-| --- | --- | --- |
-| Paid sticker pack | Pay once to download the complete pack from the App Store, including the App Store inside Messages. Use its stickers repeatedly. | Set the app's price in App Store Connect. The current sticker-catalog binary does not need StoreKit for a paid download. |
-| Free pack with a permanent premium collection | Download the app free, then buy an optional collection inside a custom Messages interface. | Replace the generated sticker browser with a custom iMessage interface, implement StoreKit purchase/entitlement/restore behavior, and submit a new binary and its first non-consumable In-App Purchase together. |
-| Permanent purchase of individual designs | Buy each design once inside the custom interface. | Similar StoreKit work, with separate products and entitlement states for the individual designs. A collection purchase offers a simpler experience. |
+Keep the included sticker catalogue, categories, search and favorites free. Offer **Studio Unlock**, a single **non-consumable In-App Purchase** that permanently enables the 16×16 editor, multiple local drafts and creating/inserting custom stickers. No subscription, consumable credits, per-drawing charge, per-send charge or separate paid individual designs in this plan.
 
-Apple explicitly supports paid sticker packs and In-App Purchase in code-based standalone iMessage apps. A non-consumable product is bought once and does not expire or diminish with use; this fits a permanent sticker or collection unlock. A consumable is depleted and repurchased, so it does not describe permanent access. See [Apple's iMessage apps and stickers guide](https://developer.apple.com/imessage/) and [In-App Purchase types](https://developer.apple.com/help/app-store-connect/reference/in-app-purchases-and-subscriptions/in-app-purchase-types/).
+Proposed product ID: `eu.armand.--bit-art.studio.unlock`, under app **1366485724**. Check availability/validity before registration. One product covers the tools across future updates; do not sell the same entitlement again in each version. Restore Purchases recovers ownership under the purchasing App Store account; it does not recover deleted local artwork. No app-specific user account or developer-operated backend is required for this local feature set.
 
-## Exact US $1 availability
+Apple permits In-App Purchase in custom standalone iMessage apps. A non-consumable is purchased once and does not expire or diminish with use. [iMessage app support](https://developer.apple.com/imessage/), [IAP types](https://developer.apple.com/help/app-store-connect/reference/in-app-purchases-and-subscriptions/in-app-purchase-types/).
 
-A read-only App Store Connect API query for this app (`1366485724`) returned a USA app price point with `customerPrice: "1.0"`. An exact **US $1.00 paid download** is available, as well as $0.99. This checks app-download pricing; it does not create or verify an In-App Purchase product's price schedule.
+## US$1 price target
 
-The chosen US price can stay fixed as the base storefront price. Other storefronts use their own currencies and applicable taxes; a US $1 price does not make every international price literally $1. Paid distribution also requires the current Paid Apps Agreement and completed tax/banking information. See [set an app price](https://developer.apple.com/help/app-store-connect/manage-app-pricing/set-a-price/) and [schedule app price changes](https://developer.apple.com/help/app-store-connect/manage-app-pricing/schedule-price-changes-for-apps).
+The intended USA base price is **exactly US$1.00 once**, subject to verifying an available price point for this **IAP product**. Previously, a read-only query verified an exact $1.00 **app-download** price point. That is a different pricing resource and does not verify the Studio Unlock price.
 
-Changing the app-download price is separate from changing the binary. It charges new purchasers; it does not introduce a charge each time a sticker is sent. Existing owners keep their app purchase. Apple's [iPhone App Store guide](https://support.apple.com/en-gb/guide/iphone/iphc90580097/26/ios/26) describes redownloading an already purchased app for free; applying that ownership model to an app acquired while free means those customers should not be asked to buy the download again. A later premium In-App Purchase would be a separate entitlement, so any grandfathering promise would need explicit implementation.
+When configuring the new IAP, inspect its USA price points, record the chosen point and price readback, and select $1.00 if available. If unavailable, present the actual options to the owner; do not silently change to $0.99. Leave the app-download price unchanged. Display StoreKit's `Product.displayPrice`, including currency/localization, rather than hard-coded $1 text. Other territories use localized prices and applicable taxes. [Set an IAP price](https://developer.apple.com/help/app-store-connect/manage-in-app-purchases/set-a-price-for-an-in-app-purchase/), [displayPrice](https://developer.apple.com/documentation/storekit/product/displayprice).
 
-## Recommendation for this project
+Before sale, verify the current Paid Apps Agreement and tax/banking setup. Do not assume those prerequisites are complete from the existing app's availability.
 
-For a simple fixed charge, offer the complete pack as a one-time US $1 download after the owner explicitly chooses that business model. If the goal is specifically to sell designs **within** the Messages interface, keep the current pack accessible and plan a later update with a permanent premium-collection unlock. Do not put existing stickers behind a new paywall without deciding how existing users retain access.
+## Purchase behavior and boundaries
 
-Version 1.2 build 5 is a predefined sticker catalog and has no StoreKit purchase interface. App Store Connect alone cannot add an in-Messages unlock to that binary. Apple's [In-App Purchase submission instructions](https://developer.apple.com/help/app-store-connect/manage-submissions-to-app-review/submit-an-in-app-purchase/) require the first product of each In-App Purchase type to accompany a new app version. StoreKit implementation, purchase/restore testing and that review belong to a subsequent update if build 5 proceeds as prepared.
+The [implementation handoff](native-studio-implementation-plan.md) is authoritative for the state machine and test matrix: verified StoreKit 2 entitlements, explicit purchase, cancellation/pending handling, automatic transaction updates, user-initiated Restore Purchases and offline use for known verified owners. Refunded/revoked access locks new paid editing/insertion after reconciliation but never deletes drafts or favorites; existing drawings remain viewable/exportable.
+
+**Family Sharing is not decided.** Leave it off until the owner chooses it, then test family entitlement behavior if enabled. Apple's setting cannot be turned off after activation. [Family Sharing](https://developer.apple.com/help/app-store-connect/configure-in-app-purchase-settings/turn-on-family-sharing-for-in-app-purchases/).
+
+Current 1.2 (5) and development 1.3 (6) are static sticker packs without StoreKit. The paid Studio needs a new custom Messages binary. Apple's first non-consumable product must accompany the new app version **in the same review submission**. Do not attach this plan/product to the already submitted build 5. [First-IAP submission](https://developer.apple.com/help/app-store-connect/manage-submissions-to-app-review/submit-an-in-app-purchase/).
+
+A paid download, premium sticker collections, subscriptions, web checkout and per-design purchases remain outside this chosen scope. Reconsider them only if the owner changes the product direction.

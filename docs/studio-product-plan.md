@@ -1,45 +1,45 @@
 # Sticker Studio product plan
 
-Updated October 26, 2026. This separates the submitted release from future product choices.
+Updated October 26, 2026. The owner has chosen the future product direction: **native Studio inside Messages, on the existing 8 bit art listing, with an optional one-time US$1 Studio Unlock**. This is a documented plan; the native editor and purchase code have not been built.
 
-## What is shipping in 1.2
+**Start future implementation with [the native Studio implementation and release handoff](native-studio-implementation-plan.md).** It defines feature access, screen behavior, source layout, catalogue migration, the 16×16 model, local drafts, StoreKit state handling, tests and release gates. [Monetization decisions](monetization-options.md) record the price target and unresolved configuration choices.
 
-The existing **8 bit art** app, Apple ID **1366485724**, remains a standalone iMessage sticker pack with 46 stickers. Version **1.2 (5)** has a clean signed archive/export and passed Apple validation/upload, processed as `VALID` and replaced build 4 as the selected build. The wine-glass sticker is retained in recovered source but omitted from shipping assets. It was submitted for App Review on October 26, 2026, at **3:01 PM CDT**, and is **Waiting for Review**, with **automatic release after approval** selected. The **Data Not Collected** privacy label is published. The update has not yet been approved or publicly released. It preserves `eu.armand.--bit-art` and `eu.armand.--bit-art.StickerPackExtension`. There is no home-screen editor in this release. The browser Studio is not bundled, and its screenshots must not be presented as shipped iOS functionality.
+## Product decision
 
-The current Studio at `http://127.0.0.1:8787/prototype/` is served by a Python process on this Mac. It has no public deployment. Its drawings and favorites live in that browser's local storage; stopping the server makes the local URL unavailable. Keeping its source on GitHub does not itself publish a website.
+| Part | Agreed direction |
+| --- | --- |
+| App | Same listing: Apple ID `1366485724`, host `eu.armand.--bit-art`, extension `eu.armand.--bit-art.StickerPackExtension` |
+| Where Studio opens | A custom standalone iMessage app inside Messages, compact for browsing and expanded for editing |
+| Included free | Included stickers, categories, search, favorites, ordinary sticker sending/placement |
+| Optional paid tools | Native 16×16 editor, exact-grid remix templates, multiple named local drafts, custom sticker creation/insertion and PNG export |
+| Purchase | One permanent non-consumable **Studio Unlock**, intended USA base price **US$1.00**; localized prices from Apple; restore supported |
+| Data | Device-local drafts/favorites, no developer account or backend; restoring purchases does not restore deleted local drawings |
+| Hosting | No new hosting for native Studio. Existing support/privacy pages remain on GitHub Pages. |
 
-## Which native Studio can use the existing listing?
+All included catalogue art remains available without buying Studio. There is no per-drawing or per-send charge and no subscription. Exact $1.00 **IAP** price-point availability must be checked when the product is configured; the earlier $1.00 app-download price point does not establish it. Family Sharing remains off/undecided pending an explicit owner choice because enabling it is irreversible.
 
-Apple makes a distinction that affects the plan: a standalone sticker pack can become a **standalone custom iMessage app** through an update to the same App Store record. Changing a standalone app into an extension inside a normal iOS app requires a **new app**, as does the reverse. Therefore a home-screen Studio cannot be promised as an ordinary update to this existing listing. [Apple: change iMessage app type](https://developer.apple.com/help/app-store-connect/create-an-app-record/add-imessage-app-information).
+Apple allows a standalone sticker pack to become a custom standalone iMessage app on the **same record**. A full home-screen app requires a **new app record** under its app-type rules. See [Apple's app-type rules](https://developer.apple.com/help/app-store-connect/create-an-app-record/add-imessage-app-information/) and [iMessage purchase support](https://developer.apple.com/imessage/).
 
-| Option | Where it opens | Existing listing? | Hosting |
-| --- | --- | --- | --- |
-| Current 1.2 sticker pack | Messages and supported system sticker surfaces | Yes | No app backend needed |
-| Future native Studio inside Messages | Custom compact/expanded Messages interface | Yes, as a standalone iMessage app update | No backend needed for local editing |
-| Full home-screen Studio app | A normal iPhone/iPad app | New app record and app identity required | No backend needed for local editing |
-| Optional web Studio | Safari, Chrome and other browsers | Separate website, not an App Store app | Static web host such as GitHub Pages |
+## Existing releases and prototypes
 
-The recommended continuation of the existing app is **Studio inside Messages**: first add categories, search and favorites, then a 16×16 editor with saved drafts and a button to insert the resulting sticker into the active conversation. That is a native implementation using the [Messages framework](https://developer.apple.com/documentation/messages), including `MSMessagesAppViewController`, `MSStickerBrowserViewController` and `MSConversation`. It can reuse the repository's editable pixel data and generated artwork; the current browser UI is a design and interaction reference.
+- **Submitted 1.2 (5):** forty-six stickers, no native editor or StoreKit code. Last verified October 26, 2026 as Waiting for Review with automatic release after approval and a published Data Not Collected label. Preserve `v1.2-build5-submitted`, its signed archive, [metadata snapshot](../release/1.2-build5-metadata.json), screenshot manifest and [release record](../release/release-status.json). Recheck live status when resuming.
+- **Development 1.3 (6):** sixty stickers, including fourteen more memes and four 67 designs. Unsigned simulator/device builds and art/browser checks passed. Not uploaded/submitted. It can ship as an art update before Studio; the likely separate Studio release would then be 1.4, with version/build confirmed later.
+- **Browser Studio:** `http://127.0.0.1:8787/prototype/`, served locally by Python. It is a reference prototype, not bundled native functionality or a public website. Its editor currently uses 32×32 cells and stores one draft in browser localStorage. Native Studio deliberately uses 16×16 / 256 cells and multiple saved documents. Browser data does not automatically migrate.
 
-The native work still needs its own implementation, sandbox persistence, accessibility, compact/expanded layout tests and real-device sending tests. Browser drafts will not automatically appear in the native app. Export/import of PNG files is the initial bridge; account-based synchronization would be a separate feature with a backend and updated privacy disclosures.
+The full included catalogue is built from ten classics and fifty generated designs; `art/manifest.json` contains only the fifty generated entries. The native migration must include all sixty. Thirty-eight sources are true 16×16 and eligible for exact-grid remixing; do not silently downsample legacy / 50×50 art or flatten animations.
 
-If a full home-screen creative app becomes the priority, treat it as a separate product decision and new app submission. An iOS app can include its own Messages extension; its App Store categories and description then also apply to that extension, and the containing app cannot use the Stickers category. [Apple's app and extension distribution models](https://developer.apple.com/imessage/). A containing app and its extension can share selected local files/preferences through an explicitly configured [App Group](https://developer.apple.com/documentation/xcode/configuring-app-groups); that entitlement is not configured for this release.
+## Website and scope
 
-## What happens to the website?
+The existing [app page](https://mim-armand.github.io/8bit-stickers/), [support page](https://mim-armand.github.io/8bit-stickers/support/) and [privacy policy](https://mim-armand.github.io/8bit-stickers/privacy/) are hosted on **GitHub Pages**, from the repository's `gh-pages` branch. The last recorded deployment is `30355ecd03d7b135b002f614803367d73eb3c805`. Support email: **seltzer.wisdom7h@icloud.com**.
 
-The web Studio is useful as an optional public try-it-out page and desktop pixel editor. It is not needed to make the native stickers work. A release support site can be deployed independently of the full Studio.
+The interactive web Studio is not deployed there. A future static `/studio/` route is optional and separate; native editing does not depend on it. If later publishing the web editor, deploy an intentional static output rather than the whole local repository server. A web/native purchase bridge, cloud drafts and a normal home-screen app are outside the first Studio release.
 
-**Hosting now in use:** GitHub Pages from the existing public `mim-Armand/8bit-stickers` repository hosts the [app page](https://mim-armand.github.io/8bit-stickers/), [support page](https://mim-armand.github.io/8bit-stickers/support/) and [privacy policy](https://mim-armand.github.io/8bit-stickers/privacy/). All three were verified with HTTP 200 responses, a completed Pages build and HTTPS enforcement. The deployed `gh-pages` commit is `30355ecd03d7b135b002f614803367d73eb3c805`.
+## Sequence for a future iteration
 
-**The interactive Studio is not on that public site.** It remains at the local `127.0.0.1` URL. If a public web Studio is wanted later, the same Pages host can serve an intentional static Studio output, for example under a future `/studio/` route. That route is a proposal, not a live destination. Pages supports static HTML, CSS, JavaScript and PNG files without an application backend; a custom domain is optional. [GitHub Pages hosting model](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages).
+1. Read the [implementation handoff](native-studio-implementation-plan.md) and current Git/App Store status. Keep submitted 1.2 and development 1.3 separate.
+2. Prove conversion to a custom standalone Messages extension, native insertion and StoreKit purchase presentation on a device while preserving identity.
+3. Implement the free native catalogue/search/favorites, then the 256-cell editor, atomic multi-draft storage and PNG insertion.
+4. Add the permanent StoreKit unlock and purchase/restore/refund/offline behavior. Validate the exact IAP price point; retain all drafts on entitlement loss.
+5. Pass the specified model/UI/StoreKit/device tests, prepare actual native screenshots and revised support/privacy copy, and submit the first IAP with the new app version when release is authorized.
 
-For a public Studio, publish an intentional static output folder rather than the whole local repository server. Keep scripts, build archives and credentials out of the website artifact. Add a website privacy notice that distinguishes local browser drafts from hosting logs; GitHub Pages records visitor IP addresses for security. The native sticker pack's no-data-collection disclosure remains a separate statement about the native binary.
-
-## Sequence
-
-1. The 46-sticker 1.2 (5) update is submitted: signing, upload, selected `VALID` build, six native screenshots/twelve complete placements, revised metadata, API age rating `FOUR_PLUS` and live support/privacy URLs are verified. The no-collected-data privacy label is published. A physical-device/TestFlight pass is still available as an optional final check, not a claimed completed test.
-2. App Review is pending under submission `d6780537-3c51-43b3-97d9-67f900dfc768`. Release type `AFTER_APPROVAL` will automatically publish the update after approval.
-3. Build Studio inside Messages as the next update to the existing app, beginning with browsing and favorites.
-4. Optionally publish the web demo on GitHub Pages; decide separately whether a full home-screen Studio justifies a new app.
-
-No new home-screen app, sync service or public Studio deployment is implied by submitting version 1.2. Pricing is unchanged; see [monetization options](monetization-options.md) for a paid pack or future Studio purchase.
+No app price, IAP product, Apple submission, public website or binary was changed by this planning work. The implementation milestones and acceptance criteria are the work queue; this summary should not be interpreted as a completed feature list.
