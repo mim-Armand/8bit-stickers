@@ -8,6 +8,7 @@ configs:
   Debug: debug
   Release: release
   TestFlight: release
+  TestFlightSandbox: release
 settings:
   base:
     SWIFT_VERSION: '5.0'
@@ -27,6 +28,12 @@ settings:
     TestFlight:
       SWIFT_ACTIVE_COMPILATION_CONDITIONS: STUDIO_BETA_TESTING
       CURRENT_PROJECT_VERSION: '8'
+      CODE_SIGNING_ALLOWED: YES
+      CODE_SIGN_IDENTITY: 90776C637395C6FA5FF2E8133037AA95C594ECC7
+      DEVELOPMENT_TEAM: 7N3Y4QZT3Z
+    TestFlightSandbox:
+      SWIFT_ACTIVE_COMPILATION_CONDITIONS: STUDIO_SANDBOX_TESTING
+      CURRENT_PROJECT_VERSION: '9'
       CODE_SIGNING_ALLOWED: YES
       CODE_SIGN_IDENTITY: 90776C637395C6FA5FF2E8133037AA95C594ECC7
       DEVELOPMENT_TEAM: 7N3Y4QZT3Z
@@ -76,6 +83,8 @@ targets:
       configs:
         TestFlight:
           PROVISIONING_PROFILE_SPECIFIER: 8 bit art extension App Store 20261026
+        TestFlightSandbox:
+          PROVISIONING_PROFILE_SPECIFIER: 8 bit art extension App Store 20261026
   StudioMessagesHost:
     type: application.messages
     platform: iOS
@@ -94,6 +103,9 @@ targets:
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
       configs:
         TestFlight:
+          SKIP_INSTALL: NO
+          PROVISIONING_PROFILE_SPECIFIER: 8 bit art app App Store 20261026
+        TestFlightSandbox:
           SKIP_INSTALL: NO
           PROVISIONING_PROFILE_SPECIFIER: 8 bit art app App Store 20261026
   StudioCoreTests:
@@ -189,3 +201,13 @@ schemes:
       targets:
         - StudioCoreTests
         - StudioUITests
+  Studio Sandbox Internal:
+    build:
+      targets:
+        StudioMessagesHost: all
+    archive:
+      config: TestFlightSandbox
+    test:
+      config: TestFlightSandbox
+      targets:
+        - StudioCoreTests

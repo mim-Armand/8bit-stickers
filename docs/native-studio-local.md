@@ -1,6 +1,6 @@
 # Native Studio — local testing build
 
-Implemented October 26, 2026 at the owner's request. This guide describes the original **local Debug/testing build**. The owner subsequently requested TestFlight access: **1.4 (8) is now available for internal testing with free beta activation**; see the [TestFlight guide](studio-testflight.md). Public App Review and production IAP setup remain deferred. The original sticker-only project and pending 1.2 (5) release remain intact.
+Implemented October 26, 2026 at the owner's request. This guide describes the original **local Debug/testing build**. The owner subsequently requested TestFlight access: **1.4 (8) is now available for internal testing with free beta activation**; see the [TestFlight guide](studio-testflight.md). The owner then chose actual sandbox purchase testing: a registered draft Studio Unlock and separate 1.4 (9) sandbox configuration are described in the [sandbox guide](studio-sandbox.md). Public App Review, sale availability and production checkout remain deferred. The original sticker-only project and pending 1.2 (5) release remain intact.
 
 ## Try it in the local browser viewer
 
@@ -26,7 +26,7 @@ Open [`NativeStudio/Studio.xcodeproj`](../NativeStudio/Studio.xcodeproj) in Xcod
 | **Studio Messages Local** | The actual standalone Messages app and custom Messages extension, preserving `eu.armand.--bit-art` and `eu.armand.--bit-art.StickerPackExtension`. Run with Messages as the host, open a conversation, then choose 8 bit art from the app menu. |
 | **Studio Messages Tests** | Simulator-only integration checks using Apple's fictional conversation fixture. Install the Messages build first. The test inserts a sticker in the composer and never taps Send. |
 
-Debug/local configurations use version **1.4 (7)** for testing; build 7 was not uploaded. The dedicated TestFlight configuration uses the uploaded internal beta **1.4 (8)**. The separate original project remains the prepared **1.3 (6)** sticker-only build. Submitted **1.2 (5)** and its automatic-release setting were not changed.
+Debug/local configurations use version **1.4 (7)** for testing; build 7 was not uploaded. The **TestFlight** configuration uses the uploaded free internal beta **1.4 (8)**. The separate **TestFlightSandbox** configuration uses **1.4 (9)** for actual Apple sandbox purchases; check its [distribution status](studio-sandbox.md). The separate original project remains the prepared **1.3 (6)** sticker-only build. Submitted **1.2 (5)** and its automatic-release setting were not changed.
 
 Command-line shortcuts, with a simulator already booted:
 
@@ -53,11 +53,11 @@ All 45 true 16×16 sources are exact-grid remix templates. Ten classics and twel
 
 **Default: simulated checkout.** No StoreKit product request or real payment is made. Tap Unlock to try the experience. Help → Local testing → Purchase test controls exposes cancellation, failure, pending approval, approval, refund and reset. Mock ownership is stored in a clearly separate local preference, never treated as a real purchase receipt. Reset/revoke does not delete drafts.
 
-**Xcode StoreKit:** [`Config/Studio.storekit`](../Config/Studio.storekit) defines a local $1 non-consumable `eu.armand.--bit-art.studio.unlock`, with Family Sharing off. Both local schemes reference it. For interactive Apple payment-sheet testing, use a provided scheme with the local StoreKit configuration selected and add the Run environment variable `STUDIO_STOREKIT_TESTING=1`. Keep that configuration active; this is not sandbox/App Store testing. The adapter accepts only verified transactions identified as the Xcode environment.
+**Xcode StoreKit:** [`Config/Studio.storekit`](../Config/Studio.storekit) defines a local $1 non-consumable `eu.armand.bitart.studio.unlock`, with Family Sharing off. Both local schemes reference it. For interactive Apple payment-sheet testing, use a provided scheme with the local StoreKit configuration selected and add the Run environment variable `STUDIO_STOREKIT_TESTING=1`. Keep that configuration active; this is not sandbox/App Store testing. The adapter accepts only verified transactions identified as the Xcode environment.
 
-The automated StoreKit test activates `SKTestSession` using the bundled configuration. It verifies product loading at $1, purchase, restoration after creating a new service, refund revocation and preservation of unrelated saved work. This does not establish the availability of an exact $1 production IAP price point.
+The automated StoreKit test activates `SKTestSession` using the bundled configuration. It verifies product loading at $1, purchase, restoration after creating a new service, refund revocation and preservation of unrelated saved work. This local test alone does not establish an App Store price; the later sandbox setup separately verified and saved the exact US$1.00 IAP price schedule.
 
-Normal/non-Debug builds fail closed: checkout is disabled. Production purchase enablement is deliberately unfinished. No live product has been registered and no Apple account settings have been touched.
+Normal **Release** builds fail closed: checkout is disabled. The dedicated **TestFlight** configuration has free beta access, while **TestFlightSandbox** accepts only verified Apple sandbox transactions and ignores local/free-beta ownership. A draft App Store Connect product and price now exist for the authorized sandbox tests; public purchase enablement remains unfinished.
 
 [Apple's local StoreKit testing guide](https://developer.apple.com/documentation/xcode/setting-up-storekit-testing-in-xcode) describes how a local configuration replaces App Store data and produces test transactions without requiring a product in App Store Connect.
 
@@ -101,6 +101,6 @@ Run all local model/StoreKit/preview-UI tests:
 
 Tests use a dedicated UI-test draft directory/preferences so repeated runs do not erase ordinary preview drawings. The actual Messages integration tests use the simulator fixture. Do not run those against a personal conversation.
 
-Remaining before any production release: owner authorization to proceed after the current review; real-device/TestFlight and broader system-surface/accessibility testing; production StoreKit enablement; actual IAP price-point verification, agreements and product setup; updated native screenshots, privacy/support review; and app+first-IAP submission together. These steps are intentionally deferred. Do not infer permission to submit merely because the local tests pass or the earlier version is approved.
+Remaining before any production release: owner authorization to proceed after the current review; real-device/TestFlight and broader system-surface/accessibility testing; production StoreKit enablement; rechecking agreement/tax/banking statuses (all verified active on October 26, 2026) and completing review/sale metadata for the existing registered IAP; updated native screenshots, privacy/support review; and app+first-IAP submission together. These steps are intentionally deferred. Do not infer permission to submit merely because the local tests pass or the earlier version is approved.
 
 Support remains **seltzer.wisdom7h@icloud.com**. The [implementation/release handoff](native-studio-implementation-plan.md) remains the full product contract, with this document describing what can be tested now.

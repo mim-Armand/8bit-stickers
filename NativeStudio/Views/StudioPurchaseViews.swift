@@ -63,9 +63,11 @@ struct StudioUnlockView: View {
                     PixelHeartMark().padding(.top, 12)
                     VStack(spacing: 7) {
                         Text("Your ideas. Your stickers.").font(.system(.title2, design: .rounded).weight(.bold))
-                        Text(purchases.isBetaTesting
-                             ? "Try the editor and saved drafts free during TestFlight."
-                             : "Unlock the editor and saved drafts forever.")
+                        Text(purchases.isSandboxTesting
+                             ? "Test Apple's one-time unlock for the editor and saved drafts."
+                             : (purchases.isBetaTesting
+                                ? "Try the editor and saved drafts free during TestFlight."
+                                : "Unlock the editor and saved drafts forever."))
                             .font(.subheadline).foregroundColor(StudioTheme.secondary).multilineTextAlignment(.center)
                     }
                     StudioFeatures()
@@ -82,9 +84,11 @@ struct StudioUnlockView: View {
                     .buttonStyle(StudioPrimaryButton())
                     .disabled(!purchases.canPurchase || purchases.isPurchasing || purchases.isPending)
                     .accessibilityIdentifier("studio.unlock")
-                    Text(purchases.isBetaTesting
-                         ? "No payment is collected in this beta.\nThe release is planned to offer a one-time US$1 Studio Unlock."
-                         : "One-time purchase. No subscription.\nNo charge per drawing or sticker sent.")
+                    Text(purchases.isSandboxTesting
+                         ? "Apple's sandbox purchase sheet uses a test price.\nYou will not be charged. Test purchases do not carry into the public release."
+                         : (purchases.isBetaTesting
+                            ? "No payment is collected in this beta.\nThe release is planned to offer a one-time US$1 Studio Unlock."
+                            : "One-time purchase. No subscription.\nNo charge per drawing or sticker sent."))
                         .font(.footnote).foregroundColor(StudioTheme.secondary).multilineTextAlignment(.center)
                     if purchases.isPending {
                         StudioNotice(text: "Your purchase is awaiting approval. You can keep using the free stickers.", symbol: "clock")
@@ -116,7 +120,9 @@ struct StudioUnlockView: View {
         if purchases.isPurchasing { return "Unlocking Studio…" }
         if purchases.isPending { return "Awaiting approval" }
         if purchases.isLoading { return "Loading price…" }
-        if let price = purchases.price { return "Unlock Studio · \(price) once" }
+        if let price = purchases.price {
+            return purchases.isSandboxTesting ? "Test unlock · \(price)" : "Unlock Studio · \(price) once"
+        }
         return "Price unavailable"
     }
 }
@@ -132,7 +138,9 @@ struct StudioHelpView: View {
                 Section(header: Text("Using 8 bit art")) {
                     helpRow("Tap. Hold. Make someone's day.", "Tap an included sticker to add it to Messages. Touch and hold to place it on a message or photo.")
                     helpRow("Make a sticker", "Open Studio, start a drawing or remix a tiny sticker, then tap Insert sticker. Messages puts it in the composer; you tap Send.")
-                    if purchases.isBetaTesting {
+                    if purchases.isSandboxTesting {
+                        helpRow("Apple sandbox testing", "Included stickers, search and favorites stay free. Studio Unlock opens Apple's test purchase sheet. No real payment is collected in TestFlight, and sandbox ownership does not unlock the later public release.")
+                    } else if purchases.isBetaTesting {
                         helpRow("Free during this beta", "Enable Studio to try the editor and saved drafts without payment. The release is planned to offer a one-time US$1 Studio Unlock. Apple's purchase flow is not tested in this beta.")
                     } else {
                         helpRow("A one-time unlock", "Included stickers, search, and favorites are free. Studio adds the editor and saved drafts. There is no subscription or charge per drawing.")
@@ -140,9 +148,11 @@ struct StudioHelpView: View {
                 }
                 Section(header: Text("Your drawings")) {
                     helpRow("Saved on this device", "Drawings save as you edit. Deleting the app can remove them. Export drawings you want to keep.")
-                    helpRow("Restore tools, not deleted art", purchases.isBetaTesting
-                            ? "Restore beta access checks whether Studio was enabled on this device. You can enable it free on another beta device, but drawings don't automatically move between devices."
-                            : "Restore Purchases brings back your Studio unlock under the same App Store account. Drawings don't automatically move between devices.")
+                    helpRow("Restore tools, not deleted art", purchases.isSandboxTesting
+                            ? "Restore Purchases checks verified test ownership under the same sandbox purchase account. Drawings stay on this device and do not automatically move between devices."
+                            : (purchases.isBetaTesting
+                               ? "Restore beta access checks whether Studio was enabled on this device. You can enable it free on another beta device, but drawings don't automatically move between devices."
+                               : "Restore Purchases brings back your Studio unlock under the same App Store account. Drawings don't automatically move between devices."))
                 }
                 Section(header: Text("Studio access")) {
                     Label(purchases.isBetaTesting
@@ -160,7 +170,7 @@ struct StudioHelpView: View {
                     Link("Support instructions", destination: URL(string: "https://mim-armand.github.io/8bit-stickers/support/")!)
                     Link("Privacy policy", destination: URL(string: "https://mim-armand.github.io/8bit-stickers/privacy/")!)
                 }
-                #if DEBUG && STUDIO_LOCAL_TESTING && !STUDIO_BETA_TESTING
+                #if DEBUG && STUDIO_LOCAL_TESTING && !STUDIO_BETA_TESTING && !STUDIO_SANDBOX_TESTING
                 if purchases.isLocalTesting {
                     Section(header: Text("Local testing")) {
                         Text(purchases.localTestingNote ?? "Local test — no charge").font(.footnote)

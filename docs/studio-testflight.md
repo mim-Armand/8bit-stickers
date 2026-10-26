@@ -1,5 +1,7 @@
 # Studio TestFlight beta — 1.4 (8)
 
+**Later decision:** the owner chose Apple sandbox purchase/restore testing. The separate **1.4 (9)** sandbox build, registered draft IAP and verified exact US$1.00 schedule are documented in the [sandbox guide](studio-sandbox.md). The sections below preserve build 8's free-preview setup and evidence.
+
 The owner requested TestFlight access after the local Studio was completed. Version **1.4, build 8** is uploaded, processed and available for **internal testing only** under the existing **8 bit art** App Store record, **1366485724**. The account holder is invited to the existing internal group. No public App Review submission or live In-App Purchase was created for this beta.
 
 ## Install and try it

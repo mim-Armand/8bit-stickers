@@ -14,7 +14,7 @@
           "locale" : "en_US"
         }
       ],
-      "productID" : "eu.armand.--bit-art.studio.unlock",
+      "productID" : "eu.armand.bitart.studio.unlock",
       "referenceName" : "Studio Unlock — Local Test",
       "type" : "NonConsumable"
     }

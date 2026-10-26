@@ -52,6 +52,7 @@
 		CBAEB922156F258093C29DC8 /* NativePreviewBridgeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C2E371EBB8F425679E13A68 /* NativePreviewBridgeTests.swift */; };
 		CD6A31BDF94E84D66AC930A0 /* StudioTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA48CF82B0806F55C9FCBE7 /* StudioTheme.swift */; };
 		D7D35604115B8760097FFC5A /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = C221657AAC7212BD2B905917 /* PrivacyInfo.xcprivacy */; };
+		D8044DA5ACF828E173B58B4C /* StudioSandboxTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A93DA5AC5D5CF6BF13B94BAF /* StudioSandboxTests.swift */; };
 		DE9A1CD59AF4D98BBF8A290E /* DraftStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E13A8A748F28FFA0D7451C /* DraftStore.swift */; };
 		E20593B626E3A4C0B4BF78A2 /* StudioEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2040D78F33FC8F5F3EEAECD5 /* StudioEditorView.swift */; };
 		E9B98EE61D900C8DBB5E54BD /* NativeStickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 856F64C9A46ED1DADC3D6531 /* NativeStickerView.swift */; };
@@ -125,6 +126,7 @@
 		94146C41FBD886915937CC26 /* StudioMessages.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = StudioMessages.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		95C2D3B3B36546F79B3850D8 /* PixelEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixelEditor.swift; sourceTree = "<group>"; };
 		99352291A16F82BBA757C70A /* StudioUITests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = StudioUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A93DA5AC5D5CF6BF13B94BAF /* StudioSandboxTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudioSandboxTests.swift; sourceTree = "<group>"; };
 		B506E1C00B668F018074E037 /* StudioLocal.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = StudioLocal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD2EAC26CF30C2F13E1F4FA4 /* MessagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesViewController.swift; sourceTree = "<group>"; };
 		C221657AAC7212BD2B905917 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
@@ -286,6 +288,7 @@
 			children = (
 				1CBCC6907FBA8736A2E4BD7C /* StudioBetaAccessTests.swift */,
 				C91B2E912CC6BF29A80CA33B /* StudioPurchaseStoreTests.swift */,
+				A93DA5AC5D5CF6BF13B94BAF /* StudioSandboxTests.swift */,
 				2DC8BA95B7956A9DE8E1BC18 /* StudioStoreKitTests.swift */,
 			);
 			path = CommerceTests;
@@ -616,6 +619,7 @@
 				4DB1DBD3515DB7E1C19DC68E /* PixelRendererTests.swift in Sources */,
 				057658448ADC21C949EA7AF9 /* StudioBetaAccessTests.swift in Sources */,
 				A11715D0FAF4C578BA03DCBB /* StudioPurchaseStoreTests.swift in Sources */,
+				D8044DA5ACF828E173B58B4C /* StudioSandboxTests.swift in Sources */,
 				423EF2FF978FCB14E8A382B2 /* StudioStoreKitTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -669,6 +673,88 @@
 			};
 			name = TestFlight;
 		};
+		081684D9A9E61C24DEB0E147 /* TestFlightSandbox */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_ALLOWED = YES;
+				CODE_SIGN_IDENTITY = 90776C637395C6FA5FF2E8133037AA95C594ECC7;
+				CODE_SIGN_STYLE = Manual;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 9;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 7N3Y4QZT3Z;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MARKETING_VERSION = 1.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = STUDIO_SANDBOX_TESTING;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = TestFlightSandbox;
+		};
+		0F08CAA765D43CB7511461FE /* TestFlightSandbox */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = eu.armand.pixelstudio.preview.tests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = TestFlightSandbox;
+		};
 		15D46266D44E8DC038578DDF /* TestFlight */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -700,6 +786,22 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
+		};
+		2636D0408731DF4BFD9EEB8D /* TestFlightSandbox */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = eu.armand.pixelstudio.messages.tests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = TestFlightSandbox;
 		};
 		2765B1D5ECDC4C22670EB84B /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -794,6 +896,24 @@
 			};
 			name = TestFlight;
 		};
+		5066528EE5DFD5FCDEED69E0 /* TestFlightSandbox */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
+				INFOPLIST_FILE = "Config/Messages-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "eu.armand.--bit-art.StickerPackExtension";
+				PROVISIONING_PROFILE_SPECIFIER = "8 bit art extension App Store 20261026";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = TestFlightSandbox;
+		};
 		53F811D4AB40BF6A965EA7F5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -864,6 +984,41 @@
 			};
 			name = Debug;
 		};
+		5B9106D5203E7A2FCB75ED17 /* TestFlightSandbox */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "Config/Host-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "eu.armand.--bit-art";
+				PRODUCT_NAME = "8 bit art";
+				PROVISIONING_PROFILE_SPECIFIER = "8 bit art app App Store 20261026";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = TestFlightSandbox;
+		};
+		6BC9F3551DAA5F0F50084B11 /* TestFlightSandbox */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = eu.armand.pixelstudio.local.uitests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = StudioLocal;
+			};
+			name = TestFlightSandbox;
+		};
 		77DACFFFF2FB7286F1E88F9B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -927,6 +1082,23 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
+		};
+		79E2CBD887087C3CAFF6B199 /* TestFlightSandbox */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = eu.armand.pixelstudio.local.tests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/StudioLocal.app/StudioLocal";
+			};
+			name = TestFlightSandbox;
 		};
 		839D0E52B8F46609DBC5480F /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -1176,6 +1348,26 @@
 			};
 			name = TestFlight;
 		};
+		F4FD31C979262BCC3FA4975C /* TestFlightSandbox */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "8 Bit Studio Local";
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = eu.armand.pixelstudio.local;
+				PRODUCT_MODULE_NAME = StudioLocal;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = TestFlightSandbox;
+		};
 		FA4900A0222E250B793F7341 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1218,6 +1410,7 @@
 				A567342D946231FE0F6AB437 /* Debug */,
 				B475F877424C5F61BB6768AB /* Release */,
 				15D46266D44E8DC038578DDF /* TestFlight */,
+				0F08CAA765D43CB7511461FE /* TestFlightSandbox */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
@@ -1228,6 +1421,7 @@
 				2F2F8B3F709EC3806D05276E /* Debug */,
 				30108728970FE8B7E74883BE /* Release */,
 				077836CD62090878B7CAF148 /* TestFlight */,
+				F4FD31C979262BCC3FA4975C /* TestFlightSandbox */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
@@ -1238,6 +1432,7 @@
 				15F63781086ECCB80AB90FA4 /* Debug */,
 				B74B218ED07ABE55D7802545 /* Release */,
 				AEDEF9DCBBC04E88AA6A4161 /* TestFlight */,
+				2636D0408731DF4BFD9EEB8D /* TestFlightSandbox */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
@@ -1248,6 +1443,7 @@
 				C49ECA4B25A3091BE499DE5B /* Debug */,
 				839D0E52B8F46609DBC5480F /* Release */,
 				E96073F0BA37621D5A8B8381 /* TestFlight */,
+				6BC9F3551DAA5F0F50084B11 /* TestFlightSandbox */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
@@ -1258,6 +1454,7 @@
 				FA4900A0222E250B793F7341 /* Debug */,
 				E0AD7F9EAAFD6C1FE8B51D46 /* Release */,
 				42C02791BB9F100B416FD191 /* TestFlight */,
+				5066528EE5DFD5FCDEED69E0 /* TestFlightSandbox */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
@@ -1268,6 +1465,7 @@
 				2765B1D5ECDC4C22670EB84B /* Debug */,
 				996053C4CA9B9117ED51DEB3 /* Release */,
 				BB74B706CFC84208D0701E2C /* TestFlight */,
+				79E2CBD887087C3CAFF6B199 /* TestFlightSandbox */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
@@ -1278,6 +1476,7 @@
 				53F811D4AB40BF6A965EA7F5 /* Debug */,
 				77DACFFFF2FB7286F1E88F9B /* Release */,
 				943EFFCE06A8762CCF05C5B5 /* TestFlight */,
+				081684D9A9E61C24DEB0E147 /* TestFlightSandbox */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
@@ -1288,6 +1487,7 @@
 				FF8E21201E8E91432CCFCEC5 /* Debug */,
 				C26F297F16A372F7DA6BF9DF /* Release */,
 				3D980C1A81D0F391BAFB1BD2 /* TestFlight */,
+				5B9106D5203E7A2FCB75ED17 /* TestFlightSandbox */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
