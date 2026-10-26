@@ -1,12 +1,14 @@
 # 8 bit art
 
-The 2018 iMessage sticker pack is recovered and back in development. This repository preserves its Git history, Xcode project, original icons and eleven original stickers. The revival adds twelve editable pixel-art designs, two animations, an unsigned native build, and a working local Sticker Studio.
+The 2018 iMessage sticker pack is recovered and back in development. This repository preserves its Git history, Xcode project, original icons and eleven original stickers. The revival now adds 36 editable designs, including **24 cute and meme reactions drawn on a true 16×16 grid**, two animations, an unsigned native build, and a working local Sticker Studio.
 
-![New pixel art](docs/previews/new-art-board.png)
+![Cute 16×16 pixel art](docs/previews/cute-art-board.png)
+
+![Meme 16×16 pixel art](docs/previews/meme-art-board.png)
 
 ## Try the two MVPs
 
-**iMessage pack — proposed version 1.2 (4).** Open `8 bit art.xcodeproj` in Xcode and select the shared **8 bit art** scheme. The native pack contains **23 stickers**, including a pulsing heart and blinking robot. It keeps the original bundle identifiers and icon. It requires iOS/iPadOS 15 or later with the current toolchain.
+**iMessage pack — proposed version 1.2 (4).** Open `8 bit art.xcodeproj` in Xcode and select the shared **8 bit art** scheme. The native pack contains **47 stickers**, including a pulsing heart and blinking robot. It keeps the original bundle identifiers and icon. It requires iOS/iPadOS 15 or later with the current toolchain.
 
 ```sh
 ./scripts/build-ios.sh simulator
@@ -29,7 +31,9 @@ The Studio is a working product experiment. Search, favorites, chat previews and
 
 ## Art you can keep editing
 
-`art/sprites.json` contains palette-based pixel commands. `scripts/generate-art.py` generates the native catalog additions, browser assets, animation frames and review boards. The recovered eleven images remain unchanged.
+`art/sprites.json`, `art/cute-sprites.json` and `art/meme-sprites.json` contain palette-based pixel commands. The latest two collections use a 16×16 canvas, dark outlines and limited colors with no white rim. `scripts/generate-art.py` generates native catalog additions, browser assets, raw PNGs in `art/pixels/`, animation frames and review boards. The recovered eleven images remain unchanged.
+
+The tiny PNGs are truly 16×16. Native 300×300 sticker exports use integer 18× enlargement with six pixels of transparent padding; no smoothing or added detail is introduced. Open a tiny sticker in Studio to download either size.
 
 ```sh
 python3 -m venv .venv
@@ -38,7 +42,7 @@ python3 -m venv .venv
 python3 scripts/build-preview.py
 ```
 
-Read [the art guide](art/README.md) for the editable source format and provenance. New artwork includes affection, coffee, a star, a sprout, a sleeping cat, a generic gamepad, a rainbow, a rocket, a birthday cake, a moon, a love letter and a robot. Existing art was recovered as-is; review its provenance before publishing a new release.
+Read [the art guide](art/README.md) for the editable source format and provenance. The new tiny collection includes frog, bunny, cat, puppy, toast, boba, duck, penguin, sleepy bear, dumpling, mushroom and capybara, alongside side-eye, bruh, melting, crying-laughing, sus, heart-eyes and other meme reactions. The previous twelve revival designs remain included. Existing art was recovered as-is; review its provenance before publishing a new release.
 
 ## Verification
 

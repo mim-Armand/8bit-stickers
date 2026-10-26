@@ -1,6 +1,6 @@
 # Native iMessage MVP
 
-The original Xcode sticker-pack project and all 11 catalog stickers were recovered from `mim-Armand/8bit-stickers` at commit `816eba114d65f5a0182c4ed3bf6dd1c1bd4f9256`. This is a working continuation of that project, not a replacement App Store listing. The revived pack includes those 11 originals plus 12 new designs, including two APNG animations.
+The original Xcode sticker-pack project and all 11 catalog stickers were recovered from `mim-Armand/8bit-stickers` at commit `816eba114d65f5a0182c4ed3bf6dd1c1bd4f9256`. This is a working continuation of that project, not a replacement App Store listing. The revived pack includes 47 stickers: those 11 originals plus 36 new designs, including two APNG animations. The latest 24 additions use a true 16×16 source grid for chunky cute characters and meme reactions closer to the original art.
 
 ## Identity preserved
 
@@ -20,7 +20,7 @@ The existing release supports iOS 10. Current local Xcode 27.1 rejects deploymen
 
 - Native sticker-pack extension inside Messages, using Apple's generated `StickerBrowserViewController`.
 - Original catalog and original app icon retained.
-- Twelve additional transparent pixel-art stickers, with two animated PNG designs.
+- Thirty-six additional transparent pixel-art stickers: twelve revival designs and twenty-four tiny cute/meme designs, with two animated PNG designs in the revival set.
 - Both target version/build values come from the same Xcode build settings.
 - Shared build/archive scheme, an unsigned verification script, and GitHub Actions builds.
 - `NSStickerSharingLevel = OS`, matching the current Xcode sticker-pack template, to opt into system sticker sharing on supported OS versions. Availability and placement must be verified on devices.
@@ -54,9 +54,9 @@ In Messages, open a conversation, tap the plus button, and locate the sticker pa
 ## Verification recorded October 26, 2026
 
 - Xcode 27.1 (`27A9275`).
-- Unsigned simulator Release build passed, including compilation of all 23 catalog entries.
-- Unsigned device Release build passed.
-- Installed on an iOS 27.0 iPhone 17 simulator; `pluginkit` reported the extension registered as version 1.2.
+- Unsigned simulator Release build passed with all 47 catalog entries and no warnings.
+- Unsigned device Release build passed with all 47 catalog entries and no warnings.
+- The final 47-sticker source was installed on an iOS 27.0 iPhone 17 simulator; `pluginkit` reported the extension registered as version 1.2.
 - Messages launched successfully.
 
 Unsigned compilation and simulator installation do not verify App Store provisioning, distribution signing, TestFlight, delivery to another person, or App Review acceptance. A real-device pass must still cover tapping a sticker, dragging it onto a message, animation playback, appearance in light/dark mode, and iPad layouts.

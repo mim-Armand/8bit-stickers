@@ -25,7 +25,7 @@ const path = require("node:path");
   try {
     await page.goto(root);
     await page.locator(".sticker-card").last().waitFor();
-    assert.equal(await page.locator(".sticker-card").count(), 23);
+    assert.equal(await page.locator(".sticker-card").count(), 47);
     await page.evaluate(async () => {
       await Promise.all(
         [...document.images]
@@ -50,13 +50,35 @@ const path = require("node:path");
       fullPage: true,
     });
     await page.getByRole("button", { name: /Fresh pixels/ }).click();
+    assert.equal(await page.locator(".sticker-card").count(), 36);
+    await page.getByRole("button", { name: /Tiny pixels/ }).click();
+    assert.equal(await page.locator(".sticker-card").count(), 24);
+    await page.getByRole("button", { name: "Cute", exact: true }).click();
     assert.equal(await page.locator(".sticker-card").count(), 12);
+    await page
+      .getByRole("button", { name: "Preview Henlo", exact: true })
+      .click();
+    const tinyDownload = page.waitForEvent("download");
+    await page.getByRole("link", { name: /Download 16 × 16 PNG/ }).click();
+    const tinyFile = await tinyDownload;
+    const tinyPath = path.join(__dirname, "../build/tiny-test-export.png");
+    await fs.mkdir(path.dirname(tinyPath), { recursive: true });
+    await tinyFile.saveAs(tinyPath);
+    const tinyPng = await fs.readFile(tinyPath);
+    assert.equal(tinyPng.readUInt32BE(16), 16);
+    assert.equal(tinyPng.readUInt32BE(20), 16);
+    await page
+      .getByRole("button", { name: "Close sticker preview", exact: true })
+      .click();
+    await page.getByRole("button", { name: "Memes", exact: true }).click();
+    assert.equal(await page.locator(".sticker-card").count(), 12);
+    await page.getByRole("button", { name: /Fresh pixels/ }).click();
     await page.getByRole("button", { name: "Everyday", exact: true }).click();
     assert.equal(await page.locator(".sticker-card").count(), 2);
     await page.getByRole("button", { name: /In motion/ }).click();
     assert.equal(await page.locator(".sticker-card").count(), 2);
     await page.getByRole("button", { name: /All stickers/ }).click();
-    await page.getByRole("searchbox").fill("coffee");
+    await page.getByRole("searchbox").fill("warm & awake");
     assert.equal(await page.locator(".sticker-card").count(), 1);
     await page
       .getByRole("button", { name: "Save Warm & awake", exact: true })
@@ -188,7 +210,7 @@ const path = require("node:path");
     await page
       .getByRole("button", { name: "Show all stickers", exact: true })
       .click();
-    assert.equal(await page.locator(".sticker-card").count(), 23);
+    assert.equal(await page.locator(".sticker-card").count(), 47);
     await page.setViewportSize({ width: 390, height: 844 });
     await page.evaluate(() =>
       document.querySelector("#toast").classList.remove("show"),
@@ -219,10 +241,10 @@ const path = require("node:path");
     });
     await page.evaluate(() => localStorage.setItem("8bit-favorites", "{}"));
     await page.reload();
-    assert.equal(await page.locator(".sticker-card").count(), 23);
+    assert.equal(await page.locator(".sticker-card").count(), 47);
     assert.deepEqual(errors, []);
     console.log(
-      "PASS: 23 images, filters/search, favorites persistence, local chat, original download, editor paint/erase/fill/undo/persistence, transparent 300px export, remix, empty state, responsive layout, no browser/network errors.",
+      "PASS: 47 images, tiny/cute/meme filters, search, favorites persistence, local chat, PNG downloads, editor tools/persistence, transparent 300px export, remix, responsive layout, no browser/network errors.",
     );
   } finally {
     await browser.close();

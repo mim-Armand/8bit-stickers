@@ -12,10 +12,35 @@ ROOT = Path(__file__).resolve().parents[1]
 PACK = ROOT / '8 bit art StickerPackExtension/Stickers.xcstickers/Sticker Pack.stickerpack'
 ART = ROOT / 'art'
 PREVIEWS = ROOT / 'docs/previews'
+SOURCE_FILES = ['sprites.json', 'cute-sprites.json', 'meme-sprites.json']
+
+
+def source_sprites():
+    """Keep each collection's logical grid and palette with its editable sprites."""
+    for filename in SOURCE_FILES:
+        path = ART / filename
+        if not path.exists():
+            continue
+        source = json.loads(path.read_text())
+        for sprite in source['sprites']:
+            yield ({'canvas': source.get('canvas', [50, 50]),
+                    'rim': source.get('rim', True), **sprite}, source['palette'], filename)
+
+
+def export_frame(frame):
+    """Use integer enlargement, then transparent padding to meet native 300px size."""
+    scale = 300 // max(frame.size)
+    assert scale >= 1, 'Logical sticker canvas must fit 300px'
+    resized = frame.resize((frame.width * scale, frame.height * scale), Image.Resampling.NEAREST)
+    if resized.size == (300, 300):
+        return resized
+    output = Image.new('RGBA', (300, 300))
+    output.alpha_composite(resized, ((300 - resized.width) // 2, (300 - resized.height) // 2))
+    return output
 
 
 def render_sprite(sprite, palette):
-    image = Image.new('RGBA', (50, 50))
+    image = Image.new('RGBA', tuple(sprite.get('canvas', [50, 50])))
     draw = ImageDraw.Draw(image)
     for command in sprite['commands']:
         kind, color, *args = command
@@ -28,7 +53,9 @@ def render_sprite(sprite, palette):
             draw.line([tuple(p) for p in args[0]], fill=color, width=args[1] if len(args) > 1 else 1)
         else:
             raise ValueError(f'Unknown pixel command: {kind}')
-    # A one-grid-pixel paper edge separates every sticker from light/dark bubbles.
+    if not sprite.get('rim', True):
+        return image
+    # The first revival collection has a rim; tiny originals-style sprites do not.
     rim = Image.new('RGBA', image.size, palette['paper'])
     rim.putalpha(image.getchannel('A').filter(ImageFilter.MaxFilter(3)))
     rim.alpha_composite(image)
@@ -74,7 +101,11 @@ def review_board(items, title, subtitle, destination):
         draw.rounded_rectangle((x,y,x+card_w,y+card_h), radius=20, fill='#FFFFFF')
         draw.rounded_rectangle((x+14,y+14,x+card_w-14,y+268), radius=14, fill='#EEEAF4')
         sticker = Image.open(item['path']).convert('RGBA')
-        sticker.thumbnail((244,244), Image.Resampling.NEAREST)
+        if max(sticker.size) < 244:
+            scale = 244 // max(sticker.size)
+            sticker = sticker.resize((sticker.width*scale, sticker.height*scale), Image.Resampling.NEAREST)
+        else:
+            sticker.thumbnail((244,244), Image.Resampling.NEAREST)
         board.paste(sticker, (x+(card_w-sticker.width)//2, y+20+(244-sticker.height)//2), sticker)
         draw.text((x+22,y+286), item['title'], font=text_font(21), fill='#2F243A')
         draw.text((x+22,y+316), item['caption'], font=text_font(14), fill='#7E6B8F')
@@ -84,18 +115,23 @@ def review_board(items, title, subtitle, destination):
 
 def main():
     source = json.loads((ART/'sprites.json').read_text())
-    palette, sprites = source['palette'], source['sprites']
+    sprites = list(source_sprites())
     PREVIEWS.mkdir(parents=True, exist_ok=True)
+    (ART/'pixels').mkdir(parents=True, exist_ok=True)
     (ROOT/'prototype/assets/new').mkdir(parents=True, exist_ok=True)
-    manifest = {'schemaVersion': 1, 'palette': palette, 'stickers': []}
+    manifest = {'schemaVersion': 1, 'palette': source['palette'], 'stickers': []}
     board_items = []
-    for sprite in sprites:
+    tiny_items = []
+    for sprite, palette, source_file in sprites:
         identifier = sprite['id']
         directory = PACK / f'new_{identifier}.sticker'
         directory.mkdir(parents=True, exist_ok=True)
         filename = f'new_{identifier}.png'
-        frames, durations = frames_for(sprite, render_sprite(sprite, palette))
-        frames = [frame.resize((300,300), Image.Resampling.NEAREST) for frame in frames]
+        raw = render_sprite(sprite, palette)
+        pixel_source = ART/'pixels'/f'{identifier}.png'
+        raw.save(pixel_source, optimize=True)
+        frames, durations = frames_for(sprite, raw)
+        frames = [export_frame(frame) for frame in frames]
         kwargs = {'save_all': True, 'append_images': frames[1:], 'duration': durations,
                   'loop': 0, 'disposal': 0, 'blend': 0} if len(frames)>1 else {}
         frames[0].save(directory/filename, optimize=True, **kwargs)
@@ -106,14 +142,31 @@ def main():
             'id':identifier, 'title':sprite['title'], 'category':sprite['category'],
             'tags':sprite['tags'], 'filename':str((directory/filename).relative_to(ROOT)),
             'preview':str(preview.relative_to(ROOT)), 'animated':len(frames)>1,
-            'source':'art/sprites.json'})
-        board_items.append({'path':preview,'title':sprite['title'],'caption':sprite['category'] + (' / ANIMATED' if len(frames)>1 else ' / 300 x 300')})
+            'source':f'art/{source_file}', 'logicalSize':list(raw.size),
+            'pixelSource':str(pixel_source.relative_to(ROOT)),
+            'collection':sprite.get('collection', 'revival')})
+        item = {'path':pixel_source if sprite.get('collection') == 'tiny-pixels' else preview,'title':sprite['title'],
+                'caption':sprite['category'] + (' / ANIMATED' if len(frames)>1 else f' / {raw.width} x {raw.height} pixels')}
+        (tiny_items if sprite.get('collection') == 'tiny-pixels' else board_items).append(item)
     (ART/'manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
     catalog = json.loads((PACK/'Contents.json').read_text())
     original = [item for item in catalog['stickers'] if not item['filename'].startswith('new_')]
-    catalog['stickers'] = original + [{'filename':f"new_{item['id']}.sticker"} for item in sprites]
+    catalog['stickers'] = original + [{'filename':f"new_{sprite['id']}.sticker"} for sprite, _, _ in sprites]
     (PACK/'Contents.json').write_text(json.dumps(catalog,indent=2)+'\n')
     review_board(board_items, 'Small pixels. Big feelings.', 'Twelve new sticker concepts / one playful, coordinated palette', PREVIEWS/'new-art-board.png')
+    if tiny_items:
+        review_board(tiny_items, 'Fewer pixels. More personality.',
+                     f'{len(tiny_items)} cute + meme reactions / true 16 x 16 sprites / crisp integer scaling',
+                     PREVIEWS/'tiny-art-board.png')
+        for category, filename in [('Cute', 'cute-art-board.png'), ('Memes', 'meme-art-board.png')]:
+            category_items = [item for item in tiny_items if item['caption'].startswith(category + ' /')]
+            review_board(category_items, 'Tiny ' + category.lower() + '. Big feelings.',
+                         'Original-style chunky pixels / 16 x 16 editable art / no smoothing', PREVIEWS/filename)
+        sample = [item for item in tiny_items if item['caption'].startswith('Cute /')][:4]
+        sample += [item for item in tiny_items if item['caption'].startswith('Memes /')][:4]
+        review_board(sample, 'Tiny cute. Big moods.',
+                     'A peek at 24 new reactions / true 16 x 16 pixels / original-style outlines',
+                     PREVIEWS/'tiny-sample.png')
     names = {'exclamation_point_01':'Exclamation block', 'hear_01':'Heart', 'dealwithit_01':'Deal with it',
              'smiley_01':'Smile', 'smiley_02':'Big smile'}
     recovered = []

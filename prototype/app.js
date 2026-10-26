@@ -55,6 +55,7 @@
   });
   const titles = {
     all: "A feeling for every message",
+    tiny: "Tiny pixels. Huge reactions",
     new: "Meet your fresh pixels",
     original: "The ones that started it all",
     animated: "A little movement. A lot of joy",
@@ -65,6 +66,7 @@
     const result = stickers.filter(
       (s) =>
         (filter !== "new" || !s.original) &&
+        (filter !== "tiny" || s.collection === "tiny-pixels") &&
         (filter !== "original" || s.original) &&
         (filter !== "animated" || s.animated) &&
         (filter !== "favorites" || favorites.has(s.id)) &&
@@ -77,6 +79,9 @@
       `${result.length} ${result.length === 1 ? "sticker" : "stickers"} · ${filter === "original" ? "Recovered from your 2018 project" : "Tiny expressions, ready to explore"}`;
     $("#all-count").textContent = stickers.length;
     $("#new-count").textContent = stickers.filter((s) => !s.original).length;
+    $("#tiny-count").textContent = stickers.filter(
+      (s) => s.collection === "tiny-pixels",
+    ).length;
     $("#animated-count").textContent = stickers.filter(
       (s) => s.animated,
     ).length;
@@ -103,7 +108,8 @@
         const detail = document.createElement("span");
         detail.textContent = s.original
           ? "THE 2018 ORIGINALS"
-          : s.category + " · NEW";
+          : s.category +
+            (s.collection === "tiny-pixels" ? " · 16 × 16" : " · NEW");
         meta.append(title, detail);
         open.append(art, meta);
         open.onclick = () => openSticker(s);
@@ -172,11 +178,19 @@
     $("#dialog-category").textContent = s.original
       ? "RECOVERED · THE 2018 ORIGINALS"
       : "FRESH PIXELS · " + s.category.toUpperCase();
-    $("#dialog-description").textContent = s.animated
-      ? "A tiny animated expression. Try it in the local chat or download the original animated PNG."
-      : "A little pixel personality for your next conversation. Try it in the local chat or download the transparent PNG.";
+    $("#dialog-description").textContent =
+      s.collection === "tiny-pixels"
+        ? "Just 16 × 16 pixels. Download the tiny original or a crisp, transparent sticker enlarged without smoothing."
+        : s.animated
+          ? "A tiny animated expression. Try it in the local chat or download the original animated PNG."
+          : "A little pixel personality for your next conversation. Try it in the local chat or download the transparent PNG.";
     $("#download-sticker").href = asset(s.filename);
     $("#download-sticker").download = s.filename.split("/").pop();
+    $("#download-pixels").hidden = s.collection !== "tiny-pixels";
+    if (s.pixelSource) {
+      $("#download-pixels").href = asset(s.pixelSource);
+      $("#download-pixels").download = s.id + "-16x16.png";
+    }
     updateFavorite();
     $("#sticker-dialog").showModal();
   }
@@ -241,9 +255,9 @@
   const getSticker = (id, fallback) =>
     stickers.find((s) => s.id === id) || stickers[fallback];
   if (stickers.length) {
-    $("#hero-star").src = asset(getSticker("star", 0).preview);
-    $("#hero-cat").src = asset(getSticker("cat", 1).preview);
-    preview(getSticker("heart", 2));
+    $("#hero-star").src = asset(getSticker("tiny_frog", 0).preview);
+    $("#hero-cat").src = asset(getSticker("tiny_cat", 1).preview);
+    preview(getSticker("tiny_sideeye", 2));
   }
   // Pixel editor uses an editable 32×32 array, exported at integer 8× into 300px padding.
   const N = 32,

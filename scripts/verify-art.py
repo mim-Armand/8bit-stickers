@@ -9,14 +9,24 @@ ROOT = Path(__file__).resolve().parents[1]
 spec = importlib.util.spec_from_file_location('art_generator', ROOT / 'scripts/generate-art.py')
 generator = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(generator)
-source = json.loads((ROOT / 'art/sprites.json').read_text())
 manifest = json.loads((ROOT / 'art/manifest.json').read_text())
 by_id = {entry['id']: entry for entry in manifest['stickers']}
-assert len(by_id) == len(source['sprites']), 'Source/manifest count differs'
-for sprite in source['sprites']:
+sprites = list(generator.source_sprites())
+assert len(by_id) == len(sprites), 'Source/manifest count differs'
+for sprite, palette, source_file in sprites:
     entry = by_id[sprite['id']]
-    frames, durations = generator.frames_for(sprite, generator.render_sprite(sprite, source['palette']))
-    expected = [frame.resize((300, 300), Image.Resampling.NEAREST) for frame in frames]
+    raw = generator.render_sprite(sprite, palette)
+    if sprite.get('collection') == 'tiny-pixels':
+        assert raw.size == (16, 16), f"{entry['id']}: keep the logical canvas at 16x16"
+        assert sprite.get('rim') is False, f"{entry['id']}: no outer white rim"
+        opaque_colors = [color for _, color in raw.getcolors(256) if color[3] > 0]
+        assert len(opaque_colors) <= 6, f"{entry['id']}: keep the limited-color style"
+    assert entry['logicalSize'] == list(raw.size), entry['id']
+    with Image.open(ROOT / entry['pixelSource']) as pixel_source:
+        assert pixel_source.size == raw.size, entry['id']
+        assert pixel_source.convert('RGBA').tobytes() == raw.tobytes(), entry['id']
+    frames, durations = generator.frames_for(sprite, raw)
+    expected = [generator.export_frame(frame) for frame in frames]
     assert entry['animated'] == (len(expected) > 1), entry['id']
     for key in ['filename', 'preview']:
         path = ROOT / entry[key]

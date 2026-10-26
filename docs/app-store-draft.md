@@ -25,7 +25,7 @@ Give your messages a little 8-bit love.
 
 8 bit art brings a colorful collection of pixel-art stickers to Messages. Tap a sticker to send it, or touch and hold to peel it onto a message or photo.
 
-This refreshed collection includes 23 stickers: 11 recovered classics and 12 new designs for affection, celebration, encouragement and everyday reactions.
+This refreshed collection includes 47 stickers: 11 recovered classics and 36 new designs. Meet cute tiny animals, share a side-eye or a shocked reaction, and add a little retro personality to everyday conversations. Twenty-four new cute and meme designs use a chunky 16×16 pixel grid; a pulsing heart and blinking robot add a little movement.
 
 The sticker pack works offline. There are no accounts, ads or subscriptions.
 
@@ -37,7 +37,7 @@ Questions or feedback? Contact seltzer.wisdom7h@icloud.com.
 
 **What's New:**
 
-8 bit art is back! This update brings back 11 classic stickers and adds 12 new pixel-art designs. We have also refreshed the project for modern iPhone and iPad versions.
+8 bit art is back! This update brings back 11 classic stickers and adds 36 new pixel-art designs, including 24 chunky cute characters and meme reactions. Try the pulsing heart and blinking robot, too. We have also refreshed the project for modern iPhone and iPad versions.
 
 **Screenshot plan:** Capture the actual native sticker pack in Messages on supported iPhone and iPad sizes. Show the collection, a few everyday replies and stickers placed on sample bubbles. Use fictional conversation names and text. The local Studio is a prototype and must not appear as a feature of the native sticker pack in listing screenshots.
 
@@ -45,7 +45,7 @@ Questions or feedback? Contact seltzer.wisdom7h@icloud.com.
 
 This is an update to the existing standalone iMessage sticker pack, Apple ID 1366485724. It preserves the main bundle ID `eu.armand.--bit-art` and extension ID `eu.armand.--bit-art.StickerPackExtension`.
 
-The update retains 11 stickers from the recovered project and adds 12 new pixel-art designs, including a pulsing heart and blinking robot. No login, purchase, account setup or server access is required. Open Messages and select the 8 bit art sticker pack to test sending and placing stickers. The app does not provide a separate home-screen editor. The browser Studio in the source repository is a local development prototype and is not bundled in this submission.
+The update retains 11 stickers from the recovered project and adds 36 new pixel-art designs: 12 revival designs, including a pulsing heart and blinking robot, plus 24 static cute/meme designs drawn on a 16×16 source grid. All are exported as transparent sticker assets for Messages. No login, purchase, account setup or server access is required. Open Messages and select the 8 bit art sticker pack to test sending and placing stickers. The app does not provide a separate home-screen editor. The browser Studio in the source repository is a local development prototype and is not bundled in this submission.
 
 Replace these draft statements if the final build changes. Enter the review contact details requested by App Store Connect separately; the public support address does not establish a reviewer phone number.
 

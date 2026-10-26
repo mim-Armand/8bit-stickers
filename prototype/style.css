@@ -1315,3 +1315,8 @@ dialog::backdrop {
   outline: 3px solid var(--purple);
   outline-offset: 3px;
 }
+.pixel-download {
+  display: block;
+  margin: 12px 0 5px;
+  text-align: center;
+}

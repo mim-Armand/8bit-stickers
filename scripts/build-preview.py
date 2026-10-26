@@ -32,6 +32,7 @@ for entry in json.loads((PACK / 'Contents.json').read_text())['stickers']:
 manifest = ROOT / 'art/manifest.json'
 if manifest.exists():
     fresh = [{**item, 'original': False} for item in json.loads(manifest.read_text())['stickers']]
+    fresh.sort(key=lambda item: 0 if item.get('collection') == 'tiny-pixels' else 1)
     items = fresh + items
 out = ROOT / 'prototype/catalog.js'
 out.parent.mkdir(exist_ok=True)
