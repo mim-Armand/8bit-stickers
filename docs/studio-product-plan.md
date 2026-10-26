@@ -1,8 +1,8 @@
 # Sticker Studio product plan
 
-Updated October 26, 2026. The owner has chosen the future product direction: **native Studio inside Messages, on the existing 8 bit art listing, with an optional one-time US$1 Studio Unlock**. This is a documented plan; the native editor and purchase code have not been built.
+Updated October 26, 2026. The owner has chosen the future product direction: **native Studio inside Messages, on the existing 8 bit art listing, with an optional one-time US$1 Studio Unlock**. The native editor, drafts and local purchase flows are now implemented for testing only; see the [local testing guide](native-studio-local.md). Production purchase setup and release remain deferred.
 
-**Start future implementation with [the native Studio implementation and release handoff](native-studio-implementation-plan.md).** It defines feature access, screen behavior, source layout, catalogue migration, the 16×16 model, local drafts, StoreKit state handling, tests and release gates. [Monetization decisions](monetization-options.md) record the price target and unresolved configuration choices.
+**Start local testing with [the native Studio guide](native-studio-local.md); use [the implementation/release handoff](native-studio-implementation-plan.md) for the full contract and remaining release work.** It defines feature access, screen behavior, source layout, catalogue migration, the 16×16 model, local drafts, StoreKit state handling, tests and release gates. [Monetization decisions](monetization-options.md) record the price target and unresolved configuration choices.
 
 ## Product decision
 
@@ -13,7 +13,7 @@ Updated October 26, 2026. The owner has chosen the future product direction: **n
 | Included free | Included stickers, categories, search, favorites, ordinary sticker sending/placement |
 | Optional paid tools | Native 16×16 editor, exact-grid remix templates, multiple named local drafts, custom sticker creation/insertion and PNG export |
 | Purchase | One permanent non-consumable **Studio Unlock**, intended USA base price **US$1.00**; localized prices from Apple; restore supported |
-| Data | Device-local drafts/favorites, no developer account or backend; restoring purchases does not restore deleted local drawings |
+| Data | Device-local drafts/favorites, no app-specific account or backend; restoring purchases does not restore deleted local drawings |
 | Hosting | No new hosting for native Studio. Existing support/privacy pages remain on GitHub Pages. |
 
 All included catalogue art remains available without buying Studio. There is no per-drawing or per-send charge and no subscription. Exact $1.00 **IAP** price-point availability must be checked when the product is configured; the earlier $1.00 app-download price point does not establish it. Family Sharing remains off/undecided pending an explicit owner choice because enabling it is irreversible.
@@ -24,6 +24,7 @@ Apple allows a standalone sticker pack to become a custom standalone iMessage ap
 
 - **Submitted 1.2 (5):** forty-six stickers, no native editor or StoreKit code. Last verified October 26, 2026 as Waiting for Review with automatic release after approval and a published Data Not Collected label. Preserve `v1.2-build5-submitted`, its signed archive, [metadata snapshot](../release/1.2-build5-metadata.json), screenshot manifest and [release record](../release/release-status.json). Recheck live status when resuming.
 - **Development 1.3 (6):** sixty-seven stickers, including twenty-one more memes since submitted 1.2 (5) and five 67 designs. The preceding sixty-sticker source passed unsigned simulator/device builds and art/browser checks; verification for the latest seven is recorded separately in [verification notes](verification.md). Not uploaded/submitted. It can ship as an art update before Studio; the likely separate Studio release would then be 1.4, with version/build confirmed later.
+- **Local native Studio 1.4 (7):** `NativeStudio/Studio.xcodeproj` contains the custom standalone Messages extension and a preview test host. Free browsing/favorites, 16×16 editing, multi-drafts and local purchase/restore/refund flows are implemented. No production product or submission has been created.
 - **Browser Studio:** `http://127.0.0.1:8787/prototype/`, served locally by Python. It is a reference prototype, not bundled native functionality or a public website. Its editor currently uses 32×32 cells and stores one draft in browser localStorage. Native Studio deliberately uses 16×16 / 256 cells and multiple saved documents. Browser data does not automatically migrate.
 
 The full included catalogue is built from ten classics and fifty-seven generated designs; `art/manifest.json` contains only the fifty-seven generated entries. The native migration must include all sixty-seven. Forty-five sources are true 16×16 and eligible for exact-grid remixing; do not silently downsample legacy / 50×50 art or flatten animations.
@@ -34,7 +35,7 @@ The existing [app page](https://mim-armand.github.io/8bit-stickers/), [support p
 
 The interactive web Studio is not deployed there. A future static `/studio/` route is optional and separate; native editing does not depend on it. If later publishing the web editor, deploy an intentional static output rather than the whole local repository server. A web/native purchase bridge, cloud drafts and a normal home-screen app are outside the first Studio release.
 
-## Sequence for a future iteration
+## Production sequence after local testing
 
 1. Read the [implementation handoff](native-studio-implementation-plan.md) and current Git/App Store status. Keep submitted 1.2 and development 1.3 separate.
 2. Prove conversion to a custom standalone Messages extension, native insertion and StoreKit purchase presentation on a device while preserving identity.
@@ -42,4 +43,4 @@ The interactive web Studio is not deployed there. A future static `/studio/` rou
 4. Add the permanent StoreKit unlock and purchase/restore/refund/offline behavior. Validate the exact IAP price point; retain all drafts on entitlement loss.
 5. Pass the specified model/UI/StoreKit/device tests, prepare actual native screenshots and revised support/privacy copy, and submit the first IAP with the new app version when release is authorized.
 
-No app price, IAP product, Apple submission, public website or binary was changed by this planning work. The implementation milestones and acceptance criteria are the work queue; this summary should not be interpreted as a completed feature list.
+Local native code now exists; its current verification and limitations are recorded in [the testing guide](native-studio-local.md) and [verification notes](verification.md). App price, live IAP products, Apple submissions and public hosting remain unchanged. The remaining production milestones do not authorize a release.

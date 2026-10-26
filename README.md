@@ -39,11 +39,28 @@ Open **http://127.0.0.1:8787/prototype/**. Python 3 is the only runtime needed t
 
 The Studio is a working product experiment. Search, favorites, chat previews and the editor are **not bundled into the native sticker pack**. It does not send messages or install exported art into Messages automatically. Editing animation loads one frame and exports a static PNG.
 
-The [public app/support site](https://mim-armand.github.io/8bit-stickers/), [support page](https://mim-armand.github.io/8bit-stickers/support/) and [privacy policy](https://mim-armand.github.io/8bit-stickers/privacy/) are now hosted on **GitHub Pages**. The interactive Studio is **not** published there; it remains localhost only. The owner has chosen a future native Studio **inside Messages** on this same listing, with free browsing/search/favorites and a permanent **Studio Unlock** targeting US$1.00. Apple's app-type rules require a new app record for a full home-screen Studio app.
+The [public app/support site](https://mim-armand.github.io/8bit-stickers/), [support page](https://mim-armand.github.io/8bit-stickers/support/) and [privacy policy](https://mim-armand.github.io/8bit-stickers/privacy/) are now hosted on **GitHub Pages**. The interactive Studio is **not** published there; it remains localhost only. The owner has chosen a native Studio **inside Messages** on this same listing, with free browsing/search/favorites and a permanent **Studio Unlock** targeting US$1.00. Apple's app-type rules require a new app record for a full home-screen Studio app.
 
-**Future implementation starts at [the native Studio build and release handoff](docs/native-studio-implementation-plan.md).** It defines the 16×16 editor, multi-draft persistence, StoreKit purchase/restore/offline behavior, source layout, milestone acceptance tests and first-IAP release checklist. The browser editor currently uses a 32×32 grid and is an interaction reference, not the native data model. This plan changes no binary, price, Apple submission or hosting.
+**The [native Studio build and release handoff](docs/native-studio-implementation-plan.md) records the product contract.** It defines the 16×16 editor, multi-draft persistence, StoreKit purchase/restore/offline behavior, source layout, milestone acceptance tests and first-IAP release checklist. The browser editor currently uses a 32×32 grid and is an interaction reference, not the native data model. The local native implementation is described below; production pricing, Apple submission and hosting remain unchanged.
 
 ![Sticker Studio](docs/previews/studio-desktop.png)
+
+## Native Studio — local testing
+
+The planned Studio is now implemented as a **local native build**: free search/favorites for all 67 stickers, an optional one-time $1 test unlock, a true 16×16 editor, 45 exact-grid remix templates, multiple saved drafts, PNG export and actual Messages insertion. It saves as you draw, resumes the requested drawing after unlock, and keeps existing work available after refund/revocation.
+
+Open [`NativeStudio/Studio.xcodeproj`](NativeStudio/Studio.xcodeproj). Choose **Studio Local** to try the shared UI in a simulator preview app, or **Studio Messages Local** for the actual standalone Messages extension. The preview host is a development aid with its own local identity; the intended public app remains inside Messages on the existing listing.
+
+```sh
+./scripts/run-native-studio.sh preview
+./scripts/run-native-studio.sh messages
+```
+
+For an interactive browser view of the **actual native simulator app**, open **http://127.0.0.1:8792/** while `scripts/run-native-viewer.sh SIMULATOR_UUID` is running. This is useful where the Simulator window app is unavailable; it supports tap, drag and text entry, stays on localhost and is excluded from the Messages binary.
+
+The unlock is marked **Local test — no charge**. The default mode simulates payment; the bundled StoreKit configuration also supports Apple's local transaction tests. Normal release builds disable checkout. No Apple products, uploads, submissions or pricing have been changed. The separate sticker-only project remains 1.3 (6); local Studio uses 1.4 (7) only for testing.
+
+See the [local testing guide](docs/native-studio-local.md) for test controls, StoreKit mode, saved-draft behavior, source layout and remaining production work. Current evidence is in [verification notes](docs/verification.md). Keep all release activity deferred until the owner asks to proceed.
 
 ## Art you can keep editing
 

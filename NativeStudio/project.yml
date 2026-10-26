@@ -1,0 +1,166 @@
+name: Studio
+options:
+  bundleIdPrefix: eu.armand
+  deploymentTarget:
+    iOS: '15.0'
+  createIntermediateGroups: true
+configs:
+  Debug: debug
+  Release: release
+settings:
+  base:
+    SWIFT_VERSION: '5.0'
+    TARGETED_DEVICE_FAMILY: '1,2'
+    MARKETING_VERSION: '1.4'
+    CURRENT_PROJECT_VERSION: '7'
+    CODE_SIGNING_ALLOWED: NO
+    CODE_SIGN_STYLE: Manual
+    ENABLE_USER_SCRIPT_SANDBOXING: YES
+    SWIFT_ACTIVE_COMPILATION_CONDITIONS: '$(inherited) STUDIO_LOCAL_TESTING'
+    SKIP_INSTALL: YES
+  configs:
+    Debug:
+      SWIFT_ACTIVE_COMPILATION_CONDITIONS: '$(inherited) DEBUG STUDIO_LOCAL_TESTING'
+      SWIFT_OPTIMIZATION_LEVEL: '-Onone'
+      ENABLE_TESTABILITY: YES
+targets:
+  StudioLocal:
+    type: application
+    platform: iOS
+    sources:
+      - Core
+      - Commerce
+      - Views
+      - Integration/CatalogStore.swift
+      - LocalApp
+      - path: Resources/NativeCatalog.json
+      - path: ../Config/Studio.storekit
+        buildPhase: resources
+      - path: Resources/Stickers
+        type: folder
+      - path: ../8 bit art/PrivacyInfo.xcprivacy
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: eu.armand.pixelstudio.local
+        PRODUCT_MODULE_NAME: StudioLocal
+        GENERATE_INFOPLIST_FILE: YES
+        INFOPLIST_KEY_CFBundleDisplayName: '8 Bit Studio Local'
+        INFOPLIST_KEY_UILaunchScreen_Generation: YES
+        INFOPLIST_KEY_ITSAppUsesNonExemptEncryption: NO
+  StudioMessages:
+    type: app-extension.messages
+    platform: iOS
+    sources:
+      - Core
+      - Commerce
+      - Views
+      - Integration
+      - path: Resources/NativeCatalog.json
+      - path: Resources/Stickers
+        type: folder
+      - path: Resources/Icons.xcassets
+      - path: ../8 bit art/PrivacyInfo.xcprivacy
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: eu.armand.--bit-art.StickerPackExtension
+        INFOPLIST_FILE: Config/Messages-Info.plist
+        APPLICATION_EXTENSION_API_ONLY: YES
+        ASSETCATALOG_COMPILER_APPICON_NAME: iMessage App Icon
+  StudioMessagesHost:
+    type: application.messages
+    platform: iOS
+    sources:
+      - path: Resources/Icons.xcassets
+      - path: ../8 bit art/PrivacyInfo.xcprivacy
+    dependencies:
+      - target: StudioMessages
+        embed: true
+        codeSign: false
+    settings:
+      base:
+        PRODUCT_NAME: 8 bit art
+        PRODUCT_BUNDLE_IDENTIFIER: eu.armand.--bit-art
+        INFOPLIST_FILE: Config/Host-Info.plist
+        ASSETCATALOG_COMPILER_APPICON_NAME: iMessage App Icon
+  StudioCoreTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - CoreTests
+      - CommerceTests
+      - path: ../Config/Studio.storekit
+        buildPhase: resources
+    dependencies:
+      - target: StudioLocal
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: eu.armand.pixelstudio.local.tests
+        GENERATE_INFOPLIST_FILE: YES
+        TEST_HOST: '$(BUILT_PRODUCTS_DIR)/StudioLocal.app/StudioLocal'
+        BUNDLE_LOADER: '$(TEST_HOST)'
+  StudioUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources:
+      - UITests
+    dependencies:
+      - target: StudioLocal
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: eu.armand.pixelstudio.local.uitests
+        GENERATE_INFOPLIST_FILE: YES
+  StudioMessagesTests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources: [MessageTests]
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: eu.armand.pixelstudio.messages.tests
+        GENERATE_INFOPLIST_FILE: YES
+  StudioPreviewBridgeTests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources: [PreviewBridge]
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: eu.armand.pixelstudio.preview.tests
+        GENERATE_INFOPLIST_FILE: YES
+schemes:
+  Studio Local:
+    build:
+      targets:
+        StudioLocal: [run, test, analyze]
+    run:
+      config: Debug
+      storeKitConfiguration: ../Config/Studio.storekit
+    test:
+      config: Debug
+      targets:
+        - StudioCoreTests
+        - StudioUITests
+  Studio Messages Local:
+    build:
+      targets:
+        StudioMessagesHost: [run, test, analyze]
+    run:
+      config: Debug
+      askForAppToLaunch: true
+      storeKitConfiguration: ../Config/Studio.storekit
+  Studio Messages Tests:
+    build:
+      targets:
+        StudioMessagesTests: [test]
+    test:
+      config: Debug
+      targets:
+        - StudioMessagesTests
+  Studio Browser Preview:
+    build:
+      targets:
+        StudioPreviewBridgeTests: [test]
+    test:
+      config: Debug
+      environmentVariables:
+        STUDIO_NATIVE_PREVIEW_BRIDGE: '1'
+      targets:
+        - StudioPreviewBridgeTests
