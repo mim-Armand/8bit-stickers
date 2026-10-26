@@ -41,13 +41,15 @@ The Studio is a working product experiment. Search, favorites, chat previews and
 
 The [public app/support site](https://mim-armand.github.io/8bit-stickers/), [support page](https://mim-armand.github.io/8bit-stickers/support/) and [privacy policy](https://mim-armand.github.io/8bit-stickers/privacy/) are now hosted on **GitHub Pages**. The interactive Studio is **not** published there; it remains localhost only. The owner has chosen a native Studio **inside Messages** on this same listing, with free browsing/search/favorites and a permanent **Studio Unlock** targeting US$1.00. Apple's app-type rules require a new app record for a full home-screen Studio app.
 
-**The [native Studio build and release handoff](docs/native-studio-implementation-plan.md) records the product contract.** It defines the 16×16 editor, multi-draft persistence, StoreKit purchase/restore/offline behavior, source layout, milestone acceptance tests and first-IAP release checklist. The browser editor currently uses a 32×32 grid and is an interaction reference, not the native data model. The local native implementation is described below; production pricing, Apple submission and hosting remain unchanged.
+**The [native Studio build and release handoff](docs/native-studio-implementation-plan.md) records the product contract.** It defines the 16×16 editor, multi-draft persistence, StoreKit purchase/restore/offline behavior, source layout, milestone acceptance tests and first-IAP release checklist. The browser editor currently uses a 32×32 grid and is an interaction reference, not the native data model. The native implementation is described below; a draft Studio Unlock product and exact US$1.00 price are configured for sandbox testing. Public submission, app-download pricing and hosting remain unchanged.
 
 ![Sticker Studio](docs/previews/studio-desktop.png)
 
 ## Native Studio — TestFlight and local testing
 
 **Internal TestFlight 1.4 (8) is available, and the account holder is invited.** Install 8 bit art from TestFlight, open it inside Messages, then choose **Studio → Enable Studio for this beta**. All tools are free during this beta; no purchase is made. See the [TestFlight installation and verification guide](docs/studio-testflight.md). The pending public 1.2 (5) review and automatic-release setting are unchanged.
+
+**Apple sandbox testing is now configured separately for 1.4 (9).** The owner chose to test Apple's actual purchase and restore flow. Studio Unlock is registered with an exact US$1.00 USA price; sandbox purchases make no real charge and do not confer public-release ownership. See the [sandbox testing guide](docs/studio-sandbox.md) for its current build status and device checks. Build 8 retains its free-beta behavior.
 
 The planned Studio is now implemented in a **native Messages build**: free search/favorites for all 67 stickers, an optional one-time $1 test unlock, a true 16×16 editor, 45 exact-grid remix templates, multiple saved drafts, PNG export and actual Messages insertion. It saves as you draw, resumes the requested drawing after unlock, and keeps existing work available after refund/revocation.
 
@@ -60,9 +62,9 @@ Open [`NativeStudio/Studio.xcodeproj`](NativeStudio/Studio.xcodeproj). Choose **
 
 For an interactive browser view of the **actual native simulator app**, open **http://127.0.0.1:8792/** while `scripts/run-native-viewer.sh SIMULATOR_UUID` is running. This is useful where the Simulator window app is unavailable; it supports tap, drag and text entry, stays on localhost and is excluded from the Messages binary.
 
-Debug builds mark the unlock **Local test — no charge** and simulate payment; the bundled StoreKit configuration also supports Apple's local transaction tests. The dedicated TestFlight configuration uses **free beta activation** without StoreKit requests. Normal Release builds disable checkout. No live product or price was created. The separate sticker-only project remains 1.3 (6); local Debug uses 1.4 (7), while the uploaded internal beta is 1.4 (8).
+Debug builds mark the unlock **Local test — no charge** and simulate payment; the bundled StoreKit configuration also supports Apple's local transaction tests. The **TestFlight** configuration/build 8 uses free beta activation. **TestFlightSandbox**/build 9 requires verified Apple sandbox transactions and displays Apple's localized product price. Normal Release builds disable checkout. The draft product has no public-sale availability or review submission. The separate sticker-only project remains 1.3 (6), and local Debug uses 1.4 (7).
 
-See the [local testing guide](docs/native-studio-local.md) for test controls, StoreKit mode, saved-draft behavior, source layout and remaining production work. Current evidence is in [verification notes](docs/verification.md). Public release and production purchase setup remain deferred until the owner asks to proceed.
+See the [local testing guide](docs/native-studio-local.md) for test controls, StoreKit mode, saved-draft behavior, source layout and remaining production work. Current evidence is in [verification notes](docs/verification.md). Public release, public-sale availability and production checkout remain deferred until the owner asks to proceed.
 
 ## Art you can keep editing
 
