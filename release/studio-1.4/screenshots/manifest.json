@@ -1,0 +1,165 @@
+{
+  "appID": "1366485724",
+  "version": "1.4",
+  "build": "10",
+  "families": [
+    {
+      "checkoutEvidence": "UI-initiated verified Xcode transaction completed",
+      "capturedAtUTC": "2026-10-27T05:23:02.152901+00:00",
+      "appID": "1366485724",
+      "hostBundleID": "eu.armand.--bit-art",
+      "extensionBundleID": "eu.armand.--bit-art.StickerPackExtension",
+      "version": "1.4",
+      "build": "10",
+      "deviceFamily": "ipad-13",
+      "simulatorUUID": "AD50D99B-D805-4B09-89DE-F6E46599C79F",
+      "configuration": "Screenshots",
+      "captureSource": "simctl native physical screen requested by capture-only local test bridge; no padding/resizing",
+      "context": "Actual custom extension inside Messages, Apple simulator fictional conversation fixture",
+      "purchaseFixture": "Verified Xcode StoreKit transaction for eu.armand.bitart.studio.unlock; no entitlement bypass",
+      "publicUICopy": true,
+      "stickerCount": 67,
+      "templates": 45,
+      "wineExcluded": true,
+      "messageSent": false,
+      "resultBundle": "build/studio-release/capture-ipad-13-20261027002145/capture.xcresult",
+      "assets": [
+        {
+          "name": "01-free-stickers",
+          "path": "release/studio-1.4/screenshots/ipad-13/01-free-stickers.png",
+          "size": [
+            2064,
+            2752
+          ],
+          "mode": "RGB",
+          "sha256": "da5914b58d96d40b14fdb0addd82188e0cb025b23cd9fdd2c2d45e56d2a4e2b8",
+          "purpose": "app-store"
+        },
+        {
+          "name": "02-six-seven-reactions",
+          "path": "release/studio-1.4/screenshots/ipad-13/02-six-seven-reactions.png",
+          "size": [
+            2064,
+            2752
+          ],
+          "mode": "RGB",
+          "sha256": "698934521649e6070c6ed6922f94d11bae2984df3b771361917b3005dd4706c4",
+          "purpose": "app-store"
+        },
+        {
+          "name": "03-pixel-studio",
+          "path": "release/studio-1.4/screenshots/ipad-13/03-pixel-studio.png",
+          "size": [
+            2064,
+            2752
+          ],
+          "mode": "RGB",
+          "sha256": "e67fcd38181485a0b02b07b9db13856ec61709f70cd4bb347fcea2083e83e8c0",
+          "purpose": "app-store"
+        },
+        {
+          "name": "04-saved-drafts",
+          "path": "release/studio-1.4/screenshots/ipad-13/04-saved-drafts.png",
+          "size": [
+            2064,
+            2752
+          ],
+          "mode": "RGB",
+          "sha256": "861c5eced361654ff2608ce59298764c163f982b9a2b19d1d1839a821fdf95f5",
+          "purpose": "app-store"
+        },
+        {
+          "name": "review-studio-unlock",
+          "path": "release/studio-1.4/screenshots/iap-review-ipad-13.png",
+          "size": [
+            2064,
+            2752
+          ],
+          "mode": "RGB",
+          "sha256": "979dc309a5d366efafedbf4950be19be018602e420a0320b18d188210ae2eac7",
+          "purpose": "iap-review"
+        }
+      ],
+      "captureFixturePolicy": "Fresh dedicated simulators for future runs; harness does not delete saved drawings"
+    },
+    {
+      "checkoutEvidence": "UI-initiated verified Xcode transaction completed",
+      "capturedAtUTC": "2026-10-27T05:18:15.033588+00:00",
+      "appID": "1366485724",
+      "hostBundleID": "eu.armand.--bit-art",
+      "extensionBundleID": "eu.armand.--bit-art.StickerPackExtension",
+      "version": "1.4",
+      "build": "10",
+      "deviceFamily": "iphone-6.1",
+      "simulatorUUID": "91AC9DEF-D385-4B7D-9D27-E24EA91156F5",
+      "configuration": "Screenshots",
+      "captureSource": "simctl native physical screen requested by capture-only local test bridge; no padding/resizing",
+      "context": "Actual custom extension inside Messages, Apple simulator fictional conversation fixture",
+      "purchaseFixture": "Verified Xcode StoreKit transaction for eu.armand.bitart.studio.unlock; no entitlement bypass",
+      "publicUICopy": true,
+      "stickerCount": 67,
+      "templates": 45,
+      "wineExcluded": true,
+      "messageSent": false,
+      "resultBundle": "build/studio-release/capture-iphone-6.1-20261027001641/capture.xcresult",
+      "assets": [
+        {
+          "name": "01-free-stickers",
+          "path": "release/studio-1.4/screenshots/iphone-6.1/01-free-stickers.png",
+          "size": [
+            1179,
+            2556
+          ],
+          "mode": "RGB",
+          "sha256": "4b487e684c0d56d7942beafdd9cdca15eb1d86e4bc7832a1bcdc5a4314eeb3ad",
+          "purpose": "app-store"
+        },
+        {
+          "name": "02-six-seven-reactions",
+          "path": "release/studio-1.4/screenshots/iphone-6.1/02-six-seven-reactions.png",
+          "size": [
+            1179,
+            2556
+          ],
+          "mode": "RGB",
+          "sha256": "f32b94e8bf17d5e73794ee2b29c21c8f08fd2223f73498a44ea8935789f95f44",
+          "purpose": "app-store"
+        },
+        {
+          "name": "03-pixel-studio",
+          "path": "release/studio-1.4/screenshots/iphone-6.1/03-pixel-studio.png",
+          "size": [
+            1179,
+            2556
+          ],
+          "mode": "RGB",
+          "sha256": "7d45837a3d643f8588f3e655cfa2bb77c5f7de45f62e3c763e7348fc67b18c81",
+          "purpose": "app-store"
+        },
+        {
+          "name": "04-saved-drafts",
+          "path": "release/studio-1.4/screenshots/iphone-6.1/04-saved-drafts.png",
+          "size": [
+            1179,
+            2556
+          ],
+          "mode": "RGB",
+          "sha256": "11cfa5077a470776996935a82b7b6ea4b4bca1ff8162dc014b034b2e2f38a1ea",
+          "purpose": "app-store"
+        },
+        {
+          "name": "review-studio-unlock",
+          "path": "release/studio-1.4/screenshots/iap-review-iphone-6.1.png",
+          "size": [
+            1179,
+            2556
+          ],
+          "mode": "RGB",
+          "sha256": "fdf45024f5826bb2cea02115085ad38043a8638682db6df2cf9a84aa73341410",
+          "purpose": "iap-review"
+        }
+      ],
+      "captureFixturePolicy": "Fresh dedicated simulators for future runs; harness does not delete saved drawings"
+    }
+  ]
+}

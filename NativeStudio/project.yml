@@ -9,6 +9,8 @@ configs:
   Release: release
   TestFlight: release
   TestFlightSandbox: release
+  AppStore: release
+  Screenshots: release
 settings:
   base:
     SWIFT_VERSION: '5.0'
@@ -37,6 +39,16 @@ settings:
       CODE_SIGNING_ALLOWED: YES
       CODE_SIGN_IDENTITY: 90776C637395C6FA5FF2E8133037AA95C594ECC7
       DEVELOPMENT_TEAM: 7N3Y4QZT3Z
+    AppStore:
+      SWIFT_ACTIVE_COMPILATION_CONDITIONS: STUDIO_APP_STORE
+      CURRENT_PROJECT_VERSION: '10'
+      CODE_SIGNING_ALLOWED: YES
+      CODE_SIGN_IDENTITY: 90776C637395C6FA5FF2E8133037AA95C594ECC7
+      DEVELOPMENT_TEAM: 7N3Y4QZT3Z
+    Screenshots:
+      SWIFT_ACTIVE_COMPILATION_CONDITIONS: STUDIO_SCREENSHOT_TESTING
+      CURRENT_PROJECT_VERSION: '10'
+      CODE_SIGNING_ALLOWED: NO
 targets:
   StudioLocal:
     type: application
@@ -52,7 +64,7 @@ targets:
         buildPhase: resources
       - path: Resources/Stickers
         type: folder
-      - path: ../8 bit art/PrivacyInfo.xcprivacy
+      - path: Resources/PrivacyInfo.xcprivacy
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: eu.armand.pixelstudio.local
@@ -73,7 +85,7 @@ targets:
       - path: Resources/Stickers
         type: folder
       - path: Resources/Icons.xcassets
-      - path: ../8 bit art/PrivacyInfo.xcprivacy
+      - path: Resources/PrivacyInfo.xcprivacy
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: eu.armand.--bit-art.StickerPackExtension
@@ -85,12 +97,14 @@ targets:
           PROVISIONING_PROFILE_SPECIFIER: 8 bit art extension App Store 20261026
         TestFlightSandbox:
           PROVISIONING_PROFILE_SPECIFIER: 8 bit art extension App Store 20261026
+        AppStore:
+          PROVISIONING_PROFILE_SPECIFIER: 8 bit art extension App Store 20261026
   StudioMessagesHost:
     type: application.messages
     platform: iOS
     sources:
       - path: Resources/Icons.xcassets
-      - path: ../8 bit art/PrivacyInfo.xcprivacy
+      - path: Resources/PrivacyInfo.xcprivacy
     dependencies:
       - target: StudioMessages
         embed: true
@@ -106,6 +120,9 @@ targets:
           SKIP_INSTALL: NO
           PROVISIONING_PROFILE_SPECIFIER: 8 bit art app App Store 20261026
         TestFlightSandbox:
+          SKIP_INSTALL: NO
+          PROVISIONING_PROFILE_SPECIFIER: 8 bit art app App Store 20261026
+        AppStore:
           SKIP_INSTALL: NO
           PROVISIONING_PROFILE_SPECIFIER: 8 bit art app App Store 20261026
   StudioCoreTests:
@@ -151,6 +168,20 @@ targets:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: eu.armand.pixelstudio.preview.tests
         GENERATE_INFOPLIST_FILE: YES
+  StudioReleaseCaptureTests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources:
+      - ReleaseCaptureTests
+      - path: ../Config/Studio.storekit
+        buildPhase: resources
+    dependencies:
+      - target: StudioMessagesHost
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: eu.armand.pixelstudio.releasecapture.tests
+        GENERATE_INFOPLIST_FILE: YES
+        TEST_TARGET_NAME: StudioMessagesHost
 schemes:
   Studio Local:
     build:
@@ -211,3 +242,21 @@ schemes:
       config: TestFlightSandbox
       targets:
         - StudioCoreTests
+  Studio App Store:
+    build:
+      targets:
+        StudioMessagesHost: all
+    archive:
+      config: AppStore
+    test:
+      config: AppStore
+      targets:
+        - StudioCoreTests
+  Studio Release Capture:
+    build:
+      targets:
+        StudioReleaseCaptureTests: [test]
+    test:
+      config: Screenshots
+      targets:
+        - StudioReleaseCaptureTests

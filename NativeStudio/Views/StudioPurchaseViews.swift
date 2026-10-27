@@ -1,4 +1,5 @@
 import SwiftUI
+import UIKit
 
 @MainActor
 struct StudioLockedView: View {
@@ -112,6 +113,8 @@ struct StudioUnlockView: View {
             .toolbar { ToolbarItem(placement: .cancellationAction) { Button("Not now") { dismiss() } } }
         }
         .navigationViewStyle(StackNavigationViewStyle())
+        .background(StudioPurchasePresentationAnchor(purchases: purchases)
+            .frame(width: 0, height: 0).allowsHitTesting(false))
         .onChange(of: purchases.isUnlocked) { unlocked in if unlocked { dismiss() } }
     }
 
@@ -170,7 +173,7 @@ struct StudioHelpView: View {
                     Link("Support instructions", destination: URL(string: "https://mim-armand.github.io/8bit-stickers/support/")!)
                     Link("Privacy policy", destination: URL(string: "https://mim-armand.github.io/8bit-stickers/privacy/")!)
                 }
-                #if DEBUG && STUDIO_LOCAL_TESTING && !STUDIO_BETA_TESTING && !STUDIO_SANDBOX_TESTING
+                #if DEBUG && STUDIO_LOCAL_TESTING && !STUDIO_BETA_TESTING && !STUDIO_SANDBOX_TESTING && !STUDIO_APP_STORE && !STUDIO_SCREENSHOT_TESTING
                 if purchases.isLocalTesting {
                     Section(header: Text("Local testing")) {
                         Text(purchases.localTestingNote ?? "Local test — no charge").font(.footnote)
@@ -200,5 +203,23 @@ struct StudioHelpView: View {
             Text(title).font(.system(.subheadline, design: .rounded).weight(.semibold))
             Text(detail).font(.footnote).foregroundColor(StudioTheme.secondary).fixedSize(horizontal: false, vertical: true)
         }.padding(.vertical, 5).accessibilityElement(children: .combine)
+    }
+}
+
+/// Supplies the visible sheet's UIKit hierarchy without accessing another app's
+/// windows. The store holds it weakly, so closing the offer releases the anchor.
+@MainActor
+private struct StudioPurchasePresentationAnchor: UIViewControllerRepresentable {
+    let purchases: StudioPurchaseStore
+
+    func makeUIViewController(context: Context) -> UIViewController {
+        let controller = UIViewController()
+        controller.view.backgroundColor = .clear
+        purchases.purchasePresentationController = controller
+        return controller
+    }
+
+    func updateUIViewController(_ controller: UIViewController, context: Context) {
+        purchases.purchasePresentationController = controller
     }
 }

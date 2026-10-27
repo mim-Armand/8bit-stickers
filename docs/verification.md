@@ -1,4 +1,14 @@
-# Verification — October 26, 2026
+# Verification — October 26–27, 2026
+
+## Public Studio candidate — 1.4 (10)
+
+The owner requested preparation of the paid Studio update. Production App Store StoreKit code passed **29 AppStore / 26 screenshot-configuration / 31 Debug** core/model checks and an additional **1 ordinary Release restriction check**. Actual Messages UI checkout completed with verified Xcode StoreKit purchases on iPhone and iPad. No remote Apple sandbox/device purchase is claimed. The visible offer supplies supported UIKit controller/scene confirmation; verified ownership is scoped to the published app/product/non-consumable and never comes from test preferences.
+
+Clean signed archive/export and Apple validation/upload succeeded with zero errors and expected hidden Messages-only warnings 90863/90984. Build `626b2c8b-f888-4d02-81f5-14999de27c89` is **VALID / APP_STORE_ELIGIBLE / IN_BETA_TESTING** and selected in the unsubmitted **1.4** draft, with **AFTER_APPROVAL** retained. Both privacy manifests declare app-local UserDefaults reason CA92.1; the IPA excludes wine, test fixtures, browser bridge, preview host and StoreKitTest.
+
+Eight reviewed native captures have **16 COMPLETE App Store/Messages placements**, and the IAP review screenshot is COMPLETE. Inherited copies were retired only from draft 1.4; published image IDs were protected. Studio Unlock's exact US$1.00 schedule and text are saved. Automatic approval review rejected enabling the proposed 175 territories, so availability remains unchanged pending explicit owner approval; the IAP currently reports MISSING_METADATA / version PREPARE_FOR_SUBMISSION. No public app/IAP review was submitted.
+
+Public **1.2 (5)** is now approved and Ready for Distribution; its prior review is COMPLETE. See the [release handoff](studio-release-preparation.md) and [sanitized status](../release/studio-1.4/preparation-status.json) for current evidence and outstanding availability/device checks. Detailed logs/readbacks and signed output stay ignored under `build/studio-release/`. Support/privacy source is updated; no website deployment occurred.
 
 ## Native Studio — sandbox purchase configuration 1.4 (9)
 
