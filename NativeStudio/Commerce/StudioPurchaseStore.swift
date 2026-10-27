@@ -1,15 +1,17 @@
 import Combine
 import Foundation
 import StoreKit
+import UIKit
 
-/// A normal build cannot initiate a purchase. The free TestFlight preview uses
-/// device-local beta access. The separate sandbox build uses verified Apple sandbox
-/// transactions only; neither path grants production purchase ownership.
+/// Only the explicit App Store configuration enables public StoreKit checkout.
+/// It uses Apple's verified transaction/entitlement context and never reads mock or
+/// free-beta ownership. Separate beta configurations remain isolated.
 /// DEBUG + STUDIO_LOCAL_TESTING enables either the deterministic simulator or, when
 /// explicitly requested by the Xcode scheme, the local StoreKit configuration.
 @MainActor
 final class StudioPurchaseStore: ObservableObject {
     static let productID = "eu.armand.bitart.studio.unlock"
+    static let appBundleID = "eu.armand.--bit-art"
 
     @Published private(set) var isUnlocked = false
     @Published private(set) var isLoading = false
@@ -19,7 +21,7 @@ final class StudioPurchaseStore: ObservableObject {
     @Published private(set) var price: String?
 
     private enum Mode {
-        case disabled, simulated, storeKit, sandboxStoreKit
+        case disabled, simulated, storeKit, sandboxStoreKit, appStore
         #if STUDIO_BETA_TESTING
         case betaPreview
         #endif
@@ -30,11 +32,31 @@ final class StudioPurchaseStore: ObservableObject {
     private var updatesTask: Task<Void, Never>?
     private var entitlementRevision: UInt64 = 0
     private var hasStarted = false
+    // A view supplied by the visible unlock sheet, rather than UIApplication's
+    // windows, so the purchase sheet is anchored to this Messages extension.
+    weak var purchasePresentationController: UIViewController?
     private static let localPurchaseKey = "studio.localSimulation.purchased"
     private static let localPendingKey = "studio.localSimulation.pending"
     private static let betaAccessKey = "studio.betaPreview.enabled"
 
-    var isLocalTesting: Bool { mode != .disabled }
+    var isLocalTesting: Bool {
+        #if STUDIO_SCREENSHOT_TESTING
+        return false
+        #else
+        return mode != .disabled && mode != .appStore
+        #endif
+    }
+    var isAppStoreRelease: Bool { mode == .appStore }
+    private var isStoreKitMode: Bool {
+        mode == .storeKit || mode == .sandboxStoreKit || mode == .appStore
+    }
+    private var usesPublicPurchaseCopy: Bool {
+        #if STUDIO_SCREENSHOT_TESTING
+        return true
+        #else
+        return isAppStoreRelease
+        #endif
+    }
     var isBetaTesting: Bool {
         #if STUDIO_BETA_TESTING
         return mode == .betaPreview
@@ -45,7 +67,7 @@ final class StudioPurchaseStore: ObservableObject {
     var isSandboxTesting: Bool { mode == .sandboxStoreKit }
     var isUsingStoreKitTesting: Bool { mode == .storeKit }
     var canPurchase: Bool {
-        isLocalTesting && (isBetaTesting || price != nil) && !isLoading && !isPurchasing && !isPending && !isUnlocked
+        mode != .disabled && (isBetaTesting || price != nil) && !isLoading && !isPurchasing && !isPending && !isUnlocked
     }
     var localTestingNote: String? {
         guard isLocalTesting else { return nil }
@@ -57,7 +79,15 @@ final class StudioPurchaseStore: ObservableObject {
     init(localTesting: Bool = false, defaults: UserDefaults = .standard,
          useStoreKitTesting: Bool? = nil) {
         self.defaults = defaults
-        #if STUDIO_SANDBOX_TESTING
+        #if STUDIO_SCREENSHOT_TESTING
+        // Capture-only configuration: real verified Xcode StoreKit transactions,
+        // with the same product UI as the public build. Never in a shipping archive.
+        mode = localTesting ? .storeKit : .disabled
+        #elseif STUDIO_APP_STORE
+        // The legacy parameter gates composition, not the purchase environment.
+        // StoreKit scopes its verified history to this installed app/store context.
+        mode = localTesting ? .appStore : .disabled
+        #elseif STUDIO_SANDBOX_TESTING
         // Never read local mock/free-beta ownership or attach Xcode's local store.
         mode = localTesting ? .sandboxStoreKit : .disabled
         #elseif STUDIO_BETA_TESTING
@@ -96,7 +126,7 @@ final class StudioPurchaseStore: ObservableObject {
             return
         }
         // A failed first price request must remain retryable from the offer sheet.
-        if hasStarted && ((mode != .storeKit && mode != .sandboxStoreKit) || product != nil) {
+        if hasStarted && (!isStoreKitMode || product != nil) {
             await refreshEntitlements()
             return
         }
@@ -110,34 +140,41 @@ final class StudioPurchaseStore: ObservableObject {
         startTransactionListener()
         await refreshEntitlements()
         do {
-            product = try await Product.products(for: [Self.productID]).first
+            product = try await Product.products(for: [Self.productID]).first {
+                $0.id == Self.productID && $0.type == .nonConsumable
+            }
             price = product?.displayPrice
             if product == nil {
-                message = isSandboxTesting
-                    ? "Studio Unlock is not available from Apple yet. Try again shortly; your drawings are safe."
+                message = (isSandboxTesting || usesPublicPurchaseCopy)
+                    ? "Studio Unlock is not available from Apple right now. Try again shortly; your drawings are safe."
                     : "The local test product is unavailable. Open the Local StoreKit scheme in Xcode and try again."
             }
         } catch {
             // Product metadata availability is separate from verified tool access.
-            message = isSandboxTesting
-                ? "Apple's test price could not load. Check your connection and try again. Your saved work and existing access are unchanged."
+            message = (isSandboxTesting || usesPublicPurchaseCopy)
+                ? "The price could not load. Check your connection and try again. Your saved work and existing access are unchanged."
                 : "The local test price could not load. Your saved work and existing access are unchanged."
         }
     }
 
-    func refreshEntitlements() async {
+    /// False means verification is unresolved; callers must not describe that as
+    /// an authoritative missing purchase or a successful restore.
+    @discardableResult
+    func refreshEntitlements() async -> Bool {
         switch mode {
         case .disabled:
-            return
+            return false
         #if STUDIO_BETA_TESTING
         case .betaPreview:
             isUnlocked = defaults.bool(forKey: Self.betaAccessKey)
             isPending = false
+            return true
         #endif
         case .simulated:
             isUnlocked = defaults.bool(forKey: Self.localPurchaseKey)
             isPending = defaults.bool(forKey: Self.localPendingKey)
-        case .storeKit, .sandboxStoreKit:
+            return true
+        case .storeKit, .sandboxStoreKit, .appStore:
             let revision = entitlementRevision
             var found = false
             var unresolved = false
@@ -155,15 +192,17 @@ final class StudioPurchaseStore: ObservableObject {
                     continue
                 }
             }
-            guard revision == entitlementRevision else { return }
+            guard revision == entitlementRevision else { return true }
             if unresolved {
                 // A verification failure cannot newly grant access or revoke a known owner.
-                message = "The test purchase could not be verified. Try Restore Purchases; your drawings are safe."
+                message = "The purchase could not be verified. Try Restore Purchases; your drawings are safe."
+                return false
             } else {
                 // StoreKit supplies locally cached verified entitlements offline as well.
                 // An authoritative empty snapshot reflects account/revocation changes.
                 isUnlocked = found
                 if found { isPending = false }
+                return true
             }
         }
     }
@@ -194,7 +233,7 @@ final class StudioPurchaseStore: ObservableObject {
         }
         #endif
         guard let product else {
-            message = isSandboxTesting
+            message = (isSandboxTesting || usesPublicPurchaseCopy)
                 ? "Studio Unlock is unavailable from Apple. Try loading the price again."
                 : "The local test product is unavailable. Try loading it again."
             return
@@ -203,7 +242,19 @@ final class StudioPurchaseStore: ObservableObject {
         message = nil
         defer { isPurchasing = false }
         do {
-            switch try await product.purchase() {
+            let result: Product.PurchaseResult
+            if #available(iOS 18.2, *), let presenter = purchasePresentationController,
+               presenter.viewIfLoaded?.window != nil {
+                result = try await product.purchase(confirmIn: presenter)
+            } else if #available(iOS 17.0, *),
+                      let scene = purchasePresentationController?.viewIfLoaded?.window?.windowScene {
+                result = try await product.purchase(confirmIn: scene)
+            } else {
+                // Earlier supported systems only expose the original overload;
+                // headless StoreKit unit sessions also take this path.
+                result = try await product.purchase()
+            }
+            switch result {
             case .success(let result):
                 await receive(result)
             case .userCancelled:
@@ -212,12 +263,14 @@ final class StudioPurchaseStore: ObservableObject {
                 isPending = true
                 message = "Purchase approval is pending. You can keep using all included stickers."
             @unknown default:
-                message = "The test purchase is not complete. You can try again."
+                message = "The purchase is not complete. You can try again."
             }
         } catch {
-            message = isSandboxTesting
-                ? "The sandbox purchase could not complete. Try again; no real payment is made in TestFlight."
-                : "The local test purchase could not complete. Try again."
+            message = usesPublicPurchaseCopy
+                ? "The purchase could not complete. Please try again. Your drawings are safe."
+                : (isSandboxTesting
+                   ? "The sandbox purchase could not complete. Try again; no real payment is made in TestFlight."
+                   : "The local test purchase could not complete. Try again.")
         }
     }
 
@@ -244,16 +297,17 @@ final class StudioPurchaseStore: ObservableObject {
         }
         do {
             try await AppStore.sync()
-            await refreshEntitlements()
+            guard await refreshEntitlements() else { return }
             message = isUnlocked ? "Studio purchase restored."
-                : "No Studio purchase found for this test account."
+                : (usesPublicPurchaseCopy ? "No Studio purchase was found for this Apple Account."
+                   : "No Studio purchase found for this test account.")
         } catch {
             message = "Restore could not complete. Try again; your existing work is safe."
         }
     }
 
     private func startTransactionListener() {
-        guard (mode == .storeKit || mode == .sandboxStoreKit), updatesTask == nil else { return }
+        guard isStoreKitMode, updatesTask == nil else { return }
         updatesTask = Task { [weak self] in
             for await result in Transaction.updates {
                 guard !Task.isCancelled, let self else { return }
@@ -267,27 +321,33 @@ final class StudioPurchaseStore: ObservableObject {
         case .verified(let transaction):
             guard transaction.productID == Self.productID else { return }
             guard acceptsTransaction(transaction) else {
-                message = isSandboxTesting
-                    ? "This transaction is not from Apple's sandbox. No access was granted."
-                    : "A nonlocal transaction was blocked. This build only supports local tests."
+                message = usesPublicPurchaseCopy
+                    ? "This purchase could not be verified for Studio. No new access was granted."
+                    : (isSandboxTesting
+                       ? "This transaction is not from Apple's sandbox. No access was granted."
+                       : "A nonlocal transaction was blocked. This build only supports local tests.")
                 return
             }
             entitlementRevision &+= 1
             isPending = false
             isUnlocked = transaction.revocationDate == nil
             message = isUnlocked
-                ? (isSandboxTesting ? "Sandbox purchase complete. Studio is unlocked for testing." : "Local test complete. Studio is unlocked.")
-                : "Test purchase revoked. Your saved drawings remain available to view and export."
+                ? (usesPublicPurchaseCopy ? "Studio is unlocked. Have fun creating!"
+                   : (isSandboxTesting ? "Sandbox purchase complete. Studio is unlocked for testing." : "Local test complete. Studio is unlocked."))
+                : "Studio access was revoked. Your saved drawings remain available to view and export."
             // Access is delivered first. Repeated deliveries and refund updates are idempotent.
             await transaction.finish()
         case .unverified(let transaction, _):
             guard transaction.productID == Self.productID else { return }
-            message = "The test purchase could not be verified. No new access was granted."
+            message = "The purchase could not be verified. No new access was granted."
         }
     }
 
     private func acceptsTransaction(_ transaction: Transaction) -> Bool {
         // This function is reached only after StoreKit signature verification.
+        if mode == .appStore && !acceptsAppStoreIdentity(
+            appBundleID: transaction.appBundleID, productID: transaction.productID,
+            productType: transaction.productType) { return false }
         if #available(iOS 16.0, *) {
             return acceptsTransactionEnvironment(transaction.environment.rawValue)
         }
@@ -300,8 +360,19 @@ final class StudioPurchaseStore: ObservableObject {
         switch mode {
         case .storeKit: return environment.lowercased() == "xcode"
         case .sandboxStoreKit: return environment.lowercased() == "sandbox"
+        case .appStore:
+            // Apple uses sandbox for App Review/TestFlight and production for sale.
+            // Access always comes from the current install's verified StoreKit
+            // history; no persistent beta flag can migrate test access into sale.
+            return ["production", "sandbox"].contains(environment.lowercased())
         default: return false
         }
+    }
+
+    func acceptsAppStoreIdentity(appBundleID: String, productID: String,
+                                 productType: Product.ProductType) -> Bool {
+        mode == .appStore && appBundleID == Self.appBundleID
+            && productID == Self.productID && productType == .nonConsumable
     }
 
     #if DEBUG && STUDIO_LOCAL_TESTING

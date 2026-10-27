@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>destination</key>
+	<string>export</string>
+	<key>manageAppVersionAndBuildNumber</key>
+	<false/>
+	<key>method</key>
+	<string>app-store-connect</string>
+	<key>provisioningProfiles</key>
+	<dict>
+		<key>eu.armand.--bit-art</key>
+		<string>8 bit art app App Store 20261026</string>
+		<key>eu.armand.--bit-art.StickerPackExtension</key>
+		<string>8 bit art extension App Store 20261026</string>
+	</dict>
+	<key>signingCertificate</key>
+	<string>90776C637395C6FA5FF2E8133037AA95C594ECC7</string>
+	<key>signingStyle</key>
+	<string>manual</string>
+	<key>teamID</key>
+	<string>7N3Y4QZT3Z</string>
+	<key>uploadSymbols</key>
+	<true/>
+</dict>
+</plist>

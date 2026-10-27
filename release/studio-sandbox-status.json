@@ -1,5 +1,5 @@
 {
-  "verifiedAtUTC": "2026-10-26T23:07:56.971Z",
+  "verifiedAtUTC": "2026-10-27T04:55:12.000667+00:00",
   "app": {
     "appleID": "1366485724",
     "hostBundleID": "eu.armand.--bit-art",
@@ -10,18 +10,22 @@
     "build": "9",
     "deliveryID": "97fbb69d-ef07-4c84-800a-3798ceaec769",
     "uploadAccepted": true,
-    "processingState": null,
-    "distributionState": "AWAITING_APPLE_PROCESSING",
+    "processingState": "VALID",
+    "distributionState": "IN_BETA_TESTING",
     "intendedAudience": "INTERNAL_ONLY",
     "sandboxStoreKitEnabled": true,
     "freeBetaActivationEnabled": false,
     "physicalDevicePurchaseVerified": false,
     "physicalDeviceRestoreVerified": false,
-    "uploadState": "PROCESSING",
+    "uploadState": "COMPLETE",
     "processingErrors": [],
     "uploadedDate": "2026-10-26T16:00:19-07:00",
-    "buildID": null,
-    "sourceCommit": "cb1a08d1a911e50fd57a9bfbdf0c8fe2079e3d19"
+    "buildID": "97fbb69d-ef07-4c84-800a-3798ceaec769",
+    "sourceCommit": "cb1a08d1a911e50fd57a9bfbdf0c8fe2079e3d19",
+    "audience": "INTERNAL_ONLY",
+    "internalState": "IN_BETA_TESTING",
+    "externalState": "NOT_APPLICABLE",
+    "expirationDate": "2027-01-24T15:14:00-08:00"
   },
   "product": {
     "appleID": "6827336076",
@@ -81,9 +85,10 @@
     "version": "1.2",
     "build": "5",
     "selectedBuildID": "ecc379bc-4471-489b-887b-826ec30d9c6b",
-    "state": "WAITING_FOR_REVIEW",
+    "state": "READY_FOR_SALE",
     "releaseType": "AFTER_APPROVAL",
-    "unchanged": true
+    "unchanged": true,
+    "approved": true
   },
   "evidenceDirectory": "build/studio-sandbox/ (ignored; signed outputs and private account readback)",
   "internalTesting": {
@@ -93,7 +98,7 @@
     "automaticAllBuilds": true,
     "testerCount": 1,
     "ownerState": "INVITED",
-    "buildAvailable": false,
-    "availabilityRequiresAppleProcessing": true
+    "buildAvailable": true,
+    "availabilityRequiresAppleProcessing": false
   }
 }

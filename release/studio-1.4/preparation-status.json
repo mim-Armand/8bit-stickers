@@ -1,0 +1,273 @@
+{
+  "verifiedAtUTC": "2026-10-27T05:37:47.977Z",
+  "app": {
+    "appleID": "1366485724",
+    "hostBundleID": "eu.armand.--bit-art",
+    "extensionBundleID": "eu.armand.--bit-art.StickerPackExtension"
+  },
+  "candidate": {
+    "version": "1.4",
+    "build": "10",
+    "versionID": "2d64f5fa-b9c8-4d60-94ec-1cf3f03e65d0",
+    "localeID": "d56f8cc2-94b7-420a-816a-9a939395c054",
+    "appInfoID": "cfad5390-7194-471a-a7e8-0a9fd740fd0c",
+    "appStoreState": "PREPARE_FOR_SUBMISSION",
+    "releaseType": "AFTER_APPROVAL",
+    "uploadAccepted": true,
+    "deliveryID": "626b2c8b-f888-4d02-81f5-14999de27c89",
+    "uploadState": "COMPLETE",
+    "buildID": "626b2c8b-f888-4d02-81f5-14999de27c89",
+    "processingState": "VALID",
+    "audience": "APP_STORE_ELIGIBLE",
+    "selected": true,
+    "reviewSubmitted": false,
+    "internalBetaState": "IN_BETA_TESTING",
+    "externalBetaState": "READY_FOR_BETA_SUBMISSION",
+    "expirationDate": "2027-01-24T21:10:31-08:00"
+  },
+  "product": {
+    "appleID": "6827336076",
+    "productID": "eu.armand.bitart.studio.unlock",
+    "metadataVersionID": "45b42e0b-bc8a-4835-8bc8-4d766e48bda1",
+    "type": "NON_CONSUMABLE",
+    "usaPrice": "1.00",
+    "currency": "USD",
+    "priceScheduleVerified": true,
+    "familySharing": false,
+    "reviewSubmitted": false,
+    "salesAvailabilityApplied": true,
+    "proposedTerritoryCount": 175,
+    "proposal": "release/studio-1.4/availability-plan.json",
+    "availabilityRequiresOwnerApproval": false,
+    "state": "READY_TO_SUBMIT",
+    "metadataVersionState": "PREPARE_FOR_SUBMISSION",
+    "reviewImageID": "b812ad78-1a48-4718-ad9c-3bd930753b4f",
+    "reviewImageState": "COMPLETE",
+    "availabilityId": "6827336076",
+    "availableTerritoryCount": 175,
+    "availabilityExactMatch": true,
+    "availableInNewTerritories": false,
+    "availabilityVerifiedAtUTC": "2026-10-27T05:37:34.751Z",
+    "ownerAvailabilityApproval": {
+      "granted": true,
+      "date": "2026-10-27",
+      "scope": "App existing175territories"
+    }
+  },
+  "automaticApprovalReview": {
+    "action": "Enable IAP sales availability across the app\u2019s existing 175 territories",
+    "decision": "REJECTED",
+    "reason": "Project instructions defer public-sale availability until separately authorized.",
+    "rejectedCommandExecuted": false,
+    "metadataOnlyAlternativeSucceeded": true,
+    "resolved": true,
+    "blocked": false,
+    "resolution": "The owner explicitly approved the existing 175 territories on October 27, 2026. Exact availability was applied and verified."
+  },
+  "export": {
+    "path": "build/studio-release/1.4-10/export/8 bit art.ipa",
+    "version": "1.4",
+    "build": "10",
+    "hostBundleID": "eu.armand.--bit-art",
+    "extensionBundleID": "eu.armand.--bit-art.StickerPackExtension",
+    "internalOnlyMarker": false,
+    "stickerCount": 67,
+    "privacyManifestCount": 2,
+    "userDefaultsReason": "CA92.1",
+    "excludedTestFixtures": true,
+    "bytes": 744308,
+    "sha256": "28b2828b52e14932b6b9374399fee3c51909c5f1f8aa899753989c4e5ddb6757"
+  },
+  "verification": {
+    "appStoreCoreTests": 29,
+    "screenshotsCoreTests": 26,
+    "debugRegressionTests": 31,
+    "ordinaryReleaseRestrictionTests": 1,
+    "actualMessagesXcodeCheckoutCompleted": true,
+    "ownershipInjectionUsedForCheckout": false,
+    "physicalDeviceSandboxPurchaseVerified": false,
+    "physicalDeviceRestoreVerified": false,
+    "appleValidationErrors": 0,
+    "appleWarningCodes": [
+      "90863",
+      "90984"
+    ],
+    "nativeResourcesVerified": true,
+    "actualMessagesXcodeCheckoutDevices": [
+      "iPhone 15 Pro / iOS17.5",
+      "iPad Pro13-inch / iOS17.5"
+    ]
+  },
+  "screenshots": {
+    "status": "COMPLETE",
+    "manifest": "release/studio-1.4/screenshots/manifest.json",
+    "uploaded": true,
+    "uniqueAppStoreImages": 8,
+    "placements": 16,
+    "allDesiredComplete": true,
+    "retiredInheritedDraftImages": 12,
+    "publishedImagesChanged": false,
+    "sets": [
+      {
+        "displayType": "APP_IPHONE_61",
+        "id": "6ddc6061-f61a-47b8-b29b-5f3bae627e46",
+        "assets": [
+          {
+            "id": "7f800005-172e-8adc-8039-24efb8dc83ab",
+            "fileName": "01-free-stickers.png",
+            "checksum": "32f774af2ad4a499bfe0be14c4eca21d",
+            "state": "COMPLETE"
+          },
+          {
+            "id": "50c00005-172e-8adc-801e-9497e5ebe5c5",
+            "fileName": "02-six-seven-reactions.png",
+            "checksum": "3252344102af176a45d213b2ba7b5212",
+            "state": "COMPLETE"
+          },
+          {
+            "id": "fb000005-172e-8adc-8039-c4df6a8ae924",
+            "fileName": "03-pixel-studio.png",
+            "checksum": "2b21a46113fd7b39816d77c2f6e59a54",
+            "state": "COMPLETE"
+          },
+          {
+            "id": "6ec00005-172e-8adc-803a-3440b9b7a597",
+            "fileName": "04-saved-drafts.png",
+            "checksum": "7eceac6a64086fcbba62df371304dd96",
+            "state": "COMPLETE"
+          }
+        ]
+      },
+      {
+        "displayType": "IMESSAGE_APP_IPHONE_61",
+        "id": "802f0607-18ff-4325-88dd-4e40e2dc1c3d",
+        "assets": [
+          {
+            "id": "05400005-172e-8adc-802e-c542abff6b97",
+            "fileName": "01-free-stickers.png",
+            "checksum": "32f774af2ad4a499bfe0be14c4eca21d",
+            "state": "COMPLETE"
+          },
+          {
+            "id": "d8000005-172e-8adc-8001-f4b98d0eb234",
+            "fileName": "02-six-seven-reactions.png",
+            "checksum": "3252344102af176a45d213b2ba7b5212",
+            "state": "COMPLETE"
+          },
+          {
+            "id": "b0c00005-172e-8adc-8037-432e122de713",
+            "fileName": "03-pixel-studio.png",
+            "checksum": "2b21a46113fd7b39816d77c2f6e59a54",
+            "state": "COMPLETE"
+          },
+          {
+            "id": "5e000005-172e-8adc-8035-e6bdc6793ea4",
+            "fileName": "04-saved-drafts.png",
+            "checksum": "7eceac6a64086fcbba62df371304dd96",
+            "state": "COMPLETE"
+          }
+        ]
+      },
+      {
+        "displayType": "APP_IPAD_PRO_3GEN_129",
+        "id": "3c4b9228-4d1f-49e0-88ed-347fae3ac4b1",
+        "assets": [
+          {
+            "id": "27400005-172e-8adc-800f-5acf5ffb4be7",
+            "fileName": "01-free-stickers.png",
+            "checksum": "ca65bf0d10c6ca68c52f0e1748ee6f61",
+            "state": "COMPLETE"
+          },
+          {
+            "id": "95000005-172e-8adc-8017-735a42b2d69f",
+            "fileName": "02-six-seven-reactions.png",
+            "checksum": "6b11e144079e681e27437bbf83089091",
+            "state": "COMPLETE"
+          },
+          {
+            "id": "afc00005-172e-8adc-8002-509826e3607b",
+            "fileName": "03-pixel-studio.png",
+            "checksum": "4689c7b095a84d9da74fcc3ae7366fbc",
+            "state": "COMPLETE"
+          },
+          {
+            "id": "ce800005-172e-8adc-800c-7136c2c75eea",
+            "fileName": "04-saved-drafts.png",
+            "checksum": "543e1bf4e2a52a47cccc9209d21c4b63",
+            "state": "COMPLETE"
+          }
+        ]
+      },
+      {
+        "displayType": "IMESSAGE_APP_IPAD_PRO_3GEN_129",
+        "id": "fcd5a521-ebe0-42a5-90ba-964715f7ab4f",
+        "assets": [
+          {
+            "id": "17800005-172e-8adc-8020-2a8277a13b14",
+            "fileName": "01-free-stickers.png",
+            "checksum": "ca65bf0d10c6ca68c52f0e1748ee6f61",
+            "state": "COMPLETE"
+          },
+          {
+            "id": "62800005-172e-8adc-8026-91028131fbbf",
+            "fileName": "02-six-seven-reactions.png",
+            "checksum": "6b11e144079e681e27437bbf83089091",
+            "state": "COMPLETE"
+          },
+          {
+            "id": "1ac00005-172e-8adc-8039-1889fc2fbc1c",
+            "fileName": "03-pixel-studio.png",
+            "checksum": "4689c7b095a84d9da74fcc3ae7366fbc",
+            "state": "COMPLETE"
+          },
+          {
+            "id": "94400005-172e-8adc-8037-20a8d53320c1",
+            "fileName": "04-saved-drafts.png",
+            "checksum": "543e1bf4e2a52a47cccc9209d21c4b63",
+            "state": "COMPLETE"
+          }
+        ]
+      }
+    ]
+  },
+  "privacy": {
+    "labelAssessment": "DATA_NOT_COLLECTED",
+    "labelRepublished": false,
+    "userDefaultsRequiredReason": "CA92.1",
+    "manifestIncludedInHostAndExtension": true
+  },
+  "ageRating": {
+    "inheritedCalculatedRating": "FOUR_PLUS",
+    "questionnaireChanged": false,
+    "wineExcluded": true,
+    "assessment": "Local creation; no broad-distribution UGC, public feed, or developer chat service."
+  },
+  "supportSite": {
+    "sourceUpdated": true,
+    "deployed": false
+  },
+  "previousRelease": {
+    "version": "1.2",
+    "build": "5",
+    "state": "READY_FOR_SALE",
+    "appVersionState": "READY_FOR_DISTRIBUTION",
+    "reviewSubmissionState": "COMPLETE",
+    "changedByThisPreparation": false
+  },
+  "sourceCommit": "d99de1119a2542577d7b8ac24635def420b37a32",
+  "evidenceDirectory": "build/studio-release/ (ignored; contains signed output and private review-contact readback)",
+  "reviewSubmission": {
+    "submitted": false,
+    "newSubmissionCreated": false,
+    "oldSubmissionState": "COMPLETE"
+  },
+  "readiness": {
+    "candidatePrepared": true,
+    "outstandingBeforeSubmission": [
+      "Physical-device sandbox purchase/restore and final Messages/accessibility acceptance"
+    ],
+    "iapMetadataIncompleteUntilAvailabilityPrepared": false,
+    "iapReadyToSubmit": true
+  },
+  "sourceTag": "v1.4-build10-candidate"
+}
