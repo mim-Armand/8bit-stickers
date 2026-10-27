@@ -241,7 +241,7 @@
     "reviewSubmissionState": "COMPLETE",
     "changedByThisPreparation": false
   },
-  "sourceCommit": null,
+  "sourceCommit": "d99de1119a2542577d7b8ac24635def420b37a32",
   "evidenceDirectory": "build/studio-release/ (ignored; contains signed output and private review-contact readback)",
   "reviewSubmission": {
     "submitted": false,
@@ -255,5 +255,6 @@
       "Physical-device sandbox purchase/restore and final Messages/accessibility acceptance"
     ],
     "iapMetadataIncompleteUntilAvailabilityPrepared": true
-  }
+  },
+  "sourceTag": "v1.4-build10-candidate"
 }
