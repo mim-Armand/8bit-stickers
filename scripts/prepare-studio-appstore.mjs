@@ -26,17 +26,24 @@ const availability=(await api('GET',`/v1/apps/${APP_ID}/appAvailabilityV2`)).dat
 const territories=await all(`/v2/appAvailabilities/${availability.id}/territoryAvailabilities?include=territory&limit=200`);
 const available=territories.filter(x=>x.attributes.available).map(x=>x.relationships.territory.data.id).sort();
 await mkdir('release/studio-1.4',{recursive:true});
-await writeFile('release/studio-1.4/availability-plan.json',JSON.stringify({appId:APP_ID,productId:product.id,proposedTerritories:available,territoryCount:available.length,source:'Existing app availability',availableInNewTerritories:false,applied:false,requiresOwnerApproval:true},null,2)+'\n');
-const report={appId:APP_ID,version:m.version,build:m.build,versionId:version.id,localeId:locale.id,appInfoId:info.id,productId:product.id,releaseType:m.releaseType,proposedTerritoryCount:available.length,availabilityChangesApplied:false,apply,reviewSubmitted:false};
+const planPath=new URL('../release/studio-1.4/availability-plan.json',import.meta.url);
+let savedPlan;
+try{savedPlan=JSON.parse(await readFile(planPath,'utf8'));}catch(e){if(e.code!=='ENOENT')throw e;}
+if(savedPlan){
+ if(savedPlan.appId!==APP_ID||savedPlan.productId!==product.id)throw new Error('Saved availability-plan identity differs');
+ if(JSON.stringify([...savedPlan.proposedTerritories].sort())!==JSON.stringify(available))throw new Error('Live app territories changed; preserve the saved approval and inspect the difference');
+ // Keep the owner's approval and verified applied evidence intact, even in dry runs.
+}else await writeFile(planPath,JSON.stringify({appId:APP_ID,productId:product.id,proposedTerritories:available,territoryCount:available.length,source:'Existing app availability',availableInNewTerritories:false,applied:false,requiresOwnerApproval:true},null,2)+'\n');
+const report={appId:APP_ID,version:m.version,build:m.build,versionId:version.id,localeId:locale.id,appInfoId:info.id,productId:product.id,releaseType:m.releaseType,proposedTerritoryCount:available.length,availabilityChangedByThisRun:false,apply,reviewSubmitted:false};
 if(apply){
  await api('PATCH',`/v1/appStoreVersions/${version.id}`,{data:{type:'appStoreVersions',id:version.id,attributes:{copyright:m.copyright,releaseType:m.releaseType}}});
  await api('PATCH',`/v1/appStoreVersionLocalizations/${locale.id}`,{data:{type:'appStoreVersionLocalizations',id:locale.id,attributes:Object.fromEntries(['description','keywords','marketingUrl','promotionalText','supportUrl','whatsNew'].map(k=>[k,m[k]]))}});
  await api('PATCH',`/v1/appInfoLocalizations/${infoLocale.id}`,{data:{type:'appInfoLocalizations',id:infoLocale.id,attributes:{name:m.name,subtitle:m.subtitle,privacyPolicyUrl:m.privacyPolicyUrl}}});
  await api('PATCH',`/v1/appStoreReviewDetails/${review.id}`,{data:{type:'appStoreReviewDetails',id:review.id,attributes:{notes:m.reviewNotes,demoAccountRequired:false}}});
  await api('PATCH',`/v2/inAppPurchases/${product.id}`,{data:{type:'inAppPurchases',id:product.id,attributes:{reviewNote:m.reviewNotes}}});
- // Sales availability is deliberately unchanged; it requires separate owner approval.
+ // This metadata helper leaves the separately approved sales availability unchanged.
  await mkdir('build/studio-release',{recursive:true});
- const readback={...report,verifiedAtUTC:new Date().toISOString(),version:await api('GET',`/v1/appStoreVersions/${version.id}`),locale:await api('GET',`/v1/appStoreVersionLocalizations/${locale.id}`),iap:await api('GET',`/v2/inAppPurchases/${product.id}`),availabilityChangesApplied:false};
+ const readback={...report,verifiedAtUTC:new Date().toISOString(),version:await api('GET',`/v1/appStoreVersions/${version.id}`),locale:await api('GET',`/v1/appStoreVersionLocalizations/${locale.id}`),iap:await api('GET',`/v2/inAppPurchases/${product.id}`),availabilityChangedByThisRun:false};
  await writeFile('build/studio-release/prepared-metadata-readback.json',JSON.stringify(readback,null,2));
 }
 console.log(JSON.stringify(report,null,2));

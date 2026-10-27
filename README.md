@@ -47,9 +47,9 @@ The [public app/support site](https://mim-armand.github.io/8bit-stickers/), [sup
 
 ## Native Studio — TestFlight and local testing
 
-**Public 1.4 (10) is being prepared for review.** Production StoreKit, the optional exact US$1.00 Studio Unlock and an editable Apple release draft are now prepared. See the [release handoff](docs/studio-release-preparation.md) for signed candidate, screenshots, review status and outstanding acceptance/availability approval. This candidate has not been submitted.
+**Public 1.4 (10) is being prepared for review.** Production StoreKit, the optional exact US$1.00 Studio Unlock and an editable Apple release draft are now prepared. See the [release handoff](docs/studio-release-preparation.md) for signed candidate, screenshots, review status and outstanding device acceptance. This candidate has not been submitted.
 
-**Internal TestFlight 1.4 (8) is available, and the account holder is invited.** Install 8 bit art from TestFlight, open it inside Messages, then choose **Studio → Enable Studio for this beta**. All tools are free during this beta; no purchase is made. See the [TestFlight installation and verification guide](docs/studio-testflight.md). The pending public 1.2 (5) review and automatic-release setting are unchanged.
+**Internal TestFlight 1.4 (8) is available, and the account holder is invited.** Install 8 bit art from TestFlight, open it inside Messages, then choose **Studio → Enable Studio for this beta**. All tools are free during this beta; no purchase is made. See the [TestFlight installation and verification guide](docs/studio-testflight.md). Public 1.2 (5) is now approved and Ready for Distribution.
 
 **Apple sandbox testing is now configured separately for 1.4 (9).** The owner chose to test Apple's actual purchase and restore flow. Studio Unlock is registered with an exact US$1.00 USA price; sandbox purchases make no real charge and do not confer public-release ownership. See the [sandbox testing guide](docs/studio-sandbox.md) for its current build status and device checks. Build 8 retains its free-beta behavior.
 
@@ -64,9 +64,9 @@ Open [`NativeStudio/Studio.xcodeproj`](NativeStudio/Studio.xcodeproj). Choose **
 
 For an interactive browser view of the **actual native simulator app**, open **http://127.0.0.1:8792/** while `scripts/run-native-viewer.sh SIMULATOR_UUID` is running. This is useful where the Simulator window app is unavailable; it supports tap, drag and text entry, stays on localhost and is excluded from the Messages binary.
 
-Debug builds mark the unlock **Local test — no charge** and simulate payment; the bundled StoreKit configuration also supports Apple's local transaction tests. The **TestFlight** configuration/build 8 uses free beta activation. **TestFlightSandbox**/build 9 requires verified Apple sandbox transactions and displays Apple's localized product price. Normal Release builds disable checkout. The draft product has no public-sale availability or review submission. The separate sticker-only project remains 1.3 (6), and local Debug uses 1.4 (7).
+Debug builds mark the unlock **Local test — no charge** and simulate payment; the bundled StoreKit configuration also supports Apple's local transaction tests. The **TestFlight** configuration/build 8 uses free beta activation. **TestFlightSandbox**/build 9 requires verified Apple sandbox transactions and displays Apple's localized product price. Normal Release builds disable checkout. The owner-approved IAP availability is configured for the app’s existing 175 territories, with automatic new territories off; Studio Unlock reports READY_TO_SUBMIT and no review is submitted. The separate sticker-only project remains 1.3 (6), and local Debug uses 1.4 (7).
 
-See the [local testing guide](docs/native-studio-local.md) for test controls, StoreKit mode, saved-draft behavior, source layout and remaining production work. Current evidence is in [verification notes](docs/verification.md). Public release remains deferred. The owner has now requested the public candidate preparation described above; sales availability still requires the explicit approval recorded in that handoff.
+See the [local testing guide](docs/native-studio-local.md) for test controls, StoreKit mode, saved-draft behavior, source layout and remaining production work. Current evidence is in [verification notes](docs/verification.md). Public release remains deferred. The owner has now requested the public candidate preparation described above; the owner explicitly approved the existing 175 territories and that availability is now applied and verified. Physical-device purchase/restore remains to be checked before submission.
 
 ## Art you can keep editing
 
@@ -101,7 +101,7 @@ To use an installed Google Chrome instead, run `PLAYWRIGHT_CHANNEL=chrome npm ru
 
 The published app is **8 bit art, Apple ID 1366485724**, bundle ID **`eu.armand.--bit-art`**. The similarly named unpublished **8-bit art, ID 1366403490**, is a separate record. Update the published record.
 
-The published release is 1.1. The recovered source was already marked 1.2 (3), so its exact correspondence to the published binary is unverified. The submitted update is **1.2 (5)** with 46 stickers and API age rating `FOUR_PLUS`. The wine-glass artwork is omitted from shipping assets. Build 5 replaced the earlier build 4 and is now **Ready for Distribution**, following its automatic-release approval.
+The public release is **1.2 (5)** with 46 stickers and API age rating `FOUR_PLUS`. The recovered source was already marked 1.2 (3), so its exact correspondence to the original published 1.1 binary is unverified. The wine-glass artwork is omitted from shipping assets. Build 5 replaced the earlier build 4 and is now **Ready for Distribution**, following its automatic-release approval.
 
 See the [release checklist](docs/release-checklist.md) for publication/submission evidence and optional device checks; [recovery and roadmap](docs/recovery-and-roadmap.md) covers the update path and backup strategy. [App Store listing](docs/app-store-draft.md) records the submitted copy and live support/privacy URLs. [Studio Unlock decisions](docs/monetization-options.md) record the chosen future tools purchase; this submission does not add a purchase or change pricing.
 

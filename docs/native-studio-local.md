@@ -1,6 +1,10 @@
 # Native Studio — local testing build
 
-Implemented October 26, 2026 at the owner's request. This guide describes the original **local Debug/testing build**. The owner subsequently requested TestFlight access: **1.4 (8) is now available for internal testing with free beta activation**; see the [TestFlight guide](studio-testflight.md). The owner then chose actual sandbox purchase testing: a registered draft Studio Unlock and separate 1.4 (9) sandbox configuration are described in the [sandbox guide](studio-sandbox.md). Public App Review, sale availability and production checkout remain deferred. The original sticker-only project and pending 1.2 (5) release remain intact.
+**Current status — October 27, 2026:** Public candidate **1.4 (10)** is VALID / APP_STORE_ELIGIBLE, selected in the editable draft and available internally. The owner explicitly approved the app’s existing **175 territories**; availability **6827336076** is applied and verified, automatic new territories are off, US$1.00 pricing is unchanged and Family Sharing is off. Studio Unlock is **READY_TO_SUBMIT**; metadata version is **PREPARE_FOR_SUBMISSION**. No app/IAP review has been submitted. Physical-device purchase/restore remains pending. See the [current release handoff](studio-release-preparation.md). No repeat approval is needed for the verified territory setting.
+
+## Historical planning and test-phase context
+
+Implemented October 26, 2026 at the owner's request. This guide describes the original **local Debug/testing build**. The owner subsequently requested TestFlight access: **1.4 (8) is now available for internal testing with free beta activation**; see the [TestFlight guide](studio-testflight.md). The owner then chose actual sandbox purchase testing: a registered draft Studio Unlock and separate 1.4 (9) sandbox configuration are described in the [sandbox guide](studio-sandbox.md). At that local phase, public review, sale availability and production checkout were deferred. The original sticker-only project is preserved; 1.2 (5) is now released and the later public-candidate status is recorded above.
 
 ## Try it in the local browser viewer
 

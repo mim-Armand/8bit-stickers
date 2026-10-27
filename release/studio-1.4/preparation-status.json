@@ -1,5 +1,5 @@
 {
-  "verifiedAtUTC": "2026-10-27T05:27:50.531Z",
+  "verifiedAtUTC": "2026-10-27T05:37:47.977Z",
   "app": {
     "appleID": "1366485724",
     "hostBundleID": "eu.armand.--bit-art",
@@ -35,21 +35,34 @@
     "priceScheduleVerified": true,
     "familySharing": false,
     "reviewSubmitted": false,
-    "salesAvailabilityApplied": false,
+    "salesAvailabilityApplied": true,
     "proposedTerritoryCount": 175,
     "proposal": "release/studio-1.4/availability-plan.json",
-    "availabilityRequiresOwnerApproval": true,
-    "state": "MISSING_METADATA",
+    "availabilityRequiresOwnerApproval": false,
+    "state": "READY_TO_SUBMIT",
     "metadataVersionState": "PREPARE_FOR_SUBMISSION",
     "reviewImageID": "b812ad78-1a48-4718-ad9c-3bd930753b4f",
-    "reviewImageState": "COMPLETE"
+    "reviewImageState": "COMPLETE",
+    "availabilityId": "6827336076",
+    "availableTerritoryCount": 175,
+    "availabilityExactMatch": true,
+    "availableInNewTerritories": false,
+    "availabilityVerifiedAtUTC": "2026-10-27T05:37:34.751Z",
+    "ownerAvailabilityApproval": {
+      "granted": true,
+      "date": "2026-10-27",
+      "scope": "App existing175territories"
+    }
   },
   "automaticApprovalReview": {
     "action": "Enable IAP sales availability across the app\u2019s existing 175 territories",
     "decision": "REJECTED",
     "reason": "Project instructions defer public-sale availability until separately authorized.",
     "rejectedCommandExecuted": false,
-    "metadataOnlyAlternativeSucceeded": true
+    "metadataOnlyAlternativeSucceeded": true,
+    "resolved": true,
+    "blocked": false,
+    "resolution": "The owner explicitly approved the existing 175 territories on October 27, 2026. Exact availability was applied and verified."
   },
   "export": {
     "path": "build/studio-release/1.4-10/export/8 bit art.ipa",
@@ -251,10 +264,10 @@
   "readiness": {
     "candidatePrepared": true,
     "outstandingBeforeSubmission": [
-      "Explicit owner approval to configure IAP territory availability",
       "Physical-device sandbox purchase/restore and final Messages/accessibility acceptance"
     ],
-    "iapMetadataIncompleteUntilAvailabilityPrepared": true
+    "iapMetadataIncompleteUntilAvailabilityPrepared": false,
+    "iapReadyToSubmit": true
   },
   "sourceTag": "v1.4-build10-candidate"
 }

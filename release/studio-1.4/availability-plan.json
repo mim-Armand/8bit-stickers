@@ -181,6 +181,15 @@
   "territoryCount": 175,
   "source": "Existing app availability",
   "availableInNewTerritories": false,
-  "applied": false,
-  "requiresOwnerApproval": true
+  "applied": true,
+  "requiresOwnerApproval": false,
+  "ownerApproval": {
+    "granted": true,
+    "date": "2026-10-27",
+    "scope": "The same existing 175 App Store territories; new territories remain off",
+    "source": "User explicitly answered: Yes, use the existing 175 territories (Recommended)"
+  },
+  "availabilityId": "6827336076",
+  "verifiedAtUTC": "2026-10-27T05:37:34.751Z",
+  "appliedTerritoryCount": 175
 }

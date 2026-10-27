@@ -16,13 +16,13 @@ The dedicated **AppStore** configuration enables real StoreKit ownership and che
 
 The offer supplies its own visible UIKit controller/scene to Apple's purchase API on supported OS versions; iOS 15/16 use the original supported overload. Normal unconfigured Release checkout remains disabled. Debug, free beta, sandbox beta and screenshot configurations remain separate.
 
-## Purchase availability approval
+## Approved purchase availability
 
-Automatic approval review rejected an attempted combined metadata/availability command because it would enable IAP production availability across **175 storefronts**, and the earlier project instructions defer that setting until separately authorized. **The rejected command did not run.** The revised metadata helper saves only draft text/reviewer notes and leaves sales availability unchanged.
+On **October 27, 2026**, the owner explicitly approved Studio Unlock for **the same 175 territories where this app is already available**. The exact approved list is now applied and read back under availability ID **`6827336076`**, with **automatic new-territory availability off**. [`availability-plan.json`](../release/studio-1.4/availability-plan.json) preserves the approved list and verification. The USA price remains **US$1.00**, localized prices remain in place elsewhere, and Family Sharing remains off.
 
-The concrete proposal is to offer Studio Unlock in **the same 175 territories where this app is already available**, with new-territory automatic availability off. [`availability-plan.json`](../release/studio-1.4/availability-plan.json) lists the exact territories, derived from Apple rather than invented. The price schedule is already configured. Enabling availability is a prerequisite for the intended public sale; approval would not itself submit App Review or make the unapproved product sellable.
+Studio Unlock now reports **`READY_TO_SUBMIT`**; metadata version `45b42e0b-bc8a-4835-8bc8-4d766e48bda1` remains **`PREPARE_FOR_SUBMISSION`**. These states do not mean App Review has been submitted or the product is approved for sale. **No app/IAP review has been submitted.** Physical-device purchase/restore and final acceptance remain to be completed.
 
-The owner must explicitly approve that availability setting before it is applied. Do not re-run a combined availability mutation as a workaround. Keep all other preparation moving while this setting waits.
+The earlier automatic approval rejection is historical and **resolved by the owner's explicit approval**. The rejected combined command did not run; availability was subsequently applied within the approved scope. Do not ask for this same territory approval again. The metadata helper continues to leave availability unchanged when refreshing draft text.
 
 ## Metadata, support and privacy
 
@@ -59,9 +59,9 @@ The **Screenshots** configuration/target is a test aid with public UI copy and g
 ## Remaining before submitting
 
 1. Confirm the actual App Store eligible build is `VALID`, selected in 1.4, and the new native screenshots/IAP review image are all processed. Preserve the released 1.2 screenshot assets. Verify the prepared source tag matches the candidate.
-2. Obtain and apply the owner's explicit IAP territory-availability approval. The product currently reports `MISSING_METADATA` and its metadata version `PREPARE_FOR_SUBMISSION`; availability is not configured, while its localized text, exact price and review screenshot are saved. Complete any remaining IAP review-readiness fields; reuse the existing product/version and exact price.
+2. Recheck the approved 175-territory availability, US$1.00 schedule and completed review image. Studio Unlock is `READY_TO_SUBMIT`; its metadata version remains `PREPARE_FOR_SUBMISSION`. Reuse the existing product/version and exact price. No repeat territory approval is needed.
 3. Install the final candidate through internal TestFlight on an iPhone/iPad. Complete the real sandbox purchase, cancel/retry, restore under the same account, relaunch/offline access, saved drafts, drawing/PNG and Messages insertion. Check compact/expanded, large text and VoiceOver. Export existing drafts before destructive reinstall/history-reset tests. Do not claim message delivery from a composer insertion alone.
 4. Refresh listing/support/privacy and age/agreements/price readback. Site copy can deploy intentionally when appropriate. The Paid Apps Agreement/tax/banking statuses were active at the preceding read-only verification; recheck if they change or significant time passes.
 5. When the owner explicitly asks to submit, attach **both app 1.4 and the first Studio Unlock IAP metadata version** to the same review submission under Apple's current version-based IAP API. Submit neither item alone. Preserve `AFTER_APPROVAL` if still desired. Record the exact submission/readback and retain source tag, archive and backup.
 
-No review submission or public release is authorized merely by preparing this candidate or by passing local tests. The owner can review the concrete candidate and outstanding availability/device checks before the final submission action.
+No review submission or public release is authorized merely by preparing this candidate or by passing local tests. The owner can review the concrete candidate and outstanding device checks before the final submission action.
