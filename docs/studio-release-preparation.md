@@ -1,5 +1,7 @@
 # Native Studio public release preparation — 1.4 (10)
 
+**October 31 status:** 1.4 (10) is now released, but the Studio Unlock IAP was omitted from its completed app-only review and remains unsubmitted. See [the 1.4.1 (11) purchase correction](studio-purchase-fix.md) for the current investigation, fixes and combined-review preparation. The remainder of this file preserves the original October 27 preparation handoff.
+
 The owner requested a new review candidate with native Studio and the optional paid tools on October 27, 2026. This work prepares the candidate and editable Apple metadata; **it does not submit the app or IAP review**.
 
 Fresh Apple readback confirms **1.2 (5) is approved and Ready for Distribution**, with the old review submission complete. Internal sandbox **1.4 (9)** is now `VALID`, `INTERNAL_ONLY` and `IN_BETA_TESTING`. Neither version needs cancellation. The new public candidate is **1.4 (10)** under the same Apple ID **1366485724**, host **eu.armand.--bit-art** and extension **eu.armand.--bit-art.StickerPackExtension**.

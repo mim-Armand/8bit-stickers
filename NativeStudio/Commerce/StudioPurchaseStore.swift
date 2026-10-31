@@ -32,6 +32,9 @@ final class StudioPurchaseStore: ObservableObject {
     private var updatesTask: Task<Void, Never>?
     private var entitlementRevision: UInt64 = 0
     private var hasStarted = false
+    // Metadata retries may dismiss their own warning, never an ownership or
+    // checkout result delivered while the request was in flight.
+    private var productAvailabilityMessage: String?
     // A view supplied by the visible unlock sheet, rather than UIApplication's
     // windows, so the purchase sheet is anchored to this Messages extension.
     weak var purchasePresentationController: UIViewController?
@@ -121,6 +124,10 @@ final class StudioPurchaseStore: ObservableObject {
             message = "Purchases are disabled in this build. Use the local testing app."
             return
         }
+        // The startup task and an offer-sheet retry can reach this service at
+        // once. Keep one metadata/restore operation in flight and one loading
+        // indicator, rather than letting an older response replace a newer one.
+        guard !isLoading, !isPurchasing else { return }
         if isBetaTesting {
             await refreshEntitlements()
             return
@@ -145,16 +152,27 @@ final class StudioPurchaseStore: ObservableObject {
             }
             price = product?.displayPrice
             if product == nil {
-                message = (isSandboxTesting || usesPublicPurchaseCopy)
+                showProductAvailabilityMessage((isSandboxTesting || usesPublicPurchaseCopy)
                     ? "Studio Unlock is not available from Apple right now. Try again shortly; your drawings are safe."
-                    : "The local test product is unavailable. Open the Local StoreKit scheme in Xcode and try again."
+                    : "The local test product is unavailable. Open the Local StoreKit scheme in Xcode and try again.")
+            } else {
+                if let productAvailabilityMessage, message == productAvailabilityMessage {
+                    message = nil
+                }
+                productAvailabilityMessage = nil
             }
         } catch {
             // Product metadata availability is separate from verified tool access.
-            message = (isSandboxTesting || usesPublicPurchaseCopy)
+            showProductAvailabilityMessage((isSandboxTesting || usesPublicPurchaseCopy)
                 ? "The price could not load. Check your connection and try again. Your saved work and existing access are unchanged."
-                : "The local test price could not load. Your saved work and existing access are unchanged."
+                : "The local test price could not load. Your saved work and existing access are unchanged.")
         }
+    }
+
+    private func showProductAvailabilityMessage(_ text: String) {
+        guard message == nil || message == productAvailabilityMessage else { return }
+        message = text
+        productAvailabilityMessage = text
     }
 
     /// False means verification is unresolved; callers must not describe that as

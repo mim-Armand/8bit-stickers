@@ -11,6 +11,17 @@ enum StudioTheme {
     static let secondary = Color(red: 0.39, green: 0.35, blue: 0.43)
 }
 
+extension View {
+    /// Studio uses a fixed light palette. Apply it to each presentation root:
+    /// sheets do not inherit their presenter's foreground color, and otherwise
+    /// dark appearance can put white system text on our cream and white cards.
+    func studioAppearance() -> some View {
+        foregroundColor(StudioTheme.ink)
+            .accentColor(StudioTheme.purple)
+            .preferredColorScheme(.light)
+    }
+}
+
 struct StudioPrimaryButton: ButtonStyle {
     @Environment(\.isEnabled) private var enabled
     func makeBody(configuration: Configuration) -> some View {

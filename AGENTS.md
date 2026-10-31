@@ -1,5 +1,7 @@
 # Project preferences
 
+Current handoff (October 31, 2026): public 1.4 (10) is READY_FOR_DISTRIBUTION, but its completed review contained only the app; Studio Unlock remains READY_TO_SUBMIT and has never been approved. See `docs/studio-purchase-fix.md` and `release/studio-1.4.1/preparation-status.json` for corrective 1.4.1 (11). Preserve the existing product, exact $1.00 price and approved 175 territories. Stage the app and first IAP metadata version together; never submit the app alone. Review submission still requires a separate explicit owner request. Earlier October 27 paragraphs below are preparation history.
+
 Use `seltzer.wisdom7h@icloud.com` as the default public support email unless the user specifies another address.
 
 Preserve the published app identity: Apple ID `1366485724`, host bundle ID `eu.armand.--bit-art`, extension ID `eu.armand.--bit-art.StickerPackExtension`. The separate App Store record `1366403490` is not this app's update destination.

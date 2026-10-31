@@ -1,4 +1,12 @@
-# Verification — October 26–27, 2026
+# Verification — October 26–31, 2026
+
+## Studio purchase correction — October 31, 2026
+
+The live App Store release is 1.4 (10), while its first Studio Unlock IAP remains unsubmitted. See [the correction handoff](studio-purchase-fix.md); earlier preparation snapshots below are historical. Corrective 1.4.1 (11) passes **32 AppStore/model tests**, including genuine StoreKitTest empty-catalog recovery, product network-failure recovery and preservation of unresolved ownership messages. Evidence: ignored `build/studio-price-fix-core-tests-final.log` and `.xcresult`.
+
+Two targeted UI capture checks passed in system Dark Mode on iPhone 15 Pro / iOS 17.5 at default and accessibility-large Dynamic Type. Unlock headings, feature names, navigation, checkout and help are readable; large checkout wraps and remains reachable. These captures use the explicitly labeled Debug local purchase simulation and do not demonstrate production catalog availability. Evidence: ignored `build/unlock-contrast/dark-appearance-ios17.xcresult` and `screenshots/manifest.json`. The fresh iOS 27 simulator stalled before app launch, so the visual check used the existing working runtime; no iOS 27 visual result is claimed.
+
+The signed 1.4.1 (11) archive/export succeeds. Apple validation reports zero errors and only the two existing standalone-Messages compatibility warnings, 90863 and 90984. Payload checks confirm the original host/extension IDs, 67 stickers with wine excluded, two UserDefaults privacy declarations, and no local StoreKit fixtures, preview app or test code. Deterministic source-resource verification also passes (67 identical sticker exports and 45 lossless 16-pixel templates). Final processing/draft status is recorded in `release/studio-1.4.1/preparation-status.json`.
 
 ## Public Studio candidate — 1.4 (10)
 
