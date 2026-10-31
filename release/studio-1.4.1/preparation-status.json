@@ -1,0 +1,202 @@
+{
+  "verifiedAtUTC": "2026-10-31T07:43:15.227Z",
+  "appID": "1366485724",
+  "version": "1.4.1",
+  "build": "11",
+  "sourceCommit": "bb9acf8c24a3cf32f8a98620030213eaf4dc716c",
+  "sourceTag": "v1.4.1-build11-candidate",
+  "diagnosis": {
+    "releasedVersion": "1.4",
+    "releasedBuild": "10",
+    "releasedVersionState": "READY_FOR_DISTRIBUTION",
+    "completedSubmissionID": "62051c1f-8195-49b2-8dae-fc6083e2ce41",
+    "completedSubmissionItems": [
+      "appStoreVersion"
+    ],
+    "purchaseState": "READY_TO_SUBMIT",
+    "purchaseMetadataState": "PREPARE_FOR_SUBMISSION",
+    "cause": "The first Studio Unlock IAP was omitted from the completed app-only review. Production product lookup returns no matching product."
+  },
+  "candidate": {
+    "versionID": "6cd58d90-1728-495e-a02d-2b5fc571a519",
+    "localizationID": "25f0993f-cae4-48be-8b3a-f87677a6ce21",
+    "releaseType": "AFTER_APPROVAL",
+    "uploadID": "63c7404d-e3b0-4136-8ae2-6a6bb90d652e",
+    "processingState": "VALID",
+    "buildID": "63c7404d-e3b0-4136-8ae2-6a6bb90d652e",
+    "selected": true,
+    "reviewSubmitted": true,
+    "appState": "WAITING_FOR_REVIEW",
+    "internalBetaState": "IN_BETA_TESTING",
+    "externalBetaState": "READY_FOR_BETA_SUBMISSION"
+  },
+  "purchase": {
+    "id": "6827336076",
+    "productID": "eu.armand.bitart.studio.unlock",
+    "state": "WAITING_FOR_REVIEW",
+    "metadataVersionID": "45b42e0b-bc8a-4835-8bc8-4d766e48bda1",
+    "usaPrice": "1.00",
+    "familySharing": false,
+    "territoryCount": 175,
+    "metadataState": "WAITING_FOR_REVIEW"
+  },
+  "availabilityApproval": "../studio-1.4/availability-plan.json",
+  "screenshots": [
+    {
+      "id": "7d0e700a-68cf-4e9b-a721-7bc028b063d7",
+      "type": "APP_IPHONE_61",
+      "images": [
+        {
+          "id": "b21e9a94-39d7-485d-988e-e4bcb88eda27",
+          "state": "COMPLETE"
+        },
+        {
+          "id": "981e6fab-b3a9-4518-9063-b102886a2bdb",
+          "state": "COMPLETE"
+        },
+        {
+          "id": "dde3ba62-65b4-4cd6-b098-9a5ea1490c96",
+          "state": "COMPLETE"
+        },
+        {
+          "id": "fbb0d57e-fddc-4812-9bb6-f081fc648265",
+          "state": "COMPLETE"
+        }
+      ]
+    },
+    {
+      "id": "3152693a-1ae3-4894-8dcf-3f21c5da3a1b",
+      "type": "APP_IPAD_PRO_3GEN_129",
+      "images": [
+        {
+          "id": "8d9eabc2-2aa4-411c-83cd-27e08d340ada",
+          "state": "COMPLETE"
+        },
+        {
+          "id": "02a72760-8d83-4142-b108-7152216f7703",
+          "state": "COMPLETE"
+        },
+        {
+          "id": "d4435370-a1b0-4fb5-818e-18a16983861f",
+          "state": "COMPLETE"
+        },
+        {
+          "id": "476c8a15-d84a-48f2-bbfa-6094edcff4ea",
+          "state": "COMPLETE"
+        }
+      ]
+    },
+    {
+      "id": "5fc3b623-678e-4926-a32e-427e86c9ebf9",
+      "type": "IMESSAGE_APP_IPAD_PRO_3GEN_129",
+      "images": [
+        {
+          "id": "24fce6ff-d747-4ce5-81c8-b150cca2da84",
+          "state": "COMPLETE"
+        },
+        {
+          "id": "1d6bb341-1a2e-4cb0-bb48-39610efa9ac9",
+          "state": "COMPLETE"
+        },
+        {
+          "id": "9f44ea1c-e7db-41cf-a8f7-06def882cb8d",
+          "state": "COMPLETE"
+        },
+        {
+          "id": "1499aea6-1516-4fd5-9099-0de237b48f02",
+          "state": "COMPLETE"
+        }
+      ]
+    },
+    {
+      "id": "f845cf97-d163-45b9-8399-743c3a04412d",
+      "type": "IMESSAGE_APP_IPHONE_61",
+      "images": [
+        {
+          "id": "bd2d6f40-2595-49b8-8589-0d7ac06be3c2",
+          "state": "COMPLETE"
+        },
+        {
+          "id": "7fdb2ad8-7635-4746-9f1a-c00fbd267697",
+          "state": "COMPLETE"
+        },
+        {
+          "id": "6940c870-38d4-45c4-8d65-6dd27664dfe8",
+          "state": "COMPLETE"
+        },
+        {
+          "id": "e0cff5fb-919c-48fe-9f44-6f1525aebf6d",
+          "state": "COMPLETE"
+        }
+      ]
+    }
+  ],
+  "payload": {
+    "version": "1.4.1",
+    "build": "11",
+    "ipa": "build/studio-release/1.4.1-11/export/8 bit art.ipa",
+    "size": 758576,
+    "sha256": "d27764a6cd52dea128e8eaaaf7602d4c308afba3f231f8b4a6aafdbd5386ed8d",
+    "bundleIDs": [
+      "eu.armand.--bit-art",
+      "eu.armand.--bit-art.StickerPackExtension"
+    ],
+    "stickers": 67,
+    "wineExcluded": true,
+    "privacyManifests": 2,
+    "noTestFixtures": true
+  },
+  "validation": {
+    "appleValidationSucceeded": true,
+    "appleUploadSucceeded": true,
+    "errors": 0,
+    "warnings": [
+      90863,
+      90984
+    ],
+    "coreTests": 32,
+    "coreTestFailures": 0,
+    "darkAppearanceChecks": 2,
+    "darkAppearanceFailures": 0,
+    "sourceResourceVerificationPassed": true,
+    "physicalDeviceProductionPurchaseVerified": false,
+    "physicalDeviceSandboxPurchaseVerified": false,
+    "ios27VisualVerification": false
+  },
+  "review": {
+    "submissionID": "4ab04eda-8610-4e9d-8552-8617b6a3f7e2",
+    "submitted": true,
+    "requiresExplicitOwnerRequest": false,
+    "requiredItems": [
+      "appStoreVersion:1.4.1",
+      "inAppPurchaseVersion:45b42e0b-bc8a-4835-8bc8-4d766e48bda1"
+    ],
+    "state": "WAITING_FOR_REVIEW",
+    "items": [
+      {
+        "id": "NGFiMDRlZGEtODYxMC00ZTlkLTg1NTItODYxN2I2YTNmN2UyfDZ8ODk0Mjc0MTcx",
+        "state": "READY_FOR_REVIEW",
+        "appStoreVersionID": "6cd58d90-1728-495e-a02d-2b5fc571a519"
+      },
+      {
+        "id": "NGFiMDRlZGEtODYxMC00ZTlkLTg1NTItODYxN2I2YTNmN2UyfDE3fDQ1YjQyZTBiLWJjOGEtNDgzNS04YmM4LTRkNzY2ZTQ4YmRhMQ",
+        "state": "READY_FOR_REVIEW",
+        "inAppPurchaseVersionID": "45b42e0b-bc8a-4835-8bc8-4d766e48bda1"
+      }
+    ],
+    "bothRequiredItemsVerified": true,
+    "submittedAtUTC": "2026-10-31T07:42:46.946Z",
+    "ownerApproval": {
+      "granted": true,
+      "date": "2026-10-31",
+      "instruction": "Submit both; release automatically after approval"
+    }
+  },
+  "evidenceDirectory": "build/purchase-investigation/ (ignored; private Apple readbacks, validation and upload)",
+  "remaining": [
+    "Wait for Apple App Review of BOTH submitted items",
+    "After approval verify IAP APPROVED and actual production price/purchase/restore on a physical device"
+  ],
+  "githubPullRequest": "https://github.com/mim-Armand/8bit-stickers/pull/8",
+  "submittedSourceTag": "v1.4.1-build11-submitted"
+}

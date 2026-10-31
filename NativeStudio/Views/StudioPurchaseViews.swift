@@ -113,6 +113,7 @@ struct StudioUnlockView: View {
             .toolbar { ToolbarItem(placement: .cancellationAction) { Button("Not now") { dismiss() } } }
         }
         .navigationViewStyle(StackNavigationViewStyle())
+        .studioAppearance()
         .background(StudioPurchasePresentationAnchor(purchases: purchases)
             .frame(width: 0, height: 0).allowsHitTesting(false))
         .onChange(of: purchases.isUnlocked) { unlocked in if unlocked { dismiss() } }
@@ -195,7 +196,7 @@ struct StudioHelpView: View {
             }
             .navigationTitle("A little help").navigationBarTitleDisplayMode(.inline)
             .toolbar { ToolbarItem(placement: .confirmationAction) { Button("Done") { dismiss() } } }
-        }.navigationViewStyle(StackNavigationViewStyle()).accentColor(StudioTheme.purple)
+        }.navigationViewStyle(StackNavigationViewStyle()).studioAppearance()
     }
 
     private func helpRow(_ title: String, _ detail: String) -> some View {

@@ -42,8 +42,8 @@ struct StudioRootView: View {
                 }
             }
         }
-        .foregroundColor(StudioTheme.ink).background(StudioTheme.cream.ignoresSafeArea())
-        .accentColor(StudioTheme.purple)
+        .background(StudioTheme.cream.ignoresSafeArea())
+        .studioAppearance()
         .sheet(isPresented: $showUnlock, onDismiss: finishUnlock) { StudioUnlockView(purchases: purchases) }
         .sheet(isPresented: $showHelp) { StudioHelpView(purchases: purchases) }
         .alert("Couldn't open the drawing", isPresented: $showError) { Button("OK", role: .cancel) {} } message: { Text(errorMessage ?? "Please try again.") }

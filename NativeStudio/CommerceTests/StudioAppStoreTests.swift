@@ -103,6 +103,86 @@ final class StudioAppStoreTests: XCTestCase {
         XCTAssertTrue(store.message?.contains("could not be verified") == true,
                       "Restore must retain the verification error instead of claiming a successful restore or missing purchase")
     }
+
+    func testPriceRecoversAfterAppleCatalogInitiallyHasNoProduct() async throws {
+        // Change only the test catalog. This reproduces Apple's successful but
+        // empty lookup without a shipping product override or ownership bypass.
+        let fixtureURL = try XCTUnwrap(Bundle.main.url(forResource: "Studio", withExtension: "storekit"))
+        var fixture = try XCTUnwrap(JSONSerialization.jsonObject(with: Data(contentsOf: fixtureURL)) as? [String: Any])
+        fixture["products"] = []
+        let emptyURL = FileManager.default.temporaryDirectory.appendingPathComponent("EmptyStudio-\(UUID().uuidString).storekit")
+        try JSONSerialization.data(withJSONObject: fixture).write(to: emptyURL)
+        defer { try? FileManager.default.removeItem(at: emptyURL) }
+        let emptySession = try SKTestSession(contentsOf: emptyURL)
+        emptySession.resetToDefaultState()
+        emptySession.clearTransactions()
+
+        let store = makeStore()
+        preferences.set("Keep this drawing", forKey: "drawingSentinel")
+        await store.start()
+        XCTAssertNil(store.price)
+        XCTAssertFalse(store.canPurchase)
+        XCTAssertTrue(store.message?.contains("not available from Apple") == true)
+
+        let availableSession = try SKTestSession(configurationFileNamed: "Studio")
+        availableSession.resetToDefaultState()
+        availableSession.clearTransactions()
+        defer { availableSession.clearTransactions() }
+        await store.start()
+        XCTAssertNotNil(store.price, "A retry must request Apple's catalog again after an empty result")
+        XCTAssertTrue(store.canPurchase)
+        XCTAssertNil(store.message, "A recovered price must dismiss its stale unavailability warning")
+        XCTAssertFalse(store.isUnlocked, "Product metadata alone never establishes purchase ownership")
+        XCTAssertEqual(preferences.string(forKey: "drawingSentinel"), "Keep this drawing")
+    }
+
+    func testPriceRecoversAfterStoreKitNetworkFailure() async throws {
+        guard #available(iOS 17.0, *) else { throw XCTSkip("StoreKit error simulation requires iOS 17") }
+        let session = try SKTestSession(configurationFileNamed: "Studio")
+        session.resetToDefaultState()
+        session.clearTransactions()
+        defer { session.resetToDefaultState(); session.clearTransactions() }
+        try await session.setSimulatedError(.generic(.networkError(URLError(.notConnectedToInternet))), forAPI: .loadProducts)
+
+        let store = makeStore()
+        await store.start()
+        XCTAssertNil(store.price)
+        XCTAssertFalse(store.canPurchase)
+        XCTAssertTrue(store.message?.contains("price could not load") == true)
+        XCTAssertFalse(store.isLoading)
+
+        try await session.setSimulatedError(nil, forAPI: .loadProducts)
+        await store.start()
+        XCTAssertNotNil(store.price)
+        XCTAssertTrue(store.canPurchase)
+        XCTAssertNil(store.message)
+        XCTAssertFalse(store.isUnlocked)
+    }
+
+    func testPriceFailureAndRecoveryKeepUnresolvedPurchaseVisible() async throws {
+        guard #available(iOS 17.0, *) else { throw XCTSkip("StoreKit error simulation requires iOS 17") }
+        let session = try SKTestSession(configurationFileNamed: "Studio")
+        session.resetToDefaultState()
+        session.clearTransactions()
+        session.disableDialogs = true
+        defer { session.resetToDefaultState(); session.clearTransactions() }
+        // The production adapter intentionally rejects Xcode ownership. Its
+        // verification notice must survive both failure and recovery of pricing.
+        _ = try await session.buyProduct(identifier: StudioPurchaseStore.productID)
+        try await session.setSimulatedError(.generic(.networkError(URLError(.notConnectedToInternet))), forAPI: .loadProducts)
+        let store = makeStore()
+        await store.start()
+        XCTAssertNil(store.price)
+        XCTAssertFalse(store.isUnlocked)
+        XCTAssertTrue(store.message?.contains("could not be verified") == true)
+
+        try await session.setSimulatedError(nil, forAPI: .loadProducts)
+        await store.start()
+        XCTAssertNotNil(store.price)
+        XCTAssertFalse(store.isUnlocked)
+        XCTAssertTrue(store.message?.contains("could not be verified") == true,
+                      "Loading metadata cannot resolve or hide an ownership verification failure")
+    }
 }
 #endif
 
