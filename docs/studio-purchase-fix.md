@@ -19,6 +19,10 @@ The screenshot's precise message comes from a successful `Product.products(for:)
 
 The new Apple draft is **6cd58d90-1728-495e-a02d-2b5fc571a519**, with en-US localization **25f0993f-cae4-48be-8b3a-f87677a6ce21**. It inherits all 16 native screenshot placements, each **COMPLETE**. Those screenshots still represent the included artwork and Studio features. Reviewer notes explicitly describe the missing first-IAP review and request review of the existing product with this correction. Automatic release remains **AFTER_APPROVAL**.
 
+Build **63c7404d-e3b0-4136-8ae2-6a6bb90d652e** is now **VALID / APP_STORE_ELIGIBLE**, selected in 1.4.1, and **IN_BETA_TESTING** in the existing internal group. Signed candidate source is commit **bb9acf8c24a3cf32f8a98620030213eaf4dc716c**, tagged **v1.4.1-build11-candidate**. [GitHub PR #8](https://github.com/mim-Armand/8bit-stickers/pull/8) records the correction.
+
+Combined review draft **4ab04eda-8610-4e9d-8552-8617b6a3f7e2** contains **two READY_FOR_REVIEW items**: app version **6cd58d90-1728-495e-a02d-2b5fc571a519** and IAP metadata version **45b42e0b-bc8a-4835-8bc8-4d766e48bda1**. The submission itself is **READY_FOR_REVIEW**, with no submitted date. The IAP metadata version also reports **READY_FOR_REVIEW** after propagation; its parent product remains READY_TO_SUBMIT. Its presence in the same draft is verified by the exact relationship on the IAP review item. **Nothing has been submitted for review.**
+
 ## Preparation and release controls
 
 `scripts/prepare-studio-purchase-fix.mjs` is a dry run by default. `--apply` creates/updates this exact editable draft and selects processed build 11. `--apply --stage-review` requires a selected **VALID / APP_STORE_ELIGIBLE** build, all inherited screenshots, the completed IAP review image, the exact $1.00 price and the recorded territory approval. It then attaches **both** the app version and existing first-IAP metadata version to **one unsubmitted review draft**. It rejects unrelated review items. It deliberately contains no review-submission operation.
