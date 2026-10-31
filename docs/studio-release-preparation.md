@@ -1,6 +1,6 @@
 # Native Studio public release preparation — 1.4 (10)
 
-**October 31 status:** 1.4 (10) is now released, but the Studio Unlock IAP was omitted from its completed app-only review and remains unsubmitted. See [the 1.4.1 (11) purchase correction](studio-purchase-fix.md) for the current investigation, fixes and combined-review preparation. The remainder of this file preserves the original October 27 preparation handoff.
+**October 31 status:** 1.4 (10) is now released, but the Studio Unlock IAP was omitted from its completed app-only review. The owner explicitly approved submission of corrective **1.4.1 (11) and Studio Unlock together**; both are now **Waiting for Review**, with automatic release after approval. See [the purchase correction](studio-purchase-fix.md) for the current investigation, fixes and verified combined submission. The remainder of this file preserves the original October 27 preparation handoff.
 
 The owner requested a new review candidate with native Studio and the optional paid tools on October 27, 2026. This work prepares the candidate and editable Apple metadata; **it does not submit the app or IAP review**.
 
