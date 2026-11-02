@@ -24,6 +24,8 @@ final class StudioPurchaseStore: ObservableObject {
     @Published private(set) var isCheckingPurchaseAvailability = false
     @Published private(set) var purchaseAvailabilityStatus: String?
     @Published private(set) var purchaseAvailabilityReport: String?
+    @Published private(set) var initialPriceAvailabilityStatus: String?
+    @Published private(set) var initialPriceAvailabilityReport: String?
     #endif
 
     private enum Mode {
@@ -121,6 +123,10 @@ final class StudioPurchaseStore: ObservableObject {
         #else
         mode = .disabled
         #endif
+        #if STUDIO_PURCHASE_DIAGNOSTICS
+        initialPriceAvailabilityReport = defaults.string(forKey: initialPriceReportKey)
+        initialPriceAvailabilityStatus = Self.initialPriceStatus(for: initialPriceAvailabilityReport)
+        #endif
     }
 
     deinit { updatesTask?.cancel() }
@@ -144,6 +150,20 @@ final class StudioPurchaseStore: ObservableObject {
             lookupError = error as NSError
         }
         let storefront = await currentStorefront
+        let report = purchaseAvailabilitySnapshot(rawProducts: rawProducts, lookupError: lookupError, storefront: storefront)
+        purchaseAvailabilityReport = Self.encodeAvailabilityReport(report)
+        if lookupError != nil {
+            purchaseAvailabilityStatus = "Apple's product lookup failed. Copy the technical report for support."
+        } else if rawProducts.contains(where: { $0.id == Self.productID && $0.type == .nonConsumable }) {
+            purchaseAvailabilityStatus = "Apple returned Studio Unlock. Your current access is unchanged."
+        } else if rawProducts.isEmpty {
+            purchaseAvailabilityStatus = "Apple returned no products. Your current access is unchanged."
+        } else {
+            purchaseAvailabilityStatus = "Apple returned products without a matching Studio Unlock. Your current access is unchanged."
+        }
+    }
+
+    private func purchaseAvailabilitySnapshot(rawProducts: [Product], lookupError: NSError?, storefront: Storefront?) -> [String: Any] {
         let bundle = Bundle.main
         // A Messages extension is embedded at App.app/PlugIns/Extension.appex.
         // Read only that parent's bundle identifier; never report local paths.
@@ -180,17 +200,72 @@ final class StudioPurchaseStore: ObservableObject {
         } else {
             report["error"] = NSNull()
         }
-        if let data = try? JSONSerialization.data(withJSONObject: report, options: [.prettyPrinted, .sortedKeys]) {
-            purchaseAvailabilityReport = String(data: data, encoding: .utf8)
+        return report
+    }
+
+    private static func encodeAvailabilityReport(_ report: [String: Any]) -> String? {
+        guard let data = try? JSONSerialization.data(withJSONObject: report, options: [.prettyPrinted, .sortedKeys]) else { return nil }
+        return String(data: data, encoding: .utf8)
+    }
+
+    private var initialPriceReportKey: String {
+        let bundle = Bundle.main
+        let version = bundle.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "unknown"
+        let build = bundle.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? "unknown"
+        return "studio.purchaseDiagnostics.initialPriceReport.\(bundle.bundleIdentifier ?? "unknown").\(version).\(build)"
+    }
+
+    /// Persist the first normal lookup before filtering its result. Later price
+    /// retries and manual probes cannot replace this build's original evidence.
+    private func recordInitialPriceLookup(rawProducts: [Product], lookupError: NSError?, startedAt: Date,
+                                          completedAt: Date, wasUnlocked: Bool) {
+        let key = initialPriceReportKey
+        guard defaults.string(forKey: key) == nil else { return }
+        var snapshot = purchaseAvailabilitySnapshot(rawProducts: rawProducts, lookupError: lookupError, storefront: nil)
+        snapshot["reportKind"] = "initial-price-lookup"
+        snapshot["requestStartedAtUTC"] = ISO8601DateFormatter().string(from: startedAt)
+        snapshot["requestCompletedAtUTC"] = ISO8601DateFormatter().string(from: completedAt)
+        snapshot["queryDurationSeconds"] = max(0, completedAt.timeIntervalSince(startedAt))
+        snapshot["studioUnlockedBeforeRequest"] = wasUnlocked
+        snapshot["storefrontCheck"] = "pending"
+        guard let initialText = Self.encodeAvailabilityReport(snapshot) else { return }
+        defaults.set(initialText, forKey: key)
+        initialPriceAvailabilityReport = initialText
+        initialPriceAvailabilityStatus = Self.initialPriceStatus(for: initialText)
+
+        // Start this only after the normal product request, and never await it
+        // in checkout startup. Storefront latency cannot delay a usable price.
+        let initialSnapshot = snapshot
+        Task { [weak self] in
+            let storefront = await Storefront.current
+            guard let self, self.defaults.string(forKey: key) == initialText else { return }
+            var enriched = initialSnapshot
+            if let storefront {
+                enriched["storefront"] = ["id": storefront.id, "countryCode": storefront.countryCode]
+            }
+            enriched["storefrontCheck"] = "completed"
+            enriched["storefrontCapturedAtUTC"] = ISO8601DateFormatter().string(from: Date())
+            guard let text = Self.encodeAvailabilityReport(enriched) else { return }
+            self.defaults.set(text, forKey: key)
+            self.initialPriceAvailabilityReport = text
         }
-        if lookupError != nil {
-            purchaseAvailabilityStatus = "Apple's product lookup failed. Copy the technical report for support."
-        } else if rawProducts.contains(where: { $0.id == Self.productID && $0.type == .nonConsumable }) {
-            purchaseAvailabilityStatus = "Apple returned Studio Unlock. Your current access is unchanged."
-        } else if rawProducts.isEmpty {
-            purchaseAvailabilityStatus = "Apple returned no products. Your current access is unchanged."
+    }
+
+    private static func initialPriceStatus(for text: String?) -> String? {
+        guard let text else { return nil }
+        guard let data = text.data(using: .utf8),
+              let report = try? JSONSerialization.jsonObject(with: data) as? [String: Any] else {
+            return "The saved initial price report could not be read."
+        }
+        let access = (report["studioUnlockedBeforeRequest"] as? Bool) == true ? "unlocked" : "locked"
+        if report["error"] is [String: Any] {
+            return "First price request failed while Studio was \(access)."
+        }
+        let count = report["rawProductCount"] as? Int ?? 0
+        if count == 0 {
+            return "First price request returned no products while Studio was \(access)."
         } else {
-            purchaseAvailabilityStatus = "Apple returned products without a matching Studio Unlock. Your current access is unchanged."
+            return "First price request returned \(count) \(count == 1 ? "product" : "products") while Studio was \(access)."
         }
     }
     #endif
@@ -222,10 +297,21 @@ final class StudioPurchaseStore: ObservableObject {
         }
         startTransactionListener()
         await refreshEntitlements()
+        #if STUDIO_PURCHASE_DIAGNOSTICS
+        let initialLookupStartedAt = Date()
+        let wasUnlockedBeforeInitialLookup = isUnlocked
+        #endif
         do {
+            #if STUDIO_PURCHASE_DIAGNOSTICS
+            let rawProducts = try await Product.products(for: [Self.productID])
+            recordInitialPriceLookup(rawProducts: rawProducts, lookupError: nil, startedAt: initialLookupStartedAt,
+                                    completedAt: Date(), wasUnlocked: wasUnlockedBeforeInitialLookup)
+            product = rawProducts.first { $0.id == Self.productID && $0.type == .nonConsumable }
+            #else
             product = try await Product.products(for: [Self.productID]).first {
                 $0.id == Self.productID && $0.type == .nonConsumable
             }
+            #endif
             price = product?.displayPrice
             if product == nil {
                 showProductAvailabilityMessage((isSandboxTesting || usesPublicPurchaseCopy)
@@ -238,6 +324,10 @@ final class StudioPurchaseStore: ObservableObject {
                 productAvailabilityMessage = nil
             }
         } catch {
+            #if STUDIO_PURCHASE_DIAGNOSTICS
+            recordInitialPriceLookup(rawProducts: [], lookupError: error as NSError, startedAt: initialLookupStartedAt,
+                                    completedAt: Date(), wasUnlocked: wasUnlockedBeforeInitialLookup)
+            #endif
             // Product metadata availability is separate from verified tool access.
             showProductAvailabilityMessage((isSandboxTesting || usesPublicPurchaseCopy)
                 ? "The price could not load. Check your connection and try again. Your saved work and existing access are unchanged."

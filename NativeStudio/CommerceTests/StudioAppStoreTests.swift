@@ -185,6 +185,139 @@ final class StudioAppStoreTests: XCTestCase {
     }
 
     #if STUDIO_PURCHASE_DIAGNOSTICS
+    private func initialReport(_ store: StudioPurchaseStore) throws -> [String: Any] {
+        let text = try XCTUnwrap(store.initialPriceAvailabilityReport)
+        let data = try XCTUnwrap(text.data(using: .utf8))
+        return try XCTUnwrap(JSONSerialization.jsonObject(with: data) as? [String: Any])
+    }
+
+    func testInitialPriceReportRecordsUnownedLookupAndPersistsForThisBuild() async throws {
+        let session = try SKTestSession(configurationFileNamed: "Studio")
+        session.resetToDefaultState()
+        session.clearTransactions()
+        defer { session.resetToDefaultState(); session.clearTransactions() }
+        preferences.set(true, forKey: "studio.localSimulation.purchased")
+        preferences.set(true, forKey: "studio.betaPreview.enabled")
+        preferences.set("Keep this drawing", forKey: "drawingSentinel")
+        let store = makeStore()
+        XCTAssertNil(store.initialPriceAvailabilityReport)
+
+        await store.start()
+
+        let first = try initialReport(store)
+        XCTAssertEqual(first["reportKind"] as? String, "initial-price-lookup")
+        XCTAssertEqual(first["rawProductCount"] as? Int, 1)
+        XCTAssertEqual(first["studioUnlockedBeforeRequest"] as? Bool, false,
+                       "Mock/beta preferences cannot turn an unowned first lookup into an owned one")
+        XCTAssertTrue(first["error"] is NSNull)
+        XCTAssertNotNil(first["requestStartedAtUTC"] as? String)
+        XCTAssertNotNil(first["requestCompletedAtUTC"] as? String)
+        XCTAssertGreaterThanOrEqual(try XCTUnwrap(first["queryDurationSeconds"] as? Double), 0)
+        XCTAssertFalse(store.isUnlocked)
+        XCTAssertNotNil(store.price, "Normal checkout still receives the real product metadata")
+        XCTAssertTrue(store.canPurchase)
+        XCTAssertFalse(store.isLoading)
+        XCTAssertTrue(session.allTransactions().isEmpty)
+        XCTAssertEqual(preferences.string(forKey: "drawingSentinel"), "Keep this drawing")
+
+        let savedKeys = preferences.dictionaryRepresentation().keys.filter { $0.hasPrefix("studio.purchaseDiagnostics.initialPriceReport.") }
+        XCTAssertEqual(savedKeys.count, 1)
+        let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "unknown"
+        let build = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? "unknown"
+        XCTAssertTrue(try XCTUnwrap(savedKeys.first).hasSuffix(".\(version).\(build)"))
+        let recreated = makeStore()
+        let restored = try initialReport(recreated)
+        XCTAssertEqual(restored["requestStartedAtUTC"] as? String, first["requestStartedAtUTC"] as? String)
+        XCTAssertEqual(restored["rawProductCount"] as? Int, 1)
+        XCTAssertEqual(restored["studioUnlockedBeforeRequest"] as? Bool, false)
+        XCTAssertNil(recreated.price, "Restoring diagnostic evidence does not restore a checkout product or ownership")
+        XCTAssertFalse(recreated.isUnlocked)
+    }
+
+    func testInitialEmptyLookupSurvivesRetryManualProbeAndServiceRecreation() async throws {
+        let fixtureURL = try XCTUnwrap(Bundle.main.url(forResource: "Studio", withExtension: "storekit"))
+        var fixture = try XCTUnwrap(JSONSerialization.jsonObject(with: Data(contentsOf: fixtureURL)) as? [String: Any])
+        fixture["products"] = []
+        let emptyURL = FileManager.default.temporaryDirectory.appendingPathComponent("InitialEmptyStudio-\(UUID().uuidString).storekit")
+        try JSONSerialization.data(withJSONObject: fixture).write(to: emptyURL)
+        defer { try? FileManager.default.removeItem(at: emptyURL) }
+        let emptySession = try SKTestSession(contentsOf: emptyURL)
+        emptySession.resetToDefaultState()
+        emptySession.clearTransactions()
+        let store = makeStore()
+
+        await store.start()
+        let first = try initialReport(store)
+        XCTAssertEqual(first["rawProductCount"] as? Int, 0)
+        XCTAssertEqual(first["studioUnlockedBeforeRequest"] as? Bool, false)
+        XCTAssertTrue(first["error"] is NSNull)
+        XCTAssertNil(store.price)
+        XCTAssertFalse(store.canPurchase)
+
+        let availableSession = try SKTestSession(configurationFileNamed: "Studio")
+        availableSession.resetToDefaultState()
+        availableSession.clearTransactions()
+        defer { availableSession.resetToDefaultState(); availableSession.clearTransactions() }
+        await store.start()
+        XCTAssertNotNil(store.price)
+        XCTAssertTrue(store.canPurchase)
+        await store.checkPurchaseAvailability()
+        let manualText = try XCTUnwrap(store.purchaseAvailabilityReport)
+        let manualData = try XCTUnwrap(manualText.data(using: .utf8))
+        let manual = try XCTUnwrap(JSONSerialization.jsonObject(with: manualData) as? [String: Any])
+        XCTAssertEqual(manual["rawProductCount"] as? Int, 1)
+        XCTAssertEqual(try initialReport(store)["rawProductCount"] as? Int, 0,
+                       "A later successful manual query must not replace the initial empty result")
+
+        let recreated = makeStore()
+        await recreated.start()
+        let restored = try initialReport(recreated)
+        XCTAssertEqual(restored["rawProductCount"] as? Int, 0)
+        XCTAssertEqual(restored["requestStartedAtUTC"] as? String, first["requestStartedAtUTC"] as? String)
+        XCTAssertEqual(restored["studioUnlockedBeforeRequest"] as? Bool, false)
+        XCTAssertNotNil(recreated.price)
+        XCTAssertFalse(recreated.isUnlocked)
+        XCTAssertTrue(availableSession.allTransactions().isEmpty)
+    }
+
+    func testInitialLookupErrorSurvivesSuccessfulRetryAndRecreationWithoutPrivateDetails() async throws {
+        guard #available(iOS 17.0, *) else { throw XCTSkip("StoreKit error simulation requires iOS 17") }
+        let session = try SKTestSession(configurationFileNamed: "Studio")
+        session.resetToDefaultState()
+        session.clearTransactions()
+        defer { session.resetToDefaultState(); session.clearTransactions() }
+        let privateDetail = "PRIVATE_INITIAL_ERROR_DETAIL_MUST_NOT_APPEAR"
+        let error = URLError(.notConnectedToInternet, userInfo: [NSLocalizedDescriptionKey: privateDetail])
+        try await session.setSimulatedError(.generic(.networkError(error)), forAPI: .loadProducts)
+        let store = makeStore()
+
+        await store.start()
+        let first = try initialReport(store)
+        let initialError = try XCTUnwrap(first["error"] as? [String: Any])
+        XCTAssertEqual(Set(initialError.keys), Set(["domain", "code"]))
+        XCTAssertFalse(try XCTUnwrap(store.initialPriceAvailabilityReport).contains(privateDetail))
+        XCTAssertEqual(first["rawProductCount"] as? Int, 0)
+        XCTAssertEqual(first["studioUnlockedBeforeRequest"] as? Bool, false)
+        XCTAssertNil(store.price)
+
+        try await session.setSimulatedError(nil, forAPI: .loadProducts)
+        await store.start()
+        XCTAssertNotNil(store.price)
+        XCTAssertTrue(store.canPurchase)
+        let recreated = makeStore()
+        await recreated.start()
+        let restored = try initialReport(recreated)
+        let restoredError = try XCTUnwrap(restored["error"] as? [String: Any])
+        XCTAssertEqual(restoredError["domain"] as? String, initialError["domain"] as? String)
+        XCTAssertEqual(restoredError["code"] as? Int, initialError["code"] as? Int)
+        XCTAssertEqual(restored["requestStartedAtUTC"] as? String, first["requestStartedAtUTC"] as? String)
+        XCTAssertEqual(restored["rawProductCount"] as? Int, 0)
+        XCTAssertFalse(try XCTUnwrap(recreated.initialPriceAvailabilityReport).contains(privateDetail))
+        XCTAssertFalse(recreated.isUnlocked)
+        XCTAssertNotNil(recreated.price)
+        XCTAssertTrue(session.allTransactions().isEmpty)
+    }
+
     func testDiagnosticReadReportsRawCatalogWithoutChangingCheckoutOrOwnership() async throws {
         let session = try SKTestSession(configurationFileNamed: "Studio")
         session.resetToDefaultState()

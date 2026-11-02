@@ -1,0 +1,99 @@
+{
+  "verifiedAtUTC": "2026-11-02T13:14:34.512Z",
+  "appID": "1366485724",
+  "version": "1.4.1",
+  "build": "13",
+  "configuration": "TestFlightExternalDiagnostics",
+  "sourceCommit": null,
+  "sourceTag": "v1.4.1-build13-clean-test",
+  "authorization": {
+    "date": "2026-11-02",
+    "scope": "Add the owner-supplied second-device email to TestFlight and test/fix first-time sandbox purchasing",
+    "namedTesterCount": 1,
+    "externalBetaAuthorized": true,
+    "appStoreConnectRolesAuthorizedOrGranted": false
+  },
+  "distribution": {
+    "kind": "TESTFLIGHT_PRIVATE_EXTERNAL",
+    "groupID": "fe239fc9-f457-4326-afa0-365a777aebe7",
+    "groupName": "Studio First Purchase Test",
+    "publicLinkEnabled": false,
+    "hasAccessToAllBuilds": false,
+    "targetMembershipVerified": true,
+    "targetEmailStoredInGit": false,
+    "betaReviewRequired": true,
+    "buildID": null,
+    "processingState": "UPLOADING",
+    "betaReviewID": null,
+    "betaReviewState": null,
+    "invitationState": "TARGET_ADDED_PENDING_ELIGIBLE_BUILD"
+  },
+  "productionReview": {
+    "submissionID": "4ab04eda-8610-4e9d-8552-8617b6a3f7e2",
+    "appVersion": "1.4.1",
+    "selectedBuild": "11",
+    "state": "UNRESOLVED_ISSUES",
+    "changedByThisWork": false
+  },
+  "commerce": {
+    "productID": "eu.armand.bitart.studio.unlock",
+    "appleID": "6827336076",
+    "usaPrice": "1.00",
+    "territoryCount": 175,
+    "familySharing": false
+  },
+  "firstLookupCapture": {
+    "persistedPerBuild": true,
+    "beforeFiltering": true,
+    "preRequestAccessIncluded": true,
+    "subsequentRetriesPreserveFirstResult": true,
+    "privateAccountOrTransactionDataIncluded": false,
+    "changesPurchasePolicy": false,
+    "changesDrawingsOrOwnership": false
+  },
+  "payload": {
+    "version": "1.4.1",
+    "build": "13",
+    "hostBundleID": "eu.armand.--bit-art",
+    "extensionBundleID": "eu.armand.--bit-art.StickerPackExtension",
+    "internalOnly": false,
+    "noTestFixtures": true,
+    "stickerCount": 67,
+    "initialLookupDiagnosticsPresent": true,
+    "ipa": "build/studio-external-test/1.4.1-13/export/8 bit art.ipa",
+    "size": 789007,
+    "sha256": "838907ee20eae222fadd4f5a22f6eafe4ae6fd47061922435591e7b2b80cf2c2"
+  },
+  "validation": {
+    "coreModelTests": 37,
+    "testFailures": 0,
+    "archiveExportSucceeded": true,
+    "appleValidationSucceeded": true,
+    "appleUploadSucceeded": false,
+    "resourcesVerified": true,
+    "appStoreBuild11AndInternalBuild12SettingsUnchanged": true,
+    "appleValidationErrors": 0,
+    "appleWarnings": [
+      90863,
+      90984
+    ]
+  },
+  "deviceAcceptance": {
+    "initialUnownedState": "NOT_YET_TESTED",
+    "initialPriceLookup": "NOT_YET_TESTED",
+    "firstSandboxPurchase": "NOT_YET_TESTED",
+    "editorOpensAfterPurchase": "NOT_YET_TESTED",
+    "relaunchRetainsAccess": "NOT_YET_TESTED",
+    "restorePurchases": "NOT_YET_TESTED"
+  },
+  "rootCauseResolved": false,
+  "fixVerified": false,
+  "privateEvidenceDirectory": "build/fresh-buyer-test/",
+  "guide": "docs/studio-first-purchase-test.md",
+  "remaining": [
+    "Validate/upload/process build 13",
+    "Attach only to private target group and submit TestFlight Beta App Review",
+    "Invite target when permitted and collect clean-device initial lookup/purchase results",
+    "Fix only an evidenced failure and verify before any production resubmission"
+  ]
+}

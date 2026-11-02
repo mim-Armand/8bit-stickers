@@ -1,5 +1,7 @@
 # 8 bit art
 
+**Private first-purchase test:** the owner authorized a second-device TestFlight tester. External diagnostic **1.4.1 (13)** records the original startup price result so retries cannot hide a failure. It uses a private named-email group and requires Beta App Review; see [the device test guide](docs/studio-first-purchase-test.md) and [current distribution status](release/studio-first-purchase-status.json). Actual clean-account purchase results are still pending; production review remains unchanged.
+
 **November 2 review update:** Apple rejected 1.4.1 (11) because its sandbox reviewer also saw **Price unavailable**. Configuration and agreement checks pass; the owner’s existing TestFlight Studio remains unlocked. Internal read-only diagnostic beta **1.4.1 (12) is now available in TestFlight**: open Messages → 8 bit art → ? → Check purchase availability → Copy technical report. See [the live sandbox investigation](docs/studio-sandbox-investigation.md) for the unresolved diagnosis. No review has been resubmitted or cancelled. The October 31 status below is historical.
 
 The owner’s build-12 report returned the correct non-consumable at **$1.00**, with no error, on OS 27.2 / USA. This is an existing-owner result; it does **not** verify the failing first-time-buyer flow, an uncached request or production checkout. The purchase issue remains unresolved. See [the scoped evidence](release/studio-1.4.1/owner-lookup-evidence.json).

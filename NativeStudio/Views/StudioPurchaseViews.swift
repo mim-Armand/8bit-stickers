@@ -137,6 +137,7 @@ struct StudioHelpView: View {
     @Environment(\.dismiss) private var dismiss
     #if STUDIO_PURCHASE_DIAGNOSTICS
     @State private var copiedPurchaseReport = false
+    @State private var copiedInitialPriceReport = false
     #endif
 
     var body: some View {
@@ -173,6 +174,20 @@ struct StudioHelpView: View {
                     if let message = purchases.message { Text(message).font(.footnote).foregroundColor(StudioTheme.secondary) }
                 }
                 #if STUDIO_PURCHASE_DIAGNOSTICS
+                Section(header: Text("First price lookup")) {
+                    Text("Saved once for this build. Later price checks keep this first result so we can investigate a fresh install.")
+                        .font(.footnote).foregroundColor(StudioTheme.secondary)
+                    Text(purchases.initialPriceAvailabilityStatus ?? "The first price lookup has not completed yet.")
+                        .font(.footnote).foregroundColor(StudioTheme.secondary)
+                        .accessibilityIdentifier("studio.purchaseDiagnostics.initialStatus")
+                    Button(copiedInitialPriceReport ? "Initial price report copied" : "Copy initial price report") {
+                        guard let report = purchases.initialPriceAvailabilityReport else { return }
+                        UIPasteboard.general.string = report
+                        copiedInitialPriceReport = true
+                    }
+                    .disabled(purchases.initialPriceAvailabilityReport == nil)
+                    .accessibilityIdentifier("studio.purchaseDiagnostics.copyInitial")
+                }
                 Section(header: Text("Purchase availability check")) {
                     Text("Check Apple's current product listing without changing Studio access or making a purchase.")
                         .font(.footnote).foregroundColor(StudioTheme.secondary)

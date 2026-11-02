@@ -1,5 +1,13 @@
 # Verification — October 26–November 2, 2026
 
+## External first-purchase diagnostic beta — 1.4.1 (13)
+
+The owner authorized adding a supplied second-device email for a private external TestFlight test. The separate TestFlightExternalDiagnostics configuration retains the first normal product query before filtering, including pre-request access/timing and sanitized metadata. It persists once per build; later retries, manual probes and service recreation preserve it. Storefront enrichment runs afterward without delaying price display. AppStore build-11 and internal diagnostic build-12 settings remain unchanged.
+
+**37 core/model tests pass** (32 existing, 2 manual-probe boundary tests, 3 first-lookup persistence tests). They cover success with access locked, first empty/error results surviving later recovery, and report reload without ownership grants. Evidence: ignored `build/studio-external-diagnostics/core-tests.log` and `.xcresult`. The signed archive/export and Apple validation pass with zero errors and existing Messages-only warnings 90863/90984. Payload verifies build 13 and published IDs, no internal-only flag, no StoreKit fixture/test/preview code, all 67 stickers and both privacy manifests. Initial-diagnostic UI is present. Source-resource/shell/metadata/whitespace checks pass.
+
+These automated checks do not establish that the remote first-time purchase succeeds. Device results and actual Beta App Review/invitation progress are tracked in [the private test handoff](studio-first-purchase-test.md) and `release/studio-first-purchase-status.json`. The production app/IAP review has not been resubmitted or cancelled.
+
 ## Internal sandbox diagnostics — November 2, 2026
 
 Apple rejected app 1.4.1 (11) for unavailable product pricing in its review sandbox. The exact rejection, owner’s existing TestFlight access, current configuration checks and limits of the earlier approval-only diagnosis are recorded in [the current investigation](studio-sandbox-investigation.md). No review item has been resubmitted, removed or cancelled, and no message has been sent to Apple.

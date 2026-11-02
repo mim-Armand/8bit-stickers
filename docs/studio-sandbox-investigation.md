@@ -1,5 +1,7 @@
 # Studio sandbox investigation — November 2, 2026
 
+**Current next step:** the owner authorized another-device TestFlight test under a supplied unowned account. [Build 13 and its private external test guide](studio-first-purchase-test.md) preserve the first normal price lookup and require a real first purchase before declaring a fix. Beta App Review is authorized for that named test; the rejected production submission remains intact.
+
 Apple rejected **1.4.1 (11)** under **Guideline 2.1(b)**. The reviewer’s **iPad Air 11-inch (M3), iPadOS 27.2** had an active internet connection but the Studio Unlock screen displayed **Price unavailable**. The attached screenshot shows the exact message emitted when StoreKit returns no matching non-consumable product.
 
 Submission **4ab04eda-8610-4e9d-8552-8617b6a3f7e2** is now **UNRESOLVED_ISSUES**. The app item is **REJECTED**; the existing Studio Unlock metadata item remains **READY_FOR_REVIEW** in the same submission. Its parent IAP reports **READY_TO_SUBMIT**. Neither item has been removed, resubmitted or cancelled. Automatic release remains **AFTER_APPROVAL** for a future accepted submission.
