@@ -30,7 +30,12 @@
     "resetsDrawings": false,
     "collectsAccountOrTransactionDetails": false,
     "sendsDataToDeveloper": false,
-    "freshDeviceLookupVerified": false
+    "freshDeviceLookupVerified": true,
+    "lookupEvidenceSource": "Owner-provided diagnostic report; API invocation may use SDK caching",
+    "cleanAccountLookupVerified": false,
+    "newPurchaseVerified": false,
+    "uncachedLookupVerified": false,
+    "firstTimeBuyerFlowVerified": false
   },
   "payload": {
     "version": "1.4.1",
@@ -60,13 +65,14 @@
     "resourceVerificationPassed": true,
     "appStoreBuild11SettingsUnchanged": true
   },
-  "ownerReport": "Earlier TestFlight purchase completed; current TestFlight Studio is unlocked and editor works. Fresh product lookup still required.",
+  "ownerReport": "Prior TestFlight purchase and current editor access reported by owner. Build 12 lookup on OS 27.2/USA returned the correct non-consumable at $1.00 without error at 2026-11-02T10:53:51Z. Clean first-time-buyer flow remains unverified.",
   "usage": "Messages > 8 bit art > ? > Purchase availability check > Check purchase availability > Copy technical report",
   "evidenceDirectory": "build/rejection-2026-11-02/ and build/studio-diagnostics/ (ignored)",
   "remaining": [
-    "Collect owner-initiated fresh product lookup report without resetting ownership",
+    "Verify clean first-time-buyer initial lookup and sandbox purchase, or obtain reviewer diagnostics explaining the differing result",
     "Resolve sandbox lookup with evidence; no review resubmission or Apple reply without explicit instruction"
   ],
   "existingInternalGroupContainsBuild": true,
-  "testFlightNotesSaved": true
+  "testFlightNotesSaved": true,
+  "lookupEvidenceFile": "studio-1.4.1/owner-lookup-evidence.json"
 }

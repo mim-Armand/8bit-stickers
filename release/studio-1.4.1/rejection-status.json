@@ -12,7 +12,7 @@
   "reviewDevice": "iPad Air 11-inch (M3)",
   "reviewOS": "iPadOS 27.2",
   "reviewFinding": "Studio Unlock displays Price unavailable in Apple sandbox with active internet",
-  "ownerReport": "Earlier TestFlight purchase completed; current TestFlight Studio remains unlocked and editor works. Current fresh product lookup not yet observed.",
+  "ownerReport": "Prior TestFlight purchase and current editor access reported by owner. Build 12 lookup on OS 27.2/USA returned the correct non-consumable at $1.00 without error at 2026-11-02T10:53:51Z. Clean first-time-buyer flow remains unverified.",
   "checks": {
     "paidAppsAgreement": "Active",
     "bankAccount": "Active",
@@ -29,10 +29,11 @@
     "reviewImage": "COMPLETE",
     "localStoreKitFixturesExcluded": true
   },
-  "rootCause": "Unresolved. IAP approval is required for production sales but is not a prerequisite for sandbox product lookup. Configuration checks alone do not prove the reviewer catalog is healthy.",
+  "rootCause": "Unresolved. The owner lookup succeeds, but the reviewed first-time-buyer failure has not been reproduced or fixed. Approval alone does not fix sandbox lookup.",
   "appleReviewMutations": false,
   "replySent": false,
   "appResubmitted": false,
-  "nextStep": "Internal read-only catalog diagnostics in TestFlight 1.4.1 (12), without replacing the rejected review build or resetting ownership/drafts",
-  "privateEvidenceDirectory": "build/rejection-2026-11-02/"
+  "nextStep": "Verify clean first-time-buyer initial lookup/purchase or obtain reviewer-environment diagnostics; do not repeat an unchanged submission based only on the existing-owner report",
+  "privateEvidenceDirectory": "build/rejection-2026-11-02/",
+  "ownerLookupEvidenceFile": "owner-lookup-evidence.json"
 }
