@@ -1,6 +1,6 @@
 # App Review response — 1.4.1 (11)
 
-**Draft only — not sent.** Updated November 2, 2026 after the owner deferred further TestFlight testing and requested focus on the App Store failure. The response requests help resolving the existing combined review; it does not claim the sandbox rejection is fixed or request app-only approval. The reviewer-ready text is below Apple's 4,000-character reply limit.
+**Sent November 2, 2026 at 16:23 UTC (10:23 AM CST).** The owner explicitly authorized the prepared reply, and its presence in the existing App Review conversation was verified after a Chrome reload. The exact 2,939-character text below was sent; it requests help resolving the existing combined review and does not claim a verified fix or request app-only approval. Await Apple's response. See the [send confirmation and unchanged review status](../release/studio-1.4.1/app-review-reply-status.json).
 
 ## Reviewer-ready response
 
@@ -31,11 +31,11 @@ Thank you.
 
 ## Internal notes — do not include when sending
 
-- This is an unsent draft. Do not post it, resubmit either item or change the review until authorized by the owner/root task.
+- The owner explicitly authorized this exact prepared reply. It was sent at 16:23 UTC on November 2, 2026 and remained visible after reloading the conversation. Do not resend it or treat sending a reply as resubmitting either review item.
 - Root verified configuration and Business statuses on November 2. Preserve sanitized evidence; do not include bank details, personal contact information, credentials or account identifiers in a reply.
 - The owner supplied the build-12 report. A sanitized evidence summary is in `release/studio-1.4.1/owner-lookup-evidence.json`; the complete report stays ignored under `build/rejection-2026-11-02/owner-lookup-report.json`. No account, transaction, receipt or private device identifiers should be added to this response.
-- The earlier TestFlight purchase had already worked before the original App Store failure. The owner has deferred more TestFlight testing. The next proposed action is this factual App Review inquiry, not an unchanged resubmission. A clean purchase remains unverified and must never be invented.
-- Current root cause remains unresolved. Do not assert that approval alone fixes sandbox lookup, that Apple’s catalog is defective, or that a StoreKit 1 fallback is proven necessary.
-- Before sending, confirm the exact rejection wording and submission/product states against the current readback. The app version resource is **6cd58d90-1728-495e-a02d-2b5fc571a519**.
+- The earlier TestFlight purchase had already worked before the original App Store failure. The owner has deferred more TestFlight testing. This factual inquiry is now sent; await Apple's response rather than making an unchanged resubmission. A clean purchase remains unverified and must never be invented.
+- The sandbox-review discrepancy remains unresolved, and the separate missing production approval remains a confirmed sale blocker. Do not assert that approval alone fixes sandbox lookup, that Apple’s catalog is defective, or that a StoreKit 1 fallback is proven necessary.
+- Sending was followed by an API readback at **2026-11-02T16:23:28.591Z**: submission **UNRESOLVED_ISSUES**, parent IAP **READY_TO_SUBMIT**, metadata **READY_FOR_REVIEW**, selected build **11**. The app version resource is **6cd58d90-1728-495e-a02d-2b5fc571a519**. See `release/studio-1.4.1/app-review-reply-status.json`; the reply did not approve or resubmit either item.
 - Live production evidence and acceptance criteria: `release/studio-production-availability-status.json` and `docs/studio-production-availability.md`.
 - Relevant Apple references: [production availability / TN3188](https://developer.apple.com/documentation/technotes/tn3188-troubleshooting-in-app-purchases-availability-in-the-app-store), [configure In-App Purchases for sandbox review](https://developer.apple.com/help/app-review/before-submitting-for-review/configure-in-app-purchases/), [TN3186](https://developer.apple.com/documentation/technotes/tn3186-troubleshooting-in-app-purchases-availability-in-the-sandbox), and [standalone iMessage app support for IAP](https://developer.apple.com/imessage/).

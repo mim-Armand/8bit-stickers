@@ -1,6 +1,6 @@
 {
   "verifiedAtUTC": "2026-11-02T10:19:46.876Z",
-  "reviewStateReverifiedAtUTC": "2026-11-02T15:51:08.831Z",
+  "reviewStateReverifiedAtUTC": "2026-11-02T16:23:28.591Z",
   "appID": "1366485724",
   "version": "1.4.1",
   "build": "11",
@@ -31,10 +31,13 @@
     "localStoreKitFixturesExcluded": true
   },
   "rootCause": "The sandbox-review discrepancy remains unresolved. Separately, the IAP has never reached APPROVED, which is a confirmed production sale blocker. The owner lookup does not prove either a clean purchase or production checkout. Approval alone does not explain sandbox lookup.",
-  "appleReviewMutations": false,
-  "replySent": false,
+  "appleReviewMutations": true,
+  "appleReviewMutationScope": "Owner-authorized reply only; no resubmission, cancellation or item/build changes",
+  "replySent": true,
+  "replySentAtUTCMinute": "2026-11-02T16:23Z",
+  "replyEvidence": "app-review-reply-status.json",
   "appResubmitted": false,
-  "nextStep": "Owner deferred more TestFlight tests. A factual App Review inquiry about review-catalog association, storefront and combined first-IAP review is prepared but unsent pending the required explicit owner request. Do not repeat an unchanged submission or claim production fixed.",
+  "nextStep": "Owner-approved App Review inquiry was sent and persisted after reload. Evaluate Apple's response about review-catalog association, storefront and combined first-IAP review. Additional TestFlight tests remain deferred. Do not resend, repeat an unchanged submission or claim production fixed.",
   "productionInvestigation": "docs/studio-production-availability.md",
   "privateEvidenceDirectory": "build/rejection-2026-11-02/",
   "ownerLookupEvidenceFile": "owner-lookup-evidence.json"

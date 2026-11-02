@@ -115,7 +115,7 @@
   "remaining": [
     "Owner has deferred further TestFlight testing; existing Beta App Review and automatic invitations remain configured",
     "Focus on the confirmed missing IAP production approval and unresolved combined App Review submission",
-    "Prepared App Review inquiry remains unsent pending the explicit owner request required by project instructions",
+    "Owner-approved App Review inquiry was sent November 2 at 10:23 AM CST; evaluate Apple's response before deciding further corrective work",
     "Device purchase cases remain unverified; resume this test only if the owner requests it"
   ]
 }

@@ -1,5 +1,6 @@
 {
   "verifiedAtUTC": "2026-11-02T15:51:08.831Z",
+  "postReplyStateVerifiedAtUTC": "2026-11-02T16:23:28.591Z",
   "appID": "1366485724",
   "hostBundleID": "eu.armand.--bit-art",
   "extensionBundleID": "eu.armand.--bit-art.StickerPackExtension",
@@ -67,10 +68,13 @@
     "issueResolved": false
   },
   "nextAction": {
-    "kind": "REQUEST_REVIEW_CATALOG_AND_COMBINED_IAP_REVIEW_INVESTIGATION",
+    "kind": "EVALUATE_APPLE_RESPONSE_TO_SENT_REVIEW_CATALOG_INQUIRY",
     "draft": "docs/app-review-response-1.4.1.md",
-    "replySent": false,
-    "explicitOwnerRequestRequiredByProjectInstructions": true,
+    "replySent": true,
+    "replySentAtUTCMinute": "2026-11-02T16:23Z",
+    "replyPersistedAfterPageReload": true,
+    "explicitOwnerRequestReceived": true,
+    "replyEvidence": "release/studio-1.4.1/app-review-reply-status.json",
     "resubmissionPreparedOrPerformed": false,
     "requestAppOnlyApproval": false
   },
