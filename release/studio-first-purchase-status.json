@@ -1,5 +1,5 @@
 {
-  "verifiedAtUTC": "2026-11-02T13:45:27.071Z",
+  "verifiedAtUTC": "2026-11-02T13:55:37.318Z",
   "appID": "1366485724",
   "version": "1.4.1",
   "build": "13",
@@ -38,7 +38,8 @@
     "installableByExternalTester": false,
     "manualInvitationDeferral": "Apple returned STATE_ERROR.TESTER_INVITE.NO_INSTALLABLE_BUILDS while Beta App Review is pending",
     "betaAppReviewSubmitted": true,
-    "targetTesterState": "NOT_INVITED"
+    "targetTesterState": "NOT_INVITED",
+    "recipientVerifiedAgainstOwnerRequest": true
   },
   "productionReview": {
     "submissionID": "4ab04eda-8610-4e9d-8552-8617b6a3f7e2",
