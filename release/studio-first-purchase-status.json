@@ -1,10 +1,10 @@
 {
-  "verifiedAtUTC": "2026-11-02T13:14:34.512Z",
+  "verifiedAtUTC": "2026-11-02T13:45:27.071Z",
   "appID": "1366485724",
   "version": "1.4.1",
   "build": "13",
   "configuration": "TestFlightExternalDiagnostics",
-  "sourceCommit": null,
+  "sourceCommit": "be55ad6193b4207dc74c4189efc083bdfb6ca793",
   "sourceTag": "v1.4.1-build13-clean-test",
   "authorization": {
     "date": "2026-11-02",
@@ -22,11 +22,23 @@
     "targetMembershipVerified": true,
     "targetEmailStoredInGit": false,
     "betaReviewRequired": true,
-    "buildID": null,
-    "processingState": "UPLOADING",
-    "betaReviewID": null,
-    "betaReviewState": null,
-    "invitationState": "TARGET_ADDED_PENDING_ELIGIBLE_BUILD"
+    "buildID": "8f14e8f0-0b83-4bf7-bf20-55e3b4122bef",
+    "processingState": "VALID",
+    "betaReviewID": "8f14e8f0-0b83-4bf7-bf20-55e3b4122bef",
+    "betaReviewState": "WAITING_FOR_REVIEW",
+    "invitationState": "AWAITING_BETA_REVIEW_AUTOMATIC_INVITATION",
+    "uploadID": "8f14e8f0-0b83-4bf7-bf20-55e3b4122bef",
+    "buildAttachedToTargetGroup": true,
+    "invitationRequestAccepted": false,
+    "internalBuildState": "IN_BETA_TESTING",
+    "externalBuildState": "WAITING_FOR_BETA_REVIEW",
+    "autoNotifyEnabled": true,
+    "automaticInvitationsConfigured": true,
+    "invitationSentVerified": false,
+    "installableByExternalTester": false,
+    "manualInvitationDeferral": "Apple returned STATE_ERROR.TESTER_INVITE.NO_INSTALLABLE_BUILDS while Beta App Review is pending",
+    "betaAppReviewSubmitted": true,
+    "targetTesterState": "NOT_INVITED"
   },
   "productionReview": {
     "submissionID": "4ab04eda-8610-4e9d-8552-8617b6a3f7e2",
@@ -69,7 +81,7 @@
     "testFailures": 0,
     "archiveExportSucceeded": true,
     "appleValidationSucceeded": true,
-    "appleUploadSucceeded": false,
+    "appleUploadSucceeded": true,
     "resourcesVerified": true,
     "appStoreBuild11AndInternalBuild12SettingsUnchanged": true,
     "appleValidationErrors": 0,
@@ -91,9 +103,8 @@
   "privateEvidenceDirectory": "build/fresh-buyer-test/",
   "guide": "docs/studio-first-purchase-test.md",
   "remaining": [
-    "Validate/upload/process build 13",
-    "Attach only to private target group and submit TestFlight Beta App Review",
-    "Invite target when permitted and collect clean-device initial lookup/purchase results",
+    "Wait for TestFlight Beta App Review; automatic invitations are enabled for the private group",
+    "Collect clean-device first price report and first sandbox purchase/editor/relaunch/restore results",
     "Fix only an evidenced failure and verify before any production resubmission"
   ]
 }
