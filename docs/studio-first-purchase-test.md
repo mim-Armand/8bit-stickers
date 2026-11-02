@@ -1,5 +1,7 @@
 # First-time Studio purchase — private TestFlight test
 
+**Owner direction, November 2:** additional TestFlight testing is deferred. Focus is now the [unapproved production purchase and unresolved combined review](studio-production-availability.md). The existing external beta submission and automatic invitation settings remain intact; no dedicated Sandbox account, reset or refund was performed. The test instructions below are retained for a later authorized test and are not evidence of completion.
+
 On November 2, 2026, the owner authorized adding one supplied Apple Account email for a purchase test on another device. The target is stored only in ignored `build/fresh-buyer-test/` readbacks. No App Store Connect role is granted. The external group **Studio First Purchase Test** has public links off and receives only the authorized beta.
 
 Internal build 12 cannot be distributed to an external tester. **1.4.1 (13)** uses **TestFlightExternalDiagnostics** and is eligible for external TestFlight distribution. The first external build requires **Beta App Review** before the tester can install it. This beta review does not change the rejected production app/IAP submission or select a new production build.

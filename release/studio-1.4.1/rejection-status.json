@@ -1,5 +1,6 @@
 {
   "verifiedAtUTC": "2026-11-02T10:19:46.876Z",
+  "reviewStateReverifiedAtUTC": "2026-11-02T15:51:08.831Z",
   "appID": "1366485724",
   "version": "1.4.1",
   "build": "11",
@@ -29,11 +30,12 @@
     "reviewImage": "COMPLETE",
     "localStoreKitFixturesExcluded": true
   },
-  "rootCause": "Unresolved. The owner lookup succeeds, but the reviewed first-time-buyer failure has not been reproduced or fixed. Approval alone does not fix sandbox lookup.",
+  "rootCause": "The sandbox-review discrepancy remains unresolved. Separately, the IAP has never reached APPROVED, which is a confirmed production sale blocker. The owner lookup does not prove either a clean purchase or production checkout. Approval alone does not explain sandbox lookup.",
   "appleReviewMutations": false,
   "replySent": false,
   "appResubmitted": false,
-  "nextStep": "Verify clean first-time-buyer initial lookup/purchase or obtain reviewer-environment diagnostics; do not repeat an unchanged submission based only on the existing-owner report",
+  "nextStep": "Owner deferred more TestFlight tests. A factual App Review inquiry about review-catalog association, storefront and combined first-IAP review is prepared but unsent pending the required explicit owner request. Do not repeat an unchanged submission or claim production fixed.",
+  "productionInvestigation": "docs/studio-production-availability.md",
   "privateEvidenceDirectory": "build/rejection-2026-11-02/",
   "ownerLookupEvidenceFile": "owner-lookup-evidence.json"
 }

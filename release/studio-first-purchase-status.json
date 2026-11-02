@@ -6,6 +6,15 @@
   "configuration": "TestFlightExternalDiagnostics",
   "sourceCommit": "be55ad6193b4207dc74c4189efc083bdfb6ca793",
   "sourceTag": "v1.4.1-build13-clean-test",
+  "ownerFollowup": {
+    "date": "2026-11-02",
+    "additionalTestFlightTestingDeferred": true,
+    "focus": "Resolve the released App Store purchase failure",
+    "existingBetaReviewOrDistributionCancelled": false,
+    "sandboxAccountCreated": false,
+    "ownershipResetOrRefundPerformed": false,
+    "productionInvestigation": "docs/studio-production-availability.md"
+  },
   "authorization": {
     "date": "2026-11-02",
     "scope": "Add the owner-supplied second-device email to TestFlight and test/fix first-time sandbox purchasing",
@@ -104,8 +113,9 @@
   "privateEvidenceDirectory": "build/fresh-buyer-test/",
   "guide": "docs/studio-first-purchase-test.md",
   "remaining": [
-    "Wait for TestFlight Beta App Review; automatic invitations are enabled for the private group",
-    "Collect clean-device first price report and first sandbox purchase/editor/relaunch/restore results",
-    "Fix only an evidenced failure and verify before any production resubmission"
+    "Owner has deferred further TestFlight testing; existing Beta App Review and automatic invitations remain configured",
+    "Focus on the confirmed missing IAP production approval and unresolved combined App Review submission",
+    "Prepared App Review inquiry remains unsent pending the explicit owner request required by project instructions",
+    "Device purchase cases remain unverified; resume this test only if the owner requests it"
   ]
 }

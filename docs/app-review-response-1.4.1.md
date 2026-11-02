@@ -1,30 +1,31 @@
 # App Review response — 1.4.1 (11)
 
-**Draft only — not sent.** Prepared November 2, 2026. The response below requests help investigating the sandbox product lookup; it does not claim the issue is fixed or request approval of the app without its purchase.
+**Draft only — not sent.** Updated November 2, 2026 after the owner deferred further TestFlight testing and requested focus on the App Store failure. The response requests help resolving the existing combined review; it does not claim the sandbox rejection is fixed or request app-only approval. The reviewer-ready text is below Apple's 4,000-character reply limit.
 
 ## Reviewer-ready response
 
 Hello App Review,
 
-Thank you for reporting that Studio Unlock shows “Price unavailable” on iPad Air 11-inch (M3), iPadOS 27.2, under Guideline 2.1(b). We are investigating the product lookup and understand that In-App Purchases do not need prior approval to function in your sandbox review environment.
+We need help resolving Studio Unlock's product availability in the existing combined submission. Thank you for reporting “Price unavailable” on iPad Air 11-inch (M3), iPadOS 27.2, under Guideline 2.1(b).
 
-The submission contains both of these items:
+Combined submission 4ab04eda-8610-4e9d-8552-8617b6a3f7e2, submitted October 31, contains:
 
-- App: **8 bit art**, Apple ID **1366485724**, version **1.4.1 (11)**, build ID **63c7404d-e3b0-4136-8ae2-6a6bb90d652e**.
-- Purchase: **Studio Unlock**, product ID **eu.armand.bitart.studio.unlock**, Apple ID **6827336076**, metadata version **45b42e0b-bc8a-4835-8bc8-4d766e48bda1**.
-- Combined submission ID: **4ab04eda-8610-4e9d-8552-8617b6a3f7e2**.
+- App: 8 bit art, Apple ID 1366485724, version 1.4.1 (11), build 63c7404d-e3b0-4136-8ae2-6a6bb90d652e.
+- First IAP: Studio Unlock, product eu.armand.bitart.studio.unlock, Apple ID 6827336076, metadata version 45b42e0b-bc8a-4835-8bc8-4d766e48bda1.
 
-Studio Unlock is one permanent **non-consumable** purchase for the 16×16 editor and saved drafts. It is not a subscription. The USA price is **US$1.00**, with localized prices in the app’s existing 175 territories. Included stickers, search and favorites remain available without it.
+The public version 1.4 (10) was approved without its first IAP. That explains why it could work in TestFlight yet be unavailable to App Store customers, as described in TN3188. Our corrective submission therefore includes both items. Today's readback still shows the app item REJECTED, IAP item READY_FOR_REVIEW, and parent IAP READY_TO_SUBMIT; the purchase has never become APPROVED.
 
-On November 2, we rechecked the registered product and its app association, product ID, non-consumable type, localization, price and availability. We also verified that the Paid Apps Agreement, bank account and tax forms are Active. The signed host and extension use the registered explicit bundle IDs **eu.armand.--bit-art** and **eu.armand.--bit-art.StickerPackExtension**, with valid provisioning and In-App Purchase capability enabled. The submitted archive has no local StoreKit configuration or purchase simulation.
+We understand that prior approval is NOT required in your sandbox review environment, so lack of production approval alone does not explain your device's failure.
 
-To reach the offer: open **Messages → a conversation → + / More → 8 bit art → Studio → Try Studio**. If saved drafts are already present, use **Unlock Studio** instead. The offer requests Apple’s product details before enabling checkout. **Try loading the price again** repeats that request; **Restore Purchases** is also available. No app-specific login is required.
+We checked the product/app association, exact product ID, non-consumable type, localization, completed review image, ongoing US$1.00 USA price and 175 territories. Paid Apps Agreement, bank and tax forms are Active. Host eu.armand.--bit-art and extension eu.armand.--bit-art.StickerPackExtension have explicit registered IDs, In-App Purchase capability and valid signing. The exported build has no StoreKit fixture or purchase simulation. Its real StoreKit implementation accepts verified production and sandbox transactions.
 
-We now have an owner-provided runtime report from internal TestFlight 1.4.1 (12), OS 27.2, USA storefront 143441, timestamp 2026-11-02T10:53:51Z. A direct `Product.products(for:)` invocation returned exactly one product: **eu.armand.bitart.studio.unlock**, type **Non-Consumable**, localized price **$1.00**, with no error and payments permitted. The extension and containing-app bundle identifiers match those above. Build 12 adds a read-only diagnostic action around the same product query used by build 11; it does not change the purchase implementation or contain a local StoreKit fixture.
+Studio Unlock permanently enables the 16×16 editor and saved drafts. It is not a subscription. Included stickers, search and favorites stay free.
 
-This result is limited to an existing TestFlight owner. The query may use SDK caching; it does not prove the initial paywall request in build 11, a clean/unowned-account purchase, checkout/restore, the reviewer’s iPad/storefront, or production availability. The owner had already completed a TestFlight purchase before the original production failure, so we are not treating a successful existing-owner query as proof that the rejected issue is fixed. We are validating the first-time-buyer path before any further resubmission.
+An owner-provided TestFlight build-12 diagnostic report on OS 27.2 / USA storefront 143441 at 2026-11-02T10:53:51Z returned one exact matching Non-Consumable product at $1.00, with no error. The same real product query is used in build 11. This was an already-owned sandbox account, may use SDK caching, and does not prove a fresh purchase, your review-device behavior or production availability. We are not claiming a verified fix.
 
-Could you please confirm the review storefront and whether **Try loading the price again** still returns the same result in your review environment? If the existing product is not being served for this app there, please advise whether the catalog association needs further investigation and which diagnostics would help. We are not requesting a bug-fix exception or asserting that the issue is resolved; we want the app and purchase to be testable and reviewed together.
+To reach the offer: Messages → a conversation → + / More → 8 bit art → Studio → Try Studio (or Unlock Studio when drafts exist). “Try loading the price again” repeats Apple's product query. Restore Purchases is also available. No app-specific login is required.
+
+Please confirm the review storefront, whether retry still returns no product, and whether this first IAP is correctly queued and served for this app in your review catalog. If further changes are required, please advise which configuration or diagnostic is needed. We need the app and first IAP reviewed together; approving only the app would leave App Store customers unable to buy Studio. We are not requesting an app-only bug-fix exception.
 
 Thank you.
 
@@ -33,7 +34,8 @@ Thank you.
 - This is an unsent draft. Do not post it, resubmit either item or change the review until authorized by the owner/root task.
 - Root verified configuration and Business statuses on November 2. Preserve sanitized evidence; do not include bank details, personal contact information, credentials or account identifiers in a reply.
 - The owner supplied the build-12 report. A sanitized evidence summary is in `release/studio-1.4.1/owner-lookup-evidence.json`; the complete report stays ignored under `build/rejection-2026-11-02/owner-lookup-report.json`. No account, transaction, receipt or private device identifiers should be added to this response.
-- The earlier TestFlight purchase had already worked before the original App Store failure. This new report strengthens product-discovery evidence for that existing-owner context but does not validate the failing new-buyer flow. Verify a clean/unowned-account initial lookup and purchase before claiming a fix or proposing another unchanged resubmission.
+- The earlier TestFlight purchase had already worked before the original App Store failure. The owner has deferred more TestFlight testing. The next proposed action is this factual App Review inquiry, not an unchanged resubmission. A clean purchase remains unverified and must never be invented.
 - Current root cause remains unresolved. Do not assert that approval alone fixes sandbox lookup, that Apple’s catalog is defective, or that a StoreKit 1 fallback is proven necessary.
 - Before sending, confirm the exact rejection wording and submission/product states against the current readback. The app version resource is **6cd58d90-1728-495e-a02d-2b5fc571a519**.
-- Relevant Apple references: [configure In-App Purchases for sandbox review](https://developer.apple.com/help/app-review/before-submitting-for-review/configure-in-app-purchases/), [TN3186](https://developer.apple.com/documentation/technotes/tn3186-troubleshooting-in-app-purchases-availability-in-the-sandbox), and [standalone iMessage app support for IAP](https://developer.apple.com/imessage/).
+- Live production evidence and acceptance criteria: `release/studio-production-availability-status.json` and `docs/studio-production-availability.md`.
+- Relevant Apple references: [production availability / TN3188](https://developer.apple.com/documentation/technotes/tn3188-troubleshooting-in-app-purchases-availability-in-the-app-store), [configure In-App Purchases for sandbox review](https://developer.apple.com/help/app-review/before-submitting-for-review/configure-in-app-purchases/), [TN3186](https://developer.apple.com/documentation/technotes/tn3186-troubleshooting-in-app-purchases-availability-in-the-sandbox), and [standalone iMessage app support for IAP](https://developer.apple.com/imessage/).

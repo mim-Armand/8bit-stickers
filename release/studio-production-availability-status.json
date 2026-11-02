@@ -1,0 +1,84 @@
+{
+  "verifiedAtUTC": "2026-11-02T15:51:08.831Z",
+  "appID": "1366485724",
+  "hostBundleID": "eu.armand.--bit-art",
+  "extensionBundleID": "eu.armand.--bit-art.StickerPackExtension",
+  "ownerDirection": {
+    "date": "2026-11-02",
+    "additionalTestFlightTestingDeferred": true,
+    "focus": "Resolve the released App Store purchase failure",
+    "sandboxAccountCreated": false,
+    "purchaseResetOrRefundPerformed": false
+  },
+  "product": {
+    "id": "6827336076",
+    "productID": "eu.armand.bitart.studio.unlock",
+    "type": "NON_CONSUMABLE",
+    "appMembershipVerified": true,
+    "appMembershipEndpoint": "/v1/apps/1366485724/inAppPurchasesV2",
+    "state": "READY_TO_SUBMIT",
+    "metadataVersionID": "45b42e0b-bc8a-4835-8bc8-4d766e48bda1",
+    "metadataState": "READY_FOR_REVIEW",
+    "approved": false,
+    "ongoingUSAPrice": "1.00",
+    "currency": "USD",
+    "territoryCount": 175,
+    "usaAvailable": true,
+    "availableInNewTerritories": false,
+    "familySharing": false
+  },
+  "review": {
+    "publicAppVersion": "1.4",
+    "publicAppBuild": "10",
+    "publicAppState": "READY_FOR_SALE",
+    "correctiveVersion": "1.4.1",
+    "selectedBuild": "11",
+    "selectedBuildID": "63c7404d-e3b0-4136-8ae2-6a6bb90d652e",
+    "appVersionID": "6cd58d90-1728-495e-a02d-2b5fc571a519",
+    "submissionID": "4ab04eda-8610-4e9d-8552-8617b6a3f7e2",
+    "submissionState": "UNRESOLVED_ISSUES",
+    "appItemState": "REJECTED",
+    "iapItemState": "READY_FOR_REVIEW",
+    "bothExactItemsPresent": true,
+    "releaseType": "AFTER_APPROVAL",
+    "changedByThisInvestigation": false
+  },
+  "sourceAndExportAudit": {
+    "recordedAtUTC": "2026-11-02T15:54:15.146632Z",
+    "exportedBuildsChecked": ["10", "11", "13"],
+    "hostAndExtensionStrictSignatureChecksPassed": 6,
+    "localStoreKitFixturesInExports": false,
+    "productionOnlyPurchaseDisableFound": false,
+    "exactSKUAndNonConsumableFilter": true,
+    "productionAndSandboxTransactionsAccepted": true,
+    "transactionPolicyRunsAfterProductDiscovery": true,
+    "sourceOrBinaryChanged": false,
+    "privateEvidence": "build/production-investigation/source-and-signature-audit.json"
+  },
+  "finding": {
+    "confirmedProductionBlocker": "Studio Unlock has never reached APPROVED and is not approved for production sale",
+    "productionConfigurationEligible": false,
+    "testFlightSuccessProvesProductionAvailability": false,
+    "reviewSandboxFailureExplained": false,
+    "failingRawProductResponseCaptured": false,
+    "additionalClientOrCatalogFailuresRuledOut": false,
+    "actualAppStorePurchaseVerified": false,
+    "actualAppStoreRestoreVerified": false,
+    "issueResolved": false
+  },
+  "nextAction": {
+    "kind": "REQUEST_REVIEW_CATALOG_AND_COMBINED_IAP_REVIEW_INVESTIGATION",
+    "draft": "docs/app-review-response-1.4.1.md",
+    "replySent": false,
+    "explicitOwnerRequestRequiredByProjectInstructions": true,
+    "resubmissionPreparedOrPerformed": false,
+    "requestAppOnlyApproval": false
+  },
+  "references": [
+    "https://developer.apple.com/documentation/technotes/tn3188-troubleshooting-in-app-purchases-availability-in-the-app-store",
+    "https://developer.apple.com/help/app-review/before-submitting-for-review/configure-in-app-purchases/",
+    "https://developer.apple.com/help/app-store-connect/manage-submissions-to-app-review/submit-an-in-app-purchase/"
+  ],
+  "privateReadback": "build/fresh-buyer-test/production-readback-private.json",
+  "guide": "docs/studio-production-availability.md"
+}
