@@ -1,16 +1,16 @@
 {
-  "verifiedAtUTC": "2026-11-02T10:42:13.637Z",
+  "verifiedAtUTC": "2026-11-02T10:46:19.559Z",
   "appID": "1366485724",
   "version": "1.4.1",
   "build": "12",
   "configuration": "TestFlightDiagnostics",
-  "sourceCommit": null,
+  "sourceCommit": "4b487f4826f18f2f42fd392d6b291f68d888c7f1",
   "sourceTag": "v1.4.1-build12-diagnostics",
   "distribution": "TESTFLIGHT_INTERNAL_ONLY",
-  "uploadID": null,
-  "buildID": null,
-  "processingState": "UPLOADING",
-  "internalBetaState": null,
+  "uploadID": "f14819f3-23c1-4507-9ad3-ad339980c1a9",
+  "buildID": "f14819f3-23c1-4507-9ad3-ad339980c1a9",
+  "processingState": "VALID",
+  "internalBetaState": "IN_BETA_TESTING",
   "externalBetaState": "NOT_APPLICABLE",
   "appReviewSubmitted": false,
   "reviewBuildUnchanged": "1.4.1 (11)",
@@ -51,7 +51,7 @@
     "testFailures": 0,
     "archiveExportSucceeded": true,
     "appleValidationSucceeded": true,
-    "appleUploadSucceeded": false,
+    "appleUploadSucceeded": true,
     "appleValidationErrors": 0,
     "appleWarnings": [
       90863,
@@ -64,8 +64,9 @@
   "usage": "Messages > 8 bit art > ? > Purchase availability check > Check purchase availability > Copy technical report",
   "evidenceDirectory": "build/rejection-2026-11-02/ and build/studio-diagnostics/ (ignored)",
   "remaining": [
-    "Wait for build processing/internal TestFlight availability",
     "Collect owner-initiated fresh product lookup report without resetting ownership",
     "Resolve sandbox lookup with evidence; no review resubmission or Apple reply without explicit instruction"
-  ]
+  ],
+  "existingInternalGroupContainsBuild": true,
+  "testFlightNotesSaved": true
 }

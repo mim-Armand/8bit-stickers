@@ -1,4 +1,4 @@
-# Verification — October 26–31, 2026
+# Verification — October 26–November 2, 2026
 
 ## Internal sandbox diagnostics — November 2, 2026
 

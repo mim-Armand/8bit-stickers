@@ -27,9 +27,11 @@ The separate **TestFlightDiagnostics** configuration uses the same real StoreKit
 
 The diagnostic Help section permits an explicit read-only Apple product lookup even when Studio is already unlocked. It reports returned product count/IDs/types/localized prices, storefront, app identity and error domain/code. It does not purchase, restore, reset ownership or edit drawings. Technical reports exclude account details, transaction identifiers, receipts, tokens, messages and artwork, and are copied only on the user’s action.
 
-Use **Messages → 8 bit art → ? → Purchase availability → Check purchase availability** in internal beta build 12. Record whether Apple returns the configured product and localized price. Copy the technical report for diagnosis. Existing sandbox ownership can remain intact; a new purchase is not needed for this lookup.
+Use **Messages → 8 bit art → ? → Purchase availability check → Check purchase availability** in internal beta build 12. Record whether Apple returns the configured product and localized price. Copy the technical report for diagnosis. Existing sandbox ownership can remain intact; a new purchase is not needed for this lookup.
 
 Source configuration is in `Config/StudioDiagnosticsMetadata.json`; local archive/export helper is `scripts/archive-studio-diagnostics.sh`. Signed output and private evidence stay under ignored `build/studio-diagnostics/` and `build/rejection-2026-11-02/`. Sanitized release evidence is recorded in `release/studio-diagnostics-status.json` once upload completes.
+
+Build **f14819f3-23c1-4507-9ad3-ad339980c1a9** is now **VALID / INTERNAL_ONLY / IN_BETA_TESTING** and present in the existing internal group. TestFlight notes contain the diagnostic steps. No external distribution is applicable. Exact source is **4b487f4826f18f2f42fd392d6b291f68d888c7f1**, tagged **v1.4.1-build12-diagnostics**. All **34 core/model tests** pass; clean archive/export and Apple validation/upload succeed with zero errors. Final readback verifies that rejected review build 11, its two review items and UNRESOLVED_ISSUES submission remain intact. The outstanding evidence is the owner-initiated fresh lookup report.
 
 ## Next decision
 
