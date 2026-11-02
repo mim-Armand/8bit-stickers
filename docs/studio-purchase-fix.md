@@ -1,5 +1,7 @@
 # Studio purchase correction — 1.4.1 (11)
 
+**November 2:** This submitted build was rejected because the reviewer also received no product price in Apple’s sandbox. [The current investigation](studio-sandbox-investigation.md) supersedes the waiting-for-review status below. Missing approval explains public sale availability but does not explain sandbox failure; the original diagnosis was incomplete. Keep both submitted items intact while gathering live catalog evidence.
+
 On October 31, 2026, an App Store customer reported **Price unavailable** on the Studio Unlock offer. At diagnosis, a fresh App Store Connect readback confirmed public **1.4 (10) is Ready for Distribution**, but Studio Unlock **6827336076 / eu.armand.bitart.studio.unlock** was **READY_TO_SUBMIT**. Its sole metadata version **45b42e0b-bc8a-4835-8bc8-4d766e48bda1** was **PREPARE_FOR_SUBMISSION**. The completed October 27 review **62051c1f-8195-49b2-8dae-fc6083e2ce41** contains only one approved app item.
 
 The screenshot's precise message comes from a successful `Product.products(for:)` request with no matching product, rather than an exception or checkout failure. The code requests the correct non-consumable identifier. Apple has not approved this product for production sale. Its ongoing exact **US$1.00** price, the approved **175 territories**, automatic new-territory availability **off**, and Family Sharing **off** all match the intended configuration.

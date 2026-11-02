@@ -183,6 +183,78 @@ final class StudioAppStoreTests: XCTestCase {
         XCTAssertTrue(store.message?.contains("could not be verified") == true,
                       "Loading metadata cannot resolve or hide an ownership verification failure")
     }
+
+    #if STUDIO_PURCHASE_DIAGNOSTICS
+    func testDiagnosticReadReportsRawCatalogWithoutChangingCheckoutOrOwnership() async throws {
+        let session = try SKTestSession(configurationFileNamed: "Studio")
+        session.resetToDefaultState()
+        session.clearTransactions()
+        defer { session.resetToDefaultState(); session.clearTransactions() }
+        let store = makeStore()
+        store.message = "Preserve the existing notice"
+        preferences.set("Keep this drawing", forKey: "drawingSentinel")
+
+        await store.checkPurchaseAvailability()
+
+        let text = try XCTUnwrap(store.purchaseAvailabilityReport)
+        let data = try XCTUnwrap(text.data(using: .utf8))
+        let report = try XCTUnwrap(JSONSerialization.jsonObject(with: data) as? [String: Any])
+        XCTAssertEqual(report["rawProductCount"] as? Int, 1)
+        let rawProducts = try XCTUnwrap(report["rawProducts"] as? [[String: String]])
+        XCTAssertEqual(rawProducts.first?["id"], StudioPurchaseStore.productID)
+        XCTAssertEqual(rawProducts.first?["type"], Product.ProductType.nonConsumable.rawValue)
+        XCTAssertFalse(try XCTUnwrap(rawProducts.first?["localizedPrice"]).isEmpty)
+        XCTAssertTrue(report["error"] is NSNull)
+        XCTAssertNotNil(report["canMakePayments"] as? Bool)
+        XCTAssertEqual(report["studioUnlocked"] as? Bool, false)
+        XCTAssertTrue(store.purchaseAvailabilityStatus?.contains("Apple returned Studio Unlock") == true)
+        XCTAssertFalse(store.isCheckingPurchaseAvailability)
+        XCTAssertFalse(store.isUnlocked, "A catalog response cannot grant ownership")
+        XCTAssertNil(store.price, "The diagnostic must not populate the checkout's cached product/price")
+        XCTAssertFalse(store.canPurchase)
+        XCTAssertFalse(store.isLoading)
+        XCTAssertFalse(store.isPurchasing)
+        XCTAssertEqual(store.message, "Preserve the existing notice")
+        XCTAssertEqual(preferences.string(forKey: "drawingSentinel"), "Keep this drawing")
+        XCTAssertTrue(session.allTransactions().isEmpty, "The diagnostic must not initiate checkout")
+        XCTAssertEqual(Set(report.keys), Set(["reportVersion", "timestampUTC", "bundleID", "containingBundleID",
+            "version", "build", "osVersion", "requestedProductID", "rawProductCount", "rawProducts",
+            "canMakePayments", "studioUnlocked", "storefront", "error"]),
+            "The copyable report must stay limited to approved non-personal diagnostic fields")
+    }
+
+    func testDiagnosticFailureIncludesOnlyErrorDomainAndCodeAndPreservesCheckoutState() async throws {
+        guard #available(iOS 17.0, *) else { throw XCTSkip("StoreKit error simulation requires iOS 17") }
+        let session = try SKTestSession(configurationFileNamed: "Studio")
+        session.resetToDefaultState()
+        session.clearTransactions()
+        defer { session.resetToDefaultState(); session.clearTransactions() }
+        let privateDetail = "PRIVATE_DESCRIPTION_MUST_NOT_APPEAR"
+        let error = URLError(.notConnectedToInternet, userInfo: [NSLocalizedDescriptionKey: privateDetail])
+        try await session.setSimulatedError(.generic(.networkError(error)), forAPI: .loadProducts)
+        let store = makeStore()
+        store.message = "Preserve the existing notice"
+
+        await store.checkPurchaseAvailability()
+
+        let text = try XCTUnwrap(store.purchaseAvailabilityReport)
+        let data = try XCTUnwrap(text.data(using: .utf8))
+        let report = try XCTUnwrap(JSONSerialization.jsonObject(with: data) as? [String: Any])
+        let failure = try XCTUnwrap(report["error"] as? [String: Any])
+        XCTAssertEqual(Set(failure.keys), Set(["domain", "code"]))
+        XCTAssertNotNil(failure["domain"] as? String)
+        XCTAssertNotNil(failure["code"] as? Int)
+        XCTAssertFalse(text.contains(privateDetail), "Error descriptions/userInfo must not enter a copied report")
+        XCTAssertEqual(report["rawProductCount"] as? Int, 0)
+        XCTAssertTrue(store.purchaseAvailabilityStatus?.contains("lookup failed") == true)
+        XCTAssertFalse(store.isCheckingPurchaseAvailability)
+        XCTAssertFalse(store.isUnlocked)
+        XCTAssertNil(store.price)
+        XCTAssertFalse(store.canPurchase)
+        XCTAssertEqual(store.message, "Preserve the existing notice")
+        XCTAssertTrue(session.allTransactions().isEmpty)
+    }
+    #endif
 }
 #endif
 

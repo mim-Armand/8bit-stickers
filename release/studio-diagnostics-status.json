@@ -1,0 +1,71 @@
+{
+  "verifiedAtUTC": "2026-11-02T10:42:13.637Z",
+  "appID": "1366485724",
+  "version": "1.4.1",
+  "build": "12",
+  "configuration": "TestFlightDiagnostics",
+  "sourceCommit": null,
+  "sourceTag": "v1.4.1-build12-diagnostics",
+  "distribution": "TESTFLIGHT_INTERNAL_ONLY",
+  "uploadID": null,
+  "buildID": null,
+  "processingState": "UPLOADING",
+  "internalBetaState": null,
+  "externalBetaState": "NOT_APPLICABLE",
+  "appReviewSubmitted": false,
+  "reviewBuildUnchanged": "1.4.1 (11)",
+  "reviewSubmissionID": "4ab04eda-8610-4e9d-8552-8617b6a3f7e2",
+  "reviewSubmissionState": "UNRESOLVED_ISSUES",
+  "purchase": {
+    "productID": "eu.armand.bitart.studio.unlock",
+    "appleID": "6827336076",
+    "usaPrice": "1.00",
+    "familySharing": false,
+    "territoryCount": 175
+  },
+  "diagnostics": {
+    "readOnly": true,
+    "changesOwnership": false,
+    "startsPurchase": false,
+    "resetsDrawings": false,
+    "collectsAccountOrTransactionDetails": false,
+    "sendsDataToDeveloper": false,
+    "freshDeviceLookupVerified": false
+  },
+  "payload": {
+    "version": "1.4.1",
+    "build": "12",
+    "hostBundleID": "eu.armand.--bit-art",
+    "extensionBundleID": "eu.armand.--bit-art.StickerPackExtension",
+    "internalOnly": true,
+    "noTestFixtures": true,
+    "stickerCount": 67,
+    "wineExcluded": true,
+    "diagnosticsPresent": true,
+    "ipa": "build/studio-diagnostics/1.4.1-12/export/8 bit art.ipa",
+    "sha256": "56214f3292a4d833fdaca6d7ccab23d58ca44cd1d18d1c85a14ed300b457b9a3",
+    "size": 778245
+  },
+  "validation": {
+    "coreModelTests": 34,
+    "testFailures": 0,
+    "archiveExportSucceeded": true,
+    "appleValidationSucceeded": true,
+    "appleUploadSucceeded": false,
+    "appleValidationErrors": 0,
+    "appleWarnings": [
+      90863,
+      90984
+    ],
+    "resourceVerificationPassed": true,
+    "appStoreBuild11SettingsUnchanged": true
+  },
+  "ownerReport": "Earlier TestFlight purchase completed; current TestFlight Studio is unlocked and editor works. Fresh product lookup still required.",
+  "usage": "Messages > 8 bit art > ? > Purchase availability check > Check purchase availability > Copy technical report",
+  "evidenceDirectory": "build/rejection-2026-11-02/ and build/studio-diagnostics/ (ignored)",
+  "remaining": [
+    "Wait for build processing/internal TestFlight availability",
+    "Collect owner-initiated fresh product lookup report without resetting ownership",
+    "Resolve sandbox lookup with evidence; no review resubmission or Apple reply without explicit instruction"
+  ]
+}

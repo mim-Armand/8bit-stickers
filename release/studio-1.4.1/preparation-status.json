@@ -1,5 +1,5 @@
 {
-  "verifiedAtUTC": "2026-10-31T07:43:15.227Z",
+  "verifiedAtUTC": "2026-11-02T10:19:46.876Z",
   "appID": "1366485724",
   "version": "1.4.1",
   "build": "11",
@@ -15,7 +15,8 @@
     ],
     "purchaseState": "READY_TO_SUBMIT",
     "purchaseMetadataState": "PREPARE_FOR_SUBMISSION",
-    "cause": "The first Studio Unlock IAP was omitted from the completed app-only review. Production product lookup returns no matching product."
+    "cause": "The first Studio Unlock IAP was omitted from the completed app-only review. Production product lookup returns no matching product.",
+    "followup": "November 2 rejection shows missing prior approval was not a complete diagnosis: sandbox products need no prior approval. See rejection-status.json and current diagnostic beta."
   },
   "candidate": {
     "versionID": "6cd58d90-1728-495e-a02d-2b5fc571a519",
@@ -26,19 +27,19 @@
     "buildID": "63c7404d-e3b0-4136-8ae2-6a6bb90d652e",
     "selected": true,
     "reviewSubmitted": true,
-    "appState": "WAITING_FOR_REVIEW",
+    "appState": "REJECTED",
     "internalBetaState": "IN_BETA_TESTING",
     "externalBetaState": "READY_FOR_BETA_SUBMISSION"
   },
   "purchase": {
     "id": "6827336076",
     "productID": "eu.armand.bitart.studio.unlock",
-    "state": "WAITING_FOR_REVIEW",
+    "state": "READY_TO_SUBMIT",
     "metadataVersionID": "45b42e0b-bc8a-4835-8bc8-4d766e48bda1",
     "usaPrice": "1.00",
     "familySharing": false,
     "territoryCount": 175,
-    "metadataState": "WAITING_FOR_REVIEW"
+    "metadataState": "READY_FOR_REVIEW"
   },
   "availabilityApproval": "../studio-1.4/availability-plan.json",
   "screenshots": [
@@ -171,11 +172,11 @@
       "appStoreVersion:1.4.1",
       "inAppPurchaseVersion:45b42e0b-bc8a-4835-8bc8-4d766e48bda1"
     ],
-    "state": "WAITING_FOR_REVIEW",
+    "state": "UNRESOLVED_ISSUES",
     "items": [
       {
         "id": "NGFiMDRlZGEtODYxMC00ZTlkLTg1NTItODYxN2I2YTNmN2UyfDZ8ODk0Mjc0MTcx",
-        "state": "READY_FOR_REVIEW",
+        "state": "REJECTED",
         "appStoreVersionID": "6cd58d90-1728-495e-a02d-2b5fc571a519"
       },
       {
@@ -194,9 +195,11 @@
   },
   "evidenceDirectory": "build/purchase-investigation/ (ignored; private Apple readbacks, validation and upload)",
   "remaining": [
-    "Wait for Apple App Review of BOTH submitted items",
+    "Check a fresh Apple product lookup in diagnostic TestFlight build 12 while preserving ownership",
+    "Resolve the sandbox price failure with evidence; obtain explicit instruction before replying to Apple or resubmitting",
     "After approval verify IAP APPROVED and actual production price/purchase/restore on a physical device"
   ],
   "githubPullRequest": "https://github.com/mim-Armand/8bit-stickers/pull/8",
-  "submittedSourceTag": "v1.4.1-build11-submitted"
+  "submittedSourceTag": "v1.4.1-build11-submitted",
+  "rejectionStatusFile": "rejection-status.json"
 }

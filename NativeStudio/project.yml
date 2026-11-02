@@ -9,6 +9,7 @@ configs:
   Release: release
   TestFlight: release
   TestFlightSandbox: release
+  TestFlightDiagnostics: release
   AppStore: release
   Screenshots: release
 settings:
@@ -36,6 +37,13 @@ settings:
     TestFlightSandbox:
       SWIFT_ACTIVE_COMPILATION_CONDITIONS: STUDIO_SANDBOX_TESTING
       CURRENT_PROJECT_VERSION: '9'
+      CODE_SIGNING_ALLOWED: YES
+      CODE_SIGN_IDENTITY: 90776C637395C6FA5FF2E8133037AA95C594ECC7
+      DEVELOPMENT_TEAM: 7N3Y4QZT3Z
+    TestFlightDiagnostics:
+      SWIFT_ACTIVE_COMPILATION_CONDITIONS: STUDIO_APP_STORE STUDIO_PURCHASE_DIAGNOSTICS
+      MARKETING_VERSION: '1.4.1'
+      CURRENT_PROJECT_VERSION: '12'
       CODE_SIGNING_ALLOWED: YES
       CODE_SIGN_IDENTITY: 90776C637395C6FA5FF2E8133037AA95C594ECC7
       DEVELOPMENT_TEAM: 7N3Y4QZT3Z
@@ -98,6 +106,8 @@ targets:
           PROVISIONING_PROFILE_SPECIFIER: 8 bit art extension App Store 20261026
         TestFlightSandbox:
           PROVISIONING_PROFILE_SPECIFIER: 8 bit art extension App Store 20261026
+        TestFlightDiagnostics:
+          PROVISIONING_PROFILE_SPECIFIER: 8 bit art extension App Store 20261026
         AppStore:
           PROVISIONING_PROFILE_SPECIFIER: 8 bit art extension App Store 20261026
   StudioMessagesHost:
@@ -121,6 +131,9 @@ targets:
           SKIP_INSTALL: NO
           PROVISIONING_PROFILE_SPECIFIER: 8 bit art app App Store 20261026
         TestFlightSandbox:
+          SKIP_INSTALL: NO
+          PROVISIONING_PROFILE_SPECIFIER: 8 bit art app App Store 20261026
+        TestFlightDiagnostics:
           SKIP_INSTALL: NO
           PROVISIONING_PROFILE_SPECIFIER: 8 bit art app App Store 20261026
         AppStore:
@@ -251,6 +264,16 @@ schemes:
       config: AppStore
     test:
       config: AppStore
+      targets:
+        - StudioCoreTests
+  Studio Diagnostics Internal:
+    build:
+      targets:
+        StudioMessagesHost: all
+    archive:
+      config: TestFlightDiagnostics
+    test:
+      config: TestFlightDiagnostics
       targets:
         - StudioCoreTests
   Studio Release Capture:

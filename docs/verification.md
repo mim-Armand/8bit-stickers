@@ -1,5 +1,13 @@
 # Verification — October 26–31, 2026
 
+## Internal sandbox diagnostics — November 2, 2026
+
+Apple rejected app 1.4.1 (11) for unavailable product pricing in its review sandbox. The exact rejection, owner’s existing TestFlight access, current configuration checks and limits of the earlier approval-only diagnosis are recorded in [the current investigation](studio-sandbox-investigation.md). No review item has been resubmitted, removed or cancelled, and no message has been sent to Apple.
+
+The internal-only **TestFlightDiagnostics 1.4.1 (12)** adds a read-only catalog probe under Help. **34 core/model tests pass** (32 existing plus 2 diagnostic boundary checks): a raw product read cannot change ownership/checkout state or start a transaction, and copied error reports exclude private userInfo/descriptions. Evidence: ignored `build/studio-diagnostics/core-tests-retry.log` and `.xcresult`. The initial simulator runner stalled before executing any tests; restarting only that simulator without erasing data allowed the retry to pass.
+
+Clean signed archive/export and Apple validation pass with zero errors and the existing Messages-only warnings 90863/90984. Payload verification confirms **TFInternalTestingOnly=true**, the same published IDs, 67 stickers, two privacy manifests, diagnostic UI present, and no StoreKit fixture/test/preview payload. The original AppStore build-11 configuration is unchanged. Source-resource checks and metadata/shell/whitespace checks also pass. Fresh device catalog results remain to be collected; local tests do not establish remote sandbox availability.
+
 ## Studio purchase correction — October 31, 2026
 
 The live App Store release is 1.4 (10); its first Studio Unlock IAP was omitted from the completed app-only review. With explicit owner approval, corrective **1.4.1 (11) and Studio Unlock are now submitted together and WAITING_FOR_REVIEW**, with **AFTER_APPROVAL** release. See [the correction handoff](studio-purchase-fix.md); earlier preparation snapshots below are historical. The correction passes **32 AppStore/model tests**, including genuine StoreKitTest empty-catalog recovery, product network-failure recovery and preservation of unresolved ownership messages. Evidence: ignored `build/studio-price-fix-core-tests-final.log` and `.xcresult`.

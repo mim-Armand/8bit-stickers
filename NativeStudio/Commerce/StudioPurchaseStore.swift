@@ -20,6 +20,12 @@ final class StudioPurchaseStore: ObservableObject {
     @Published var message: String?
     @Published private(set) var price: String?
 
+    #if STUDIO_PURCHASE_DIAGNOSTICS
+    @Published private(set) var isCheckingPurchaseAvailability = false
+    @Published private(set) var purchaseAvailabilityStatus: String?
+    @Published private(set) var purchaseAvailabilityReport: String?
+    #endif
+
     private enum Mode {
         case disabled, simulated, storeKit, sandboxStoreKit, appStore
         #if STUDIO_BETA_TESTING
@@ -118,6 +124,76 @@ final class StudioPurchaseStore: ObservableObject {
     }
 
     deinit { updatesTask?.cancel() }
+
+    #if STUDIO_PURCHASE_DIAGNOSTICS
+    /// A fresh catalog read for the internal diagnostic beta. It deliberately
+    /// does not use or replace the checkout product, refresh ownership, sync,
+    /// start a purchase, or change the normal price/error/loading state.
+    func checkPurchaseAvailability() async {
+        guard !isCheckingPurchaseAvailability else { return }
+        isCheckingPurchaseAvailability = true
+        purchaseAvailabilityStatus = "Checking Apple's current listing…"
+        defer { isCheckingPurchaseAvailability = false }
+
+        async let currentStorefront = Storefront.current
+        var rawProducts: [Product] = []
+        var lookupError: NSError?
+        do {
+            rawProducts = try await Product.products(for: [Self.productID])
+        } catch {
+            lookupError = error as NSError
+        }
+        let storefront = await currentStorefront
+        let bundle = Bundle.main
+        // A Messages extension is embedded at App.app/PlugIns/Extension.appex.
+        // Read only that parent's bundle identifier; never report local paths.
+        let possibleContainer = bundle.bundleURL.deletingLastPathComponent().deletingLastPathComponent()
+        let containingBundleID: String?
+        if bundle.bundleURL.pathExtension == "appex", possibleContainer.pathExtension == "app" {
+            containingBundleID = Bundle(url: possibleContainer)?.bundleIdentifier
+        } else {
+            containingBundleID = nil
+        }
+        var report: [String: Any] = [
+            "reportVersion": 1,
+            "timestampUTC": ISO8601DateFormatter().string(from: Date()),
+            "bundleID": bundle.bundleIdentifier ?? "unavailable",
+            "containingBundleID": containingBundleID ?? "not available",
+            "version": bundle.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "unavailable",
+            "build": bundle.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? "unavailable",
+            "osVersion": UIDevice.current.systemVersion,
+            "requestedProductID": Self.productID,
+            "rawProductCount": rawProducts.count,
+            "rawProducts": rawProducts.map { ["id": $0.id, "type": $0.type.rawValue, "localizedPrice": $0.displayPrice] },
+            "canMakePayments": AppStore.canMakePayments,
+            "studioUnlocked": isUnlocked,
+        ]
+        if let storefront {
+            report["storefront"] = ["id": storefront.id, "countryCode": storefront.countryCode]
+        } else {
+            report["storefront"] = NSNull()
+        }
+        if let lookupError {
+            // No error description, userInfo, account, receipt or transaction
+            // data is included in the user-initiated copyable report.
+            report["error"] = ["domain": lookupError.domain, "code": lookupError.code]
+        } else {
+            report["error"] = NSNull()
+        }
+        if let data = try? JSONSerialization.data(withJSONObject: report, options: [.prettyPrinted, .sortedKeys]) {
+            purchaseAvailabilityReport = String(data: data, encoding: .utf8)
+        }
+        if lookupError != nil {
+            purchaseAvailabilityStatus = "Apple's product lookup failed. Copy the technical report for support."
+        } else if rawProducts.contains(where: { $0.id == Self.productID && $0.type == .nonConsumable }) {
+            purchaseAvailabilityStatus = "Apple returned Studio Unlock. Your current access is unchanged."
+        } else if rawProducts.isEmpty {
+            purchaseAvailabilityStatus = "Apple returned no products. Your current access is unchanged."
+        } else {
+            purchaseAvailabilityStatus = "Apple returned products without a matching Studio Unlock. Your current access is unchanged."
+        }
+    }
+    #endif
 
     func start() async {
         guard mode != .disabled else {

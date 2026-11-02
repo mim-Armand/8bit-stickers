@@ -1,5 +1,7 @@
 # 8 bit art
 
+**November 2 review update:** Apple rejected 1.4.1 (11) because its sandbox reviewer also saw **Price unavailable**. Configuration and agreement checks pass; the owner’s existing TestFlight Studio remains unlocked. See [the live sandbox investigation](docs/studio-sandbox-investigation.md) for the unresolved diagnosis and internal read-only diagnostic beta 1.4.1 (12). No review has been resubmitted or cancelled. The October 31 status below is historical.
+
 **Current release check, October 31:** App Store version **1.4 (10)** is available, but its first Studio Unlock purchase was omitted from review, causing **Price unavailable** in production. With the owner's explicit approval, corrective **1.4.1 (11) and Studio Unlock have now been submitted together** and are **Waiting for Review**, with **automatic release after approval**. The update also fixes unlock-sheet contrast in Dark Mode and price retry recovery. The build is available in internal TestFlight; production purchasing still awaits IAP approval. See [the current correction handoff](docs/studio-purchase-fix.md). Earlier preparation/beta descriptions below are historical.
 
 The 2018 iMessage sticker pack is recovered and back in development. This repository preserves its Git history, Xcode project, original icons and eleven original stickers. The collection now contains **67 stickers**, including **45 cute and meme reactions drawn on a true 16×16 grid**, two animations, a native Studio available in internal TestFlight, and a working local browser prototype.

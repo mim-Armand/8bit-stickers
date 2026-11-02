@@ -135,6 +135,9 @@ struct StudioUnlockView: View {
 struct StudioHelpView: View {
     @ObservedObject var purchases: StudioPurchaseStore
     @Environment(\.dismiss) private var dismiss
+    #if STUDIO_PURCHASE_DIAGNOSTICS
+    @State private var copiedPurchaseReport = false
+    #endif
 
     var body: some View {
         NavigationView {
@@ -169,6 +172,29 @@ struct StudioHelpView: View {
                         .accessibilityIdentifier("studio.restore")
                     if let message = purchases.message { Text(message).font(.footnote).foregroundColor(StudioTheme.secondary) }
                 }
+                #if STUDIO_PURCHASE_DIAGNOSTICS
+                Section(header: Text("Purchase availability check")) {
+                    Text("Check Apple's current product listing without changing Studio access or making a purchase.")
+                        .font(.footnote).foregroundColor(StudioTheme.secondary)
+                    Button(purchases.isCheckingPurchaseAvailability ? "Checking availability…" : "Check purchase availability") {
+                        copiedPurchaseReport = false
+                        Task { await purchases.checkPurchaseAvailability() }
+                    }
+                    .disabled(purchases.isCheckingPurchaseAvailability)
+                    .accessibilityIdentifier("studio.purchaseDiagnostics.check")
+                    if let status = purchases.purchaseAvailabilityStatus {
+                        Text(status).font(.footnote).foregroundColor(StudioTheme.secondary)
+                            .accessibilityIdentifier("studio.purchaseDiagnostics.status")
+                    }
+                    Button(copiedPurchaseReport ? "Technical report copied" : "Copy technical report") {
+                        guard let report = purchases.purchaseAvailabilityReport else { return }
+                        UIPasteboard.general.string = report
+                        copiedPurchaseReport = true
+                    }
+                    .disabled(purchases.isCheckingPurchaseAvailability || purchases.purchaseAvailabilityReport == nil)
+                    .accessibilityIdentifier("studio.purchaseDiagnostics.copy")
+                }
+                #endif
                 Section(header: Text("Need a hand?")) {
                     Link("Email support", destination: URL(string: "mailto:seltzer.wisdom7h@icloud.com")!)
                     Link("Support instructions", destination: URL(string: "https://mim-armand.github.io/8bit-stickers/support/")!)
