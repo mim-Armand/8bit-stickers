@@ -1,0 +1,34 @@
+{
+  "source": "Owner-provided report from internal TestFlight 1.4.1 (12)",
+  "timestampUTC": "2026-11-02T10:53:51Z",
+  "version": "1.4.1",
+  "build": "12",
+  "bundleID": "eu.armand.--bit-art.StickerPackExtension",
+  "containingBundleID": "eu.armand.--bit-art",
+  "osVersion": "27.2",
+  "storefront": {
+    "countryCode": "USA",
+    "id": "143441"
+  },
+  "canMakePayments": true,
+  "error": null,
+  "rawProductCount": 1,
+  "rawProducts": [
+    {
+      "id": "eu.armand.bitart.studio.unlock",
+      "localizedPrice": "$1.00",
+      "type": "Non-Consumable"
+    }
+  ],
+  "proves": "The diagnostic Product.products(for:) invocation returned the correct non-consumable and localized price in this existing-owner TestFlight context.",
+  "doesNotProve": [
+    "Uncached network request",
+    "Submitted build 11 first-launch paywall lookup",
+    "Clean account or first-time buyer lookup/purchase",
+    "Reviewer iPad/storefront behavior",
+    "New checkout or restore",
+    "Production catalog availability",
+    "Root cause or completed fix"
+  ],
+  "purchaseInitiated": false
+}

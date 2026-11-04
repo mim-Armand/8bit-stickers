@@ -134,7 +134,7 @@ private struct DraftNameSheet: View {
                 ToolbarItem(placement: .cancellationAction) { Button("Cancel") { dismiss() } }
                 ToolbarItem(placement: .confirmationAction) { Button("Save", action: save).accessibilityIdentifier("studio.renameSave") }
             }
-        }.navigationViewStyle(StackNavigationViewStyle())
+        }.navigationViewStyle(StackNavigationViewStyle()).studioAppearance()
     }
     private func save() {
         var updated = document

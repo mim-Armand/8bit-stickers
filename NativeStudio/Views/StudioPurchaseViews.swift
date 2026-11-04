@@ -113,6 +113,7 @@ struct StudioUnlockView: View {
             .toolbar { ToolbarItem(placement: .cancellationAction) { Button("Not now") { dismiss() } } }
         }
         .navigationViewStyle(StackNavigationViewStyle())
+        .studioAppearance()
         .background(StudioPurchasePresentationAnchor(purchases: purchases)
             .frame(width: 0, height: 0).allowsHitTesting(false))
         .onChange(of: purchases.isUnlocked) { unlocked in if unlocked { dismiss() } }
@@ -134,6 +135,10 @@ struct StudioUnlockView: View {
 struct StudioHelpView: View {
     @ObservedObject var purchases: StudioPurchaseStore
     @Environment(\.dismiss) private var dismiss
+    #if STUDIO_PURCHASE_DIAGNOSTICS
+    @State private var copiedPurchaseReport = false
+    @State private var copiedInitialPriceReport = false
+    #endif
 
     var body: some View {
         NavigationView {
@@ -168,6 +173,43 @@ struct StudioHelpView: View {
                         .accessibilityIdentifier("studio.restore")
                     if let message = purchases.message { Text(message).font(.footnote).foregroundColor(StudioTheme.secondary) }
                 }
+                #if STUDIO_PURCHASE_DIAGNOSTICS
+                Section(header: Text("First price lookup")) {
+                    Text("Saved once for this build. Later price checks keep this first result so we can investigate a fresh install.")
+                        .font(.footnote).foregroundColor(StudioTheme.secondary)
+                    Text(purchases.initialPriceAvailabilityStatus ?? "The first price lookup has not completed yet.")
+                        .font(.footnote).foregroundColor(StudioTheme.secondary)
+                        .accessibilityIdentifier("studio.purchaseDiagnostics.initialStatus")
+                    Button(copiedInitialPriceReport ? "Initial price report copied" : "Copy initial price report") {
+                        guard let report = purchases.initialPriceAvailabilityReport else { return }
+                        UIPasteboard.general.string = report
+                        copiedInitialPriceReport = true
+                    }
+                    .disabled(purchases.initialPriceAvailabilityReport == nil)
+                    .accessibilityIdentifier("studio.purchaseDiagnostics.copyInitial")
+                }
+                Section(header: Text("Purchase availability check")) {
+                    Text("Check Apple's current product listing without changing Studio access or making a purchase.")
+                        .font(.footnote).foregroundColor(StudioTheme.secondary)
+                    Button(purchases.isCheckingPurchaseAvailability ? "Checking availability…" : "Check purchase availability") {
+                        copiedPurchaseReport = false
+                        Task { await purchases.checkPurchaseAvailability() }
+                    }
+                    .disabled(purchases.isCheckingPurchaseAvailability)
+                    .accessibilityIdentifier("studio.purchaseDiagnostics.check")
+                    if let status = purchases.purchaseAvailabilityStatus {
+                        Text(status).font(.footnote).foregroundColor(StudioTheme.secondary)
+                            .accessibilityIdentifier("studio.purchaseDiagnostics.status")
+                    }
+                    Button(copiedPurchaseReport ? "Technical report copied" : "Copy technical report") {
+                        guard let report = purchases.purchaseAvailabilityReport else { return }
+                        UIPasteboard.general.string = report
+                        copiedPurchaseReport = true
+                    }
+                    .disabled(purchases.isCheckingPurchaseAvailability || purchases.purchaseAvailabilityReport == nil)
+                    .accessibilityIdentifier("studio.purchaseDiagnostics.copy")
+                }
+                #endif
                 Section(header: Text("Need a hand?")) {
                     Link("Email support", destination: URL(string: "mailto:seltzer.wisdom7h@icloud.com")!)
                     Link("Support instructions", destination: URL(string: "https://mim-armand.github.io/8bit-stickers/support/")!)
@@ -195,7 +237,7 @@ struct StudioHelpView: View {
             }
             .navigationTitle("A little help").navigationBarTitleDisplayMode(.inline)
             .toolbar { ToolbarItem(placement: .confirmationAction) { Button("Done") { dismiss() } } }
-        }.navigationViewStyle(StackNavigationViewStyle()).accentColor(StudioTheme.purple)
+        }.navigationViewStyle(StackNavigationViewStyle()).studioAppearance()
     }
 
     private func helpRow(_ title: String, _ detail: String) -> some View {

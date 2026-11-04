@@ -177,6 +177,6 @@ private struct StickerDetailView: View {
             .background(StudioTheme.cream)
             .navigationTitle("Your sticker").navigationBarTitleDisplayMode(.inline)
             .toolbar { ToolbarItem(placement: .confirmationAction) { Button("Done") { dismiss() } } }
-        }.navigationViewStyle(StackNavigationViewStyle())
+        }.navigationViewStyle(StackNavigationViewStyle()).studioAppearance()
     }
 }

@@ -1,0 +1,38 @@
+{
+  "appId": "1366485724",
+  "version": "1.4.1",
+  "build": "12",
+  "hostBundleId": "eu.armand.--bit-art",
+  "extensionBundleId": "eu.armand.--bit-art.StickerPackExtension",
+  "configuration": "TestFlightDiagnostics",
+  "scheme": "Studio Diagnostics Internal",
+  "distribution": "TESTFLIGHT_INTERNAL_ONLY",
+  "purpose": "Investigate real Apple product-price lookup in Messages without modifying the active App Review submission.",
+  "compileConditions": [
+    "STUDIO_APP_STORE",
+    "STUDIO_PURCHASE_DIAGNOSTICS"
+  ],
+  "diagnostics": {
+    "internalOnly": true,
+    "publicReleaseFeature": false,
+    "usesRealStoreKit": true,
+    "grantsOwnership": false,
+    "includesLocalStoreKitFixture": false,
+    "resetsPurchasesOrDrawings": false
+  },
+  "commerce": {
+    "productId": "eu.armand.bitart.studio.unlock",
+    "appleId": "6827336076",
+    "type": "NON_CONSUMABLE",
+    "usaPrice": "1.00",
+    "currency": "USD",
+    "familySharing": false,
+    "territoryCount": 175
+  },
+  "exportOptions": "Config/ExportStudioTestFlight.plist",
+  "outputDirectory": "build/studio-diagnostics/1.4.1-12",
+  "appReviewSubmitted": false,
+  "externalDistributionStarted": false,
+  "mustNotReplaceAppReviewBuild": "1.4.1 (11)",
+  "supportEmail": "seltzer.wisdom7h@icloud.com"
+}
