@@ -1,0 +1,46 @@
+{
+  "recordedAtUTC": "2026-11-04T13:00:21.931Z",
+  "authorization": {
+    "projectIfAbsent": true,
+    "publishAnnouncement": true,
+    "userRequestedNoAdditionalApproval": true
+  },
+  "profileURL": "https://www.linkedin.com/in/3dots/",
+  "browser": "Browser plugin / signed-in Chrome",
+  "appStoreURL": "https://apps.apple.com/app/id1366485724",
+  "project": {
+    "existingProjectsReviewed": 33,
+    "matchingProjectFoundBefore": false,
+    "created": true,
+    "title": "8 bit art — Pixel Art Stickers & Studio for iMessage",
+    "description": "Recovered and modernized my original 2018 iMessage sticker app for iPhone and iPad. The free collection includes 67 pixel-art stickers, search, and favorites. An optional permanent Studio Unlock adds a native 16×16 editor inside Messages, remix templates, and saved drafts. The project brings together native iOS development, editable pixel-art sources, and a reproducible asset pipeline, with artwork and source preserved together in GitHub.\n\nDownload: https://apps.apple.com/app/id1366485724",
+    "editURL": "https://www.linkedin.com/in/3dots/details/projects/edit/forms/647961609/",
+    "publicProjectsURL": "https://www.linkedin.com/in/3dots/details/projects/",
+    "appStoreMediaAttached": true,
+    "verifiedAfterReload": true,
+    "currentlyWorking": true,
+    "datesOmittedRatherThanInvented": true
+  },
+  "post": {
+    "published": true,
+    "url": "https://www.linkedin.com/feed/update/urn:li:share:7523728612122951681/",
+    "activityURL": "https://www.linkedin.com/feed/update/urn:li:activity:7523728612701786112/",
+    "text": "Little pixels. Big feelings. 👾\n\nI’ve brought 8 bit art back to life!\n\nWhat started as my iMessage sticker project in 2018 now has 67 pixel-art stickers: cute animals, funny reactions, meme-inspired characters, and a few very necessary 67s.\n\nThe included collection is free, with search and favorites to keep your reactions close. Want to make your own? The optional, one-time Studio Unlock adds a 16×16 pixel editor, remix templates, and saved drafts—right inside Messages.\n\nI’ve also recovered and modernized the project, with the artwork and source now preserved together in GitHub.\n\nDownload for iPhone and iPad:\nhttps://apps.apple.com/app/id1366485724\n\nAfter installing, open a conversation in Messages, tap +, and choose 8 bit art.\n\nWhich reaction should I add next?\n\n#PixelArt #IndieDev #iOS",
+    "audience": "Anyone",
+    "appStorePreviewPresent": true,
+    "paragraphFormattingVerifiedAfterReload": true
+  },
+  "appRelease": {
+    "appleID": "1366485724",
+    "publicVersion": "1.4.1",
+    "appState": "READY_FOR_SALE",
+    "iapID": "6827336076",
+    "iapState": "APPROVED",
+    "verifiedAtUTC": "2026-11-04T12:37:21.797Z",
+    "actualProductionPurchaseVerified": false
+  },
+  "privateScreenshots": [
+    "build/linkedin-announcement/project-added.jpg",
+    "build/linkedin-announcement/published-post.jpg"
+  ]
+}

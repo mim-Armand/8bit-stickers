@@ -1,5 +1,7 @@
 # Studio Unlock — production availability investigation
 
+**November 4 readback:** public 1.4.1 is READY_FOR_SALE and the exact Studio Unlock product is APPROVED, verified at 2026-11-04T12:37:21.797Z while preparing the owner-authorized LinkedIn announcement. The missing-approval blocker documented below is now historical. This does not establish actual production purchase/restore success; that physical-device check remains unverified. No Apple state was changed during this follow-up. The readback and publication facts are preserved in `release/linkedin-2026-11-04.json`, with the direct API evidence under ignored `build/linkedin-announcement/`.
+
 Updated November 2, 2026. The owner deferred additional TestFlight purchase tests and requested focus on the released App Store failure. No Sandbox account was created, no purchase was reset, and the existing beta/review distribution was not cancelled.
 
 ## Confirmed production blocker
