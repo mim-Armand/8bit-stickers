@@ -1,0 +1,40 @@
+{
+  "verifiedAtUTC": "2026-11-25T09:23:13.332Z",
+  "appID": "1366485724",
+  "version": "1.5",
+  "build": "14",
+  "buildID": "998f443d-50ff-44ae-ab82-33af30289c0d",
+  "processingState": "VALID",
+  "audience": "INTERNAL_ONLY",
+  "internalState": "IN_BETA_TESTING",
+  "group": "App Store Connect Users",
+  "availableInGroup": true,
+  "whatsNewVerified": true,
+  "expirationDate": "2027-02-23T01:21:45-08:00",
+  "sourceCommit": "9031ddef61210068c47c46c9cb6be0c0a7adc744",
+  "sourceTag": "v1.5-build14-internal",
+  "pullRequest": "https://github.com/mim-Armand/8bit-stickers/pull/9",
+  "configuration": "AppStore",
+  "exportOptions": "Config/ExportStudioTestFlight.plist",
+  "ipaSHA256": "216c3c157ef6b51b9e5ad4498de324a16e40966ddcdf4f8f164d3742825e1be7",
+  "appleValidation": {
+    "errors": 0,
+    "warnings": [
+      90863,
+      90984
+    ]
+  },
+  "verification": {
+    "catalogStickers": 67,
+    "losslessRemixTemplates": 45,
+    "appStoreCoreTestsOnIPadOS18": 35,
+    "debugCoreTestsOnIOS27ExcludingStoreKitFixture": 33,
+    "debugStoreKitPurchaseRestoreRefundTestsOnIPadOS18": 1,
+    "flowTestsOnIPhoneIOS27": 4,
+    "savedDrawingInsertedInMessagesIPadOS27": true,
+    "verifiedXcodeCheckoutOpenedSelectedRemixInMessagesIPadOS18": true,
+    "messageSentByTests": false,
+    "physicalProductionPurchaseRestoreVerified": false,
+    "iOS27LocalStoreKitFixture": "Local StoreKit requests reached the sandbox catalog on the iOS 27.0 simulator. The fixture purchase/restore tests passed on iPadOS 18.0."
+  }
+}

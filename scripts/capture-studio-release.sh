@@ -57,6 +57,7 @@ xcrun simctl status_bar "$capture_uuid" override --time '9:41' --batteryState ch
 if ! xcodebuild test -project NativeStudio/Studio.xcodeproj -scheme 'Studio Release Capture' \
   -configuration Screenshots -destination "platform=iOS Simulator,id=$capture_uuid" \
   -derivedDataPath "$capture_derived" -resultBundlePath "$capture_work/capture.xcresult" \
+  -only-testing:StudioReleaseCaptureTests/StudioReleaseScreenshotTests/testCapturePublicStudioFlow \
   CODE_SIGNING_ALLOWED=NO -parallel-testing-enabled NO > "$capture_work/test.log" 2>&1; then
   tail -60 "$capture_work/test.log" >&2
   exit 1

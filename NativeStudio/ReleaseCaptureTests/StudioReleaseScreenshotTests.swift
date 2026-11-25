@@ -11,20 +11,12 @@ final class StudioReleaseScreenshotTests: XCTestCase {
     @MainActor
     func testCapturePublicStudioFlow() async throws {
         continueAfterFailure = false
-        // TEST_TARGET_NAME must be StudioMessagesHost so the test transaction
-        // belongs to this app instead of an unrelated unhosted runner.
-        let store = try SKTestSession(configurationFileNamed: "Studio")
-        store.resetToDefaultState()
-        store.clearTransactions()
-        store.disableDialogs = true
-        store.askToBuyEnabled = false
-        store.storefront = "USA"
-        store.locale = Locale(identifier: "en_US")
+        let store = try localStore()
         defer { store.clearTransactions() }
 
         openStudioInFixture()
         messages.buttons["studio.tab.studio"].tap()
-        XCTAssertFalse(messages.staticTexts["Your tiny ideas"].waitForExistence(timeout: 1),
+        XCTAssertFalse(messages.staticTexts["Saved drawings"].waitForExistence(timeout: 1),
                        "Use a fresh dedicated capture simulator; existing drawings will not be deleted")
         XCTAssertTrue(messages.buttons["studio.tab.collection"].waitForExistence(timeout: 5), messages.debugDescription)
         messages.buttons["studio.tab.collection"].tap()
@@ -60,6 +52,50 @@ final class StudioReleaseScreenshotTests: XCTestCase {
         capture("04-saved-drafts")
         XCTAssertFalse(store.allTransactions().isEmpty, "Captures must follow a real Xcode StoreKit transaction")
         // No insertion or Messages Send action is performed by this capture flow.
+    }
+
+    /// Use a fresh simulator for this purchase test, as for the release captures.
+    @available(iOS 17.0, *)
+    @MainActor
+    func testInlineCheckoutOpensChosenTemplateInMessages() async throws {
+        continueAfterFailure = false
+        let store = try localStore()
+        defer { store.clearTransactions() }
+
+        openStudioInFixture()
+        messages.buttons["studio.tab.studio"].tap()
+        let template = messages.buttons["studio.template.tiny_duck"]
+        XCTAssertTrue(template.waitForExistence(timeout: 10), "Use a dedicated simulator with no drawings or prior access.")
+        template.tap()
+        let preview = messages.descendants(matching: .any)["studio.recolorPreview"].firstMatch
+        let selected = expectation(for: NSPredicate(format: "label CONTAINS %@", "Just a lil guy"), evaluatedWith: preview)
+        await fulfillment(of: [selected], timeout: 8)
+        let unlock = messages.buttons["studio.unlock"]
+        let priced = expectation(for: NSPredicate(format: "label CONTAINS %@ AND enabled == true", "$1.00"), evaluatedWith: unlock)
+        await fulfillment(of: [priced], timeout: 25)
+        XCTAssertTrue(store.allTransactions().isEmpty)
+        unlock.tap()
+
+        let name = messages.textFields["studio.drawingName"]
+        XCTAssertTrue(name.waitForExistence(timeout: 20), messages.debugDescription)
+        XCTAssertEqual(name.value as? String, "Just a lil guy remix")
+        XCTAssertTrue(canvas.exists)
+        XCTAssertTrue(store.allTransactions().contains {
+            $0.productIdentifier == "eu.armand.bitart.studio.unlock" && $0.state == .purchased
+        }, "The chosen drawing must follow a successful local StoreKit transaction.")
+    }
+
+    private func localStore() throws -> SKTestSession {
+        // TEST_TARGET_NAME must be StudioMessagesHost so the test transaction
+        // belongs to this app instead of an unrelated unhosted runner.
+        let store = try SKTestSession(configurationFileNamed: "Studio")
+        store.resetToDefaultState()
+        store.clearTransactions()
+        store.disableDialogs = true
+        store.askToBuyEnabled = false
+        store.storefront = "USA"
+        store.locale = Locale(identifier: "en_US")
+        return store
     }
 
     private var canvas: XCUIElement { messages.descendants(matching: .any)["studio.canvas"].firstMatch }
