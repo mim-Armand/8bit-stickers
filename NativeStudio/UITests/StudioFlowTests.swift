@@ -36,9 +36,8 @@ final class StudioFlowTests: XCTestCase {
         XCTAssertTrue(app.buttons["studio.unlock"].label.contains("$1.00"))
         #endif
         saveScreenshot("01-local-unlock")
-        app.buttons["Not now"].tap()
-        app.buttons["studio.tab.collection"].tap()
-        XCTAssertTrue(app.staticTexts["catalog-count"].exists)
+        app.buttons["studio.freeStickers"].tap()
+        XCTAssertTrue(app.staticTexts["catalog-count"].waitForExistence(timeout: 5))
     }
 
     func testUnlockRemixAutosaveInsertAndReopen() {
@@ -68,6 +67,10 @@ final class StudioFlowTests: XCTestCase {
         app.alerts["Sticker ready"].buttons["OK"].tap()
         app.buttons["studio.backToDrafts"].tap()
         XCTAssertTrue(app.buttons["Open drawing Pixel pal"].waitForExistence(timeout: 3))
+        app.buttons["Insert Pixel pal"].tap()
+        XCTAssertTrue(app.alerts["Sticker ready"].waitForExistence(timeout: 5))
+        app.alerts["Sticker ready"].buttons["OK"].tap()
+        XCTAssertTrue(app.buttons["Open drawing Pixel pal"].exists)
         saveScreenshot("03-saved-drafts")
         app.terminate()
         app.launchEnvironment["STUDIO_UI_TEST_RESET"] = "0"
@@ -79,6 +82,26 @@ final class StudioFlowTests: XCTestCase {
         XCTAssertTrue(app.buttons["studio.insert"].isEnabled)
     }
 
+    func testStudioTemplateBrowserContinuesWithSelectedRemix() {
+        app.buttons["studio.tab.studio"].tap()
+        let browse = app.buttons["studio.allTemplates"]
+        XCTAssertTrue(browse.waitForExistence(timeout: 5))
+        XCTAssertEqual(browse.label, "Browse all 45 templates")
+        browse.tap()
+        app.buttons["studio.template.tiny_bunny"].tap()
+        let preview = app.descendants(matching: .any)["studio.recolorPreview"].firstMatch
+        let chosenPreview = expectation(for: NSPredicate(format: "label CONTAINS %@", "A little shy"), evaluatedWith: preview)
+        wait(for: [chosenPreview], timeout: 5)
+        app.buttons["studio.unlock"].tap()
+        let name = app.textFields["studio.drawingName"]
+        XCTAssertTrue(name.waitForExistence(timeout: 5))
+        XCTAssertEqual(name.value as? String, "A little shy remix")
+        app.buttons["studio.backToDrafts"].tap()
+        app.buttons["studio.template.tiny_duck"].tap()
+        XCTAssertTrue(name.waitForExistence(timeout: 5))
+        XCTAssertEqual(name.value as? String, "Just a lil guy remix")
+    }
+
     private func finishSearch() {
         if app.keyboards.buttons["Search"].exists { app.keyboards.buttons["Search"].tap() }
         else if app.keyboards.buttons["Return"].exists { app.keyboards.buttons["Return"].tap() }
@@ -87,5 +110,38 @@ final class StudioFlowTests: XCTestCase {
         let attachment = XCTAttachment(screenshot: app.screenshot())
         attachment.name = name; attachment.lifetime = .keepAlways
         add(attachment)
+    }
+}
+
+extension StudioFlowTests {
+    func testCompactOptionsFiltersAndSearchSurviveMessagesExpansion() {
+        app.terminate()
+        app.launchEnvironment["STUDIO_UI_TEST_COMPACT"] = "1"
+        app.launch()
+        let options = app.buttons["options-exclamation_point_01"]
+        XCTAssertTrue(options.waitForExistence(timeout: 5))
+
+        options.tap()
+        app.buttons["Details"].tap()
+        XCTAssertTrue(app.buttons["insert-included-sticker"].waitForExistence(timeout: 5))
+        app.buttons["Done"].tap()
+        options.tap()
+        app.buttons["Favorite"].tap()
+
+        app.buttons["studio.filters"].tap()
+        app.descendants(matching: .any).matching(NSPredicate(format: "label == %@", "Favorites only")).firstMatch.tap()
+        let count = app.staticTexts["catalog-count"]
+        XCTAssertEqual(count.label, "1 sticker")
+
+        let search = app.textFields["studio.search"]
+        search.tap()
+        search.typeText("surp")
+        finishSearch()
+        XCTAssertEqual(count.label, "1 sticker")
+        app.buttons["testHost.finishExpansion"].tap()
+        XCTAssertTrue(app.buttons["preview-exclamation_point_01"].waitForExistence(timeout: 5))
+        XCTAssertEqual(search.value as? String, "surp")
+        XCTAssertEqual(app.buttons["favorites-filter"].value as? String, "Favorites only")
+        XCTAssertEqual(count.label, "1 sticker")
     }
 }

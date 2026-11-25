@@ -5,10 +5,13 @@ import SwiftUI
     @StateObject private var drafts: DraftStore
     @StateObject private var purchases: StudioPurchaseStore
     @State private var insertedTitle: String?
+    @State private var isExpanded: Bool
+    @State private var expansionRequested = false
 
     init() {
         let environment = ProcessInfo.processInfo.environment
         let isUITest = environment["STUDIO_UI_TESTING"] == "1"
+        _isExpanded = State(initialValue: !(isUITest && environment["STUDIO_UI_TEST_COMPACT"] == "1"))
         let directory = isUITest ? FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
             .appendingPathComponent("StudioUITestData", isDirectory: true) : nil
         let preferences = isUITest ? UserDefaults(suiteName: "StudioLocalUITest")! : .standard
@@ -23,8 +26,16 @@ import SwiftUI
 
     var body: some Scene {
         WindowGroup {
-            StudioRootView(catalog: catalog, drafts: drafts, purchases: purchases, isExpanded: true,
-                onExpand: {}, onInsert: { _, title in insertedTitle = title })
+            StudioRootView(catalog: catalog, drafts: drafts, purchases: purchases, isExpanded: isExpanded,
+                onExpand: { if !isExpanded { expansionRequested = true } }, onInsert: { _, title in insertedTitle = title })
+                .overlay(alignment: .bottomTrailing) {
+                    // The compact UI test controls when the Messages host finishes its transition.
+                    if expansionRequested {
+                        Button("Finish expansion") { expansionRequested = false; isExpanded = true }
+                            .buttonStyle(.borderedProminent)
+                            .accessibilityIdentifier("testHost.finishExpansion")
+                    }
+                }
                 .task { await purchases.start() }
                 .alert("Sticker ready", isPresented: Binding(get: { insertedTitle != nil }, set: { if !$0 { insertedTitle = nil } })) {
                     Button("OK") { insertedTitle = nil }

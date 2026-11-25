@@ -11,6 +11,7 @@ struct StudioRootView: View {
     @State private var tab = StudioTab.collection
     @State private var session: PixelDocument?
     @State private var pendingCreation: PixelDocument?
+    @State private var inlineCreation: PixelDocument?
     @State private var unlockNeedsExpansion = false
     @State private var showUnlock = false
     @State private var showHelp = false
@@ -18,6 +19,8 @@ struct StudioRootView: View {
     @State private var showError = false
 
     private enum StudioTab: String, CaseIterable { case collection = "Stickers", studio = "Studio" }
+
+    private var templates: [StickerItem] { catalog.items.filter { $0.template != nil } }
 
     var body: some View {
         VStack(spacing: 0) {
@@ -27,32 +30,57 @@ struct StudioRootView: View {
                     .padding(.horizontal, 16).padding(.bottom, 8)
                     .accessibilityIdentifier("studio.storageNotice")
             }
-            if let document = session {
-                StudioEditorView(document: document, drafts: drafts, isUnlocked: purchases.isUnlocked, isExpanded: isExpanded, onExpand: onExpand, onBack: { session = nil; tab = .studio }, onInsert: onInsert, onUnlock: { presentUnlock() })
-                    .id(document.id)
-            } else {
-                tabBar
-                if tab == .collection {
-                    StudioCollectionView(catalog: catalog, drafts: drafts, onInsert: onInsert, onRemix: remix)
-                        .padding(.top, 12)
-                } else if purchases.isUnlocked || !drafts.drafts.isEmpty {
-                    StudioDraftsView(drafts: drafts, isUnlocked: purchases.isUnlocked, onNew: { start(PixelDocument()) }, onOpen: open, onUnlock: { presentUnlock() })
-                } else {
-                    StudioLockedView(purchases: purchases, onUnlock: { start(PixelDocument()) })
-                }
-            }
+            workspace
         }
         .background(StudioTheme.cream.ignoresSafeArea())
         .studioAppearance()
-        .sheet(isPresented: $showUnlock, onDismiss: finishUnlock) { StudioUnlockView(purchases: purchases) }
+        .sheet(isPresented: $showUnlock, onDismiss: finishUnlock) {
+            unlockSheet
+        }
         .sheet(isPresented: $showHelp) { StudioHelpView(purchases: purchases) }
         .alert("Couldn't open the drawing", isPresented: $showError) { Button("OK", role: .cancel) {} } message: { Text(errorMessage ?? "Please try again.") }
+        .onChange(of: purchases.isUnlocked) { unlocked in
+            if unlocked, let document = inlineCreation {
+                inlineCreation = nil
+                if tab == .studio && session == nil { open(document) }
+            }
+        }
         .onChange(of: isExpanded) { expanded in
             if expanded && unlockNeedsExpansion {
                 unlockNeedsExpansion = false
-                showUnlock = true
+                if purchases.isUnlocked {
+                    finishUnlock()
+                } else {
+                    showUnlock = true
+                }
             }
         }
+    }
+
+    @ViewBuilder private var workspace: some View {
+        if let document = session {
+            StudioEditorView(document: document, drafts: drafts, isUnlocked: purchases.isUnlocked, isExpanded: isExpanded, onExpand: onExpand, onBack: { session = nil; tab = .studio }, onInsert: onInsert, onUnlock: { presentUnlock() })
+                .id(document.id)
+        } else {
+            tabBar
+            if tab == .collection {
+                StudioCollectionView(catalog: catalog, drafts: drafts, isExpanded: isExpanded, onExpand: onExpand, onInsert: onInsert, onRemix: remix)
+                    .padding(.top, 12)
+            } else if purchases.isUnlocked || !drafts.drafts.isEmpty {
+                StudioDraftsView(drafts: drafts, isUnlocked: purchases.isUnlocked, templates: templates,
+                                 onNew: { start(PixelDocument()) }, onRemix: remix, onOpen: open,
+                                 onUnlock: { presentUnlock() }, onInsert: onInsert)
+            } else {
+                StudioLockedView(purchases: purchases, templates: templates, onPurchase: purchaseStarter,
+                                 onFree: returnToStickers)
+            }
+        }
+    }
+
+    private var unlockSheet: some View {
+        let item = templates.first { $0.id == pendingCreation?.templateID }
+        let freeExit: (() -> Void)? = session == nil ? { returnToStickers() } : nil
+        return StudioUnlockView(purchases: purchases, template: item, onFree: freeExit)
     }
 
     private var header: some View {
@@ -64,7 +92,7 @@ struct StudioRootView: View {
                          : (purchases.isBetaTesting ? "TESTFLIGHT PREVIEW · NO CHARGES" : "LOCAL TEST · NO REAL CHARGES"))
                         .font(.system(size: 9, weight: .bold, design: .rounded))
                         .foregroundColor(StudioTheme.purple).accessibilityIdentifier("studio.localTestingNotice")
-                } else {
+                } else if isExpanded {
                     Text("Little pixels. Big feelings.").font(.caption).foregroundColor(StudioTheme.secondary)
                 }
             }
@@ -81,6 +109,7 @@ struct StudioRootView: View {
         HStack(spacing: 4) {
             ForEach(StudioTab.allCases, id: \.self) { value in
                 Button {
+                    if value == .collection { inlineCreation = nil }
                     tab = value
                     if value == .studio && !isExpanded { onExpand() }
                 } label: {
@@ -95,6 +124,32 @@ struct StudioRootView: View {
                 .accessibilityIdentifier(value == .collection ? "studio.tab.collection" : "studio.tab.studio")
             }
         }.padding(4).background(StudioTheme.lavender).clipShape(RoundedRectangle(cornerRadius: 13)).padding(.horizontal, 16)
+    }
+
+    private func purchaseStarter(_ item: StickerItem?) {
+        guard inlineCreation == nil else { return }
+        let document: PixelDocument
+        if let item {
+            guard let template = item.templateDocument() else { showTemplateError(); return }
+            document = template
+        } else {
+            document = PixelDocument()
+        }
+        guard isExpanded else { presentUnlock(for: document); return }
+        inlineCreation = document
+        Task {
+            await purchases.purchase()
+            if !purchases.isUnlocked && !purchases.isPending && inlineCreation?.id == document.id {
+                inlineCreation = nil
+            }
+        }
+    }
+
+    private func returnToStickers() {
+        inlineCreation = nil
+        pendingCreation = nil
+        showUnlock = false
+        tab = .collection
     }
 
     private func start(_ document: PixelDocument) {
@@ -114,10 +169,14 @@ struct StudioRootView: View {
     private func open(_ document: PixelDocument) { tab = .studio; session = document; if !isExpanded { onExpand() } }
     private func remix(_ item: StickerItem) {
         guard let document = item.templateDocument() else {
-            errorMessage = "This sticker isn't a 16 × 16 template. Try a tiny sticker or start a blank drawing."
-            showError = true; return
+            showTemplateError()
+            return
         }
         start(document)
+    }
+    private func showTemplateError() {
+        errorMessage = "This sticker isn't a 16 × 16 template. Try another sticker or start a blank drawing."
+        showError = true
     }
     private func finishUnlock() {
         unlockNeedsExpansion = false

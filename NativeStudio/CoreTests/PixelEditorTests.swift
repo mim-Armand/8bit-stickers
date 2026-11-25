@@ -5,6 +5,24 @@ import XCTest
 
 @MainActor
 final class PixelEditorTests: XCTestCase {
+    func testCursorDescribesThePixelBeforeAndAfterErasingIt() {
+        let editor = PixelEditor(document: PixelDocument())
+        editor.selectedColor = 3
+        editor.paint(x: 2, y: 4)
+        editor.endStroke()
+        XCTAssertEqual(editor.cursorDescription(x: 2, y: 4), "Row 5, column 3, Yellow")
+        XCTAssertEqual(editor.tool.cursorAction, "Paint selected pixel")
+        editor.tool = .eraser
+        XCTAssertEqual(editor.tool.cursorAction, "Erase selected pixel")
+        editor.paint(x: 2, y: 4)
+        editor.endStroke()
+        XCTAssertEqual(editor.cursorDescription(x: 2, y: 4), "Row 5, column 3, Transparent")
+        editor.tool = .fill
+        XCTAssertEqual(editor.tool.cursorAction, "Fill selected area")
+        XCTAssertEqual(PixelColor(hex: "64D982").spokenName, "Light green")
+        XCTAssertEqual(PixelColor(r: 12, g: 34, b: 56, a: 128).spokenName, "Red 12, green 34, blue 56, 50 percent opacity")
+    }
+
     func testFastStrokeInterpolatesAndIsOneUndoOperation() {
         let editor = PixelEditor(document: PixelDocument())
         editor.selectedColor = 6

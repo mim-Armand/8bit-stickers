@@ -4,6 +4,13 @@ import Combine
 enum PixelTool: String, CaseIterable, Identifiable {
     case pencil, eraser, fill
     var id: String { rawValue }
+    var cursorAction: String {
+        switch self {
+        case .pencil: return "Paint selected pixel"
+        case .eraser: return "Erase selected pixel"
+        case .fill: return "Fill selected area"
+        }
+    }
 }
 
 @MainActor
@@ -23,6 +30,16 @@ final class PixelEditor: ObservableObject {
 
     init(document: PixelDocument) {
         self.document = document
+    }
+
+    func cursorDescription(x: Int, y: Int) -> String {
+        let position = "Row \(y + 1), column \(x + 1)"
+        let index = y * PixelDocument.side + x
+        guard (0..<PixelDocument.side).contains(x), (0..<PixelDocument.side).contains(y),
+              document.pixels.indices.contains(index), document.palette.indices.contains(document.pixels[index]) else {
+            return position
+        }
+        return "\(position), \(document.palette[document.pixels[index]].spokenName)"
     }
 
     func beginStroke() {
