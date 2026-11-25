@@ -24,6 +24,24 @@ struct PixelColor: Codable, Hashable {
                 blue: CGFloat(b) / 255, alpha: CGFloat(a) / 255)
     }
 
+    var spokenName: String {
+        guard a > 0 else { return "Transparent" }
+        let rgb = Int(r) << 16 | Int(g) << 8 | Int(b)
+        let name = Self.colorNames[rgb] ?? "Red \(r), green \(g), blue \(b)"
+        return a == 255 ? name : "\(name), \(Int(round(Double(a) * 100 / 255))) percent opacity"
+    }
+
+    private static let colorNames = [
+        0x17151C: "Ink", 0xFFFDF3: "Cream", 0xFFFDF4: "Ivory", 0xFFF0B0: "Pale yellow",
+        0xFFD52A: "Yellow", 0xEBA427: "Gold", 0xF5A22A: "Amber", 0xFF7A23: "Orange",
+        0xF54D66: "Coral", 0xF55D5D: "Salmon", 0xFF9BB9: "Pink", 0xFF7CA8: "Rose",
+        0x458AFF: "Blue", 0x7ADFFF: "Cyan", 0x3DCA6B: "Green", 0x228E42: "Dark green",
+        0x8DE6A7: "Mint", 0x64D982: "Light green", 0xEBAA70: "Tan", 0xDDA26C: "Caramel",
+        0x70452F: "Dark brown", 0xA76640: "Brown", 0xA46A45: "Chestnut",
+        0x9B6BDB: "Purple", 0x9B69DC: "Violet", 0xC18AF1: "Lavender", 0x8C54BA: "Deep purple",
+        0x9EA5B6: "Gray", 0xA2A5B7: "Silver"
+    ]
+
     static let clear = PixelColor(r: 0, g: 0, b: 0, a: 0)
     static let palette: [PixelColor] = [
         .clear,

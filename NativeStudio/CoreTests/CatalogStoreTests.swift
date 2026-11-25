@@ -41,12 +41,32 @@ final class CatalogStoreTests: XCTestCase {
 
     func testNumberMemesAreDiscoverableByAllThreeSpellings() {
         let catalog = CatalogStore()
-        for query in ["67", "6 7", "six seven"] {
-            let matching = catalog.items.filter {
-                ([$0.title, $0.category] + $0.tags).joined(separator: " ").localizedStandardContains(query)
-            }
+        for query in ["67", "6 7", "six seven", " SIX–Seven! "] {
+            let matching = catalog.stickers(matching: query)
             XCTAssertEqual(matching.count, 5, query)
         }
+    }
+
+    func testEverydaySearchPhrasesAndEmojiUseTheSameCatalogOrder() {
+        let catalog = CatalogStore()
+        for alternatives in [["thanks", "Thank  you!", "ty", "🙏", "🙏🏽"], ["lol", "HahA", "😂", "🤣"], ["love", "❤️", "❤"]] {
+            let expected = catalog.stickers(matching: alternatives[0]).map(\.id)
+            XCTAssertFalse(expected.isEmpty)
+            for query in alternatives.dropFirst() {
+                XCTAssertEqual(catalog.stickers(matching: query).map(\.id), expected, query)
+            }
+        }
+        XCTAssertEqual(catalog.stickers(matching: "thank you").map(\.id), ["heart", "coffee"])
+    }
+
+    func testShortWordsHaveBoundariesAndLongerWordsCompleteAsYouType() {
+        let catalog = CatalogStore()
+        XCTAssertEqual(catalog.stickers(matching: "hi").map(\.id), ["robot", "tiny_frog"])
+        XCTAssertTrue(catalog.stickers(matching: "yes").isEmpty)
+        XCTAssertEqual(catalog.stickers(matching: "Unbother").count, 2)
+        XCTAssertEqual(catalog.stickers(matching: " \n ").map(\.id), catalog.items.map(\.id))
+        XCTAssertTrue(catalog.stickers(matching: "🛶").isEmpty)
+        XCTAssertTrue(catalog.stickers(matching: "?").contains { $0.id == "tiny_gasp" })
     }
 
     func testIncludedAnimationsRetainAPNGFrameCounts() throws {

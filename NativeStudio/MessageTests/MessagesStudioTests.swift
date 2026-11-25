@@ -30,16 +30,18 @@ final class MessagesStudioTests: XCTestCase {
         }
         XCTAssertTrue(messages.buttons["studio.tab.studio"].waitForExistence(timeout: 10), messages.debugDescription)
         messages.buttons["studio.tab.studio"].tap()
-        if messages.buttons["studio.newDrawing"].waitForExistence(timeout: 3) {
-            messages.buttons["studio.newDrawing"].tap()
-        }
+        let starter = messages.buttons["studio.template.tiny_frog"]
+        XCTAssertTrue(starter.waitForExistence(timeout: 5), messages.debugDescription)
+        starter.tap()
         if messages.buttons["studio.unlock"].waitForExistence(timeout: 3) { messages.buttons["studio.unlock"].tap() }
         XCTAssertTrue(messages.descendants(matching: .any)["studio.canvas"].firstMatch.waitForExistence(timeout: 8), messages.debugDescription)
         let capture = XCTAttachment(screenshot: messages.screenshot())
         capture.name = "04-studio-inside-messages"; capture.lifetime = .keepAlways; add(capture)
         let canvas = messages.descendants(matching: .any)["studio.canvas"].firstMatch
         canvas.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5)).tap()
-        let insert = messages.buttons["studio.insert"]
+        messages.buttons["studio.backToDrafts"].tap()
+        let insert = messages.buttons.matching(NSPredicate(format: "identifier BEGINSWITH %@", "studio.insertDraft.")).firstMatch
+        XCTAssertTrue(insert.waitForExistence(timeout: 5), messages.debugDescription)
         XCTAssertTrue(insert.isEnabled)
         insert.tap()
         let send = messages.buttons["Send"]

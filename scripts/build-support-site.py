@@ -24,6 +24,10 @@ def main():
         target = destination / f'{identifier}.png'
         shutil.copyfile(source, target)
         print(f'{identifier}: {target.stat().st_size} bytes')
+    app_icons = ROOT / 'NativeStudio/Resources/Icons.xcassets/iMessage App Icon.stickersiconset'
+    public_screens = ROOT / 'release/studio-1.4/screenshots/iphone-6.1'
+    shutil.copyfile(app_icons / 'icon_180x135.png', destination / 'messages-app-icon.png')
+    shutil.copyfile(public_screens / '01-free-stickers.png', destination / 'stickers-screen.png')
     for page in ['index.html', 'support/index.html', 'privacy/index.html']:
         if not (ROOT / 'site' / page).is_file():
             raise FileNotFoundError(page)

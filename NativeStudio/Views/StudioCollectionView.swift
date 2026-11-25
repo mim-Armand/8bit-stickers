@@ -4,6 +4,8 @@ import SwiftUI
 struct StudioCollectionView: View {
     @ObservedObject var catalog: CatalogStore
     @ObservedObject var drafts: DraftStore
+    let isExpanded: Bool
+    let onExpand: () -> Void
     let onInsert: (URL, String) -> Void
     let onRemix: (StickerItem) -> Void
     @State private var query = ""
@@ -16,18 +18,16 @@ struct StudioCollectionView: View {
 
     private var categories: [String] { ["All"] + Set(catalog.items.map(\.category)).sorted() }
     private var visibleItems: [StickerItem] {
-        let search = query.trimmingCharacters(in: .whitespacesAndNewlines)
-        return catalog.items.filter { item in
+        catalog.stickers(matching: query).filter { item in
             (category == "All" || item.category == category) &&
-            (!favoritesOnly || drafts.favorites.contains(item.id)) &&
-            (search.isEmpty || ([item.title, item.category] + item.tags).joined(separator: " ")
-                .localizedStandardContains(search))
+            (!favoritesOnly || drafts.favorites.contains(item.id))
         }
     }
 
     var body: some View {
-        VStack(spacing: 10) {
-            HStack(spacing: 10) {
+        let results = visibleItems
+        return VStack(spacing: isExpanded ? 10 : 4) {
+            HStack(spacing: 8) {
                 HStack(spacing: 8) {
                     Image(systemName: "magnifyingglass").foregroundColor(StudioTheme.secondary)
                     TextField("Find a feeling…", text: $query)
@@ -41,39 +41,52 @@ struct StudioCollectionView: View {
                             .foregroundColor(StudioTheme.secondary).accessibilityLabel("Clear search")
                     }
                 }.padding(11).background(Color.white).clipShape(RoundedRectangle(cornerRadius: 12))
-                Button { favoritesOnly.toggle() } label: {
-                    Image(systemName: favoritesOnly ? "heart.fill" : "heart")
-                        .font(.title3).frame(width: 44, height: 44)
+                if isExpanded {
+                    Button { favoritesOnly.toggle() } label: {
+                        Image(systemName: favoritesOnly ? "heart.fill" : "heart")
+                            .font(.title3).frame(width: 44, height: 44)
+                    }
+                    .foregroundColor(StudioTheme.purple)
+                    .background(favoritesOnly ? StudioTheme.lavender : Color.white)
+                    .clipShape(RoundedRectangle(cornerRadius: 12))
+                    .accessibilityLabel(favoritesOnly ? "Show all stickers" : "Show favorites")
+                    .accessibilityValue(favoritesOnly ? "Favorites only" : "All stickers")
+                    .accessibilityIdentifier("favorites-filter")
+                } else {
+                    compactFilters
                 }
-                .foregroundColor(StudioTheme.purple)
-                .background(favoritesOnly ? StudioTheme.lavender : Color.white)
-                .clipShape(RoundedRectangle(cornerRadius: 12))
-                .accessibilityLabel(favoritesOnly ? "Show all stickers" : "Show favorites")
-                .accessibilityValue(favoritesOnly ? "Favorites only" : "All stickers")
-                .accessibilityIdentifier("favorites-filter")
             }.padding(.horizontal, 16)
 
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 7) {
-                    ForEach(categories, id: \.self) { name in
-                        Button { category = name } label: {
-                            Text(name).font(.subheadline.weight(.semibold))
-                                .padding(.horizontal, 13).padding(.vertical, 9)
-                                .foregroundColor(category == name ? .white : StudioTheme.secondary)
-                                .background(category == name ? StudioTheme.purple : Color.white)
-                                .clipShape(Capsule())
+            if isExpanded {
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: 7) {
+                        ForEach(categories, id: \.self) { name in
+                            Button { category = name } label: {
+                                Text(name).font(.subheadline.weight(.semibold))
+                                    .padding(.horizontal, 13).padding(.vertical, 9)
+                                    .foregroundColor(category == name ? .white : StudioTheme.secondary)
+                                    .background(category == name ? StudioTheme.purple : Color.white)
+                                    .clipShape(Capsule())
+                            }
+                            .accessibilityAddTraits(category == name ? [.isSelected] : [])
+                            .accessibilityIdentifier("category-\(name)")
                         }
-                        .accessibilityAddTraits(category == name ? [.isSelected] : [])
-                        .accessibilityIdentifier("category-\(name)")
-                    }
-                }.padding(.horizontal, 16)
+                    }.padding(.horizontal, 16)
+                }
             }
 
             HStack {
-                Text("\(visibleItems.count) \(visibleItems.count == 1 ? "sticker" : "stickers")")
+                Text("\(results.count) \(results.count == 1 ? "sticker" : "stickers")")
                     .font(.caption.weight(.semibold)).accessibilityIdentifier("catalog-count")
                 Spacer()
-                Text("Always free to use").font(.caption)
+                if isExpanded {
+                    Text("Always free to use").font(.caption)
+                } else if category != "All" || favoritesOnly {
+                    Text([favoritesOnly ? "Favorites" : "", category == "All" ? "" : category].filter { !$0.isEmpty }.joined(separator: " · "))
+                        .font(.caption)
+                } else {
+                    Text("Tap to add. Hold and drag to place.").font(.caption)
+                }
             }.foregroundColor(StudioTheme.secondary).padding(.horizontal, 18)
 
             ScrollView {
@@ -81,22 +94,43 @@ struct StudioCollectionView: View {
                     StudioNotice(text: error, symbol: "exclamationmark.circle", isError: true)
                         .padding(.horizontal, 16)
                 }
-                if visibleItems.isEmpty {
-                    StudioEmptyState(symbol: favoritesOnly ? "heart" : "magnifyingglass", title: favoritesOnly ? "Your favorites go here" : "No matching feelings yet", detail: favoritesOnly ? "Tap the heart on a sticker to keep it close." : "Try “cat”, “67”, or a different category.")
+                if results.isEmpty {
+                    StudioEmptyState(symbol: favoritesOnly ? "heart" : "magnifyingglass", title: favoritesOnly && drafts.favorites.isEmpty ? "Your favorites go here" : "No matching feelings yet", detail: favoritesOnly && drafts.favorites.isEmpty ? "Choose Favorite on a sticker to keep it here." : "Try “cat”, “67”, or a different category.")
                     Button("Show all stickers") { query = ""; category = "All"; favoritesOnly = false }
                         .buttonStyle(StudioQuietButton())
                 } else {
-                    LazyVGrid(columns: [GridItem(.adaptive(minimum: 112, maximum: 170), spacing: 10)], spacing: 10) {
-                        ForEach(visibleItems) { item in
-                            StickerCard(item: item, isFavorite: drafts.favorites.contains(item.id), onFavorite: { drafts.toggleFavorite(item.id) }, onPreview: { selected = item })
+                    LazyVGrid(columns: [GridItem(.adaptive(minimum: isExpanded ? 112 : 94, maximum: 170), spacing: 10)], spacing: 10) {
+                        ForEach(results) { item in
+                            StickerCard(item: item, isExpanded: isExpanded, isFavorite: drafts.favorites.contains(item.id), onFavorite: { drafts.toggleFavorite(item.id) }, onPreview: { selected = item })
                         }
                     }.padding(.horizontal, 16).padding(.bottom, 18)
                 }
             }
         }
+        .onChange(of: searchFocused) { focused in
+            if focused && !isExpanded { onExpand() }
+        }
         .sheet(item: $selected, onDismiss: finishSelection) { item in
             StickerDetailView(item: item, isFavorite: drafts.favorites.contains(item.id), onFavorite: { drafts.toggleFavorite(item.id) }, onInsert: { pendingInsert = item; selected = nil }, onRemix: { pendingRemix = item; selected = nil })
         }
+    }
+
+    private var compactFilters: some View {
+        Menu {
+            Toggle("Favorites only", isOn: $favoritesOnly)
+            Picker("Category", selection: $category) {
+                ForEach(categories, id: \.self) { name in Text(name).tag(name) }
+            }
+        } label: {
+            Image(systemName: "line.3.horizontal.decrease.circle")
+                .font(.title3).frame(width: 44, height: 44)
+                .background(category != "All" || favoritesOnly ? StudioTheme.lavender : Color.white)
+                .clipShape(RoundedRectangle(cornerRadius: 12))
+        }
+        .foregroundColor(StudioTheme.purple)
+        .accessibilityLabel("Sticker filters")
+        .accessibilityValue(favoritesOnly ? "Favorites, \(category)" : category)
+        .accessibilityIdentifier("studio.filters")
     }
 
     private func finishSelection() {
@@ -107,6 +141,7 @@ struct StudioCollectionView: View {
 
 private struct StickerCard: View {
     let item: StickerItem
+    let isExpanded: Bool
     let isFavorite: Bool
     let onFavorite: () -> Void
     let onPreview: () -> Void
@@ -114,25 +149,48 @@ private struct StickerCard: View {
         VStack(spacing: 0) {
             ZStack(alignment: .topTrailing) {
                 NativeStickerView(url: item.resourceURL, title: item.title, animate: item.animated)
-                    .frame(height: 105).padding(.top, 7)
-                Button(action: onFavorite) {
-                    Image(systemName: isFavorite ? "heart.fill" : "heart")
-                        .font(.system(size: 16, weight: .semibold))
-                        .frame(width: 40, height: 40)
-                        .background(Color.white.opacity(0.92)).clipShape(Circle())
+                    .frame(height: isExpanded ? 105 : 66).padding(.top, isExpanded ? 7 : 2)
+                if isExpanded {
+                    Button(action: onFavorite) {
+                        Image(systemName: isFavorite ? "heart.fill" : "heart")
+                            .font(.system(size: 16, weight: .semibold))
+                            .frame(width: 44, height: 44)
+                            .background(Color.white.opacity(0.92)).clipShape(Circle())
+                    }
+                    .foregroundColor(StudioTheme.purple)
+                    .accessibilityLabel("\(isFavorite ? "Unsave" : "Save") \(item.title)")
+                    .accessibilityIdentifier("favorite-\(item.id)")
                 }
-                .foregroundColor(StudioTheme.purple)
-                .accessibilityLabel("\(isFavorite ? "Unsave" : "Save") \(item.title)")
-                .accessibilityIdentifier("favorite-\(item.id)")
-            }.background(StudioTheme.lavender.opacity(0.65))
-            Button(action: onPreview) {
-                VStack(alignment: .leading, spacing: 4) {
-                    Text(item.title).font(.system(.subheadline, design: .rounded).weight(.semibold))
-                        .lineLimit(2).foregroundColor(StudioTheme.ink)
-                    Text(item.animated ? "Animated · Details" : item.logicalSize == [16, 16] ? "Details & remix" : "Details")
-                        .font(.caption2).foregroundColor(StudioTheme.secondary)
-                }.frame(maxWidth: .infinity, minHeight: 45, alignment: .leading).padding(10)
-            }.accessibilityLabel("Preview \(item.title)").accessibilityIdentifier("preview-\(item.id)")
+            }.frame(maxWidth: .infinity).background(StudioTheme.lavender.opacity(0.65))
+            if isExpanded {
+                Button(action: onPreview) {
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text(item.title).font(.system(.subheadline, design: .rounded).weight(.semibold))
+                            .lineLimit(2).foregroundColor(StudioTheme.ink)
+                        Text(item.animated ? "Animated · Details" : item.template != nil ? "Details & remix" : "Details")
+                            .font(.caption2).foregroundColor(StudioTheme.secondary)
+                    }.frame(maxWidth: .infinity, minHeight: 45, alignment: .leading).padding(10)
+                }.accessibilityLabel("Preview \(item.title)").accessibilityIdentifier("preview-\(item.id)")
+            } else {
+                HStack(spacing: 0) {
+                    Text(item.title).font(.caption.weight(.semibold))
+                        .lineLimit(2).frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.leading, 6).accessibilityHidden(true)
+                    Menu {
+                        Button(action: onFavorite) {
+                            Label(isFavorite ? "Remove from favorites" : "Favorite", systemImage: isFavorite ? "heart.slash" : "heart")
+                        }
+                        Button(action: onPreview) {
+                            Label(item.template == nil ? "Details" : "Details & remix", systemImage: "info.circle")
+                        }
+                    } label: {
+                        Image(systemName: "ellipsis").foregroundColor(StudioTheme.purple)
+                            .frame(width: 44, height: 44).contentShape(Rectangle())
+                    }
+                    .accessibilityLabel("Options for \(item.title)")
+                    .accessibilityIdentifier("options-\(item.id)")
+                }
+            }
         }
         .background(Color.white)
         .clipShape(RoundedRectangle(cornerRadius: 15, style: .continuous))

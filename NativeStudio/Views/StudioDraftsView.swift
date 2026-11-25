@@ -4,9 +4,12 @@ import SwiftUI
 struct StudioDraftsView: View {
     @ObservedObject var drafts: DraftStore
     let isUnlocked: Bool
+    let templates: [StickerItem]
     let onNew: () -> Void
+    let onRemix: (StickerItem) -> Void
     let onOpen: (PixelDocument) -> Void
     let onUnlock: () -> Void
+    let onInsert: (URL, String) -> Void
     @State private var deleting: PixelDocument?
     @State private var confirmDelete = false
     @State private var renaming: PixelDocument?
@@ -17,23 +20,17 @@ struct StudioDraftsView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 16) {
-                HStack {
-                    VStack(alignment: .leading, spacing: 4) {
-                        Text("Your tiny ideas").font(.system(.title2, design: .rounded).weight(.bold))
-                        Text("Saved here. Ready for another message.").font(.subheadline).foregroundColor(StudioTheme.secondary)
-                    }
-                    Spacer()
+                if isUnlocked {
+                    StudioStartingPoints(templates: templates, onPick: onRemix, onBlank: onNew)
                 }
+                Text("Saved drawings").font(.system(.title2, design: .rounded).weight(.bold))
+                    .accessibilityAddTraits(.isHeader)
                 if !isUnlocked {
                     StudioNotice(text: "Your drawings are safe. Restore or unlock Studio to keep editing.", symbol: "lock")
                     Button("Unlock Studio", action: onUnlock).buttonStyle(StudioPrimaryButton()).accessibilityIdentifier("studio.unlock")
                 }
-                if isUnlocked {
-                    Button(action: onNew) { Label("New drawing", systemImage: "plus") }
-                        .buttonStyle(StudioPrimaryButton()).accessibilityIdentifier("studio.newDrawing")
-                }
                 if drafts.drafts.isEmpty {
-                    StudioEmptyState(symbol: "square.and.pencil", title: "Your first sticker starts here", detail: "Make something tiny. We'll save it as you draw.")
+                    StudioEmptyState(symbol: "square.and.pencil", title: "No drawings yet", detail: "Choose a starting point above. Your drawing saves here as you edit.")
                 } else {
                     ForEach(drafts.drafts.sorted { $0.updatedAt > $1.updatedAt }) { document in
                         draftRow(document)
@@ -58,11 +55,11 @@ struct StudioDraftsView: View {
     }
 
     private func draftRow(_ document: PixelDocument) -> some View {
-        HStack(spacing: 12) {
+        HStack(spacing: 6) {
             Button { onOpen(document) } label: {
                 HStack(spacing: 13) {
                     Image(uiImage: PixelRenderer.image(for: document)).interpolation(.none).resizable().scaledToFit()
-                        .frame(width: 70, height: 70).background(StudioTheme.lavender).clipShape(RoundedRectangle(cornerRadius: 12))
+                        .frame(width: 52, height: 52).background(StudioTheme.lavender).clipShape(RoundedRectangle(cornerRadius: 12))
                     VStack(alignment: .leading, spacing: 6) {
                         Text(document.title).font(.system(.headline, design: .rounded)).foregroundColor(StudioTheme.ink)
                         HStack(spacing: 4) { Text("Edited"); Text(document.updatedAt, style: .relative) }
@@ -73,6 +70,19 @@ struct StudioDraftsView: View {
             }.buttonStyle(PlainButtonStyle())
                 .accessibilityLabel("Open drawing \(document.title)")
                 .accessibilityIdentifier("studio.draft.\(document.id.uuidString)")
+            if isUnlocked && !document.isEmpty {
+                Button {
+                    do { onInsert(try PixelRenderer.exportURL(for: document), document.title) }
+                    catch { presentError(error) }
+                } label: {
+                    Text("Insert").font(.subheadline.weight(.semibold))
+                        .padding(.horizontal, 10).frame(minHeight: 44)
+                        .foregroundColor(StudioTheme.purple).background(StudioTheme.lavender)
+                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                }.buttonStyle(.plain)
+                    .accessibilityLabel("Insert \(document.title)")
+                    .accessibilityIdentifier("studio.insertDraft.\(document.id.uuidString)")
+            }
             Menu {
                 if isUnlocked {
                     Button { renaming = document } label: { Label("Rename", systemImage: "pencil") }
