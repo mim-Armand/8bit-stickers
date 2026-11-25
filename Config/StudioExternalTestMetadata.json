@@ -1,0 +1,45 @@
+{
+  "appId": "1366485724",
+  "version": "1.4.1",
+  "build": "13",
+  "hostBundleId": "eu.armand.--bit-art",
+  "extensionBundleId": "eu.armand.--bit-art.StickerPackExtension",
+  "configuration": "TestFlightExternalDiagnostics",
+  "scheme": "Studio External Diagnostics",
+  "distribution": "TESTFLIGHT_PRIVATE_EXTERNAL",
+  "buildAudience": "APP_STORE_ELIGIBLE",
+  "purpose": "Test initial product lookup and sandbox purchase on a second device with an unowned account, without replacing the rejected production-review build.",
+  "compileConditions": [
+    "STUDIO_APP_STORE",
+    "STUDIO_PURCHASE_DIAGNOSTICS"
+  ],
+  "groupTargetCount": 1,
+  "invitationMode": "NAMED_EMAIL",
+  "publicLinkEnabled": false,
+  "testerEmailStoredInGit": false,
+  "appStoreConnectRolesGranted": false,
+  "betaAppReviewRequired": true,
+  "diagnostics": {
+    "testFlightOnly": true,
+    "publicReleaseFeature": false,
+    "usesRealStoreKit": true,
+    "grantsOwnership": false,
+    "includesLocalStoreKitFixture": false,
+    "resetsPurchasesOrDrawings": false
+  },
+  "commerce": {
+    "productId": "eu.armand.bitart.studio.unlock",
+    "appleId": "6827336076",
+    "type": "NON_CONSUMABLE",
+    "usaPrice": "1.00",
+    "currency": "USD",
+    "familySharing": false,
+    "territoryCount": 175
+  },
+  "exportOptions": "Config/ExportStudioAppStore.plist",
+  "outputDirectory": "build/studio-external-test/1.4.1-13",
+  "productionAppReviewChanged": false,
+  "externalDistributionStarted": false,
+  "mustNotReplaceAppReviewBuild": "1.4.1 (11)",
+  "supportEmail": "seltzer.wisdom7h@icloud.com"
+}

@@ -11,6 +11,17 @@ enum StudioTheme {
     static let secondary = Color(red: 0.39, green: 0.35, blue: 0.43)
 }
 
+extension View {
+    /// Studio uses a fixed light palette. Apply it to each presentation root:
+    /// sheets do not inherit their presenter's foreground color, and otherwise
+    /// dark appearance can put white system text on our cream and white cards.
+    func studioAppearance() -> some View {
+        foregroundColor(StudioTheme.ink)
+            .accentColor(StudioTheme.purple)
+            .preferredColorScheme(.light)
+    }
+}
+
 struct StudioPrimaryButton: ButtonStyle {
     @Environment(\.isEnabled) private var enabled
     func makeBody(configuration: Configuration) -> some View {
@@ -61,21 +72,6 @@ struct StudioEmptyState: View {
             Text(title).font(.system(.headline, design: .rounded)).foregroundColor(StudioTheme.ink)
             Text(detail).font(.subheadline).foregroundColor(StudioTheme.secondary).multilineTextAlignment(.center)
         }.frame(maxWidth: .infinity).padding(.vertical, 30).padding(.horizontal, 20)
-    }
-}
-
-struct PixelHeartMark: View {
-    private let rows = ["01100110", "11111111", "11111111", "01111110", "00111100", "00011000"]
-    var body: some View {
-        VStack(spacing: 0) {
-            ForEach(Array(rows.enumerated()), id: \.offset) { _, row in
-                HStack(spacing: 0) {
-                    ForEach(Array(row.enumerated()), id: \.offset) { _, character in
-                        Rectangle().fill(character == "1" ? Color(red: 0.95, green: 0.30, blue: 0.43) : Color.clear)
-                    }
-                }
-            }
-        }.frame(width: 64, height: 48).accessibilityHidden(true)
     }
 }
 

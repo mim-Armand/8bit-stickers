@@ -54,6 +54,13 @@ p { margin: 0 0 18px; }
 .article section + section { margin-top: 22px; }
 .article ol, .article ul { padding-left: 24px; margin: 0 0 20px; }
 .article li { padding-left: 3px; margin-bottom: 10px; }
+.app-guide { display: grid; grid-template-columns: minmax(0, 1fr) minmax(195px, 34%); align-items: center; gap: 24px; margin: 20px 0; padding: 20px; border: 1px solid var(--line); border-radius: 16px; background: #f2eef7; }
+.app-guide .app-route { display: grid; gap: 14px; padding: 0; margin: 0 0 16px; list-style: none; }
+.app-route li { display: grid; grid-template-columns: 48px 1fr; gap: 12px; align-items: center; padding: 0; margin: 0; }
+.route-plus { justify-self: center; display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; background: white; color: var(--ink); font-size: 26px; line-height: 1; }
+.app-route img { border-radius: 8px; }
+.app-guide-steps p { margin: 0; }
+.app-guide-screen { display: block; width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; object-position: center 17%; border-radius: 10px; border: 1px solid var(--line); }
 .note { border-left: 3px solid #c3ab65; background: #f1ede2; padding: 16px 20px; border-radius: 0 8px 8px 0; color: #625a4a; }
 .contact-card { padding: 26px; background: #eae5f2; border-radius: 12px; margin-top: 25px; }
 .contact-card p { margin-bottom: 14px; }
@@ -82,3 +89,7 @@ p { margin: 0 0 18px; }
   .site-footer { align-items: flex-start; }
 }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+@media (max-width: 600px) {
+  .app-guide { grid-template-columns: 1fr; }
+  .app-guide-screen { max-width: 300px; aspect-ratio: 1.5; object-position: center 15%; justify-self: center; }
+}

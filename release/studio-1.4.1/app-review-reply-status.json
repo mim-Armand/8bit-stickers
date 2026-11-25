@@ -1,0 +1,53 @@
+{
+  "recordedAtUTC": "2026-11-02T16:25:26.673Z",
+  "appID": "1366485724",
+  "appVersion": "1.4.1",
+  "selectedBuild": "11",
+  "submissionID": "4ab04eda-8610-4e9d-8552-8617b6a3f7e2",
+  "conversationURL": "https://appstoreconnect.apple.com/apps/1366485724/distribution/reviewsubmissions/details/4ab04eda-8610-4e9d-8552-8617b6a3f7e2",
+  "ownerAuthorization": {
+    "received": true,
+    "date": "2026-11-02",
+    "answer": "Send the prepared reply (Recommended)",
+    "scope": "Send the prepared factual App Review inquiry only; do not resubmit either item"
+  },
+  "reply": {
+    "sent": true,
+    "sentAtUTCMinute": "2026-11-02T16:23Z",
+    "displayedLocalTime": "November 2, 2026, 10:23 AM CST",
+    "timeZone": "America/Chicago",
+    "timestampPrecision": "minute (App Store Connect display)",
+    "characterCount": 2939,
+    "utf8SHA256": "c588c5d01bcfe28f3a292281510b620597c26a2b95835e70b55bfa7bb9c3f9d7",
+    "sentText": "docs/app-review-response-1.4.1.md#reviewer-ready-response",
+    "internalNotesIncluded": false,
+    "source": "Owner-approved prepared response"
+  },
+  "uiVerification": {
+    "source": "Chrome App Store Connect accessibility UI",
+    "messageCountBefore": 1,
+    "messageCountAfter": 2,
+    "sentAuthorAndTimeVisible": true,
+    "expectedOpeningVisible": true,
+    "correctSubmissionVisible": true,
+    "persistedAfterPageReload": true,
+    "serverMessageIDExposed": false
+  },
+  "postSendAPIReadback": {
+    "verifiedAtUTC": "2026-11-02T16:23:28.591Z",
+    "submissionState": "UNRESOLVED_ISSUES",
+    "iapState": "READY_TO_SUBMIT",
+    "iapMetadataState": "READY_FOR_REVIEW",
+    "selectedBuild": "11"
+  },
+  "mutations": {
+    "reviewMessageSent": true,
+    "appOrIAPResubmitted": false,
+    "reviewCancelled": false,
+    "selectedBuildChanged": false,
+    "priceOrTerritoriesChanged": false,
+    "accountCreatedOrOwnershipReset": false
+  },
+  "nextStep": "Evaluate Apple's response about review catalog/storefront and combined first-IAP approval; do not claim resolution or repeat an unchanged submission",
+  "productionIssueResolved": false
+}

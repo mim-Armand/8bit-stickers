@@ -136,7 +136,7 @@ struct StudioEditorView: View {
 
     private var canvas: some View {
         VStack(spacing: 8) {
-            PixelCanvasView(editor: editor, isEditable: isUnlocked, cursorX: $cursorX, cursorY: $cursorY, showCursor: preciseControls, onBeginDrawing: { commitName(); nameFocused = false })
+            PixelCanvasView(editor: editor, isEditable: isUnlocked, cursorX: $cursorX, cursorY: $cursorY, showCursor: preciseControls, onPaintCursor: paintCursor, onBeginDrawing: { commitName(); nameFocused = false })
                 .frame(maxWidth: min(352, max(192, floor((viewportHeight - 400) / 16) * 16)))
                 .frame(maxWidth: .infinity)
             HStack {
@@ -184,7 +184,7 @@ struct StudioEditorView: View {
                                     .overlay(Circle().stroke(editor.selectedColor == index ? StudioTheme.purple : Color.clear, lineWidth: 2))
                                     .frame(width: 44, height: 44)
                             }.disabled(!isUnlocked)
-                                .accessibilityLabel(colorDescription(color))
+                                .accessibilityLabel(color.spokenName)
                                 .accessibilityAddTraits(editor.selectedColor == index ? [.isSelected] : [])
                                 .accessibilityIdentifier("studio.color.\(index)")
                         }
@@ -197,7 +197,7 @@ struct StudioEditorView: View {
     private var precision: some View {
         DisclosureGroup(isExpanded: $preciseControls) {
             VStack(spacing: 9) {
-                Text("Row \(cursorY + 1), column \(cursorX + 1)").font(.subheadline.monospacedDigit())
+                Text(editor.cursorDescription(x: cursorX, y: cursorY)).font(.subheadline.monospacedDigit())
                     .accessibilityIdentifier("studio.cursorPosition")
                 HStack(spacing: 9) {
                     cursorButton("Left", "arrow.left", enabled: cursorX > 0) { cursorX -= 1 }
@@ -205,7 +205,7 @@ struct StudioEditorView: View {
                     cursorButton("Down", "arrow.down", enabled: cursorY < 15) { cursorY += 1 }
                     cursorButton("Right", "arrow.right", enabled: cursorX < 15) { cursorX += 1 }
                 }
-                Button(editor.tool == .eraser ? "Erase selected pixel" : editor.tool == .fill ? "Fill selected area" : "Paint selected pixel") { paintCursor() }
+                Button(editor.tool.cursorAction) { paintCursor() }
                     .buttonStyle(StudioQuietButton()).disabled(!isUnlocked)
                     .accessibilityIdentifier("studio.paintCursor")
             }.padding(.vertical, 10)
@@ -233,7 +233,14 @@ struct StudioEditorView: View {
     }
     private func paintCursor() {
         guard isUnlocked else { return }
-        editor.beginStroke(); editor.paint(x: cursorX, y: cursorY); editor.endStroke()
+        commitName()
+        nameFocused = false
+        editor.beginStroke()
+        editor.paint(x: cursorX, y: cursorY)
+        editor.endStroke()
+        if UIAccessibility.isVoiceOverRunning {
+            UIAccessibility.post(notification: .announcement, argument: editor.cursorDescription(x: cursorX, y: cursorY))
+        }
     }
     @discardableResult
     private func persist() -> Bool {
@@ -263,11 +270,7 @@ struct StudioEditorView: View {
     private func toolIcon(_ tool: PixelTool) -> String {
         switch tool { case .pencil: return "pencil.tip"; case .eraser: return "eraser"; case .fill: return "drop.fill" }
     }
-    private func colorDescription(_ color: PixelColor) -> String {
-        let rgb = (Int(color.r) << 16) | (Int(color.g) << 8) | Int(color.b)
-        let names: [Int: String] = [0x17151C: "Ink", 0xFFFDF3: "Cream", 0xFFD52A: "Yellow", 0xEBA427: "Gold", 0xFF7A23: "Orange", 0xF54D66: "Coral", 0xFF9BB9: "Pink", 0x458AFF: "Blue", 0x7ADFFF: "Cyan", 0x3DCA6B: "Green", 0x228E42: "Dark green", 0x8DE6A7: "Mint", 0xEBAA70: "Tan", 0xA76640: "Brown"]
-        return names[rgb] ?? "Color red \(color.r), green \(color.g), blue \(color.b)"
-    }
+
 }
 
 @MainActor
@@ -277,13 +280,14 @@ private struct PixelCanvasView: View {
     @Binding var cursorX: Int
     @Binding var cursorY: Int
     let showCursor: Bool
+    let onPaintCursor: () -> Void
     let onBeginDrawing: () -> Void
     @State private var strokeActive = false
 
     var body: some View {
         GeometryReader { proxy in
             let side = floor(min(proxy.size.width, proxy.size.height) / 16) * 16
-            Canvas { context, size in
+            let surface = Canvas { context, size in
                 let cell = size.width / 16
                 for y in 0..<16 {
                     for x in 0..<16 {
@@ -325,7 +329,7 @@ private struct PixelCanvasView: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .accessibilityElement(children: .ignore)
             .accessibilityLabel("16 by 16 pixel canvas")
-            .accessibilityValue("Row \(cursorY + 1), column \(cursorX + 1)")
+            .accessibilityValue("\(editor.cursorDescription(x: cursorX, y: cursorY)). \(isEditable ? editor.tool.rawValue.capitalized : "Read only")")
             .accessibilityHint("Draw with your finger, or open Precise pixel controls below.")
             .accessibilityIdentifier("studio.canvas")
             .accessibilityAdjustableAction { direction in
@@ -334,9 +338,10 @@ private struct PixelCanvasView: View {
                 switch direction { case .increment: next = min(255, current + 1); case .decrement: next = max(0, current - 1); @unknown default: next = current }
                 cursorX = next % 16; cursorY = next / 16
             }
-            .accessibilityAction(named: Text("Paint selected pixel")) {
-                guard isEditable else { return }
-                editor.beginStroke(); editor.paint(x: cursorX, y: cursorY); editor.endStroke()
+            if isEditable {
+                surface.accessibilityAction(named: Text(editor.tool.cursorAction), onPaintCursor)
+            } else {
+                surface
             }
         }
         .aspectRatio(1, contentMode: .fit)
